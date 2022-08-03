@@ -1,5 +1,13 @@
 // LOOP FUNCTIONS
 function update() {
+  if (image_loading_error) {
+    return;
+  }
+
+  if (!images_loaded) {
+    return;
+  }
+
   if (game_over) {
     if (INPUT_MAP["Enter"]) {
       game_over = false;
@@ -163,15 +171,30 @@ function draw() {
   context.fillStyle = "black";
   context.fillRect(0, 0, GAME_W, GAME_H);
 
+  if (image_loading_error) {
+    context.fillStyle = "white";
+    context.fillText(
+      "Error loading assets. Check console for errrors.",
+      GAME_W / 2 - 100,
+      10
+    );
+    return;
+  }
+
+  if (!images_loaded) {
+    context.fillStyle = "white";
+    context.fillText("Loading images...", GAME_W / 2 - 50, 10);
+    return;
+  }
+
   if (!game_over) {
     GAME_OBJECTS.forEach((obj) => {
       context.fillStyle = obj.color;
       context.fillRect(obj.x, obj.y, obj.w, obj.h);
+      if (images_loaded && obj.sprite) {
+        context.drawImage(IMAGES[obj.sprite], obj.x, obj.y);
+      }
     });
-
-    if (images_loaded) {
-      context.drawImage(player_sprite, PLAYER.x, PLAYER.y);
-    }
 
     // drawHitboxes(PLAYER);
     context.fillStyle = "white";

@@ -13,6 +13,7 @@ const PLAYER_DEFAULT = {
     { name: "right", x: 0, y: 0, w: 4, h: 14, color: "red" },
   ],
   hp: MAX_HP,
+  sprite: "player_sprite",
 };
 
 const PLAYER = { ...PLAYER_DEFAULT };
