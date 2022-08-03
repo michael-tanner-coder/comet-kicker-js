@@ -2,8 +2,13 @@ const IMAGES = {}; // GLOBAL IMAGE MAP: DON'T EDIT
 
 const image_list = [
   { file: "player.png", name: "player_sprite" },
+  { file: "space-background.png", name: "background" },
+  { file: "space-background-1.png", name: "background_1" },
+  { file: "space-background-2.png", name: "background_2" },
+  { file: "space-background-3.png", name: "background_3" },
   // <-- Add your sprite in here
 ];
+
 var image_loading_error = false;
 var images_to_load = image_list.length;
 

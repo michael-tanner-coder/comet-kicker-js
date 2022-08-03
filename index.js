@@ -4,7 +4,7 @@ function update() {
     return;
   }
 
-  if (!images_loaded) {
+  if (!images_loaded || !sounds_loaded) {
     return;
   }
 
@@ -19,6 +19,14 @@ function update() {
   if (PLAYER.hp <= 0) {
     resetGame();
   }
+
+  // SCREEN WRAP FOR PARALLAX BACKGROUNDS
+  BACKGROUNDS.forEach((bg) => {
+    bg.x += bg.speed;
+    if (bg.x > GAME_W) {
+      bg.x = -1 * GAME_W;
+    }
+  });
 
   let prev_x = PLAYER.x;
   let prev_y = PLAYER.y;
@@ -170,6 +178,11 @@ function update() {
 function draw() {
   context.fillStyle = "black";
   context.fillRect(0, 0, GAME_W, GAME_H);
+  if (images_loaded) {
+    context.drawImage(IMAGES["background_1"], BACKGROUND_1.x, BACKGROUND_1.y);
+    context.drawImage(IMAGES["background_2"], BACKGROUND_2.x, BACKGROUND_2.y);
+    context.drawImage(IMAGES["background_3"], BACKGROUND_3.x, BACKGROUND_3.y);
+  }
 
   if (image_loading_error) {
     context.fillStyle = "white";
@@ -181,9 +194,9 @@ function draw() {
     return;
   }
 
-  if (!images_loaded) {
+  if (!images_loaded || !sounds_loaded) {
     context.fillStyle = "white";
-    context.fillText("Loading images...", GAME_W / 2 - 50, 10);
+    context.fillText("Loading assets...", GAME_W / 2 - 50, 10);
     return;
   }
 

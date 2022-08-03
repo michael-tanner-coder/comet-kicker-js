@@ -65,3 +65,21 @@ const COLLECT = {
   color: "yellow",
   life_timer: 360,
 };
+
+const BACKGROUND_1 = {
+  x: 0,
+  y: 0,
+  speed: 1,
+};
+const BACKGROUND_2 = {
+  x: 0,
+  y: 0,
+  speed: 2,
+};
+const BACKGROUND_3 = {
+  x: 0,
+  y: 0,
+  speed: 3,
+};
+
+const BACKGROUNDS = [BACKGROUND_1, BACKGROUND_2, BACKGROUND_3];
