@@ -164,10 +164,23 @@ function update() {
   // enemy to player
   enemies.forEach((enemy) => {
     if (collisionDetected(enemy, PLAYER)) {
-      removeObj(enemy);
-      PLAYER.hp -= 1;
+      if (!PLAYER.hit) {
+        removeObj(enemy);
+        PLAYER.hp -= 1;
+      }
+      PLAYER.hit = true;
     }
   });
+
+  // IFRAME COUNTER
+  if (PLAYER.hit) {
+    PLAYER.i_frames--;
+  }
+
+  if (PLAYER.i_frames <= 0) {
+    PLAYER.i_frames = PLAYER_DEFAULT.i_frames;
+    PLAYER.hit = false;
+  }
 
   // SCREEN WRAPPING
   if (PLAYER.x + PLAYER.w > GAME_W) {
@@ -220,6 +233,10 @@ function draw() {
       context.fillRect(obj.x, obj.y, obj.w, obj.h);
       if (images_loaded && obj.sprite) {
         context.drawImage(IMAGES[obj.sprite], obj.x, obj.y);
+      }
+      if (obj.hit && obj.i_frames % 2 === 0) {
+        context.fillStyle = "white";
+        context.fillRect(obj.x, obj.y, obj.w, obj.h);
       }
     });
 

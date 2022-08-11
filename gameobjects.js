@@ -14,6 +14,8 @@ const PLAYER_DEFAULT = {
   ],
   hp: MAX_HP,
   sprite: "player_sprite",
+  i_frames: 30,
+  hit: false,
 };
 
 const PLAYER = { ...PLAYER_DEFAULT };
