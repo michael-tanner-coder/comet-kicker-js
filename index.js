@@ -8,11 +8,24 @@ function update() {
     return;
   }
 
-  if (game_over) {
+  if (game_state === STATES.MENU) {
     if (INPUT_MAP["Enter"]) {
-      game_over = false;
+      game_state = STATES.GAME;
+    }
+
+    return;
+  }
+
+  if (game_state === STATES.GAME_OVER) {
+    if (INPUT_MAP["Enter"]) {
+      game_state = STATES.GAME;
       score = 0;
     }
+
+    if (INPUT_MAP["Escape"]) {
+      game_state = STATES.MENU;
+    }
+
     return;
   }
 
@@ -178,11 +191,6 @@ function update() {
 function draw() {
   context.fillStyle = "black";
   context.fillRect(0, 0, GAME_W, GAME_H);
-  if (images_loaded) {
-    context.drawImage(IMAGES["background_1"], BACKGROUND_1.x, BACKGROUND_1.y);
-    context.drawImage(IMAGES["background_2"], BACKGROUND_2.x, BACKGROUND_2.y);
-    context.drawImage(IMAGES["background_3"], BACKGROUND_3.x, BACKGROUND_3.y);
-  }
 
   if (image_loading_error) {
     context.fillStyle = "white";
@@ -200,7 +208,13 @@ function draw() {
     return;
   }
 
-  if (!game_over) {
+  if (game_state === STATES.GAME) {
+    if (images_loaded) {
+      context.drawImage(IMAGES["background_1"], BACKGROUND_1.x, BACKGROUND_1.y);
+      context.drawImage(IMAGES["background_2"], BACKGROUND_2.x, BACKGROUND_2.y);
+      context.drawImage(IMAGES["background_3"], BACKGROUND_3.x, BACKGROUND_3.y);
+    }
+
     GAME_OBJECTS.forEach((obj) => {
       context.fillStyle = obj.color;
       context.fillRect(obj.x, obj.y, obj.w, obj.h);
@@ -222,9 +236,28 @@ function draw() {
     return;
   }
 
-  context.fillStyle = "white";
-  context.fillText("SCORE: " + Math.round(score * 100) / 100, GAME_W / 2, 100);
-  context.fillText("SCORE: " + Math.round(score * 100) / 100, GAME_W / 2, 100);
+  if (game_state === STATES.GAME_OVER) {
+    context.fillStyle = "white";
+    context.fillText(
+      "SCORE: " + Math.round(score * 100) / 100,
+      GAME_W / 2,
+      100
+    );
+    context.fillText(
+      "SCORE: " + Math.round(score * 100) / 100,
+      GAME_W / 2,
+      100
+    );
+    context.fillText("RETRY: PRESS ENTER", GAME_W / 2, 150);
+    context.fillText("QUIT: PRESS ESC", GAME_W / 2, 200);
+  }
+
+  if (game_state === STATES.MENU) {
+    context.fillStyle = "white";
+    context.fillText("COMET KICKER", GAME_W / 2, 100);
+    context.fillText("COMET KICKER", GAME_W / 2, 100);
+    context.fillText("PRESS ENTER", GAME_W / 2, 200);
+  }
 }
 
 // CORE GAME LOOP

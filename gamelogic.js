@@ -13,6 +13,7 @@ var collect_spawn_timer = MAX_COLLECT_SPAWN_TIMER;
 var score = 0;
 var enemy_point_value = 10;
 var game_over = false;
+var game_state = STATES.MENU;
 
 // GLOBAL UTILS
 function moveInOwnDirection(object) {
@@ -126,7 +127,7 @@ function resetGame() {
   PLAYER.x = 0;
   PLAYER.y = 0;
   PLAYER.hp = MAX_HP;
-  game_over = true;
+  game_state = STATES.GAME_OVER;
   buildMap();
 }
 

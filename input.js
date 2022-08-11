@@ -5,6 +5,7 @@ const INPUT_MAP = {
   ArrowDown: false,
   [" "]: false,
   Enter: false,
+  Escape: false,
 };
 
 window.addEventListener("keydown", function (e) {
