@@ -1,3 +1,4 @@
+
 // LOOP FUNCTIONS
 function update() {
   if (image_loading_error) {
@@ -243,7 +244,6 @@ function draw() {
     // drawHitboxes(PLAYER);
     context.fillStyle = "white";
     context.fillText("SCORE: " + Math.round(score * 100) / 100, GAME_W / 2, 10);
-    context.fillText("SCORE: " + Math.round(score * 100) / 100, GAME_W / 2, 10);
 
     for (i = 0; i < PLAYER.hp; i++) {
       context.fillStyle = "white";
@@ -260,18 +260,12 @@ function draw() {
       GAME_W / 2,
       100
     );
-    context.fillText(
-      "SCORE: " + Math.round(score * 100) / 100,
-      GAME_W / 2,
-      100
-    );
     context.fillText("RETRY: PRESS ENTER", GAME_W / 2, 150);
     context.fillText("QUIT: PRESS ESC", GAME_W / 2, 200);
   }
 
   if (game_state === STATES.MENU) {
     context.fillStyle = "white";
-    context.fillText("COMET KICKER", GAME_W / 2, 100);
     context.fillText("COMET KICKER", GAME_W / 2, 100);
     context.fillText("PRESS ENTER", GAME_W / 2, 200);
   }
