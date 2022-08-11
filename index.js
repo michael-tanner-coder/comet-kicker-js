@@ -9,7 +9,9 @@ function update() {
   }
 
   if (game_state === STATES.MENU) {
-    if (INPUT_MAP["Enter"]) {
+    if (INPUT_MAP["Enter"] 
+        || gamepad.start()
+        || gamepad.buttonA()) {
       game_state = STATES.GAME;
     }
 
@@ -17,7 +19,9 @@ function update() {
   }
 
   if (game_state === STATES.GAME_OVER) {
-    if (INPUT_MAP["Enter"]) {
+    if (INPUT_MAP["Enter"] 
+        || gamepad.start()
+        || gamepad.buttonA()) {
       game_state = STATES.GAME;
       score = 0;
     }
@@ -51,9 +55,9 @@ function update() {
   let prev_x = PLAYER.x;
   let prev_y = PLAYER.y;
 
-  PLAYER.x += PLAYER.speed * (INPUT_MAP["ArrowRight"] ? 1 : 0);
-  PLAYER.x -= PLAYER.speed * (INPUT_MAP["ArrowLeft"] ? 1 : 0);
-  PLAYER.direction = INPUT_MAP["ArrowLeft"] ? 180 : 0;
+  PLAYER.x += PLAYER.speed * (INPUT_MAP["ArrowRight"]||gamepad.right() ? 1 : 0);
+  PLAYER.x -= PLAYER.speed * (INPUT_MAP["ArrowLeft"]||gamepad.left() ? 1 : 0);
+  PLAYER.direction = INPUT_MAP["ArrowLeft"]||gamepad.left() ? 180 : 0;
 
   var enemies = GAME_OBJECTS.filter((obj) => obj.type === "enemy");
   var collectibles = GAME_OBJECTS.filter((obj) => obj.type === "collect");
@@ -90,7 +94,7 @@ function update() {
     shot_fired = false;
   }
 
-  if (shot_timer <= 0 && INPUT_MAP[" "]) {
+  if (shot_timer <= 0 && (INPUT_MAP[" "] || gamepad.buttonA())) {
     spawnBullet(PLAYER.direction);
     shot_fired = true;
   }
