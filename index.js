@@ -29,6 +29,13 @@ function update() {
     return;
   }
 
+  if (game_state === STATES.GAME) {
+     if (INPUT_MAP["Escape"]) {
+       console.log("Game paused");
+       game_state = STATES.PAUSE;
+     }
+  }
+
   if (PLAYER.hp <= 0) {
     resetGame();
   }
@@ -221,7 +228,7 @@ function draw() {
     return;
   }
 
-  if (game_state === STATES.GAME) {
+  if (game_state === STATES.GAME || game_state === STATES.PAUSE) {
     if (images_loaded) {
       context.drawImage(IMAGES["background_1"], BACKGROUND_1.x, BACKGROUND_1.y);
       context.drawImage(IMAGES["background_2"], BACKGROUND_2.x, BACKGROUND_2.y);
@@ -252,8 +259,17 @@ function draw() {
       context.fillStyle = "white";
       context.fillRect(GAME_W / 2 + 16 * i, 20, 8, 16);
     }
+  }
 
-    return;
+  if (game_state === STATES.PAUSE) {
+    context.globalAlpha = 0.5;
+    context.fillStyle = "black";
+    context.fillRect(0, 0, GAME_W, GAME_H);
+
+    context.globalAlpha = 1;
+    context.fillStyle = "white";
+    context.fillText("GAME PAUSED", GAME_W / 2 - 90, 100);
+    context.fillText("PRESS ENTER TO CONTINUE", GAME_W / 2 - 90, 150);
   }
 
   if (game_state === STATES.GAME_OVER) {
@@ -281,7 +297,15 @@ function loop() {
   let current_time = new Date().getTime();
   let elapsed = current_time - last_time;
 
-  update(elapsed);
+  if (game_state === STATES.PAUSE) {
+    if (INPUT_MAP["Enter"]) {
+      console.log("Game unpaused");
+      game_state = STATES.GAME;
+    }
+  } else {
+    update(elapsed);
+  }
+
   draw();
 
   last_time = current_time;
