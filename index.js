@@ -1,4 +1,3 @@
-
 // LOOP FUNCTIONS
 function update() {
   if (image_loading_error) {
@@ -230,11 +229,15 @@ function draw() {
     }
 
     GAME_OBJECTS.forEach((obj) => {
-      context.fillStyle = obj.color;
-      context.fillRect(obj.x, obj.y, obj.w, obj.h);
+      if (render_hitboxes) {
+        context.fillStyle = obj.color;
+        context.fillRect(obj.x, obj.y, obj.w, obj.h);
+      }
+
       if (images_loaded && obj.sprite) {
         context.drawImage(IMAGES[obj.sprite], obj.x, obj.y);
       }
+
       if (obj.hit && obj.i_frames % 2 === 0) {
         context.fillStyle = "white";
         context.fillRect(obj.x, obj.y, obj.w, obj.h);

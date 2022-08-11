@@ -14,6 +14,7 @@ var score = 0;
 var enemy_point_value = 10;
 var game_over = false;
 var game_state = STATES.MENU;
+var render_hitboxes = true;
 
 // GLOBAL UTILS
 function moveInOwnDirection(object) {
