@@ -27,6 +27,7 @@ const BLOCK = {
   w: UNIT_SIZE,
   h: UNIT_SIZE,
   type: "floor",
+  sprite: "platform",
 };
 
 const BULLET = {

@@ -2,6 +2,8 @@ const IMAGES = {}; // GLOBAL IMAGE MAP: DON'T EDIT
 
 const image_list = [
   { file: "player.png", name: "player_sprite" },
+  { file: "platform.png", name: "platform" },
+  { file: "platform-end.png", name: "platform-end" },
   { file: "space-background.png", name: "background" },
   { file: "space-background-1.png", name: "background_1" },
   { file: "space-background-2.png", name: "background_2" },
