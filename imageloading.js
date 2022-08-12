@@ -3,7 +3,7 @@ const IMAGES = {}; // GLOBAL IMAGE MAP: DON'T EDIT
 const image_list = [
   { file: "player.png", name: "player_sprite" },
   { file: "platform.png", name: "platform" },
-  { file: "platform-end.png", name: "platform-end" },
+  { file: "platform-end.png", name: "platform_end" },
   { file: "space-background.png", name: "background" },
   { file: "space-background-1.png", name: "background_1" },
   { file: "space-background-2.png", name: "background_2" },
@@ -28,7 +28,7 @@ function checkForNamingCollisions(name) {
   if (name_count > 1) {
     collision = true;
     image_loading_error = true;
-    console.log("Naming collision detected! Some sprites have the same name.");
+    console.log(ERROR_MESSAGES.SPRITE_NAMING_COLLISION);
     console.log("At least two sprites are named " + name);
   }
 
