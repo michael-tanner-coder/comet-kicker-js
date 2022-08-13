@@ -294,6 +294,7 @@ function draw() {
     context.fillStyle = "white";
     context.fillText("COMET KICKER", GAME_W / 2, 100);
     context.fillText("PRESS ENTER", GAME_W / 2, 200);
+    playAnimation(ANIMATIONS.controllerLoop, 10, 0, 0, 32, 32);
   }
 }
 
