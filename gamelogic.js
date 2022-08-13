@@ -1,9 +1,7 @@
 // GLOBAL VARIABLES
-var current_key = "";
 var images_loaded = false;
 var player_x = 0;
 var player_y = 0;
-var player_speed = 0;
 var hit_ground = false;
 var hit_wall = false;
 var shot_timer = 0;

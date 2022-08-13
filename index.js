@@ -32,8 +32,7 @@ function update() {
   }
 
   if (game_state === STATES.GAME) {
-    if (isPressed(INPUTS.start)) {
-      console.log("Game paused");
+    if (isPressed(INPUTS.pause)) {
       game_state = STATES.PAUSE;
     }
   }
@@ -53,8 +52,14 @@ function update() {
   let prev_x = PLAYER.x;
   let prev_y = PLAYER.y;
 
-  PLAYER.x += PLAYER.speed * isPressed(INPUTS.moveRight) ? 1 : 0;
-  PLAYER.x -= PLAYER.speed * isPressed(INPUTS.moveLeft) ? 1 : 0;
+  if (isPressed(INPUTS.moveRight)) {
+    PLAYER.x += PLAYER.speed;
+  }
+
+  if (isPressed(INPUTS.moveLeft)) {
+    PLAYER.x -= PLAYER.speed;
+  }
+
   PLAYER.direction = isPressed(INPUTS.moveLeft) ? 180 : 0;
 
   var enemies = GAME_OBJECTS.filter((obj) => obj.type === "enemy");
@@ -301,7 +306,6 @@ function loop() {
 
   if (game_state === STATES.PAUSE) {
     if (isPressed(INPUTS.start)) {
-      console.log("Game unpaused");
       game_state = STATES.GAME;
     }
   } else {
