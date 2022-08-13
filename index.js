@@ -1,5 +1,7 @@
 // LOOP FUNCTIONS
 function update() {
+  gamepadListener();
+
   if (image_loading_error) {
     return;
   }
@@ -9,9 +11,7 @@ function update() {
   }
 
   if (game_state === STATES.MENU) {
-    if (INPUT_MAP["Enter"] 
-        || gamepad.start()
-        || gamepad.buttonA()) {
+    if (isPressed(INPUTS.start)) {
       game_state = STATES.GAME;
     }
 
@@ -19,14 +19,12 @@ function update() {
   }
 
   if (game_state === STATES.GAME_OVER) {
-    if (INPUT_MAP["Enter"] 
-        || gamepad.start()
-        || gamepad.buttonA()) {
+    if (isPressed(INPUTS.start)) {
       game_state = STATES.GAME;
       score = 0;
     }
 
-    if (INPUT_MAP["Escape"]) {
+    if (isPressed(INPUTS.select)) {
       game_state = STATES.MENU;
     }
 
@@ -34,10 +32,10 @@ function update() {
   }
 
   if (game_state === STATES.GAME) {
-     if (INPUT_MAP["Escape"]) {
-       console.log("Game paused");
-       game_state = STATES.PAUSE;
-     }
+    if (isPressed(INPUTS.start)) {
+      console.log("Game paused");
+      game_state = STATES.PAUSE;
+    }
   }
 
   if (PLAYER.hp <= 0) {
@@ -55,9 +53,9 @@ function update() {
   let prev_x = PLAYER.x;
   let prev_y = PLAYER.y;
 
-  PLAYER.x += PLAYER.speed * (INPUT_MAP["ArrowRight"]||gamepad.right() ? 1 : 0);
-  PLAYER.x -= PLAYER.speed * (INPUT_MAP["ArrowLeft"]||gamepad.left() ? 1 : 0);
-  PLAYER.direction = INPUT_MAP["ArrowLeft"]||gamepad.left() ? 180 : 0;
+  PLAYER.x += PLAYER.speed * isPressed(INPUTS.moveRight) ? 1 : 0;
+  PLAYER.x -= PLAYER.speed * isPressed(INPUTS.moveLeft) ? 1 : 0;
+  PLAYER.direction = isPressed(INPUTS.moveLeft) ? 180 : 0;
 
   var enemies = GAME_OBJECTS.filter((obj) => obj.type === "enemy");
   var collectibles = GAME_OBJECTS.filter((obj) => obj.type === "collect");
@@ -94,7 +92,7 @@ function update() {
     shot_fired = false;
   }
 
-  if (shot_timer <= 0 && (INPUT_MAP[" "] || gamepad.buttonA())) {
+  if (shot_timer <= 0 && isPressed(INPUTS.shoot)) {
     spawnBullet(PLAYER.direction);
     shot_fired = true;
   }
@@ -302,7 +300,7 @@ function loop() {
   let elapsed = current_time - last_time;
 
   if (game_state === STATES.PAUSE) {
-    if (INPUT_MAP["Enter"]) {
+    if (isPressed(INPUTS.start)) {
       console.log("Game unpaused");
       game_state = STATES.GAME;
     }
