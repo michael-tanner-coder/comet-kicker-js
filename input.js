@@ -46,8 +46,8 @@ const INPUT_MAP = {
 
 const INPUTS = {
   shoot: [" ", "buttonA"],
-  moveLeft: ["ArrowLeft", "dpadLeft"],
-  moveRight: ["ArrowRight", "dpadRight"],
+  moveLeft: ["ArrowLeft", "dpadLeft", "left"],
+  moveRight: ["ArrowRight", "dpadRight", "right"],
   pause: ["Escape", "start"],
   select: ["Enter", "select"],
   start: ["start", "Enter"],
