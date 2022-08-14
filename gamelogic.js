@@ -13,6 +13,7 @@ var enemy_point_value = 10;
 var game_over = false;
 var game_state = STATES.MENU;
 var render_hitboxes = true;
+var fullscreen = false;
 
 // GLOBAL UTILS
 function moveInOwnDirection(object) {
@@ -133,4 +134,13 @@ function resetGame() {
 function startGame() {
   GAME_OBJECTS.push(PLAYER);
   buildMap();
+}
+
+function toggleFullscreen() {
+  fullscreen = !fullscreen;
+  if (fullscreen) {
+    canvas.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
 }

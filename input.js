@@ -49,7 +49,7 @@ const INPUTS = {
   moveLeft: ["ArrowLeft", "dpadLeft", "left"],
   moveRight: ["ArrowRight", "dpadRight", "right"],
   pause: ["Escape", "start"],
-  select: ["Enter", "select"],
+  select: [" ", "select"],
   start: ["start", "Enter"],
 };
 
