@@ -1,4 +1,5 @@
-const INPUT_MAP = {
+// ---Input Constants---
+const INPUTS = {
   // == KEYBOARD ==
   // Arrow keys
   ArrowLeft: false,
@@ -44,7 +45,19 @@ const INPUT_MAP = {
   dpadRight: false,
 };
 
-const INPUTS = {
+const INPUT_STATES = {
+  idle: "idle",
+  held: "held",
+  pressed: "pressed",
+};
+
+const DEFAULT_INPUT_STATE = {
+  state: INPUT_STATES.idle,
+  timer: 0,
+  inputs: [],
+};
+
+const CONTROLS = {
   shoot: [" ", "buttonA"],
   moveLeft: ["ArrowLeft", "dpadLeft", "left"],
   moveRight: ["ArrowRight", "dpadRight", "right"],
@@ -53,28 +66,127 @@ const INPUTS = {
   start: ["start", "Enter"],
 };
 
-function isPressed(inputs) {
+function initializeInputState() {
+  const controls = Object.keys(CONTROLS);
+  controls.forEach(function (control) {
+    const inputs = [...CONTROLS[control]];
+    CONTROLS[control] = { ...DEFAULT_INPUT_STATE, inputs };
+  });
+}
+
+initializeInputState();
+
+// --- State Checks ---
+function wasPressed(inputs) {
   var pressed = false;
   inputs.forEach((input) => {
-    if (INPUT_MAP[input]) {
+    if (INPUTS[input]) {
       pressed = true;
     }
   });
   return pressed;
 }
 
+function wasReleased(inputs) {
+  var released = true;
+  inputs.forEach((input) => {
+    if (INPUTS[input]) {
+      released = false;
+    }
+  });
+  return released;
+}
+
+function inputStateMachine(input) {
+  // Button states:
+  // Idle
+  // -- default state
+  // -- if activated, go to Pressed state
+  // Pressed
+  // -- if released, go to Idle state
+  // -- If still pressed on next frame, go to Held state
+  // Held
+  // -- increment hold timer
+  // -- if released, go to Idle state. Reset timer.
+  switch (input.state) {
+    // IDLE
+    case INPUT_STATES.idle:
+      if (wasPressed(input.inputs)) {
+        input.state = INPUT_STATES.pressed;
+      }
+
+      break;
+
+    // PRESSED
+    case INPUT_STATES.pressed:
+      if (wasReleased(input.inputs)) {
+        input.state = INPUT_STATES.idle;
+      }
+
+      input.state = INPUT_STATES.held;
+
+      break;
+
+    // HELD
+    case INPUT_STATES.held:
+      input.timer++;
+
+      if (wasReleased(input.inputs)) {
+        input.state = INPUT_STATES.idle;
+        input.timer = 0;
+      }
+
+      break;
+  }
+}
+
+// ---INPUT API---
+
+// Only detects first input
+// if (onPress(CONTROLS.myInput)) {
+//    (...some logic)
+// }
+function onPress(input) {
+  return input.state === INPUT_STATES.pressed;
+}
+
+// Only detects when button is released
+// if (onRelease(CONTROLS.myInput)) {
+//    (...some logic)
+// }
+function onRelease(input) {
+  // TODO: fill in onRelease logic
+  return;
+}
+
+// Returns true for as long as the button is held
+// if (onHold(CONTROLS.myInput)) {
+//    (...some logic)
+// }
+function onHold(input) {
+  return input.state === INPUT_STATES.held;
+}
+
+// ---Listeners---
+function inputListener() {
+  const input_keys = Object.keys(CONTROLS);
+  input_keys.forEach((key) => {
+    inputStateMachine(CONTROLS[key]);
+  });
+}
+
 window.addEventListener("keydown", function (e) {
   console.log(e);
-  if (Object.keys(INPUT_MAP).includes(e.key)) {
+  if (Object.keys(INPUTS).includes(e.key)) {
     console.log(e.key + " is held");
-    INPUT_MAP[e.key] = true;
+    INPUTS[e.key] = true;
   }
 });
 
 window.addEventListener("keyup", function (e) {
   console.log(e);
-  if (Object.keys(INPUT_MAP).includes(e.key)) {
+  if (Object.keys(INPUTS).includes(e.key)) {
     console.log(e.key + " is lifted");
-    INPUT_MAP[e.key] = false;
+    INPUTS[e.key] = false;
   }
 });

@@ -92,7 +92,7 @@ const GAMEPAD = {
 };
 
 // Runs in game loop: checks for all gamepad inputs
-// See input.js for INPUT_MAP
+// See input.js for INPUTS
 function gamepadListener() {
   const inputs = Object.keys(GAMEPAD);
   inputs.forEach((input) => {
@@ -101,7 +101,7 @@ function gamepadListener() {
       input !== "butt" &&
       input !== "axis"
     ) {
-      INPUT_MAP[input] = GAMEPAD[input]() ? true : false;
+      INPUTS[input] = GAMEPAD[input]() ? true : false;
     }
   });
 }

@@ -1,7 +1,5 @@
 // LOOP FUNCTIONS
 function update() {
-  gamepadListener();
-
   if (image_loading_error) {
     return;
   }
@@ -11,20 +9,24 @@ function update() {
   }
 
   if (game_state === STATES.MENU) {
-    if (isPressed(INPUTS.start)) {
+    if (onPress(CONTROLS.start)) {
       game_state = STATES.GAME;
+    }
+
+    if (onPress(CONTROLS.select)) {
+      toggleFullscreen();
     }
 
     return;
   }
 
   if (game_state === STATES.GAME_OVER) {
-    if (isPressed(INPUTS.start)) {
+    if (onPress(CONTROLS.start)) {
       game_state = STATES.GAME;
       score = 0;
     }
 
-    if (isPressed(INPUTS.select)) {
+    if (onPress(CONTROLS.select)) {
       game_state = STATES.MENU;
     }
 
@@ -32,7 +34,7 @@ function update() {
   }
 
   if (game_state === STATES.GAME) {
-    if (isPressed(INPUTS.pause)) {
+    if (onPress(CONTROLS.pause)) {
       game_state = STATES.PAUSE;
     }
   }
@@ -52,15 +54,15 @@ function update() {
   let prev_x = PLAYER.x;
   let prev_y = PLAYER.y;
 
-  if (isPressed(INPUTS.moveRight)) {
+  if (onHold(CONTROLS.moveRight)) {
     PLAYER.x += PLAYER.speed;
+    PLAYER.direction = 0;
   }
 
-  if (isPressed(INPUTS.moveLeft)) {
+  if (onHold(CONTROLS.moveLeft)) {
     PLAYER.x -= PLAYER.speed;
+    PLAYER.direction = 180;
   }
-
-  PLAYER.direction = isPressed(INPUTS.moveLeft) ? 180 : 0;
 
   var enemies = GAME_OBJECTS.filter((obj) => obj.type === "enemy");
   var collectibles = GAME_OBJECTS.filter((obj) => obj.type === "collect");
@@ -97,7 +99,7 @@ function update() {
     shot_fired = false;
   }
 
-  if (shot_timer <= 0 && isPressed(INPUTS.shoot)) {
+  if (shot_timer <= 0 && onPress(CONTROLS.shoot)) {
     spawnBullet(PLAYER.direction);
     shot_fired = true;
   }
@@ -294,11 +296,6 @@ function draw() {
     context.fillStyle = "white";
     context.fillText("COMET KICKER", GAME_W / 2, 100);
     context.fillText("PRESS ENTER", GAME_W / 2, 200);
-    playAnimation(ANIMATIONS.controllerLoop, 10, 0, 0, 32, 32);
-
-    if (isPressed(INPUTS.select)) {
-      toggleFullscreen();
-    }
   }
 }
 
@@ -309,8 +306,11 @@ function loop() {
   let current_time = new Date().getTime();
   let elapsed = current_time - last_time;
 
+  gamepadListener();
+  inputListener();
+
   if (game_state === STATES.PAUSE) {
-    if (isPressed(INPUTS.start)) {
+    if (onPress(CONTROLS.start)) {
       game_state = STATES.GAME;
     }
   } else {
