@@ -14,6 +14,9 @@ var game_over = false;
 var game_state = STATES.MENU;
 var render_hitboxes = true;
 var fullscreen = false;
+var high_scores = window.localStorage.getItem("high_scores") ?? [];
+var max_high_score_list_length = 5;
+var recent_scores = window.localStorage.getItem("recent_scores") ?? [];
 
 // GLOBAL UTILS
 function moveInOwnDirection(object) {
@@ -132,12 +135,51 @@ function resetGame() {
   PLAYER.y = 0;
   PLAYER.hp = MAX_HP;
   game_state = STATES.GAME_OVER;
+  saveScore(score);
   buildMap();
 }
 
 function startGame() {
   GAME_OBJECTS.push(PLAYER);
   buildMap();
+}
+
+function saveScore(score) {
+  // Add to list of recent scores
+  recent_scores.push(score);
+  window.localStorage.setItem("recent_scores", recent_scores);
+
+  // if no scores are recorded, make first entry in high score array
+  if (high_scores.length === 0) {
+    high_scores = [score];
+    window.localStorage.setItem("high_scores", high_scores);
+    return;
+  }
+
+  // if other scores exist, find a place in the high score array
+  for (var i = 0; i < high_scores.length; i++) {
+    if (high_scores[i] < score) {
+      high_scores.splice(i, 0, score);
+      break;
+    }
+  }
+
+  // if the high score list has exceeded the maximum length, remove the excess scores
+  if (high_scores.length > max_high_score_list_length) {
+    high_scores.splice(max_high_score_list_length - 1);
+  }
+
+  window.localStorage.setItem("high_scores", high_scores);
+}
+
+function getAverageScore() {
+  var number_of_scores = recent_scores.length;
+  var sum = 0;
+  for (var i = 0; i < recent_scores.length; i++) {
+    sum += recent_scores[i];
+  }
+
+  return sum / number_of_scores;
 }
 
 function toggleFullscreen() {
