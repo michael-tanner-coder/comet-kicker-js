@@ -49,6 +49,7 @@ const INPUT_STATES = {
   idle: "idle",
   held: "held",
   pressed: "pressed",
+  released: "released",
 };
 
 const DEFAULT_INPUT_STATE = {
@@ -132,9 +133,15 @@ function inputStateMachine(input) {
       input.timer++;
 
       if (wasReleased(input.inputs)) {
-        input.state = INPUT_STATES.idle;
+        input.state = INPUT_STATES.released;
         input.timer = 0;
       }
+
+      break;
+
+    // RELEASED
+    case INPUT_STATES.released:
+      input.state = INPUT_STATES.idle;
 
       break;
   }
@@ -155,8 +162,12 @@ function onPress(input) {
 //    (...some logic)
 // }
 function onRelease(input) {
-  // TODO: fill in onRelease logic
-  return;
+  if (input.state === INPUT_STATES.released) {
+    input.state = INPUT_STATES.idle;
+    return true;
+  }
+
+  return false;
 }
 
 // Returns true for as long as the button is held
