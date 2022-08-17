@@ -54,14 +54,22 @@ function update() {
   let prev_x = PLAYER.x;
   let prev_y = PLAYER.y;
 
+  let max_speed = 5;
+
   if (onHold(CONTROLS.moveRight)) {
+    PLAYER.speed = easing(PLAYER.speed, max_speed);
     PLAYER.x += PLAYER.speed;
     PLAYER.direction = 0;
   }
 
   if (onHold(CONTROLS.moveLeft)) {
+    PLAYER.speed = easing(PLAYER.speed, max_speed);
     PLAYER.x -= PLAYER.speed;
     PLAYER.direction = 180;
+  }
+
+  if (onRelease(CONTROLS.moveLeft) || onRelease(CONTROLS.moveRight)) {
+    PLAYER.speed = PLAYER_DEFAULT.speed;
   }
 
   var enemies = GAME_OBJECTS.filter((obj) => obj.type === "enemy");

@@ -114,6 +114,10 @@ function collisionDetected(obj_a, obj_b) {
   );
 }
 
+function easing(x, target) {
+  return (x += (target - x) * 0.1);
+}
+
 function removeObj(obj) {
   var index = GAME_OBJECTS.indexOf(obj);
   GAME_OBJECTS.splice(index, 1);

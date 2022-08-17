@@ -4,7 +4,7 @@ const PLAYER_DEFAULT = {
   color: "white",
   w: 16,
   h: 16,
-  speed: 3,
+  speed: 0,
   direction: 0,
   has_gravity: true,
   type: "player",
