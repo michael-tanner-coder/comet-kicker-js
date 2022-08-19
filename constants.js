@@ -10,3 +10,5 @@ const MAX_COLLECT_SPAWN_TIMER = 120;
 const SPAWN_LIMIT = 20;
 const MAX_HP = 4;
 const GAME_OBJECTS = [];
+const PLAYER_HIT_SCREENSHAKES = 16; // frames
+const SCREENSHAKE_MAX_SIZE = 5; // pixels
