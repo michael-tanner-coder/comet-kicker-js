@@ -100,6 +100,20 @@ function spawnCollectible() {
   GAME_OBJECTS.push(new_collect);
 }
 
+function checkPlayerPowerup() {
+  switch (PLAYER.powerup) {
+    case PICKUPS.WIDE_SHOT:
+      PLAYER.bullet_type = WIDE_BULLET;
+      break;
+    case PICKUPS.RAPID_FIRE:
+      PLAYER.bullet_type = WIDE_BULLET;
+      break;
+    default:
+      PLAYER.bullet_type = BULLET;
+      break;
+  }
+}
+
 function checkIfOutOfBounds(object) {
   return (
     object.x < 0 ||

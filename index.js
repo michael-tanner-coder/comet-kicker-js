@@ -108,7 +108,7 @@ function update() {
   }
 
   if (shot_timer <= 0 && onPress(CONTROLS.shoot)) {
-    spawnBullet(PLAYER.direction);
+    spawnBullet(PLAYER, PLAYER.direction, PLAYER.bullet_type);
     shot_fired = true;
   }
 
@@ -132,6 +132,9 @@ function update() {
 
     moveInOwnDirection(enemy);
   });
+
+  // POWERUPS
+  checkPlayerPowerup();
 
   // PHYSICS LOOP
   GAME_OBJECTS.forEach((obj) => {
