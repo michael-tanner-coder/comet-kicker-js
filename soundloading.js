@@ -5,6 +5,7 @@ const soundList = [
 
   // SFX
   { file: "shoot.wav", name: "shoot" },
+  { file: "collect.wav", name: "collect" },
   // Add your sound asset here ^
 ];
 
