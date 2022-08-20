@@ -6,6 +6,7 @@ const soundList = [
   // SFX
   { file: "shoot.wav", name: "shoot" },
   { file: "collect.wav", name: "collect" },
+  { file: "collect-spawn.wav", name: "collect_spawn" },
   // Add your sound asset here ^
 ];
 
