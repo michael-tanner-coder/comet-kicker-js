@@ -56,14 +56,26 @@ function getHitbox(object, box_name) {
   }
 }
 
-function spawnBullet(direction) {
-  console.log("spawn");
-  var new_bullet = { ...BULLET };
+function spawnBullet(source, direction, projectile) {
+  // Center of bullet source
+  var source_center_x = source.x + source.w / 2;
+  var source_center_y = source.y + source.h / 2;
+
+  // Bullet to spawn
+  var new_bullet = { ...projectile };
+
+  // Spawn bullet at center of source, with a buffer for the horizontal direction
+  new_bullet.x = source_center_x - projectile.w / 2;
+  new_bullet.y = source_center_y;
+
+  // Center bullet with source object
+  new_bullet.x += source.w * Math.cos((direction * Math.PI) / 180);
+  new_bullet.y -= new_bullet.h / 2;
+
+  // Set bullet to move in given direction
   new_bullet.direction = direction;
-  new_bullet.x = PLAYER.x + PLAYER.w * Math.cos((direction * Math.PI) / 180);
-  new_bullet.y = PLAYER.y + PLAYER.h * Math.sin((direction * Math.PI) / 180);
-  new_bullet.x += new_bullet.w / 2;
-  new_bullet.y += new_bullet.h / 2;
+
+  // Spawn bullet
   GAME_OBJECTS.push(new_bullet);
 }
 
