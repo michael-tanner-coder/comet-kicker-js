@@ -16,11 +16,18 @@ const ANIMATIONS = {
   playerKick: {},
   playerIdle: {},
 
+  // SHOOTING ANIMATIONS
+  shoot: {
+    sprite: "shot",
+    frames: [{ x: 0, y: 0, w: 22, h: 17 }],
+    current_frame: 0,
+  },
+
   // ENEMY ANIMATIONS
   enemyMove: {},
 };
 
-const playAnimation = (animation, speed, x, y, w, h) => {
+const playAnimation = (animation, speed, x, y, w_scale = 1, h_scale = 1) => {
   const anim = animation;
   const frame_index = Math.floor(anim.current_frame);
   const frame = anim.frames[frame_index];
@@ -40,8 +47,8 @@ const playAnimation = (animation, speed, x, y, w, h) => {
       // Destination
       x,
       y,
-      w,
-      h
+      frame.w * w_scale,
+      frame.h * h_scale
     );
 
     // Prevent frame index from going out of bounds

@@ -17,7 +17,7 @@ const PLAYER_DEFAULT = {
   sprite: "player_sprite",
   i_frames: 30,
   hit: false,
-  powerup: PICKUPS.WIDE_SHOT,
+  powerup: "",
   bullet_type: "",
 };
 
@@ -44,6 +44,7 @@ const BULLET = {
   color: "yellow",
   direction: 0,
   speed: 4,
+  animation: ANIMATIONS.shoot,
 };
 
 const WIDE_BULLET = {

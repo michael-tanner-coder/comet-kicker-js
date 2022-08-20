@@ -283,6 +283,10 @@ function draw() {
         context.fillStyle = "white";
         context.fillRect(obj.x, obj.y, obj.w, obj.h);
       }
+
+      if (images_loaded && obj.animation) {
+        playAnimation(obj.animation, 1, obj.x, obj.y);
+      }
     });
 
     // drawHitboxes(PLAYER);

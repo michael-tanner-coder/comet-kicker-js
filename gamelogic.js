@@ -188,9 +188,8 @@ function initializeScores() {
   }
 }
 
-// TODO: fix recent_scores.push error
 function saveScore(score) {
-  // Add to list of recent scores
+  // add to list of recent scores
   recent_scores?.push(score);
   window.localStorage.setItem("recent_scores", JSON.stringify(recent_scores));
 
@@ -214,6 +213,7 @@ function saveScore(score) {
     high_scores.splice(max_high_score_list_length - 1);
   }
 
+  // save high scores
   window.localStorage.setItem("high_scores", JSON.stringify(high_scores));
 }
 
