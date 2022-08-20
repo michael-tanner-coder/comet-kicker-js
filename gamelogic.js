@@ -14,9 +14,11 @@ var game_over = false;
 var game_state = STATES.MENU;
 var render_hitboxes = true;
 var fullscreen = false;
-var high_scores = window.localStorage.getItem("high_scores") ?? [];
+var high_scores = window.localStorage.getItem("high_scores");
 var max_high_score_list_length = 5;
-var recent_scores = window.localStorage.getItem("recent_scores") ?? [];
+var recent_scores = window.localStorage.getItem("recent_scores");
+
+initializeScores();
 
 // GLOBAL UTILS
 function moveInOwnDirection(object) {
@@ -144,15 +146,32 @@ function startGame() {
   buildMap();
 }
 
+function initializeScores() {
+  // RECENT SCORES
+  if (window.localStorage.getItem("recent_scores")) {
+    recent_scores = JSON.parse(window.localStorage.getItem("recent_scores"));
+  } else {
+    recent_scores = [];
+  }
+
+  // HIGH SCORES
+  if (window.localStorage.getItem("high_scores")) {
+    high_scores = JSON.parse(window.localStorage.getItem("high_scores"));
+  } else {
+    high_scores = [];
+  }
+}
+
+// TODO: fix recent_scores.push error
 function saveScore(score) {
   // Add to list of recent scores
-  recent_scores.push(score);
-  window.localStorage.setItem("recent_scores", recent_scores);
+  recent_scores?.push(score);
+  window.localStorage.setItem("recent_scores", JSON.stringify(recent_scores));
 
   // if no scores are recorded, make first entry in high score array
   if (high_scores.length === 0) {
     high_scores = [score];
-    window.localStorage.setItem("high_scores", high_scores);
+    window.localStorage.setItem("high_scores", JSON.stringify(high_scores));
     return;
   }
 
@@ -169,7 +188,7 @@ function saveScore(score) {
     high_scores.splice(max_high_score_list_length - 1);
   }
 
-  window.localStorage.setItem("high_scores", high_scores);
+  window.localStorage.setItem("high_scores", JSON.stringify(high_scores));
 }
 
 function getAverageScore() {
