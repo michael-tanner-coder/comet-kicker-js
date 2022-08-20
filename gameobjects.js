@@ -69,6 +69,7 @@ const ENEMY = {
   ],
   hit_ground: false,
   hit_wall: false,
+  sprite: "basic_enemy",
 };
 
 // POWERUPS and POINT COLLECTIBLES
