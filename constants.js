@@ -12,3 +12,11 @@ const MAX_HP = 4;
 const GAME_OBJECTS = [];
 const PLAYER_HIT_SCREENSHAKES = 16; // frames
 const SCREENSHAKE_MAX_SIZE = 5; // pixels
+const PICKUPS = {
+  POINTS: "points",
+  WIDE_SHOT: "wide_shot",
+  RAPID_FIRE: "rapid_fire",
+  MISSILE: "missile",
+  SHIELD: "shield",
+  HP: "hp",
+};
