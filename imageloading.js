@@ -9,6 +9,7 @@ const image_list = [
   { file: "space-background-2.png", name: "background_2" },
   { file: "space-background-3.png", name: "background_3" },
   { file: "control-icons.png", name: "input_icons" },
+  { file: "shot.png", name: "shot" },
   // <-- Add your sprite in here
 ];
 
