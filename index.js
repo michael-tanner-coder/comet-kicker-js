@@ -270,7 +270,7 @@ function draw() {
     }
 
     GAME_OBJECTS.forEach((obj) => {
-      if (render_hitboxes) {
+      if (obj.render_hitbox) {
         context.fillStyle = obj.color;
         context.fillRect(obj.x, obj.y, obj.w, obj.h);
       }
