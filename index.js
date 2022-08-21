@@ -86,6 +86,7 @@ function update() {
 
   if (collect_spawn_timer <= 0) {
     spawnCollectible();
+    playSound(SOUNDS["collect_spawn"]);
     collect_spawn_timer = MAX_COLLECT_SPAWN_TIMER;
   }
 
@@ -108,7 +109,6 @@ function update() {
   }
 
   if (shot_timer <= 0 && onPress(CONTROLS.shoot)) {
-    playSound(SOUNDS["shoot"]);
     spawnBullet(PLAYER, PLAYER.direction, PLAYER.bullet_type);
     shot_fired = true;
   }
@@ -176,6 +176,7 @@ function update() {
     if (collisionDetected(coll, PLAYER)) {
       removeObj(coll);
       score += 100;
+      playSound(SOUNDS["collect"]);
     }
   });
 
