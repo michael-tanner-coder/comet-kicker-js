@@ -14,29 +14,7 @@ const image_list = [
   // <-- Add your sprite in here
 ];
 
-var image_loading_error = false;
 var images_to_load = image_list.length;
-
-// Just to ensure we don't give two images the same name
-function checkForNamingCollisions(name) {
-  let collision = false;
-  let name_count = 0;
-
-  image_list.forEach((image) => {
-    if (image.name === name) {
-      name_count++;
-    }
-  });
-
-  if (name_count > 1) {
-    collision = true;
-    image_loading_error = true;
-    console.log(ERROR_MESSAGES.SPRITE_NAMING_COLLISION);
-    console.log("At least two sprites are named " + name);
-  }
-
-  return collision;
-}
 
 function countLoadedImagesAndLaunchIfReady() {
   images_to_load--;
@@ -53,12 +31,19 @@ function beginLoadingImage(imgVar, fileName) {
 
 function loadImages() {
   for (var i = 0; i < image_list.length; i++) {
-    if (image_list[i].name && !checkForNamingCollisions(image_list[i].name)) {
-      IMAGES[image_list[i].name] = document.createElement("img");
-      beginLoadingImage(IMAGES[image_list[i].name], image_list[i].file);
-    } else {
+    if (
+      !image_list[i] ||
+      checkForNamingCollisions(
+        image_list,
+        image_list[i].name,
+        ASSET_TYPES.IMAGE
+      )
+    ) {
       break;
     }
+
+    IMAGES[image_list[i].name] = document.createElement("img");
+    beginLoadingImage(IMAGES[image_list[i].name], image_list[i].file);
   }
 }
 

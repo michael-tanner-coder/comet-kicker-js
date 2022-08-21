@@ -1,6 +1,6 @@
 // LOOP FUNCTIONS
 function update() {
-  if (image_loading_error) {
+  if (image_loading_error || sound_loading_error) {
     return;
   }
 
@@ -108,6 +108,7 @@ function update() {
   }
 
   if (shot_timer <= 0 && onPress(CONTROLS.shoot)) {
+    playSound(SOUNDS["shoot"]);
     spawnBullet(PLAYER, PLAYER.direction, PLAYER.bullet_type);
     shot_fired = true;
   }
@@ -248,11 +249,15 @@ function draw() {
 
   if (image_loading_error) {
     context.fillStyle = "white";
-    context.fillText(
-      "Error loading assets. Check console for errrors.",
-      GAME_W / 2 - 100,
-      10
-    );
+    context.fillText(ERROR_MESSAGES.IMAGE_LOADING_ERROR, GAME_W / 2 - 100, 10);
+    context.fillText(ERROR_MESSAGES.CHECK_CONSOLE, GAME_W / 2 - 100, 25);
+    return;
+  }
+
+  if (sound_loading_error) {
+    context.fillStyle = "white";
+    context.fillText(ERROR_MESSAGES.SOUND_LOADING_ERROR, GAME_W / 2 - 100, 10);
+    context.fillText(ERROR_MESSAGES.CHECK_CONSOLE, GAME_W / 2 - 100, 25);
     return;
   }
 

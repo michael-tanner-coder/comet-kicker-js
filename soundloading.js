@@ -1,4 +1,4 @@
-const SOUNDS = []; // GLOBAL SOUND ARRAY: DON'T EDIT
+const SOUNDS = {}; // GLOBAL SOUND ARRAY: DON'T EDIT
 const soundList = [
   // MUSIC
   // Add your music asset here ^
@@ -17,7 +17,7 @@ var audioCtx, audioMaster, compressor;
 var sounds_to_load;
 var sounds_loaded = true;
 
-async function loadSounds(sound_array) {
+async function loadSounds(sound_object) {
   if (location.protocol == "file:") {
     console.log("not using a web server: unable to download sounds. ignoring.");
     return; // no sound if no web server
@@ -25,19 +25,30 @@ async function loadSounds(sound_array) {
 
   sounds_to_load = soundList.length;
 
+  // Check for any errors in loading sound assets
   for (let i = 0; i < soundList.length; i++) {
-    sound_array[soundList[i].name] = await beginLoadingSound(
+    if (
+      !soundList[i] ||
+      checkForNamingCollisions(soundList, soundList[i].name, ASSET_TYPES.SOUND)
+    ) {
+      break;
+    }
+
+    sound_object[soundList[i].name] = await beginLoadingSound(
       soundList[i].name,
       soundList[i].file
     );
     sounds_to_load--;
   }
 
-  console.log("made sound array");
-  console.log(sound_array);
-  sounds_loaded = true;
+  if (!sound_loading_error) {
+    console.log("sounds loaded");
+    console.log(sound_object);
+    sounds_loaded = true;
+    return sound_object;
+  }
 
-  return sound_array;
+  return {};
 }
 
 async function beginLoadingSound(sndName, fileName) {
@@ -45,14 +56,16 @@ async function beginLoadingSound(sndName, fileName) {
     console.log("ERROR: beginLoadingSound has no audioCtx: " + fileName);
     return;
   }
+
   let src = "sounds/" + fileName;
+
   const response = await fetch(src);
   const arrayBuffer = await response.arrayBuffer();
   const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
   return audioBuffer;
 }
 
-function initSounds(sound_array) {
+function initSounds(sound_object) {
   // this must be run during the first click
   // and will cause a browser error if run earlier than that
   audioCtx = new AudioContext();
@@ -69,7 +82,7 @@ function initSounds(sound_array) {
   compressor.connect(audioCtx.destination);
 
   // finally we are allowed to run this safely
-  return loadSounds(sound_array);
+  return loadSounds(sound_object);
 }
 
 var is_chrome = navigator.userAgent.indexOf("Chrome") > -1;
