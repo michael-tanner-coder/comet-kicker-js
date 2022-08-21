@@ -20,3 +20,4 @@ const PICKUPS = {
   SHIELD: "shield",
   HP: "hp",
 };
+const TITLE = "COMET KICKER";

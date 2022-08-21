@@ -318,19 +318,15 @@ function draw() {
 
   if (game_state === STATES.GAME_OVER) {
     context.fillStyle = "white";
-    context.fillText(
-      "SCORE: " + Math.round(score * 100) / 100,
-      GAME_W / 2,
-      100
-    );
-    context.fillText("RETRY: PRESS ENTER", GAME_W / 2, 150);
-    context.fillText("QUIT: PRESS ESC", GAME_W / 2, 200);
+    drawCenteredText("SCORE: " + Math.round(score * 100) / 100, 50);
+    drawCenteredText("RETRY: PRESS ENTER", 100);
+    drawCenteredText("QUIT: PRESS ESC", 150);
   }
 
   if (game_state === STATES.MENU) {
     context.fillStyle = "white";
-    context.fillText("COMET KICKER", GAME_W / 2, 100);
-    context.fillText("PRESS ENTER", GAME_W / 2, 200);
+    drawCenteredText(TITLE, 100);
+    drawCenteredText("PRESS ENTER", 150);
   }
 }
 

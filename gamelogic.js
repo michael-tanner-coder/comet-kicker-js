@@ -235,3 +235,11 @@ function toggleFullscreen() {
     document.exitFullscreen();
   }
 }
+
+function getTextWidth(text) {
+  return context.measureText(text).width;
+}
+
+function drawCenteredText(text, y_value) {
+  context.fillText(text, GAME_W / 2 - getTextWidth(text) / 2, y_value);
+}
