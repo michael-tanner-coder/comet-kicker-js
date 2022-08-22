@@ -8,6 +8,8 @@ function update() {
     return;
   }
 
+  particles.update();
+
   if (game_state === STATES.MENU) {
     if (onPress(CONTROLS.start)) {
       game_state = STATES.GAME;
@@ -145,12 +147,15 @@ function update() {
   });
 
   // COLLISION CHECKS
+
   // player to block
   blocks.forEach((block) => {
     if (collisionDetected(block, PLAYER)) {
       hit_ground = true;
+      if (!hit_ground_last_frame) fall_fx(PLAYER.x,PLAYER.y);
       PLAYER.y = prev_y;
     }
+
 
     const leftBox = getHitbox(PLAYER, "left");
     const rightBox = getHitbox(PLAYER, "right");
@@ -227,22 +232,25 @@ function update() {
 
   updateHitboxes(PLAYER);
 
+  hit_ground_last_frame = hit_ground;
   hit_ground = false;
   hit_wall = false;
 }
 
+function updateScreenshake() {
+    if (PLAYER.screenshakesRemaining) { // starts max size and gets smaller
+        let wobble = Math.round((PLAYER.screenshakesRemaining/PLAYER_HIT_SCREENSHAKES)*SCREENSHAKE_MAX_SIZE);
+        if (PLAYER.screenshakesRemaining % 4 < 2) wobble *= -1; // alternate left/right every 2 frames
+        context.setTransform(1, 0, 0, 1, wobble, 0);
+        PLAYER.screenshakesRemaining--;
+    } else {
+            context.setTransform(1, 0, 0, 1, 0, 0); // reset
+    }
+}    
+
 function draw() {
   context.fillStyle = "black";
   context.fillRect(0, 0, GAME_W, GAME_H);
-
-  if (PLAYER.screenshakesRemaining) { // starts max size and gets smaller
-    let wobble = Math.round((PLAYER.screenshakesRemaining/PLAYER_HIT_SCREENSHAKES)*SCREENSHAKE_MAX_SIZE);
-    if (PLAYER.screenshakesRemaining % 4 < 2) wobble *= -1; // alternate left/right every 2 frames
-    context.setTransform(1, 0, 0, 1, wobble, 0);
-    PLAYER.screenshakesRemaining--;
-  } else {
-    context.setTransform(1, 0, 0, 1, 0, 0); // reset
-  }
 
   if (image_loading_error) {
     context.fillStyle = "white";
@@ -263,6 +271,9 @@ function draw() {
     context.fillText("Loading assets...", GAME_W / 2 - 50, 10);
     return;
   }
+
+  updateScreenshake();
+  particles.draw();
 
   if (game_state === STATES.GAME || game_state === STATES.PAUSE) {
     if (images_loaded) {

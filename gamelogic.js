@@ -3,6 +3,7 @@ var images_loaded = false;
 var player_x = 0;
 var player_y = 0;
 var hit_ground = false;
+var hit_ground_last_frame = false; // so we can trigger sounds and fx on the first touch
 var hit_wall = false;
 var shot_timer = 0;
 var shot_fired = false;
@@ -157,6 +158,7 @@ function removeObj(obj) {
 function resetGame() {
   GAME_OBJECTS.length = 0;
   GAME_OBJECTS.push(PLAYER);
+  hit_ground_last_frame = false;
   hit_ground = false;
   hit_wall = false;
   PLAYER.x = 0;
