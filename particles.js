@@ -14,24 +14,46 @@ var particles = new SimpleParticles();
 // custom effects used by this game specifically //
 ///////////////////////////////////////////////////
 
+function fire_fx(x,y) { poof(x,y,IMAGES["fire"],2); }
+function smoke_fx(x,y) { poof(x,y,IMAGES["smoke"],4); }
+function sparkle_fx(x,y) { poof(x,y,IMAGES["sparkle"],5); }
+function glow_fx(x,y) { poof(x,y,IMAGES["glow"],1); }
+
 function fall_fx(x,y) {
-    console.log("fall_fx");
+    //console.log("fall_fx");
+    let img = IMAGES["dust"];
+    let alpha = 0.5;
     let num = 8;
     for (let i=0; i<num; i++) { 
-        let img = IMAGES["dust"];
         let life = randomInt(333,777);
         let rotspd = Math.random()*0.4-0.2;
-        let ang = 0;
+        let ang = Math.random()*Math.PI*2;
         let velx = Math.random()*2-1;
         let vely = Math.random()*-1.5;
-        let alpha = 0.5;
         let px = x + 8 + Math.random()*8-4;
         let py = y + 16 + Math.random()*2-1;
         particles.add(px,py,img,life,rotspd,ang,velx,vely,alpha); 
     }
 }
 
+function poof(x,y,img,spd) {
+    let alpha = 1;
+    let num = 8;
+    for (let i=0; i<num; i++) { 
+        let life = randomInt(333,777);
+        let rotspd = Math.random()*0.4-0.2;
+        let ang = Math.random()*Math.PI*2;
+        let velx = Math.random()*spd-spd/2;
+        let vely = Math.random()*spd-spd/2;
+        let px = x + 8 + Math.random()*4-2;
+        let py = y + 8 + Math.random()*4-2;
+        particles.add(px,py,img,life,rotspd,ang,velx,vely,alpha); 
+    }
+}
+
+///////////////////////////////////////////////////
 function SimpleParticles() { // the class constructor used by the global "particles"
+///////////////////////////////////////////////////
 
     var particle = []; // all known particles in a pool so old ones can be reused
 

@@ -191,6 +191,9 @@ function update() {
       if (collisionDetected(enemy, bullet)) {
         removeObj(enemy);
         score += enemy_point_value;
+        sparkle_fx(enemy.x,enemy.y);
+        smoke_fx(enemy.x,enemy.y);
+        fire_fx(enemy.x,enemy.y);
       }
     });
   });
@@ -204,6 +207,9 @@ function update() {
       }
       PLAYER.hit = true;
       PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
+      sparkle_fx(PLAYER.x,PLAYER.y);
+      smoke_fx(PLAYER.x,PLAYER.y);
+      fire_fx(PLAYER.x,PLAYER.y);
     }
   });
 
