@@ -11,6 +11,11 @@ const image_list = [
   { file: "control-icons.png", name: "input_icons" },
   { file: "shot.png", name: "shot" },
   { file: "basic-enemy.png", name: "basic_enemy" },
+  { file: "dust.png", name: "dust" },
+  { file: "smoke.png", name: "smoke" },
+  { file: "fire.png", name: "fire" },
+  { file: "sparkle.png", name: "sparkle" },
+  { file: "glow.png", name: "glow" },
   // <-- Add your sprite in here
 ];
 
