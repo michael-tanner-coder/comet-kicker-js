@@ -18,7 +18,7 @@ var fullscreen = false;
 var high_scores = window.localStorage.getItem("high_scores");
 var max_high_score_list_length = 5;
 var recent_scores = window.localStorage.getItem("recent_scores");
-var current_language = "en";
+var current_language = "es";
 
 initializeScores();
 

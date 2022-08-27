@@ -338,15 +338,18 @@ function draw() {
 
     context.globalAlpha = 1;
     context.fillStyle = "white";
-    context.fillText("GAME PAUSED", GAME_W / 2 - 90, 100);
-    context.fillText("PRESS ENTER TO CONTINUE", GAME_W / 2 - 90, 150);
+    context.fillText(getText("game_paused"), GAME_W / 2 - 90, 100);
+    context.fillText(getText("press_enter_to_continue"), GAME_W / 2 - 90, 150);
   }
 
   if (game_state === STATES.GAME_OVER) {
     context.fillStyle = "white";
-    drawCenteredText("SCORE: " + Math.round(score * 100) / 100, 50);
-    drawCenteredText("RETRY: PRESS ENTER", 100);
-    drawCenteredText("QUIT: PRESS ESC", 150);
+    drawCenteredText(
+      `${getText("score")}: ${Math.round(score * 100) / 100}`,
+      50
+    );
+    drawCenteredText(`${getText("retry")}: ${getText("press_enter")}`, 100);
+    drawCenteredText(`${getText("quit")}: PRESS ESC`, 150);
   }
 
   if (game_state === STATES.MENU) {
