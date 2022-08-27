@@ -65,7 +65,7 @@ const ENEMY = {
   y: 0,
   color: "red",
   direction: 0,
-  speed: 3.5,
+  speed: 2,
   has_gravity: true,
   hitboxes: [
     { name: "left", x: 0, y: 0, w: 4, h: 14, color: "blue" },
