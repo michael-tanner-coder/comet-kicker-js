@@ -22,6 +22,11 @@ const ANIMATIONS = {
     frames: [{ x: 0, y: 0, w: 22, h: 17 }],
     current_frame: 0,
   },
+  wideShoot: {
+    sprite: "wide_shot",
+    frames: [{ x: 0, y: 0, w: 32, h: 32 }],
+    current_frame: 0,
+  },
 
   // ENEMY ANIMATIONS
   enemyMove: {},

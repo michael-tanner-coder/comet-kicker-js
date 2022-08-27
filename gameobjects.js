@@ -17,7 +17,7 @@ const PLAYER_DEFAULT = {
   sprite: "player_sprite",
   i_frames: 30,
   hit: false,
-  powerup: "",
+  powerup: PICKUPS.WIDE_SHOT,
   bullet_type: "",
 };
 
@@ -50,6 +50,7 @@ const BULLET = {
 const WIDE_BULLET = {
   ...BULLET,
   h: 24,
+  animation: ANIMATIONS.wideShoot,
 };
 
 // ENEMIES

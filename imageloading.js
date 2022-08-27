@@ -10,6 +10,7 @@ const image_list = [
   { file: "space-background-3.png", name: "background_3" },
   { file: "control-icons.png", name: "input_icons" },
   { file: "shot.png", name: "shot" },
+  { file: "wide-shot.png", name: "wide_shot" },
   { file: "basic-enemy.png", name: "basic_enemy" },
   { file: "dust.png", name: "dust" },
   { file: "smoke.png", name: "smoke" },
