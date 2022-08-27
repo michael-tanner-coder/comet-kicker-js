@@ -45,6 +45,8 @@ function update() {
     resetGame();
   }
 
+  PLAYER.state = PLAYER_STATES.IDLE;
+
   // SCREEN WRAP FOR PARALLAX BACKGROUNDS
   BACKGROUNDS.forEach((bg) => {
     bg.x += bg.speed;
@@ -62,12 +64,14 @@ function update() {
     PLAYER.speed = easing(PLAYER.speed, max_speed);
     PLAYER.x += PLAYER.speed;
     PLAYER.direction = 0;
+    PLAYER.state = PLAYER_STATES.RUNNING;
   }
 
   if (onHold(CONTROLS.moveLeft)) {
     PLAYER.speed = easing(PLAYER.speed, max_speed);
     PLAYER.x -= PLAYER.speed;
     PLAYER.direction = 180;
+    PLAYER.state = PLAYER_STATES.RUNNING;
   }
 
   if (onRelease(CONTROLS.moveLeft) || onRelease(CONTROLS.moveRight)) {
