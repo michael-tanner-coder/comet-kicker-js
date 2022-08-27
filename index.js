@@ -152,10 +152,9 @@ function update() {
   blocks.forEach((block) => {
     if (collisionDetected(block, PLAYER)) {
       hit_ground = true;
-      if (!hit_ground_last_frame) fall_fx(PLAYER.x,PLAYER.y);
+      if (!hit_ground_last_frame) fall_fx(PLAYER.x, PLAYER.y);
       PLAYER.y = prev_y;
     }
-
 
     const leftBox = getHitbox(PLAYER, "left");
     const rightBox = getHitbox(PLAYER, "right");
@@ -191,9 +190,9 @@ function update() {
       if (collisionDetected(enemy, bullet)) {
         removeObj(enemy);
         score += enemy_point_value;
-        sparkle_fx(enemy.x,enemy.y);
-        smoke_fx(enemy.x,enemy.y);
-        fire_fx(enemy.x,enemy.y);
+        sparkle_fx(enemy.x, enemy.y);
+        smoke_fx(enemy.x, enemy.y);
+        fire_fx(enemy.x, enemy.y);
       }
     });
   });
@@ -207,9 +206,9 @@ function update() {
       }
       PLAYER.hit = true;
       PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
-      sparkle_fx(PLAYER.x,PLAYER.y);
-      smoke_fx(PLAYER.x,PLAYER.y);
-      fire_fx(PLAYER.x,PLAYER.y);
+      sparkle_fx(PLAYER.x, PLAYER.y);
+      smoke_fx(PLAYER.x, PLAYER.y);
+      fire_fx(PLAYER.x, PLAYER.y);
     }
   });
 
@@ -244,18 +243,22 @@ function update() {
 }
 
 function updateScreenshake() {
-    if (PLAYER.screenshakesRemaining) { // starts max size and gets smaller
-        let wobble = Math.round((PLAYER.screenshakesRemaining/PLAYER_HIT_SCREENSHAKES)*SCREENSHAKE_MAX_SIZE);
-        if (PLAYER.screenshakesRemaining % 4 < 2) wobble *= -1; // alternate left/right every 2 frames
-        context.setTransform(1, 0, 0, 1, wobble, 0);
-        PLAYER.screenshakesRemaining--;
-    } else {
-            context.setTransform(1, 0, 0, 1, 0, 0); // reset
-    }
-}    
+  if (PLAYER.screenshakesRemaining) {
+    // starts max size and gets smaller
+    let wobble = Math.round(
+      (PLAYER.screenshakesRemaining / PLAYER_HIT_SCREENSHAKES) *
+        SCREENSHAKE_MAX_SIZE
+    );
+    if (PLAYER.screenshakesRemaining % 4 < 2) wobble *= -1; // alternate left/right every 2 frames
+    context.setTransform(1, 0, 0, 1, wobble, 0);
+    PLAYER.screenshakesRemaining--;
+  } else {
+    context.setTransform(1, 0, 0, 1, 0, 0); // reset
+  }
+}
 
 function draw() {
-  context.fillStyle = "black";
+  context.fillStyle = "#272744";
   context.fillRect(0, 0, GAME_W, GAME_H);
 
   if (image_loading_error) {
@@ -289,7 +292,7 @@ function draw() {
     }
 
     GAME_OBJECTS.forEach((obj) => {
-      if (obj.render_hitbox) {
+      if (obj.render_hitbox || render_hitboxes) {
         context.fillStyle = obj.color;
         context.fillRect(obj.x, obj.y, obj.w, obj.h);
       }

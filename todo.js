@@ -41,3 +41,13 @@
 // TODO: player needs more reason to move around the map
 // TODO: need more confirmation of when player takes a hit
 // TODO: visually indicate the lifetime of a collectible
+
+// TODAY:
+// TODO: make wide shot sprite
+// TODO: make player sprite states + walk
+// TODO: change direction of comet enemies
+// TODO: adjust enemy spawn rate
+// TODO: add timescale factor
+// TODO: start making menu code
+
+// TOMORROW:
