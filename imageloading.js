@@ -17,6 +17,7 @@ const image_list = [
   { file: "fire.png", name: "fire" },
   { file: "sparkle.png", name: "sparkle" },
   { file: "glow.png", name: "glow" },
+  { file: "player-spritesheet.png", name: "player_sheet" },
   // <-- Add your sprite in here
 ];
 

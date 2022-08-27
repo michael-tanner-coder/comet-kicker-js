@@ -245,3 +245,7 @@ function getTextWidth(text) {
 function drawCenteredText(text, y_value) {
   context.fillText(text, GAME_W / 2 - getTextWidth(text) / 2, y_value);
 }
+
+function getPlayerAnimation() {
+  return ANIMATIONS[PLAYER_STATE_TO_ANIMATION[PLAYER.state]];
+}

@@ -12,9 +12,32 @@ const ANIMATIONS = {
   },
 
   // PLAYER ANIMATIONS
-  playerRun: {},
-  playerKick: {},
-  playerIdle: {},
+  playerIdle: {
+    sprite: "player_sheet",
+    frames: [
+      { x: 0, y: 0, w: 16, h: 16 },
+      { x: 16, y: 0, w: 16, h: 16 },
+    ],
+    current_frame: 0,
+  },
+  playerRun: {
+    sprite: "player_sheet",
+    frames: [
+      { x: 0, y: 16, w: 16, h: 16 },
+      { x: 16, y: 16, w: 16, h: 16 },
+    ],
+    current_frame: 0,
+  },
+  playerKick: {
+    sprite: "player_sheet",
+    frames: [{ x: 0, y: 32, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  playerLose: {
+    sprite: "player_sheet",
+    frames: [{ x: 0, y: 48, w: 16, h: 16 }],
+    current_frame: 0,
+  },
 
   // SHOOTING ANIMATIONS
   shoot: {

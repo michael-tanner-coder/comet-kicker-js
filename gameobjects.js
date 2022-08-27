@@ -14,11 +14,14 @@ const PLAYER_DEFAULT = {
     { name: "right", x: 0, y: 0, w: 4, h: 14, color: "red" },
   ],
   hp: MAX_HP,
-  sprite: "player_sprite",
+  // sprite: "player_sprite",
   i_frames: 30,
   hit: false,
   powerup: PICKUPS.WIDE_SHOT,
   bullet_type: "",
+  animation: ANIMATIONS.playerIdle,
+  animation_speed: 6,
+  state: PLAYER_STATES.IDLE,
 };
 
 const PLAYER = { ...PLAYER_DEFAULT };

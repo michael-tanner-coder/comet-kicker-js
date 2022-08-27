@@ -43,8 +43,6 @@
 // TODO: visually indicate the lifetime of a collectible
 
 // TODAY:
-// TODO: make wide shot sprite
-// TODO: make player sprite states + walk
 // TODO: change direction of comet enemies
 // TODO: adjust enemy spawn rate
 // TODO: add timescale factor

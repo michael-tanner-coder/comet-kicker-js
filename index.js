@@ -136,6 +136,9 @@ function update() {
     moveInOwnDirection(enemy);
   });
 
+  // ANIMATIONS
+  PLAYER.animation = getPlayerAnimation();
+
   // POWERUPS
   checkPlayerPowerup();
 
@@ -307,7 +310,7 @@ function draw() {
       }
 
       if (images_loaded && obj.animation) {
-        playAnimation(obj.animation, 1, obj.x, obj.y);
+        playAnimation(obj.animation, obj.animation_speed || 1, obj.x, obj.y);
       }
     });
 

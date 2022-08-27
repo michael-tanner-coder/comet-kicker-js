@@ -21,3 +21,16 @@ const PICKUPS = {
   HP: "hp",
 };
 const TITLE = "COMET KICKER";
+const PLAYER_STATES = {
+  IDLE: "idle",
+  RUNNING: "running",
+  KICKING: "kicking",
+  DEAD: "dead",
+};
+
+const PLAYER_STATE_TO_ANIMATION = {
+  [PLAYER_STATES.IDLE]: "playerIdle",
+  [PLAYER_STATES.RUNNING]: "playerRun",
+  [PLAYER_STATES.KICKING]: "playerKick",
+  [PLAYER_STATES.DEAD]: "playerLose",
+};
