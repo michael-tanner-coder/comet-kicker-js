@@ -318,9 +318,12 @@ function draw() {
       }
     });
 
-    // drawHitboxes(PLAYER);
     context.fillStyle = "white";
-    context.fillText("SCORE: " + Math.round(score * 100) / 100, GAME_W / 2, 10);
+    context.fillText(
+      `${getText("score")}: ${Math.round(score * 100) / 100}`,
+      GAME_W / 2,
+      10
+    );
 
     for (i = 0; i < PLAYER.hp; i++) {
       context.fillStyle = "white";
@@ -349,7 +352,7 @@ function draw() {
   if (game_state === STATES.MENU) {
     context.fillStyle = "white";
     drawCenteredText(TITLE, 100);
-    drawCenteredText("PRESS ENTER", 150);
+    drawCenteredText(getText("press_enter"), 150);
   }
 }
 
