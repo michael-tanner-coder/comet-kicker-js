@@ -86,7 +86,8 @@ const COLLECT = {
   color: "yellow",
   life_timer: 360,
   pickup: PICKUPS.points,
-  render_hitbox: true,
+  render_hitbox: false,
+  sprite: "collectible",
 };
 const WIDE_SHOT = { ...COLLECT, pickup: PICKUPS.WIDE_SHOT };
 const RAPID_FIRE = { ...COLLECT, pickup: PICKUPS.RAPID_FIRE };
