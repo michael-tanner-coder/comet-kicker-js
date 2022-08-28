@@ -62,14 +62,14 @@ function update(dt) {
 
   if (onHold(CONTROLS.moveRight)) {
     PLAYER.speed = easing(PLAYER.speed, max_speed);
-    PLAYER.x += PLAYER.speed;
+    PLAYER.x += PLAYER.speed * time_scale;
     PLAYER.direction = 0;
     PLAYER.state = PLAYER_STATES.RUNNING;
   }
 
   if (onHold(CONTROLS.moveLeft)) {
     PLAYER.speed = easing(PLAYER.speed, max_speed);
-    PLAYER.x -= PLAYER.speed;
+    PLAYER.x -= PLAYER.speed * time_scale;
     PLAYER.direction = 180;
     PLAYER.state = PLAYER_STATES.RUNNING;
   }
@@ -149,7 +149,7 @@ function update(dt) {
   // PHYSICS LOOP
   GAME_OBJECTS.forEach((obj) => {
     if (obj.has_gravity) {
-      obj.y += GRAVITY;
+      obj.y += GRAVITY * time_scale;
     }
   });
 

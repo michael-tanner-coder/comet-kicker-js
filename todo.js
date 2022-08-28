@@ -44,5 +44,4 @@
 
 // TODAY:
 // TODO: change direction of comet enemies
-// TODO: add timescale factor
 // TODO: start making menu code

@@ -31,8 +31,10 @@ initializeScores();
 
 // GLOBAL UTILS
 function moveInOwnDirection(object) {
-  object.x += object.speed * Math.cos((object.direction * Math.PI) / 180);
-  object.y += object.speed * Math.sin((object.direction * Math.PI) / 180);
+  object.x +=
+    object.speed * Math.cos((object.direction * Math.PI) / 180) * time_scale;
+  object.y +=
+    object.speed * Math.sin((object.direction * Math.PI) / 180) * time_scale;
 }
 
 function updateHitboxes(object) {
