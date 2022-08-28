@@ -200,6 +200,7 @@ function update(dt) {
         sparkle_fx(enemy.x, enemy.y);
         smoke_fx(enemy.x, enemy.y);
         fire_fx(enemy.x, enemy.y);
+        playSound(SOUNDS["explode"]);
       }
     });
   });
