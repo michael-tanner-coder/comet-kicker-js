@@ -1,5 +1,5 @@
 // LOOP FUNCTIONS
-function update() {
+function update(dt) {
   if (image_loading_error || sound_loading_error) {
     return;
   }
@@ -264,7 +264,7 @@ function updateScreenshake() {
   }
 }
 
-function draw() {
+function draw(offset) {
   context.fillStyle = "#272744";
   context.fillRect(0, 0, GAME_W, GAME_H);
 
@@ -360,11 +360,12 @@ function draw() {
 }
 
 // CORE GAME LOOP
-last_time = new Date().getTime();
-
+// fixed time-step loop with variable rendering
 function loop() {
-  let current_time = new Date().getTime();
-  let elapsed = current_time - last_time;
+  let current_time = Date.now();
+  let elapsed = current_time - start_time;
+  start_time = current_time;
+  lag += elapsed;
 
   gamepadListener();
   inputListener();
@@ -374,14 +375,20 @@ function loop() {
       game_state = STATES.GAME;
     }
   } else {
-    update(elapsed);
+    while (lag > frame_duration) {
+      update(elapsed);
+      lag -= 1000 / fps;
+      if (lag < 0) lag = 0;
+    }
   }
 
-  draw();
+  var lag_offset = lag / frame_duration;
+  draw(lag_offset);
 
-  last_time = current_time;
+  window.requestAnimationFrame(loop);
 }
 
 // INIT
 startGame();
-window.setInterval(loop, 1000 / GAME_SPEED);
+
+loop();

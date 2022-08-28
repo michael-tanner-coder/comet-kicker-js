@@ -18,7 +18,14 @@ var fullscreen = false;
 var high_scores = window.localStorage.getItem("high_scores");
 var max_high_score_list_length = 5;
 var recent_scores = window.localStorage.getItem("recent_scores");
-var current_language = "es";
+var current_language = "en";
+var time_scale = 1;
+
+// GAME LOOP REQUIREMENTS
+var fps = 60;
+var start_time = Date.now();
+var frame_duration = 1000 / 62;
+var lag = 0;
 
 initializeScores();
 
