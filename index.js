@@ -266,25 +266,25 @@ function updateScreenshake() {
 }
 
 function draw(offset) {
-  context.fillStyle = "#272744";
+  context.fillStyle = PURPLE;
   context.fillRect(0, 0, GAME_W, GAME_H);
 
   if (image_loading_error) {
-    context.fillStyle = "white";
+    context.fillStyle = WHITE;
     context.fillText(ERROR_MESSAGES.IMAGE_LOADING_ERROR, GAME_W / 2 - 100, 10);
     context.fillText(ERROR_MESSAGES.CHECK_CONSOLE, GAME_W / 2 - 100, 25);
     return;
   }
 
   if (sound_loading_error) {
-    context.fillStyle = "white";
+    context.fillStyle = WHITE;
     context.fillText(ERROR_MESSAGES.SOUND_LOADING_ERROR, GAME_W / 2 - 100, 10);
     context.fillText(ERROR_MESSAGES.CHECK_CONSOLE, GAME_W / 2 - 100, 25);
     return;
   }
 
   if (!images_loaded || !sounds_loaded) {
-    context.fillStyle = "white";
+    context.fillStyle = WHITE;
     context.fillText("Loading assets...", GAME_W / 2 - 50, 10);
     return;
   }
@@ -310,7 +310,7 @@ function draw(offset) {
       }
 
       if (obj.hit && obj.i_frames % 2 === 0) {
-        context.fillStyle = "white";
+        context.fillStyle = WHITE;
         context.fillRect(obj.x, obj.y, obj.w, obj.h);
       }
 
@@ -319,7 +319,7 @@ function draw(offset) {
       }
     });
 
-    context.fillStyle = "white";
+    context.fillStyle = WHITE;
     context.fillText(
       `${getText("score")}: ${Math.round(score * 100) / 100}`,
       GAME_W / 2,
@@ -327,7 +327,7 @@ function draw(offset) {
     );
 
     for (i = 0; i < PLAYER.hp; i++) {
-      context.fillStyle = "white";
+      context.fillStyle = WHITE;
       context.fillRect(GAME_W / 2 + 16 * i, 20, 8, 16);
     }
   }
@@ -338,13 +338,13 @@ function draw(offset) {
     context.fillRect(0, 0, GAME_W, GAME_H);
 
     context.globalAlpha = 1;
-    context.fillStyle = "white";
+    context.fillStyle = WHITE;
     context.fillText(getText("game_paused"), GAME_W / 2 - 90, 100);
     context.fillText(getText("press_enter_to_continue"), GAME_W / 2 - 90, 150);
   }
 
   if (game_state === STATES.GAME_OVER) {
-    context.fillStyle = "white";
+    context.fillStyle = WHITE;
     drawCenteredText(
       `${getText("score")}: ${Math.round(score * 100) / 100}`,
       50
@@ -354,7 +354,7 @@ function draw(offset) {
   }
 
   if (game_state === STATES.MENU) {
-    context.fillStyle = "white";
+    context.fillStyle = WHITE;
     drawCenteredText(TITLE, 100);
     drawCenteredText(getText("press_enter"), 150);
   }

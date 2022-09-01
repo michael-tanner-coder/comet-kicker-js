@@ -2,7 +2,7 @@
 const PLAYER_DEFAULT = {
   x: 100,
   y: 25,
-  color: "white",
+  color: WHITE,
   w: 16,
   h: 16,
   speed: 0,
