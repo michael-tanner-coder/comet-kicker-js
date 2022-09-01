@@ -384,6 +384,7 @@ function draw(offset) {
   }
 
   if (game_state === STATES.MENU) {
+    titlescreenFX();
     context.fillStyle = WHITE;
     renderMenu(getCurrentMenu());
   }

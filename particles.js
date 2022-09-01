@@ -19,6 +19,15 @@ function smoke_fx(x,y) { poof(x,y,IMAGES["smoke"],4); }
 function sparkle_fx(x,y) { poof(x,y,IMAGES["sparkle"],5); }
 function glow_fx(x,y) { poof(x,y,IMAGES["glow"],1); }
 
+function titlescreenFX() {
+    let FIREHEIGHT = 30;
+    fire_fx(Math.random()*GAME_W,GAME_H-Math.random()*FIREHEIGHT);
+    smoke_fx(Math.random()*GAME_W,GAME_H-Math.random()*FIREHEIGHT);
+    //sparkle_fx(Math.random()*GAME_W,GAME_H-Math.random()*FIREHEIGHT);
+    glow_fx(Math.random()*GAME_W,GAME_H-Math.random()*FIREHEIGHT);
+    fall_fx(Math.random()*GAME_W,GAME_H-Math.random()*FIREHEIGHT);
+}
+
 function fall_fx(x,y) {
     //console.log("fall_fx");
     let img = IMAGES["dust"];
