@@ -62,9 +62,13 @@ const CONTROLS = {
   shoot: [" ", "buttonA"],
   moveLeft: ["ArrowLeft", "dpadLeft", "left"],
   moveRight: ["ArrowRight", "dpadRight", "right"],
+  moveUp: ["ArrowUp", "dpadUp", "up"],
+  moveDown: ["ArrowDown", "dpadDown", "down"],
   pause: ["Escape", "start"],
   select: [" ", "select"],
   start: ["start", "Enter"],
+  accept: [" ", "Enter", "buttonA"],
+  decline: ["Escape", "buttonB"],
 };
 
 function initializeInputState() {

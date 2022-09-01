@@ -10,13 +10,43 @@ function update(dt) {
 
   particles.update();
 
+  // MENU NAVIGATION/INTERACTION
   if (game_state === STATES.MENU) {
-    if (onPress(CONTROLS.start)) {
-      game_state = STATES.GAME;
+    // select buttons
+    if (
+      onPress(CONTROLS.accept) &&
+      getCurrentMenuElement().type === INPUT_TYPES.button
+    ) {
+      getCurrentMenu().elements[getCurrentMenu().cursor].onSelect();
     }
 
-    if (onPress(CONTROLS.select)) {
-      toggleFullscreen();
+    // navigate back
+    if (onPress(CONTROLS.decline)) {
+      goBack();
+    }
+
+    // navigate menu
+    if (onPress(CONTROLS.moveDown)) {
+      moveCursor(getCurrentMenu(), 1);
+    }
+    if (onPress(CONTROLS.moveUp)) {
+      moveCursor(getCurrentMenu(), -1);
+    }
+
+    // switch options
+    if (
+      onPress(CONTROLS.moveLeft) &&
+      getCurrentMenuElement().type === INPUT_TYPES.select
+    ) {
+      changeOptions(getCurrentMenuElement(), -1);
+      getCurrentMenuElement().onChange();
+    }
+    if (
+      onPress(CONTROLS.moveRight) &&
+      getCurrentMenuElement().type === INPUT_TYPES.select
+    ) {
+      changeOptions(getCurrentMenuElement(), 1);
+      getCurrentMenuElement().onChange();
     }
 
     return;
@@ -355,8 +385,7 @@ function draw(offset) {
 
   if (game_state === STATES.MENU) {
     context.fillStyle = WHITE;
-    drawCenteredText(TITLE, 100);
-    drawCenteredText(getText("press_enter"), 150);
+    renderMenu(getCurrentMenu());
   }
 }
 

@@ -259,3 +259,11 @@ function drawCenteredText(text, y_value) {
 function getPlayerAnimation() {
   return ANIMATIONS[PLAYER_STATE_TO_ANIMATION[PLAYER.state]];
 }
+
+// when a number exceeds a maximum or goes below a minimum, wrap it back around to the other end of the range
+// idk if 'loopClamp' is the name for this concept lol
+const loopClamp = (num, min, max) => {
+  if (num < min) num = max;
+  if (num > max) num = min;
+  return num;
+};
