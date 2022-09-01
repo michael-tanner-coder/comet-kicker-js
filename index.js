@@ -354,6 +354,7 @@ function draw(offset) {
   }
 
   if (game_state === STATES.MENU) {
+    titlescreenFX();
     context.fillStyle = "white";
     drawCenteredText(TITLE, 100);
     drawCenteredText(getText("press_enter"), 150);
