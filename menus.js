@@ -12,6 +12,7 @@ const INPUT = {
   fontColor: WHITE,
   backgroundColor: PURPLE,
   padding: 4,
+  handler: () => {},
 };
 const BUTTON = {
   ...INPUT,
@@ -141,6 +142,17 @@ const goBack = () => {
 
 const createMenu = (props = {}) => {
   const NEW_MENU = { ...MENU, ...props };
+  NEW_MENU.elements.forEach((element) => {
+    element.handler = () => {
+      if (element.type == INPUT_TYPES.button) {
+        element.onSelect(element);
+      }
+
+      if (element.type == INPUT_TYPES.select) {
+        element.onChange(element);
+      }
+    };
+  });
   MENUS.push(NEW_MENU);
 };
 
@@ -273,6 +285,10 @@ addOptionRange(MASTER_VOLUME_OPTION, 0, 10);
 const MUSIC_VOLUME_OPTION = {
   ...SELECT,
   text: "MUSIC VOLUME",
+  onChange: (input) => {
+    var currentOption = input.options[input.currentOption];
+    setMusicVolume(currentOption.value);
+  },
 };
 addOptionRange(MUSIC_VOLUME_OPTION, 0, 10);
 

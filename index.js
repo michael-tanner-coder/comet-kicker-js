@@ -17,7 +17,7 @@ function update(dt) {
       onPress(CONTROLS.accept) &&
       getCurrentMenuElement().type === INPUT_TYPES.button
     ) {
-      getCurrentMenu().elements[getCurrentMenu().cursor].onSelect();
+      getCurrentMenu().elements[getCurrentMenu().cursor].handler();
     }
 
     // navigate back
@@ -39,14 +39,14 @@ function update(dt) {
       getCurrentMenuElement().type === INPUT_TYPES.select
     ) {
       changeOptions(getCurrentMenuElement(), -1);
-      getCurrentMenuElement().onChange();
+      getCurrentMenuElement().handler();
     }
     if (
       onPress(CONTROLS.moveRight) &&
       getCurrentMenuElement().type === INPUT_TYPES.select
     ) {
       changeOptions(getCurrentMenuElement(), 1);
-      getCurrentMenuElement().onChange();
+      getCurrentMenuElement().handler();
     }
 
     return;

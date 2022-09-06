@@ -20,6 +20,7 @@ var max_high_score_list_length = 5;
 var recent_scores = window.localStorage.getItem("recent_scores");
 var current_language = "en";
 var time_scale = 1;
+var music_volume = 0.5;
 
 // GAME LOOP REQUIREMENTS
 var fps = 60;
@@ -280,4 +281,9 @@ const loopClamp = (num, min, max) => {
   if (num < min) num = max;
   if (num > max) num = min;
   return num;
+};
+
+const setMusicVolume = (vol) => {
+  music_volume = vol;
+  console.log(music_volume);
 };
