@@ -104,11 +104,12 @@ function spawnEnemy() {
 }
 
 function spawnCollectible() {
-  var new_collect = { ...COLLECT };
+  var new_collect = choose(COLLECTIBLES);
+  var temp_collect = { ...new_collect };
   var spawn_point = choose(COLLECTIBLE_LOCATIONS);
-  new_collect.x = withGrid(spawn_point.x);
-  new_collect.y = withGrid(spawn_point.y);
-  GAME_OBJECTS.push(new_collect);
+  temp_collect.x = withGrid(spawn_point.x);
+  temp_collect.y = withGrid(spawn_point.y);
+  GAME_OBJECTS.push(temp_collect);
 }
 
 function checkPlayerPowerup() {
@@ -121,6 +122,19 @@ function checkPlayerPowerup() {
       break;
     default:
       PLAYER.bullet_type = BULLET;
+      break;
+  }
+}
+
+function checkPickupType(collectible) {
+  switch (collectible.pickup) {
+    case PICKUPS.HP:
+      PLAYER.hp += 1;
+      break;
+    case PICKUPS.POINTS:
+      score += collectible.points;
+      break;
+    default:
       break;
   }
 }

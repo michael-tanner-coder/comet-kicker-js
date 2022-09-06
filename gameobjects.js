@@ -85,7 +85,8 @@ const COLLECT = {
   y: 0,
   color: "yellow",
   life_timer: 360,
-  pickup: PICKUPS.points,
+  points: 100,
+  pickup: PICKUPS.POINTS,
   render_hitbox: false,
   sprite: "collectible",
 };
@@ -93,7 +94,8 @@ const WIDE_SHOT = { ...COLLECT, pickup: PICKUPS.WIDE_SHOT };
 const RAPID_FIRE = { ...COLLECT, pickup: PICKUPS.RAPID_FIRE };
 const MISSILE = { ...COLLECT, pickup: PICKUPS.MISSILE };
 const SHIELD = { ...COLLECT, pickup: PICKUPS.SHIELD };
-const HP = { ...COLLECT, pickup: PICKUPS.HP };
+const HP = { ...COLLECT, pickup: PICKUPS.HP, sprite: "hp_up" };
+const COLLECTIBLES = [COLLECT, HP];
 
 // BACKGROUNDS FOR PARALLAX
 const BACKGROUND_1 = {

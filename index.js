@@ -215,8 +215,8 @@ function update(dt) {
     }
 
     if (collisionDetected(coll, PLAYER)) {
+      checkPickupType(coll);
       removeObj(coll);
-      score += 100;
       playSound(SOUNDS["collect"]);
     }
   });
