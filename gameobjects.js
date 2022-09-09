@@ -117,6 +117,8 @@ const BACKGROUND_3 = {
   speed: 3,
 };
 
+const BACKGROUNDS = [BACKGROUND_1, BACKGROUND_2, BACKGROUND_3];
+
 // SHIELD
 const ROTATING_SHIELD = {
   x: 0,
@@ -130,4 +132,15 @@ const ROTATING_SHIELD = {
   has_trail: true,
 };
 
-const BACKGROUNDS = [BACKGROUND_1, BACKGROUND_2, BACKGROUND_3];
+// TEXT
+const TEXT_OBJECT = {
+  x: 0,
+  y: 0,
+  h: 8,
+  w: 32,
+  color: WHITE,
+  text: "test",
+  type: "text",
+  speed: 1,
+  alpha: 1,
+};

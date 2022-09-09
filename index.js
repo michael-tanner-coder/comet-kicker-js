@@ -184,6 +184,7 @@ function update(dt) {
 
   var blocks = GAME_OBJECTS.filter((obj) => obj.type === "floor");
   var bullets = GAME_OBJECTS.filter((obj) => obj.type === "bullet");
+  var text = GAME_OBJECTS.filter((obj) => obj.type === "text");
 
   bullets.forEach((bullet) => moveInOwnDirection(bullet));
   enemies.forEach((enemy) => {
@@ -201,6 +202,12 @@ function update(dt) {
     }
 
     moveInOwnDirection(enemy);
+  });
+  text.forEach((txt) => {
+    txt.y -= txt.speed;
+    if (txt.alpha <= 0) {
+      removeObj(txt);
+    }
   });
 
   // ANIMATIONS
@@ -251,6 +258,11 @@ function update(dt) {
       checkPickupType(coll);
       removeObj(coll);
       playSound(SOUNDS["collect"]);
+      let new_text_obj = spawnObject(TEXT_OBJECT, PLAYER.x, PLAYER.y);
+      new_text_obj.text = PICKUP_TEXT[coll.pickup].toUpperCase();
+      if (new_text_obj.text === PICKUPS.POINTS.toUpperCase()) {
+        new_text_obj.text = "+" + coll.points;
+      }
     }
   });
 
@@ -346,6 +358,7 @@ function updateScreenshake() {
 }
 
 function draw(offset) {
+  context.globalAlpha = 1;
   context.fillStyle = PURPLE;
   context.fillRect(0, 0, GAME_W, GAME_H);
 
@@ -382,6 +395,14 @@ function draw(offset) {
     GAME_OBJECTS.forEach((obj) => {
       if (obj.has_trail) {
         drawTrail(obj);
+      }
+
+      if (obj.type === "text") {
+        context.fillStyle = obj.color;
+        context.globalAlpha = obj.alpha;
+        context.fillText(obj.text, obj.x, obj.y);
+        obj.alpha -= 0.02;
+        context.globalAlpha = 1;
       }
 
       if (obj.render_hitbox || render_hitboxes) {

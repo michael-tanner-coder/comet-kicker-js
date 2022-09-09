@@ -114,6 +114,19 @@ function getHitbox(object, box_name) {
   }
 }
 
+function choose(choices) {
+  return choices[Math.floor(Math.random() * choices.length)];
+}
+
+// spawning
+function spawnObject(obj, x, y) {
+  var new_obj = { ...obj };
+  new_obj.x = x;
+  new_obj.y = y;
+  GAME_OBJECTS.push(new_obj);
+  return new_obj;
+}
+
 function spawnBullet(source, direction, projectile) {
   // Center of bullet source
   var source_center_x = source.x + source.w / 2;
@@ -137,10 +150,6 @@ function spawnBullet(source, direction, projectile) {
   GAME_OBJECTS.push(new_bullet);
 }
 
-function choose(choices) {
-  return choices[Math.floor(Math.random() * choices.length)];
-}
-
 function spawnEnemy() {
   var new_enemy = { ...ENEMY };
   var spawn_point = choose(SPAWN_LOCATIONS);
@@ -157,6 +166,14 @@ function spawnCollectible() {
   temp_collect.x = withGrid(spawn_point.x);
   temp_collect.y = withGrid(spawn_point.y);
   GAME_OBJECTS.push(temp_collect);
+}
+
+function spawnShield() {
+  var new_shield = { ...ROTATING_SHIELD };
+  new_shield.x = PLAYER.x;
+  new_shield.y = PLAYER.y;
+  GAME_OBJECTS.push(new_shield);
+  playSound(SOUNDS["shield_hit"]);
 }
 
 function checkPlayerPowerup() {
@@ -190,14 +207,6 @@ function checkPickupType(collectible) {
     default:
       break;
   }
-}
-
-function spawnShield() {
-  var new_shield = { ...ROTATING_SHIELD };
-  new_shield.x = PLAYER.x;
-  new_shield.y = PLAYER.y;
-  GAME_OBJECTS.push(new_shield);
-  playSound(SOUNDS["shield_hit"]);
 }
 
 function checkIfOutOfBounds(object) {

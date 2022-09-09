@@ -21,6 +21,15 @@ const PICKUPS = {
   SHIELD: "shield",
   HP: "hp",
 };
+const PICKUP_TEXT = {
+  points: "points",
+  shot: "shot",
+  rapid_fire: "rapid fire",
+  wide_shot: "Wide Shot",
+  missile: "Missile Shot",
+  shield: "Shield",
+  hp: "HP",
+};
 const TITLE = "COMET KICKER";
 const PLAYER_STATES = {
   IDLE: "idle",
