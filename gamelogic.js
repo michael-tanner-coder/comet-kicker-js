@@ -67,6 +67,16 @@ function assignId(obj) {
   return obj.id;
 }
 
+function drawTrail(obj) {
+  object_position_map[obj.id]?.forEach((pos, i) => {
+    let ratio = (i + 1) / object_position_map[obj.id].length;
+    let w = clamp(ratio * obj.w, 1, obj.w);
+    let h = clamp(ratio * obj.h, 1, obj.h);
+    context.fillStyle = "rgba(255, 255, 255, " + ratio / 2 + ")";
+    context.fillRect(pos.x, pos.y, w, h);
+  });
+}
+
 function moveInOwnDirection(object) {
   object.x +=
     object.speed * Math.cos((object.direction * Math.PI) / 180) * time_scale;

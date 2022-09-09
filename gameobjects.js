@@ -22,6 +22,7 @@ const PLAYER_DEFAULT = {
   animation: ANIMATIONS.playerIdle,
   animation_speed: 6,
   state: PLAYER_STATES.IDLE,
+  has_trail: false,
 };
 
 const PLAYER = { ...PLAYER_DEFAULT };
@@ -48,6 +49,7 @@ const BULLET = {
   direction: 0,
   speed: 4,
   animation: ANIMATIONS.shoot,
+  has_trail: true,
 };
 
 const WIDE_BULLET = {
@@ -74,6 +76,7 @@ const ENEMY = {
   hit_ground: false,
   hit_wall: false,
   sprite: "basic_enemy",
+  has_trail: true,
 };
 
 // POWERUPS and POINT COLLECTIBLES
@@ -124,6 +127,7 @@ const ROTATING_SHIELD = {
   speed: 1,
   color: YELLOW,
   render_hitbox: true,
+  has_trail: true,
 };
 
 const BACKGROUNDS = [BACKGROUND_1, BACKGROUND_2, BACKGROUND_3];
