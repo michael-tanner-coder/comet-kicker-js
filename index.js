@@ -84,6 +84,7 @@ function update(dt) {
 
   if (PLAYER.hp <= 0) {
     resetGame();
+    playSound(SOUNDS["game_over"]);
   }
 
   PLAYER.state = PLAYER_STATES.IDLE;
