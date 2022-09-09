@@ -197,6 +197,7 @@ function spawnShield() {
   new_shield.x = PLAYER.x;
   new_shield.y = PLAYER.y;
   GAME_OBJECTS.push(new_shield);
+  playSound(SOUNDS["shield_hit"]);
 }
 
 function checkIfOutOfBounds(object) {

@@ -134,6 +134,7 @@ function update(dt) {
     shield_timer = 0;
     PLAYER.powerup = "";
     removeObj(shield);
+    playSound(SOUNDS["shield_hit"]);
   }
 
   // SCORE DECREMENT
@@ -175,6 +176,7 @@ function update(dt) {
 
   if (shot_timer <= 0 && onPress(CONTROLS.shoot)) {
     spawnBullet(PLAYER, PLAYER.direction, PLAYER.bullet_type);
+    playSound(SOUNDS["shoot"]);
     PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
     shot_fired = true;
   }
@@ -278,6 +280,7 @@ function update(dt) {
       sparkle_fx(PLAYER.x, PLAYER.y);
       smoke_fx(PLAYER.x, PLAYER.y);
       fire_fx(PLAYER.x, PLAYER.y);
+      playSound(SOUNDS["explode"]);
     }
 
     // enemy to shield
@@ -287,6 +290,7 @@ function update(dt) {
       sparkle_fx(PLAYER.x, PLAYER.y);
       smoke_fx(PLAYER.x, PLAYER.y);
       fire_fx(PLAYER.x, PLAYER.y);
+      playSound(SOUNDS["explode"]);
     }
   });
 

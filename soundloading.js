@@ -8,6 +8,7 @@ const soundList = [
   { file: "collect.wav", name: "collect" },
   { file: "collect-spawn.wav", name: "collect_spawn" },
   { file: "explode.wav", name: "explode" },
+  { file: "shield-hit.wav", name: "shield_hit" },
   // Add your sound asset here ^
 ];
 
