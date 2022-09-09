@@ -264,6 +264,9 @@ function update(dt) {
         new_text_obj.text = "+" + coll.points;
       }
     }
+
+    // floating animation
+    coll.y = coll.y + Math.sin(coll.life_timer * 0.1) * 0.5;
   });
 
   // bullet to enemy
