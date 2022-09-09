@@ -121,6 +121,8 @@ function update(dt) {
 
   var enemies = GAME_OBJECTS.filter((obj) => obj.type === "enemy");
   var collectibles = GAME_OBJECTS.filter((obj) => obj.type === "collect");
+
+  // SHIELD
   var shield = GAME_OBJECTS.find((obj) => obj.type === "shield");
   if (shield) {
     shield.x = PLAYER.x + PLAYER.w / 2 + Math.sin(shield_timer) * 18;
@@ -133,11 +135,14 @@ function update(dt) {
     PLAYER.powerup = "";
     removeObj(shield);
   }
+
+  // SCORE DECREMENT
   score -= 0.1;
   if (score <= 0) {
     score = 0;
   }
 
+  // COLLECTIBLE SPAWNS
   if (collectibles.length <= 0) {
     collect_spawn_timer--;
   }
@@ -148,6 +153,7 @@ function update(dt) {
     collect_spawn_timer = MAX_COLLECT_SPAWN_TIMER;
   }
 
+  // ENEMY SPAWNS
   if (enemies.length < SPAWN_LIMIT) {
     spawn_timer--;
   }
@@ -157,6 +163,7 @@ function update(dt) {
     spawn_timer = MAX_SPAWN_TIMER;
   }
 
+  // SHOOTING
   if (!shot_fired) {
     shot_timer--;
   }
@@ -311,6 +318,11 @@ function update(dt) {
   hit_ground_last_frame = hit_ground;
   hit_ground = false;
   hit_wall = false;
+
+  GAME_OBJECTS.forEach((obj) => {
+    assignId(obj);
+    storePreviousPosition(obj);
+  });
 }
 
 function updateScreenshake() {
@@ -363,6 +375,19 @@ function draw(offset) {
     }
 
     GAME_OBJECTS.forEach((obj) => {
+      if (obj.type === "shield") {
+        object_position_map[obj.id]?.forEach((pos, i) => {
+          let ratio = (i + 1) / object_position_map[obj.id].length;
+          let w = clamp(ratio * obj.w, 1, obj.w);
+          let h = clamp(ratio * obj.h, 1, obj.h);
+          console.log("clamp");
+          console.log(w);
+          console.log(h);
+          context.fillStyle = "rgba(255, 255, 255, " + ratio / 2 + ")";
+          context.fillRect(pos.x, pos.y, w, h);
+        });
+      }
+
       if (obj.render_hitbox || render_hitboxes) {
         context.fillStyle = obj.color;
         context.fillRect(obj.x, obj.y, obj.w, obj.h);

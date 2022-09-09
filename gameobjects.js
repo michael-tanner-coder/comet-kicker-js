@@ -118,11 +118,11 @@ const BACKGROUND_3 = {
 const ROTATING_SHIELD = {
   x: 0,
   y: 0,
-  h: 8,
-  w: 8,
+  h: 10,
+  w: 10,
   type: "shield",
   speed: 1,
-  color: "red",
+  color: YELLOW,
   render_hitbox: true,
 };
 

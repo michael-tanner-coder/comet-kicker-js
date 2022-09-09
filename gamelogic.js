@@ -24,6 +24,7 @@ var current_song_name = "";
 var current_song = {};
 var shield_spawned = false;
 var shield_timer = 0;
+var object_id_counter = 0;
 
 // SOUNDS
 var music_volume = 1;
@@ -35,10 +36,37 @@ var start_time = Date.now();
 var frame_duration = 1000 / 62;
 var lag = 0;
 
+// MAP FOR PREVIOUS OBJECT POSITIONS
+var max_position_count = 15;
+var object_position_map = {};
 
 initializeScores();
 
 // GLOBAL UTILS
+function storePreviousPosition(obj) {
+  // If no entry for this object exists, create one (default to array)
+  if (!object_position_map[obj.id]) {
+    object_position_map[obj.id] = [];
+  }
+
+  // Store the object's current position in the corresponding array
+  object_position_map[obj.id].push({ x: obj.x, y: obj.y });
+
+  // If the position array has exceeded the maximum size, remove the oldest position
+  if (object_position_map[obj.id].length > max_position_count) {
+    object_position_map[obj.id].shift();
+  }
+}
+
+function assignId(obj) {
+  if (!obj.id) {
+    obj.id = object_id_counter.toString();
+    object_id_counter += 1;
+  }
+
+  return obj.id;
+}
+
 function moveInOwnDirection(object) {
   object.x +=
     object.speed * Math.cos((object.direction * Math.PI) / 180) * time_scale;
@@ -299,8 +327,14 @@ function getPlayerAnimation() {
 // when a number exceeds a maximum or goes below a minimum, wrap it back around to the other end of the range
 // idk if 'loopClamp' is the name for this concept lol
 const loopClamp = (num, min, max) => {
-  if (num < min) num = max;
-  if (num > max) num = min;
+  if (num < min) return max;
+  if (num > max) return min;
+  return num;
+};
+
+const clamp = (num, min, max) => {
+  if (num < min) return min;
+  if (num > max) return max;
   return num;
 };
 
