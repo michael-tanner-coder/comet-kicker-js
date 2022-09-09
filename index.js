@@ -10,6 +10,17 @@ function update(dt) {
 
   particles.update();
 
+  // if (!song_playing) {
+  //   current_song = playMusic(current_song_name);
+  // }
+
+  // if (current_song) {
+  //   console.log("current_song:");
+  //   console.log(current_song.sound);
+  //   console.log(current_song.volume);
+  //   current_song.sound.volume = music_volume / 10;
+  // }
+
   // MENU NAVIGATION/INTERACTION
   if (game_state === STATES.MENU) {
     // select buttons
@@ -110,7 +121,18 @@ function update(dt) {
 
   var enemies = GAME_OBJECTS.filter((obj) => obj.type === "enemy");
   var collectibles = GAME_OBJECTS.filter((obj) => obj.type === "collect");
+  var shield = GAME_OBJECTS.find((obj) => obj.type === "shield");
+  if (shield) {
+    shield.x = PLAYER.x + PLAYER.w / 2 + Math.sin(shield_timer) * 18;
+    shield.y = PLAYER.y + PLAYER.h / 2 + Math.cos(shield_timer) * 16;
+    shield_timer += 0.1;
+  }
 
+  if (shield && shield_timer > 80) {
+    shield_timer = 0;
+    PLAYER.powerup = "";
+    removeObj(shield);
+  }
   score -= 0.1;
   if (score <= 0) {
     score = 0;
@@ -146,6 +168,7 @@ function update(dt) {
 
   if (shot_timer <= 0 && onPress(CONTROLS.shoot)) {
     spawnBullet(PLAYER, PLAYER.direction, PLAYER.bullet_type);
+    PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
     shot_fired = true;
   }
 
@@ -235,14 +258,24 @@ function update(dt) {
     });
   });
 
-  // enemy to player
+  // enemies
   enemies.forEach((enemy) => {
+    // enemy to player
     if (collisionDetected(enemy, PLAYER)) {
       if (!PLAYER.hit) {
         removeObj(enemy);
         PLAYER.hp -= 1;
       }
       PLAYER.hit = true;
+      PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
+      sparkle_fx(PLAYER.x, PLAYER.y);
+      smoke_fx(PLAYER.x, PLAYER.y);
+      fire_fx(PLAYER.x, PLAYER.y);
+    }
+
+    // enemy to shield
+    if (shield && collisionDetected(enemy, shield)) {
+      removeObj(enemy);
       PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
       sparkle_fx(PLAYER.x, PLAYER.y);
       smoke_fx(PLAYER.x, PLAYER.y);

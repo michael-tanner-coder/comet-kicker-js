@@ -44,4 +44,3 @@
 
 // TODAY:
 // TODO: change direction of comet enemies
-// TODO: start making menu code

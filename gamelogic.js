@@ -20,13 +20,21 @@ var max_high_score_list_length = 5;
 var recent_scores = window.localStorage.getItem("recent_scores");
 var current_language = "en";
 var time_scale = 1;
-var music_volume = 0.5;
+var current_song_name = "";
+var current_song = {};
+var shield_spawned = false;
+var shield_timer = 0;
+
+// SOUNDS
+var music_volume = 1;
+var song_playing = false;
 
 // GAME LOOP REQUIREMENTS
 var fps = 60;
 var start_time = Date.now();
 var frame_duration = 1000 / 62;
 var lag = 0;
+
 
 initializeScores();
 
@@ -121,6 +129,12 @@ function checkPlayerPowerup() {
     case PICKUPS.RAPID_FIRE:
       PLAYER.bullet_type = WIDE_BULLET;
       break;
+    case PICKUPS.SHIELD:
+      console.log("shield");
+      if (!shield_spawned) {
+        spawnShield();
+        shield_spawned = true;
+      }
     default:
       PLAYER.bullet_type = BULLET;
       break;
@@ -138,6 +152,13 @@ function checkPickupType(collectible) {
     default:
       break;
   }
+}
+
+function spawnShield() {
+  var new_shield = { ...ROTATING_SHIELD };
+  new_shield.x = PLAYER.x;
+  new_shield.y = PLAYER.y;
+  GAME_OBJECTS.push(new_shield);
 }
 
 function checkIfOutOfBounds(object) {
@@ -286,4 +307,13 @@ const loopClamp = (num, min, max) => {
 const setMusicVolume = (vol) => {
   music_volume = vol;
   console.log(music_volume);
+};
+
+const playMusic = (song) => {
+  let playbackRate = 1;
+  let pan = 0;
+  let volume = music_volume / 10;
+  let loop = true;
+  song_playing = true;
+  return playSound(SOUNDS[song], playbackRate, pan, volume, loop);
 };

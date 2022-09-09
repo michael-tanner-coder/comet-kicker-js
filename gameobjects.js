@@ -17,7 +17,7 @@ const PLAYER_DEFAULT = {
   // sprite: "player_sprite",
   i_frames: 30,
   hit: false,
-  powerup: PICKUPS.WIDE_SHOT,
+  powerup: PICKUPS.SHIELD,
   bullet_type: "",
   animation: ANIMATIONS.playerIdle,
   animation_speed: 6,
@@ -112,6 +112,18 @@ const BACKGROUND_3 = {
   x: 0,
   y: 0,
   speed: 3,
+};
+
+// SHIELD
+const ROTATING_SHIELD = {
+  x: 0,
+  y: 0,
+  h: 8,
+  w: 8,
+  type: "shield",
+  speed: 1,
+  color: "red",
+  render_hitbox: true,
 };
 
 const BACKGROUNDS = [BACKGROUND_1, BACKGROUND_2, BACKGROUND_3];

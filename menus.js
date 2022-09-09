@@ -1,4 +1,3 @@
-// TODO: connect handlers to options code
 // TODO: add option labels to language content
 // TODO: use localstorage + global state to preserve selected options in menu
 
@@ -19,7 +18,7 @@ const BUTTON = {
   text: "Test button",
   type: INPUT_TYPES.button,
   onSelect: () => {
-    console.log("selected");
+    console.log("selected button");
   },
 };
 const SELECT = {
