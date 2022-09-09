@@ -102,11 +102,13 @@ function update(dt) {
 
   let max_speed = 5;
 
+  // PLAYER MOVEMENT
   if (onHold(CONTROLS.moveRight)) {
     PLAYER.speed = easing(PLAYER.speed, max_speed);
     PLAYER.x += PLAYER.speed * time_scale;
     PLAYER.direction = 0;
     PLAYER.state = PLAYER_STATES.RUNNING;
+    PLAYER.x = Math.floor(PLAYER.x);
   }
 
   if (onHold(CONTROLS.moveLeft)) {
@@ -114,10 +116,16 @@ function update(dt) {
     PLAYER.x -= PLAYER.speed * time_scale;
     PLAYER.direction = 180;
     PLAYER.state = PLAYER_STATES.RUNNING;
+    PLAYER.x = Math.floor(PLAYER.x);
   }
 
   if (onRelease(CONTROLS.moveLeft) || onRelease(CONTROLS.moveRight)) {
     PLAYER.speed = PLAYER_DEFAULT.speed;
+  }
+
+  if (onHold(CONTROLS.jump)) {
+    console.log("JUMPING");
+    jump(PLAYER);
   }
 
   var enemies = GAME_OBJECTS.filter((obj) => obj.type === "enemy");
