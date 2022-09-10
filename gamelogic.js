@@ -87,6 +87,13 @@ function moveInOwnDirection(object) {
     object.speed * Math.sin((object.direction * Math.PI) / 180) * time_scale;
 }
 
+function recoil(object, shot, recoil_amount) {
+  object.x -=
+    recoil_amount * Math.cos((shot.direction * Math.PI) / 180) * time_scale;
+  object.y -=
+    recoil_amount * Math.sin((shot.direction * Math.PI) / 180) * time_scale;
+}
+
 function updateHitboxes(object) {
   if (object.hitboxes) {
     const left = object.hitboxes.find((box) => box.name === "left");
@@ -151,6 +158,8 @@ function spawnBullet(source, direction, projectile) {
 
   // Spawn bullet
   GAME_OBJECTS.push(new_bullet);
+
+  return new_bullet;
 }
 
 function spawnEnemy() {

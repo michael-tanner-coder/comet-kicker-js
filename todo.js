@@ -13,7 +13,6 @@
 // POLISH TODOS
 // ============
 // SHOOT
-// TODO: add recoil
 // TODO: spawn particles
 
 // JUMP

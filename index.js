@@ -180,7 +180,8 @@ function update(dt) {
   }
 
   if (shot_timer <= 0 && onPress(CONTROLS.shoot)) {
-    spawnBullet(PLAYER, PLAYER.direction, PLAYER.bullet_type);
+    let shot = spawnBullet(PLAYER, PLAYER.direction, PLAYER.bullet_type);
+    recoil(PLAYER, shot, shot.recoil);
     playSound(SOUNDS["shoot"]);
     PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
     shot_fired = true;

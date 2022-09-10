@@ -50,11 +50,13 @@ const BULLET = {
   speed: 6,
   animation: ANIMATIONS.shoot,
   has_trail: true,
+  recoil: 5,
 };
 
 const WIDE_BULLET = {
   ...BULLET,
   h: 24,
+  recoil: 8,
   animation: ANIMATIONS.wideShoot,
 };
 
