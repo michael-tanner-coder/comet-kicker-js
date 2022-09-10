@@ -18,7 +18,7 @@
 
 // JUMP
 // TODO: implement jump arc
-// TODO: particle dust on land
+// TODO: particle dust on jump
 
 // MOVEMENT
 // TODO: implement movement tweening (player, shots and enemy)
@@ -29,10 +29,6 @@
 // COLLISION:
 // TODO: favor player on hitboxes
 // TODO: spawn particles on destruction/hit
-
-// CAMERA
-// TODO: shake on shots, destruction, and hits
-// TODO: add mild tweening for shakes
 
 // ============
 // DESIGN TODOS

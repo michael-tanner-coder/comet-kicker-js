@@ -17,7 +17,7 @@ const PLAYER_DEFAULT = {
   // sprite: "player_sprite",
   i_frames: 30,
   hit: false,
-  powerup: PICKUPS.SHIELD,
+  powerup: "",
   bullet_type: "",
   animation: ANIMATIONS.playerIdle,
   animation_speed: 6,
@@ -98,7 +98,7 @@ const RAPID_FIRE = { ...COLLECT, pickup: PICKUPS.RAPID_FIRE };
 const MISSILE = { ...COLLECT, pickup: PICKUPS.MISSILE };
 const SHIELD = { ...COLLECT, pickup: PICKUPS.SHIELD };
 const HP = { ...COLLECT, pickup: PICKUPS.HP, sprite: "hp_up" };
-const COLLECTIBLES = [COLLECT, HP];
+const COLLECTIBLES = [COLLECT, HP, SHIELD];
 
 // BACKGROUNDS FOR PARALLAX
 const BACKGROUND_1 = {

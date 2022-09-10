@@ -137,6 +137,7 @@ function update(dt) {
   if (shield && shield_timer > 80) {
     shield_timer = 0;
     PLAYER.powerup = "";
+    shield_spawned = false;
     removeObj(shield);
     playSound(SOUNDS["shield_hit"]);
   }
@@ -259,12 +260,19 @@ function update(dt) {
 
     if (collisionDetected(coll, PLAYER)) {
       checkPickupType(coll);
+
       removeObj(coll);
+
       playSound(SOUNDS["collect"]);
+
       let new_text_obj = spawnObject(TEXT_OBJECT, PLAYER.x, PLAYER.y);
       new_text_obj.text = PICKUP_TEXT[coll.pickup].toUpperCase();
       if (new_text_obj.text === PICKUPS.POINTS.toUpperCase()) {
         new_text_obj.text = "+" + coll.points;
+      }
+
+      if (coll.pickup !== PICKUPS.HP || coll.pickup !== PICKUPS.POINTS) {
+        PLAYER.powerup = coll.pickup;
       }
     }
 

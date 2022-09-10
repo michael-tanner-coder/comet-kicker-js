@@ -188,7 +188,6 @@ function checkPlayerPowerup() {
       PLAYER.bullet_type = WIDE_BULLET;
       break;
     case PICKUPS.SHIELD:
-      console.log("shield");
       if (!shield_spawned) {
         spawnShield();
         shield_spawned = true;
