@@ -25,6 +25,9 @@ var current_song = {};
 var shield_spawned = false;
 var shield_timer = 0;
 var object_id_counter = 0;
+var multiplier = 1;
+var multiplier_timer = 200;
+var start_combo = false;
 
 // SOUNDS
 var music_volume = 1;

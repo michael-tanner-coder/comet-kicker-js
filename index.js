@@ -123,11 +123,6 @@ function update(dt) {
     PLAYER.speed = PLAYER_DEFAULT.speed;
   }
 
-  if (onHold(CONTROLS.jump)) {
-    console.log("JUMPING");
-    jump(PLAYER);
-  }
-
   var enemies = GAME_OBJECTS.filter((obj) => obj.type === "enemy");
   var collectibles = GAME_OBJECTS.filter((obj) => obj.type === "collect");
 
@@ -282,14 +277,31 @@ function update(dt) {
     enemies.forEach((enemy) => {
       if (collisionDetected(enemy, bullet)) {
         removeObj(enemy);
-        score += enemy_point_value;
+        if (start_combo) {
+          multiplier += 1;
+          multiplier_timer = 200;
+        }
+        score += enemy_point_value * multiplier;
+        let text_object = spawnObject(TEXT_OBJECT, enemy.x, enemy.y);
+        text_object.text = "+" + enemy_point_value + " x " + multiplier;
         sparkle_fx(enemy.x, enemy.y);
         smoke_fx(enemy.x, enemy.y);
         fire_fx(enemy.x, enemy.y);
         playSound(SOUNDS["explode"]);
+        start_combo = true;
       }
     });
   });
+
+  if (start_combo) {
+    multiplier_timer -= 1;
+  }
+
+  if (multiplier_timer <= 0) {
+    start_combo = false;
+    multiplier = 1;
+    multiplier_timer = 200;
+  }
 
   // enemies
   enemies.forEach((enemy) => {
@@ -344,7 +356,7 @@ function update(dt) {
   updateHitboxes(PLAYER);
 
   hit_ground_last_frame = hit_ground;
-  hit_ground = false;
+  // hit_ground = false;
   hit_wall = false;
 
   GAME_OBJECTS.forEach((obj) => {
@@ -409,11 +421,18 @@ function draw(offset) {
       }
 
       if (obj.type === "text") {
-        context.fillStyle = obj.color;
         context.globalAlpha = obj.alpha;
+        context.fontStyle = "16px PressStart2P";
+
+        context.fillStyle = PINK;
+        context.fillText(obj.text, obj.x, obj.y + 1);
+
+        context.fillStyle = obj.color;
         context.fillText(obj.text, obj.x, obj.y);
-        obj.alpha -= 0.02;
+
+        obj.alpha -= 0.01;
         context.globalAlpha = 1;
+        context.fontStyle = "8px PressStart2P";
       }
 
       if (obj.render_hitbox || render_hitboxes) {
@@ -441,6 +460,10 @@ function draw(offset) {
       GAME_W / 2,
       10
     );
+
+    if (start_combo) {
+      context.fillText("MULTIPLIER: " + multiplier_timer, GAME_W / 2, 25);
+    }
 
     for (i = 0; i < PLAYER.hp; i++) {
       context.fillStyle = WHITE;
