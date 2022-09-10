@@ -471,10 +471,6 @@ function draw(offset) {
       10
     );
 
-    if (start_combo) {
-      context.fillText("MULTIPLIER: " + multiplier_timer, GAME_W / 2, 25);
-    }
-
     for (i = 0; i < PLAYER.hp; i++) {
       context.fillStyle = WHITE;
       context.fillRect(GAME_W / 2 + 16 * i, 20, 8, 16);
