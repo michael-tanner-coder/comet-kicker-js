@@ -12,9 +12,6 @@
 // ============
 // POLISH TODOS
 // ============
-// SHOOT
-// TODO: spawn particles
-
 // JUMP
 // TODO: implement jump arc
 // TODO: particle dust on jump

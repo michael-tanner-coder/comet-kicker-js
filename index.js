@@ -181,6 +181,7 @@ function update(dt) {
 
   if (shot_timer <= 0 && onPress(CONTROLS.shoot)) {
     let shot = spawnBullet(PLAYER, PLAYER.direction, PLAYER.bullet_type);
+    spark_fx(shot.x, shot.y);
     recoil(PLAYER, shot, shot.recoil);
     playSound(SOUNDS["shoot"]);
     PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
