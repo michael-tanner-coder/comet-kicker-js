@@ -47,7 +47,7 @@ const BULLET = {
   y: 0,
   color: "yellow",
   direction: 0,
-  speed: 4,
+  speed: 6,
   animation: ANIMATIONS.shoot,
   has_trail: true,
 };
