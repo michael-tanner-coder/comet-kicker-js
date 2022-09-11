@@ -18,6 +18,7 @@ const image_list = [
   { file: "sparkle.png", name: "sparkle" },
   { file: "glow.png", name: "glow" },
   { file: "player-spritesheet.png", name: "player_sheet" },
+  { file: "basic-enemy-sheet.png", name: "enemy_sheet" },
   { file: "collectible.png", name: "collectible" },
   { file: "hp-up.png", name: "hp_up" },
   { file: "particle.png", name: "particle" },

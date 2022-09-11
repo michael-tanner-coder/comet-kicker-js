@@ -61,7 +61,7 @@ const DEFAULT_INPUT_STATE = {
 };
 
 const CONTROLS = {
-  shoot: ["x", "buttonB"],
+  shoot: ["x", "buttonX"],
   jump: [" ", "buttonA"],
   moveLeft: ["ArrowLeft", "dpadLeft", "left"],
   moveRight: ["ArrowRight", "dpadRight", "right"],

@@ -216,6 +216,8 @@ function update(dt) {
     }
 
     moveInOwnDirection(enemy);
+    enemy.x = Math.floor(enemy.x);
+    enemy.y = Math.floor(enemy.y);
   });
   text.forEach((txt) => {
     txt.y -= txt.speed;

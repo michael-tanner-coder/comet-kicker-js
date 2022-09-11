@@ -73,7 +73,7 @@ const ENEMY = {
   h: 16,
   x: 0,
   y: 0,
-  color: "red",
+  color: VIOLET,
   direction: 0,
   speed: 2,
   has_gravity: true,
@@ -83,8 +83,10 @@ const ENEMY = {
   ],
   hit_ground: false,
   hit_wall: false,
-  sprite: "basic_enemy",
+  // sprite: "basic_enemy",
   has_trail: true,
+  animation: ANIMATIONS.enemyMove,
+  animation_speed: 12,
 };
 
 // POWERUPS and POINT COLLECTIBLES

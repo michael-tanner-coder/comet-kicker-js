@@ -52,7 +52,31 @@ const ANIMATIONS = {
   },
 
   // ENEMY ANIMATIONS
-  enemyMove: {},
+  enemyMove: {
+    sprite: "enemy_sheet",
+    frames: [
+      // start
+      { x: 0, y: 0, w: 16, h: 16 },
+      { x: 0, y: 0, w: 16, h: 16 },
+      { x: 0, y: 0, w: 16, h: 16 },
+      { x: 0, y: 0, w: 16, h: 16 },
+      { x: 0, y: 0, w: 16, h: 16 },
+      { x: 0, y: 0, w: 16, h: 16 },
+      { x: 0, y: 0, w: 16, h: 16 },
+      { x: 0, y: 0, w: 16, h: 16 },
+
+      // middle
+      { x: 16, y: 0, w: 16, h: 16 },
+      { x: 32, y: 0, w: 16, h: 16 },
+
+      // end
+      { x: 48, y: 0, w: 16, h: 16 },
+      { x: 48, y: 0, w: 16, h: 16 },
+      { x: 48, y: 0, w: 16, h: 16 },
+      { x: 48, y: 0, w: 16, h: 16 },
+    ],
+    current_frame: 0,
+  },
 };
 
 const playAnimation = (animation, speed, x, y, w_scale = 1, h_scale = 1) => {
