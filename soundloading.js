@@ -5,11 +5,12 @@ const soundList = [
 
   // SFX
   { file: "shoot.wav", name: "shoot" },
-  { file: "collect.wav", name: "collect" },
+  { file: "CometKicker-Collection-v2.mp3", name: "collect" },
   { file: "collect-spawn.wav", name: "collect_spawn" },
   { file: "explode.wav", name: "explode" },
   { file: "shield-hit.wav", name: "shield_hit" },
   { file: "game-over.wav", name: "game_over" },
+  { file: "lose-hp.mp3", name: "lose_hp" },
   // Add your sound asset here ^
 ];
 

@@ -320,6 +320,7 @@ function update(dt) {
       if (!PLAYER.hit) {
         removeObj(enemy);
         PLAYER.hp -= 1;
+        playSound(SOUNDS["lose_hp"]);
       }
       PLAYER.hit = true;
       PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
