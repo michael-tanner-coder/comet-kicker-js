@@ -176,22 +176,22 @@ function update(dt) {
   }
 
   // SHOOTING
-  if (!shot_fired) {
-    shot_timer--;
+  if (!PLAYER.shot_fired) {
+    PLAYER.shot_timer--;
   }
 
-  if (shot_fired) {
-    shot_timer = MAX_SHOT_TIMER;
-    shot_fired = false;
+  if (PLAYER.shot_fired) {
+    PLAYER.shot_timer = MAX_SHOT_TIMER;
+    PLAYER.shot_fired = false;
   }
 
-  if (shot_timer <= 0 && onPress(CONTROLS.shoot)) {
+  if (PLAYER.shot_timer <= 0 && onPress(CONTROLS.shoot)) {
     let shot = spawnBullet(PLAYER, PLAYER.direction, PLAYER.bullet_type);
     spark_fx(shot.x, shot.y);
     recoil(PLAYER, shot, shot.recoil);
     playSound(SOUNDS["shoot"]);
     PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
-    shot_fired = true;
+    PLAYER.shot_fired = true;
     PLAYER.kicking = true;
   }
 
@@ -236,16 +236,16 @@ function update(dt) {
   });
 
   // JUMPING
-  if (onHold(CONTROLS.jump) && (hit_ground || jumping)) {
-    if (hit_ground) {
-      jumping = true;
+  if (onHold(CONTROLS.jump) && (PLAYER.hit_ground || PLAYER.jumping)) {
+    if (PLAYER.hit_ground) {
+      PLAYER.jumping = true;
       fall_fx(PLAYER.x, PLAYER.y);
     }
     jump(PLAYER);
   }
 
   if (onRelease(CONTROLS.jump)) {
-    jumping = false;
+    PLAYER.jumping = false;
   }
 
   // ANIMATIONS
@@ -264,15 +264,15 @@ function update(dt) {
   // COLLISION CHECKS
 
   // player to block
-  hit_ground = false;
+  PLAYER.hit_ground = false;
   blocks.forEach((block) => {
     if (collisionDetected(block, PLAYER)) {
-      hit_ground = true;
-      jumping = false;
+      PLAYER.hit_ground = true;
+      PLAYER.jumping = false;
       PLAYER.hang_time = PLAYER_DEFAULT.hang_time;
       PLAYER.jump_height = PLAYER_DEFAULT.jump_height;
       PLAYER.jump_rate = PLAYER_DEFAULT.jump_rate;
-      if (!hit_ground_last_frame) fall_fx(PLAYER.x, PLAYER.y);
+      if (!PLAYER.hit_ground_last_frame) fall_fx(PLAYER.x, PLAYER.y);
       PLAYER.y = prev_y;
     }
 
@@ -283,7 +283,7 @@ function update(dt) {
       collisionDetected(block, leftBox) ||
       collisionDetected(block, rightBox)
     ) {
-      hit_wall = true;
+      PLAYER.hit_wall = true;
       PLAYER.x = prev_x;
     }
   });
@@ -403,8 +403,8 @@ function update(dt) {
 
   updateHitboxes(PLAYER);
 
-  hit_ground_last_frame = hit_ground;
-  hit_wall = false;
+  PLAYER.hit_ground_last_frame = PLAYER.hit_ground;
+  PLAYER.hit_wall = false;
 
   GAME_OBJECTS.forEach((obj) => {
     assignId(obj);

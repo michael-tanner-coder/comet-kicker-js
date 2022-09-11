@@ -14,6 +14,7 @@
 // ============
 // MOVEMENT
 // TODO: implement movement tweening (player, shots and enemy)
+// TODO: change direction of comet enemies
 
 // SPAWNS
 // TODO: avoid spawning near player
@@ -30,6 +31,3 @@
 // TODO: player needs more reason to move around the map
 // TODO: need more confirmation of when player takes a hit
 // TODO: visually indicate the lifetime of a collectible
-
-// TODAY:
-// TODO: change direction of comet enemies

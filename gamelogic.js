@@ -1,25 +1,25 @@
 // GLOBAL VARIABLES
-var images_loaded = false;
-var jumping = false;
-var hit_ground = false;
-var hit_ground_last_frame = false; // so we can trigger sounds and fx on the first touch
-var hit_wall = false;
-var shot_timer = 0;
-var shot_fired = false;
+
+// spawning
 var spawn_timer = MAX_SPAWN_TIMER;
 var collect_spawn_timer = MAX_COLLECT_SPAWN_TIMER;
-var score = 0;
-var enemy_point_value = 10;
+
+// game state
 var game_over = false;
 var game_state = STATES.MENU;
-var render_hitboxes = false;
-var fullscreen = false;
+
+// scores
+var score = 0;
+var enemy_point_value = 10;
 var high_scores = window.localStorage.getItem("high_scores");
 var max_high_score_list_length = 5;
 var recent_scores = window.localStorage.getItem("recent_scores");
+
+// game options
+var render_hitboxes = false;
+var fullscreen = false;
 var current_language = "en";
 var time_scale = 1;
-var object_id_counter = 0;
 
 // shield
 var shield_spawned = false;
@@ -30,25 +30,60 @@ var multiplier = 1;
 var multiplier_timer = 200;
 var start_combo = false;
 
-// SOUNDS
+// sounds
 var music_volume = 1;
 var song_playing = false;
 var current_song_name = "test";
 var current_song = {};
 
-// GAME LOOP REQUIREMENTS
+// game loop
 var fps = 60;
 var start_time = Date.now();
 var frame_duration = 1000 / 62;
 var lag = 0;
 
-// MAP FOR PREVIOUS OBJECT POSITIONS
+// object positions/tracking
 var max_position_count = 15;
 var object_position_map = {};
+var object_id_counter = 0;
 
 initializeScores();
 
 // GLOBAL UTILS
+
+// general
+function loopClamp(num, min, max) {
+  // when a number exceeds a maximum or goes below a minimum, wrap it back around to the other end of the range
+  // idk if 'loopClamp' is the name for this concept lol
+  if (num < min) return max;
+  if (num > max) return min;
+  return num;
+}
+
+function clamp(num, min, max) {
+  if (num < min) return min;
+  if (num > max) return max;
+  return num;
+}
+
+function easing(x, target) {
+  return (x += (target - x) * 0.1);
+}
+
+function choose(choices) {
+  return choices[Math.floor(Math.random() * choices.length)];
+}
+
+// object positions/tracking
+function assignId(obj) {
+  if (!obj.id) {
+    obj.id = object_id_counter.toString();
+    object_id_counter += 1;
+  }
+
+  return obj.id;
+}
+
 function storePreviousPosition(obj) {
   // If no entry for this object exists, create one (default to array)
   if (!object_position_map[obj.id]) {
@@ -62,73 +97,6 @@ function storePreviousPosition(obj) {
   if (object_position_map[obj.id].length > max_position_count) {
     object_position_map[obj.id].shift();
   }
-}
-
-function assignId(obj) {
-  if (!obj.id) {
-    obj.id = object_id_counter.toString();
-    object_id_counter += 1;
-  }
-
-  return obj.id;
-}
-
-function drawTrail(obj) {
-  object_position_map[obj.id]?.forEach((pos, i) => {
-    let ratio = (i + 1) / object_position_map[obj.id].length;
-    let w = clamp(ratio * obj.w, 1, obj.w);
-    let h = clamp(ratio * obj.h, 1, obj.h);
-    context.fillStyle = "rgba(255, 255, 255, " + ratio / 2 + ")";
-    context.fillRect(pos.x, pos.y, w, h);
-  });
-}
-
-function moveInOwnDirection(object) {
-  object.x +=
-    object.speed * Math.cos((object.direction * Math.PI) / 180) * time_scale;
-  object.y +=
-    object.speed * Math.sin((object.direction * Math.PI) / 180) * time_scale;
-}
-
-function recoil(object, shot, recoil_amount) {
-  object.x -=
-    recoil_amount * Math.cos((shot.direction * Math.PI) / 180) * time_scale;
-  object.y -=
-    recoil_amount * Math.sin((shot.direction * Math.PI) / 180) * time_scale;
-}
-
-function updateHitboxes(object) {
-  if (object.hitboxes) {
-    const left = object.hitboxes.find((box) => box.name === "left");
-    const right = object.hitboxes.find((box) => box.name === "right");
-
-    if (left && right) {
-      left.x = object.x;
-      left.y = object.y;
-
-      right.x = object.x + object.w - right.w;
-      right.y = object.y;
-    }
-  }
-}
-
-function drawHitboxes(object) {
-  object.hitboxes.forEach((box) => {
-    context.fillStyle = box.color;
-    context.fillRect(box.x, box.y, box.w, box.h);
-  });
-}
-
-function getHitbox(object, box_name) {
-  if (object.hitboxes) {
-    const myBox = object.hitboxes.find((box) => box.name === box_name);
-
-    return myBox ? myBox : null;
-  }
-}
-
-function choose(choices) {
-  return choices[Math.floor(Math.random() * choices.length)];
 }
 
 // spawning
@@ -191,6 +159,7 @@ function spawnShield() {
   playSound(SOUNDS["shield_hit"]);
 }
 
+// powerups
 function checkPlayerPowerup() {
   switch (PLAYER.powerup) {
     case PICKUPS.WIDE_SHOT:
@@ -223,6 +192,7 @@ function checkPickupType(collectible) {
   }
 }
 
+// level/map
 function checkIfOutOfBounds(object) {
   return (
     object.x < 0 ||
@@ -245,6 +215,7 @@ function withGrid(number) {
   return Math.floor(number * UNIT_SIZE);
 }
 
+// physics
 function collisionDetected(obj_a, obj_b) {
   return (
     obj_a.x < obj_b.x + obj_b.w &&
@@ -254,21 +225,59 @@ function collisionDetected(obj_a, obj_b) {
   );
 }
 
-function easing(x, target) {
-  return (x += (target - x) * 0.1);
-}
-
 function removeObj(obj) {
   var index = GAME_OBJECTS.indexOf(obj);
   GAME_OBJECTS.splice(index, 1);
 }
 
+function getHitbox(object, box_name) {
+  if (object.hitboxes) {
+    const myBox = object.hitboxes.find((box) => box.name === box_name);
+
+    return myBox ? myBox : null;
+  }
+}
+
+function updateHitboxes(object) {
+  if (object.hitboxes) {
+    const left = object.hitboxes.find((box) => box.name === "left");
+    const right = object.hitboxes.find((box) => box.name === "right");
+
+    if (left && right) {
+      left.x = object.x;
+      left.y = object.y;
+
+      right.x = object.x + object.w - right.w;
+      right.y = object.y;
+    }
+  }
+}
+
+function drawHitboxes(object) {
+  object.hitboxes.forEach((box) => {
+    context.fillStyle = box.color;
+    context.fillRect(box.x, box.y, box.w, box.h);
+  });
+}
+
+function recoil(object, shot, recoil_amount) {
+  object.x -=
+    recoil_amount * Math.cos((shot.direction * Math.PI) / 180) * time_scale;
+  object.y -=
+    recoil_amount * Math.sin((shot.direction * Math.PI) / 180) * time_scale;
+}
+
+function moveInOwnDirection(object) {
+  object.x +=
+    object.speed * Math.cos((object.direction * Math.PI) / 180) * time_scale;
+  object.y +=
+    object.speed * Math.sin((object.direction * Math.PI) / 180) * time_scale;
+}
+
+// game state
 function resetGame() {
   GAME_OBJECTS.length = 0;
   GAME_OBJECTS.push(PLAYER);
-  hit_ground_last_frame = false;
-  hit_ground = false;
-  hit_wall = false;
   PLAYER.x = 0;
   PLAYER.y = 0;
   PLAYER.hp = MAX_HP;
@@ -282,6 +291,7 @@ function startGame() {
   buildMap();
 }
 
+// scores
 function initializeScores() {
   // RECENT SCORES
   if (window.localStorage.getItem("recent_scores")) {
@@ -337,15 +347,7 @@ function getAverageScore() {
   return sum / number_of_scores;
 }
 
-function toggleFullscreen() {
-  fullscreen = !fullscreen;
-  if (fullscreen) {
-    canvas.requestFullscreen();
-  } else {
-    document.exitFullscreen();
-  }
-}
-
+// text
 function getTextWidth(text) {
   return context.measureText(text).width;
 }
@@ -354,29 +356,27 @@ function drawCenteredText(text, y_value) {
   context.fillText(text, GAME_W / 2 - getTextWidth(text) / 2, y_value);
 }
 
+// graphics/animation
 function getPlayerAnimation() {
   return ANIMATIONS[PLAYER_STATE_TO_ANIMATION[PLAYER.state]];
 }
 
-// when a number exceeds a maximum or goes below a minimum, wrap it back around to the other end of the range
-// idk if 'loopClamp' is the name for this concept lol
-const loopClamp = (num, min, max) => {
-  if (num < min) return max;
-  if (num > max) return min;
-  return num;
-};
+function drawTrail(obj) {
+  object_position_map[obj.id]?.forEach((pos, i) => {
+    let ratio = (i + 1) / object_position_map[obj.id].length;
+    let w = clamp(ratio * obj.w, 1, obj.w);
+    let h = clamp(ratio * obj.h, 1, obj.h);
+    context.fillStyle = "rgba(255, 255, 255, " + ratio / 2 + ")";
+    context.fillRect(pos.x, pos.y, w, h);
+  });
+}
 
-const clamp = (num, min, max) => {
-  if (num < min) return min;
-  if (num > max) return max;
-  return num;
-};
-
-const setMusicVolume = (vol) => {
+// sound
+function setMusicVolume(vol) {
   music_volume = vol;
-};
+}
 
-const playMusic = (song) => {
+function playMusic(song) {
   let playbackRate = 1;
   let pan = 0;
   let volume = music_volume / 10;
@@ -386,9 +386,20 @@ const playMusic = (song) => {
     song_playing = true;
   }
   return sound;
-};
+}
 
-const jump = (obj) => {
+// options
+function toggleFullscreen() {
+  fullscreen = !fullscreen;
+  if (fullscreen) {
+    canvas.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+// character actions
+function jump(obj) {
   if (obj.jump_height < obj.max_jump_height) {
     obj.jump_height += obj.jump_rate;
     obj.y -= obj.jump_rate;
@@ -400,9 +411,9 @@ const jump = (obj) => {
     return;
   }
 
-  if (jumping) {
+  if (obj.jumping) {
     obj.jump_rate = easing(obj.jump_rate, 0);
     obj.y -= obj.jump_rate;
     obj.hang_time -= 1;
   }
-};
+}

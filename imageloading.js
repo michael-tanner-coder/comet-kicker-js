@@ -1,4 +1,5 @@
 const IMAGES = {}; // GLOBAL IMAGE MAP: DON'T EDIT
+var images_loaded = false;
 
 const image_list = [
   { file: "player.png", name: "player_sprite" },

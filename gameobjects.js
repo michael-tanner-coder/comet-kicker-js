@@ -1,36 +1,57 @@
 // PLAYER
 const PLAYER_DEFAULT = {
+  type: "player",
+
+  // position/dimensions
   x: 100,
   y: 25,
-  color: WHITE,
   w: 16,
   h: 16,
+
+  // colors
+  color: WHITE,
+
+  // movement
   speed: 0,
   direction: 0,
   has_gravity: true,
-  type: "player",
+
+  // collision
+  hit_ground: false,
+  hit_ground_last_frame: false,
+  hit_wall: false,
   hitboxes: [
     { name: "left", x: 0, y: 0, w: 4, h: 14, color: "red" },
     { name: "right", x: 0, y: 0, w: 4, h: 14, color: "red" },
   ],
-  hp: MAX_HP,
-  // sprite: "player_sprite",
+
+  // health/take damage
   i_frames: 30,
   hit: false,
+  hp: MAX_HP,
+
+  // powerups
   powerup: "",
   bullet_type: "",
+
+  // animation/vfx
   animation: ANIMATIONS.playerIdle,
   animation_speed: 6,
   state: PLAYER_STATES.IDLE,
   has_trail: false,
-  kicking: false,
-  kick_time: 15,
 
-  // jump properties
+  // jump
   jump_height: 0,
   max_jump_height: 96,
   jump_rate: 8,
   hang_time: 30,
+  jumping: false,
+
+  // shooting/kicking
+  shot_timer: 0,
+  shot_fired: false,
+  kicking: false,
+  kick_time: 15,
 };
 
 const PLAYER = { ...PLAYER_DEFAULT };
