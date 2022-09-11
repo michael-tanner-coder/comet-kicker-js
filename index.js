@@ -224,6 +224,19 @@ function update(dt) {
     }
   });
 
+  // JUMPING
+  if (onHold(CONTROLS.jump) && (hit_ground || jumping)) {
+    if (hit_ground) {
+      jumping = true;
+      fall_fx(PLAYER.x, PLAYER.y);
+    }
+    jump(PLAYER);
+  }
+
+  if (onRelease(CONTROLS.jump)) {
+    jumping = false;
+  }
+
   // ANIMATIONS
   PLAYER.animation = getPlayerAnimation();
 
@@ -240,9 +253,14 @@ function update(dt) {
   // COLLISION CHECKS
 
   // player to block
+  hit_ground = false;
   blocks.forEach((block) => {
     if (collisionDetected(block, PLAYER)) {
       hit_ground = true;
+      jumping = false;
+      PLAYER.hang_time = PLAYER_DEFAULT.hang_time;
+      PLAYER.jump_height = PLAYER_DEFAULT.jump_height;
+      PLAYER.jump_rate = PLAYER_DEFAULT.jump_rate;
       if (!hit_ground_last_frame) fall_fx(PLAYER.x, PLAYER.y);
       PLAYER.y = prev_y;
     }
@@ -326,7 +344,6 @@ function update(dt) {
     // enemy to player
     if (collisionDetected(enemy, PLAYER)) {
       if (!PLAYER.hit) {
-        removeObj(enemy);
         PLAYER.hp -= 1;
         removeObj(enemy);
         playSound(SOUNDS["lose_hp"]);
@@ -376,7 +393,6 @@ function update(dt) {
   updateHitboxes(PLAYER);
 
   hit_ground_last_frame = hit_ground;
-  // hit_ground = false;
   hit_wall = false;
 
   GAME_OBJECTS.forEach((obj) => {

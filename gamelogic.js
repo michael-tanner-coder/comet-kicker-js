@@ -2,6 +2,7 @@
 var images_loaded = false;
 var player_x = 0;
 var player_y = 0;
+var jumping = false;
 var hit_ground = false;
 var hit_ground_last_frame = false; // so we can trigger sounds and fx on the first touch
 var hit_wall = false;
@@ -381,4 +382,23 @@ const playMusic = (song) => {
   let loop = true;
   song_playing = true;
   return playSound(SOUNDS[song], playbackRate, pan, volume, loop);
+};
+
+const jump = (obj) => {
+  if (obj.jump_height < obj.max_jump_height) {
+    obj.jump_height += obj.jump_rate;
+    obj.y -= obj.jump_rate;
+    return;
+  }
+
+  if (obj.hang_time <= 0) {
+    obj.jump_rate = PLAYER_DEFAULT.jump_rate;
+    return;
+  }
+
+  if (jumping) {
+    obj.jump_rate = easing(obj.jump_rate, 0);
+    obj.y -= obj.jump_rate;
+    obj.hang_time -= 1;
+  }
 };

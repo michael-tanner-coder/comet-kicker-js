@@ -7,6 +7,8 @@ const INPUTS = {
   ArrowUp: false,
   ArrowDown: false,
 
+  x: false,
+
   // SPACE
   [" "]: false,
 
@@ -59,7 +61,8 @@ const DEFAULT_INPUT_STATE = {
 };
 
 const CONTROLS = {
-  shoot: [" ", "buttonA"],
+  shoot: ["x", "buttonB"],
+  jump: [" ", "buttonA"],
   moveLeft: ["ArrowLeft", "dpadLeft", "left"],
   moveRight: ["ArrowRight", "dpadRight", "right"],
   moveUp: ["ArrowUp", "dpadUp", "up"],

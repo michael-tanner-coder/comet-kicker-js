@@ -12,10 +12,6 @@
 // ============
 // POLISH TODOS
 // ============
-// JUMP
-// TODO: implement jump arc
-// TODO: particle dust on jump
-
 // MOVEMENT
 // TODO: implement movement tweening (player, shots and enemy)
 
@@ -25,6 +21,7 @@
 // COLLISION:
 // TODO: favor player on hitboxes
 // TODO: spawn particles on destruction/hit
+// TODO: stop player from tunneling into walls
 
 // ============
 // DESIGN TODOS

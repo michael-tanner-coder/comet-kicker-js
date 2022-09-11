@@ -23,6 +23,12 @@ const PLAYER_DEFAULT = {
   animation_speed: 6,
   state: PLAYER_STATES.IDLE,
   has_trail: false,
+
+  // jump properties
+  jump_height: 0,
+  max_jump_height: 96,
+  jump_rate: 8,
+  hang_time: 30,
 };
 
 const PLAYER = { ...PLAYER_DEFAULT };
