@@ -1,7 +1,5 @@
 // GLOBAL VARIABLES
 var images_loaded = false;
-var player_x = 0;
-var player_y = 0;
 var jumping = false;
 var hit_ground = false;
 var hit_ground_last_frame = false; // so we can trigger sounds and fx on the first touch
@@ -21,11 +19,13 @@ var max_high_score_list_length = 5;
 var recent_scores = window.localStorage.getItem("recent_scores");
 var current_language = "en";
 var time_scale = 1;
-var current_song_name = "";
-var current_song = {};
+var object_id_counter = 0;
+
+// shield
 var shield_spawned = false;
 var shield_timer = 0;
-var object_id_counter = 0;
+
+// multiplier
 var multiplier = 1;
 var multiplier_timer = 200;
 var start_combo = false;
@@ -33,6 +33,8 @@ var start_combo = false;
 // SOUNDS
 var music_volume = 1;
 var song_playing = false;
+var current_song_name = "test";
+var current_song = {};
 
 // GAME LOOP REQUIREMENTS
 var fps = 60;
@@ -372,7 +374,6 @@ const clamp = (num, min, max) => {
 
 const setMusicVolume = (vol) => {
   music_volume = vol;
-  console.log(music_volume);
 };
 
 const playMusic = (song) => {
@@ -380,8 +381,11 @@ const playMusic = (song) => {
   let pan = 0;
   let volume = music_volume / 10;
   let loop = true;
-  song_playing = true;
-  return playSound(SOUNDS[song], playbackRate, pan, volume, loop);
+  let sound = playSound(SOUNDS[song], playbackRate, pan, volume, loop);
+  if (sound) {
+    song_playing = true;
+  }
+  return sound;
 };
 
 const jump = (obj) => {

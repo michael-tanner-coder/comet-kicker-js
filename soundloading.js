@@ -11,6 +11,7 @@ const soundList = [
   { file: "shield-hit.wav", name: "shield_hit" },
   { file: "game-over.wav", name: "game_over" },
   { file: "lose-hp.mp3", name: "lose_hp" },
+  { file: "bg_title.mp3", name: "test" },
   // Add your sound asset here ^
 ];
 
@@ -19,7 +20,7 @@ const soundList = [
 var audioCtx, audioMaster, compressor;
 
 var sounds_to_load;
-var sounds_loaded = true;
+var sounds_loaded = false;
 
 async function loadSounds(sound_object) {
   if (location.protocol == "file:") {

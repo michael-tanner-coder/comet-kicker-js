@@ -10,16 +10,14 @@ function update(dt) {
 
   particles.update();
 
-  // if (!song_playing) {
-  //   current_song = playMusic(current_song_name);
-  // }
+  // MUSIC
+  if (!song_playing) {
+    current_song = playMusic(current_song_name);
+  }
 
-  // if (current_song) {
-  //   console.log("current_song:");
-  //   console.log(current_song.sound);
-  //   console.log(current_song.volume);
-  //   current_song.sound.volume = music_volume / 10;
-  // }
+  if (current_song) {
+    current_song.volume.gain.value = music_volume / 10;
+  }
 
   // MENU NAVIGATION/INTERACTION
   if (game_state === STATES.MENU) {
