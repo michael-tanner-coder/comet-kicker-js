@@ -23,6 +23,8 @@ const PLAYER_DEFAULT = {
   animation_speed: 6,
   state: PLAYER_STATES.IDLE,
   has_trail: false,
+  kicking: false,
+  kick_time: 15,
 
   // jump properties
   jump_height: 0,

@@ -194,6 +194,17 @@ function update(dt) {
     playSound(SOUNDS["shoot"]);
     PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
     shot_fired = true;
+    PLAYER.kicking = true;
+  }
+
+  if (PLAYER.kicking) {
+    PLAYER.state = PLAYER_STATES.KICKING;
+    PLAYER.kick_time -= 1;
+  }
+
+  if (PLAYER.kick_time <= 0) {
+    PLAYER.kicking = false;
+    PLAYER.kick_time = PLAYER_DEFAULT.kick_time;
   }
 
   var blocks = GAME_OBJECTS.filter((obj) => obj.type === "floor");
