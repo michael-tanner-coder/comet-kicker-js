@@ -1,4 +1,3 @@
-// TODO: make a default game state
 const GAME_SPEED = 60;
 const GAME_W = canvas.width;
 const GAME_H = canvas.height;

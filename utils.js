@@ -228,12 +228,17 @@ function moveInOwnDirection(object) {
 function resetGame() {
   GAME_OBJECTS.length = 0;
   GAME_OBJECTS.push(PLAYER);
-  PLAYER.x = 0;
-  PLAYER.y = 0;
-  PLAYER.hp = MAX_HP;
   game_state = STATES.GAME_OVER;
+  resetPlayer();
   saveScore(score);
   buildMap();
+}
+
+function resetPlayer() {
+  const player_keys = Object.keys(PLAYER);
+  player_keys.forEach((key) => {
+    PLAYER[key] = PLAYER_DEFAULT[key];
+  });
 }
 
 function startGame() {
@@ -321,6 +326,13 @@ function drawTrail(obj) {
   });
 }
 
+function explosion(x, y) {
+  sparkle_fx(x, y);
+  smoke_fx(x, y);
+  fire_fx(x, y);
+  playSound(SOUNDS["explode"]);
+}
+
 // sound
 function setMusicVolume(vol) {
   music_volume = vol;
@@ -365,5 +377,27 @@ function jump(obj) {
     obj.jump_rate = easing(obj.jump_rate, 0);
     obj.y -= obj.jump_rate;
     obj.hang_time -= 1;
+  }
+}
+
+function easeMovement(obj, direction) {
+  obj.state = PLAYER_STATES.RUNNING;
+  obj.speed = easing(obj.speed, obj.max_speed);
+  obj.direction = direction;
+  moveInOwnDirection(obj);
+  obj.x = Math.floor(obj.x);
+}
+
+function screenwrap(obj) {
+  if (obj.x + obj.w > GAME_W) {
+    obj.x = 0;
+  }
+
+  if (obj.x + obj.w < 0) {
+    obj.x = GAME_W - obj.w;
+  }
+
+  if (obj.y + obj.h > GAME_H) {
+    obj.y = 0;
   }
 }

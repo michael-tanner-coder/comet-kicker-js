@@ -98,23 +98,13 @@ function update(dt) {
   let prev_x = PLAYER.x;
   let prev_y = PLAYER.y;
 
-  let max_speed = 5;
-
   // PLAYER MOVEMENT
   if (onHold(CONTROLS.moveRight)) {
-    PLAYER.speed = easing(PLAYER.speed, max_speed);
-    PLAYER.x += PLAYER.speed * time_scale;
-    PLAYER.direction = 0;
-    PLAYER.state = PLAYER_STATES.RUNNING;
-    PLAYER.x = Math.floor(PLAYER.x);
+    easeMovement(PLAYER, 0);
   }
 
   if (onHold(CONTROLS.moveLeft)) {
-    PLAYER.speed = easing(PLAYER.speed, max_speed);
-    PLAYER.x -= PLAYER.speed * time_scale;
-    PLAYER.direction = 180;
-    PLAYER.state = PLAYER_STATES.RUNNING;
-    PLAYER.x = Math.floor(PLAYER.x);
+    easeMovement(PLAYER, 180);
   }
 
   if (onHold(CONTROLS.moveUp)) {
@@ -142,7 +132,7 @@ function update(dt) {
 
   if (shield && shield_timer > 80) {
     shield_timer = 0;
-    PLAYER.powerup = "";
+    PLAYER.powerup = PLAYER_DEFAULT.powerup;
     shield_spawned = false;
     removeObj(shield);
     playSound(SOUNDS["shield_hit"]);
@@ -211,19 +201,7 @@ function update(dt) {
 
   bullets.forEach((bullet) => moveInOwnDirection(bullet));
   enemies.forEach((enemy) => {
-    // TODO: refactor into a util for all screen wrapping objects
-    if (enemy.x + enemy.w > GAME_W) {
-      enemy.x = 0;
-    }
-
-    if (enemy.x + enemy.w < 0) {
-      enemy.x = GAME_W - enemy.w;
-    }
-
-    if (enemy.y + enemy.h > GAME_H) {
-      enemy.y = 0;
-    }
-
+    screenwrap(enemy);
     moveInOwnDirection(enemy);
     enemy.x = Math.floor(enemy.x);
     enemy.y = Math.floor(enemy.y);
@@ -331,10 +309,7 @@ function update(dt) {
         score += enemy_point_value * multiplier;
         let text_object = spawnObject(TEXT_OBJECT, enemy.x, enemy.y);
         text_object.text = "+" + enemy_point_value + " x " + multiplier;
-        sparkle_fx(enemy.x, enemy.y);
-        smoke_fx(enemy.x, enemy.y);
-        fire_fx(enemy.x, enemy.y);
-        playSound(SOUNDS["explode"]);
+        explosion(enemy.x, enemy.y);
         start_combo = true;
       }
     });
@@ -361,20 +336,14 @@ function update(dt) {
       }
       PLAYER.hit = true;
       PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
-      sparkle_fx(PLAYER.x, PLAYER.y);
-      smoke_fx(PLAYER.x, PLAYER.y);
-      fire_fx(PLAYER.x, PLAYER.y);
-      playSound(SOUNDS["explode"]);
+      explosion(PLAYER.x, PLAYER.y);
     }
 
     // enemy to shield
     if (shield && collisionDetected(enemy, shield)) {
       removeObj(enemy);
       PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
-      sparkle_fx(PLAYER.x, PLAYER.y);
-      smoke_fx(PLAYER.x, PLAYER.y);
-      fire_fx(PLAYER.x, PLAYER.y);
-      playSound(SOUNDS["explode"]);
+      explosion(shield.x, shield.y);
     }
   });
 
@@ -389,18 +358,9 @@ function update(dt) {
   }
 
   // SCREEN WRAPPING
-  if (PLAYER.x + PLAYER.w > GAME_W) {
-    PLAYER.x = 0;
-  }
+  screenwrap(PLAYER);
 
-  if (PLAYER.x + PLAYER.w < 0) {
-    PLAYER.x = GAME_W - PLAYER.w;
-  }
-
-  if (PLAYER.y + PLAYER.h > GAME_H) {
-    PLAYER.y = 0;
-  }
-
+  // HITBOXES
   updateHitboxes(PLAYER);
 
   PLAYER.hit_ground_last_frame = PLAYER.hit_ground;

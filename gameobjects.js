@@ -3,8 +3,8 @@ const PLAYER_DEFAULT = {
   type: "player",
 
   // position/dimensions
-  x: 100,
-  y: 25,
+  x: 0,
+  y: 0,
   w: 16,
   h: 16,
 
@@ -13,6 +13,7 @@ const PLAYER_DEFAULT = {
 
   // movement
   speed: 0,
+  max_speed: 5,
   direction: 0,
   has_gravity: true,
 
