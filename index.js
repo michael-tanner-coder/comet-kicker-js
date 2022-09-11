@@ -119,6 +119,14 @@ function update(dt) {
     PLAYER.x = Math.floor(PLAYER.x);
   }
 
+  if (onHold(CONTROLS.moveUp)) {
+    PLAYER.direction = 270;
+  }
+
+  if (onHold(CONTROLS.moveDown)) {
+    PLAYER.direction = 90;
+  }
+
   if (onRelease(CONTROLS.moveLeft) || onRelease(CONTROLS.moveRight)) {
     PLAYER.speed = PLAYER_DEFAULT.speed;
   }
@@ -320,6 +328,7 @@ function update(dt) {
       if (!PLAYER.hit) {
         removeObj(enemy);
         PLAYER.hp -= 1;
+        removeObj(enemy);
         playSound(SOUNDS["lose_hp"]);
       }
       PLAYER.hit = true;
@@ -374,6 +383,8 @@ function update(dt) {
     assignId(obj);
     storePreviousPosition(obj);
   });
+
+  PLAYER.y = Math.floor(PLAYER.y);
 }
 
 function updateScreenshake() {
