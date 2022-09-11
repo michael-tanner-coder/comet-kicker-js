@@ -16,7 +16,7 @@ const ANIMATIONS = {
     sprite: "player_sheet",
     frames: [
       { x: 0, y: 0, w: 16, h: 16 },
-      { x: 16, y: 0, w: 16, h: 16 },
+      { x: 32, y: 0, w: 16, h: 16 },
     ],
     current_frame: 0,
   },
@@ -25,6 +25,9 @@ const ANIMATIONS = {
     frames: [
       { x: 0, y: 16, w: 16, h: 16 },
       { x: 16, y: 16, w: 16, h: 16 },
+      { x: 32, y: 16, w: 16, h: 16 },
+      { x: 48, y: 16, w: 16, h: 16 },
+      { x: 16, y: 32, w: 16, h: 16 },
     ],
     current_frame: 0,
   },
