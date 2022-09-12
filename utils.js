@@ -24,6 +24,11 @@ function choose(choices) {
   return choices[Math.floor(Math.random() * choices.length)];
 }
 
+function randomInt(min, max) {
+  // helper function (inclusive: eg 1,10 may include 1 or 10)
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 // object positions/tracking
 function assignId(obj) {
   if (!obj.id) {
@@ -311,7 +316,7 @@ function drawCenteredText(text, y_value) {
   context.fillText(text, GAME_W / 2 - getTextWidth(text) / 2, y_value);
 }
 
-// graphics/animation
+// vfx/animation
 function getPlayerAnimation() {
   return ANIMATIONS[PLAYER_STATE_TO_ANIMATION[PLAYER.state]];
 }
@@ -331,6 +336,44 @@ function explosion(x, y) {
   smoke_fx(x, y);
   fire_fx(x, y);
   playSound(SOUNDS["explode"]);
+}
+
+function drawBitmapCenteredAtLocationWithRotation(
+  graphic,
+  atX,
+  atY,
+  withAngle,
+  alpha
+) {
+  if (!graphic) return;
+  context.save(); // allows us to undo translate movement and rotate spin
+  context.translate(atX, atY); // sets the point where our graphic will go
+  context.rotate(withAngle); // sets the rotation
+  if (alpha != undefined) context.globalAlpha = alpha;
+  context.drawImage(graphic, -graphic.width / 2, -graphic.height / 2); // center, draw
+  if (alpha != undefined) context.globalAlpha = 1;
+  context.restore(); // undo the translation movement and rotation since save()
+}
+
+function updateScreenshake() {
+  if (PLAYER.screenshakesRemaining) {
+    // starts max size and gets smaller
+    let wobble = Math.round(
+      (PLAYER.screenshakesRemaining / PLAYER_HIT_SCREENSHAKES) *
+        SCREENSHAKE_MAX_SIZE
+    );
+    if (PLAYER.screenshakesRemaining % 4 < 2) wobble *= -1; // alternate left/right every 2 frames
+    context.setTransform(1, 0, 0, 1, wobble, 0);
+    PLAYER.screenshakesRemaining--;
+  } else {
+    context.setTransform(1, 0, 0, 1, 0, 0); // reset
+  }
+}
+
+function drawErrorMessage(message) {
+  context.fillStyle = WHITE;
+  context.fillText(message, GAME_W / 2 - 100, 10);
+  context.fillText(ERROR_MESSAGES.CHECK_CONSOLE, GAME_W / 2 - 100, 25);
 }
 
 // sound

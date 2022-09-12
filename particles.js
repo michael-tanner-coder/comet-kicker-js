@@ -40,7 +40,6 @@ function titlescreenFX() {
 }
 
 function fall_fx(x, y) {
-  //console.log("fall_fx");
   let img = IMAGES["dust"];
   let alpha = 0.5;
   let num = 8;
@@ -169,9 +168,4 @@ function SimpleParticles() {
   this.clear = function () {
     particle = [];
   };
-}
-
-// helper function (inclusive: eg 1,10 may include 1 or 10)
-function randomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
 }

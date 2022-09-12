@@ -186,11 +186,29 @@ function onHold(input) {
 }
 
 // ---Listeners---
-function inputListener() {
+function keyListener() {
   const input_keys = Object.keys(CONTROLS);
   input_keys.forEach((key) => {
     inputStateMachine(CONTROLS[key]);
   });
+}
+
+function gamepadListener() {
+  const inputs = Object.keys(GAMEPAD);
+  inputs.forEach((input) => {
+    if (
+      typeof GAMEPAD[input] === "function" &&
+      input !== "butt" &&
+      input !== "axis"
+    ) {
+      INPUTS[input] = GAMEPAD[input]() ? true : false;
+    }
+  });
+}
+
+function inputListener() {
+  gamepadListener();
+  keyListener();
 }
 
 window.addEventListener("keydown", function (e) {

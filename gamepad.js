@@ -91,17 +91,3 @@ const GAMEPAD = {
   },
 };
 
-// Runs in game loop: checks for all gamepad inputs
-// See input.js for INPUTS
-function gamepadListener() {
-  const inputs = Object.keys(GAMEPAD);
-  inputs.forEach((input) => {
-    if (
-      typeof GAMEPAD[input] === "function" &&
-      input !== "butt" &&
-      input !== "axis"
-    ) {
-      INPUTS[input] = GAMEPAD[input]() ? true : false;
-    }
-  });
-}

@@ -11,13 +11,7 @@ function update(dt) {
   particles.update();
 
   // MUSIC
-  if (!song_playing) {
-    current_song = playMusic(current_song_name);
-  }
-
-  if (current_song) {
-    current_song.volume.gain.value = music_volume / 10;
-  }
+  updateMusic();
 
   // MENU NAVIGATION/INTERACTION
   if (game_state === STATES.MENU) {
@@ -80,25 +74,14 @@ function update(dt) {
     }
   }
 
-  if (PLAYER.hp <= 0) {
-    resetGame();
-    playSound(SOUNDS["game_over"]);
-  }
-
-  PLAYER.state = PLAYER_STATES.IDLE;
-
   // SCREEN WRAP FOR PARALLAX BACKGROUNDS
-  BACKGROUNDS.forEach((bg) => {
-    bg.x += bg.speed;
-    if (bg.x > GAME_W) {
-      bg.x = -1 * GAME_W;
-    }
-  });
-
-  let prev_x = PLAYER.x;
-  let prev_y = PLAYER.y;
+  updateBackground();
 
   // PLAYER MOVEMENT
+  PLAYER.prev_x = PLAYER.x;
+  PLAYER.prev_y = PLAYER.y;
+  PLAYER.state = PLAYER_STATES.IDLE;
+
   if (onHold(CONTROLS.moveRight)) {
     easeMovement(PLAYER, 0);
   }
@@ -119,30 +102,25 @@ function update(dt) {
     PLAYER.speed = PLAYER_DEFAULT.speed;
   }
 
+  // OBJECT COLLECTIONS
   var enemies = GAME_OBJECTS.filter((obj) => obj.type === "enemy");
   var collectibles = GAME_OBJECTS.filter((obj) => obj.type === "collect");
+  var blocks = GAME_OBJECTS.filter((obj) => obj.type === "floor");
+  var bullets = GAME_OBJECTS.filter((obj) => obj.type === "bullet");
+  var text = GAME_OBJECTS.filter((obj) => obj.type === "text");
 
   // SHIELD
   var shield = GAME_OBJECTS.find((obj) => obj.type === "shield");
   if (shield) {
-    shield.x = PLAYER.x + PLAYER.w / 2 + Math.sin(shield_timer) * 18;
-    shield.y = PLAYER.y + PLAYER.h / 2 + Math.cos(shield_timer) * 16;
-    shield_timer += 0.1;
+    rotateShield(shield); // updates shield timer
   }
 
   if (shield && shield_timer > 80) {
-    shield_timer = 0;
-    PLAYER.powerup = PLAYER_DEFAULT.powerup;
-    shield_spawned = false;
-    removeObj(shield);
-    playSound(SOUNDS["shield_hit"]);
+    despawnShield(shield);
   }
 
-  // SCORE DECREMENT
-  score -= 0.1;
-  if (score <= 0) {
-    score = 0;
-  }
+  // SCORE
+  updateScore();
 
   // COLLECTIBLE SPAWNS
   if (collectibles.length <= 0) {
@@ -195,10 +173,7 @@ function update(dt) {
     PLAYER.kick_time = PLAYER_DEFAULT.kick_time;
   }
 
-  var blocks = GAME_OBJECTS.filter((obj) => obj.type === "floor");
-  var bullets = GAME_OBJECTS.filter((obj) => obj.type === "bullet");
-  var text = GAME_OBJECTS.filter((obj) => obj.type === "text");
-
+  // UPDATE OBJECT COLLECTIONS
   bullets.forEach((bullet) => moveInOwnDirection(bullet));
   enemies.forEach((enemy) => {
     screenwrap(enemy);
@@ -240,7 +215,6 @@ function update(dt) {
   });
 
   // COLLISION CHECKS
-
   // player to block
   PLAYER.hit_ground = false;
   blocks.forEach((block) => {
@@ -251,7 +225,7 @@ function update(dt) {
       PLAYER.jump_height = PLAYER_DEFAULT.jump_height;
       PLAYER.jump_rate = PLAYER_DEFAULT.jump_rate;
       if (!PLAYER.hit_ground_last_frame) fall_fx(PLAYER.x, PLAYER.y);
-      PLAYER.y = prev_y;
+      PLAYER.y = PLAYER.prev_y;
     }
 
     const leftBox = getHitbox(PLAYER, "left");
@@ -262,7 +236,7 @@ function update(dt) {
       collisionDetected(block, rightBox)
     ) {
       PLAYER.hit_wall = true;
-      PLAYER.x = prev_x;
+      PLAYER.x = PLAYER.prev_x;
     }
   });
 
@@ -363,30 +337,23 @@ function update(dt) {
   // HITBOXES
   updateHitboxes(PLAYER);
 
-  PLAYER.hit_ground_last_frame = PLAYER.hit_ground;
-  PLAYER.hit_wall = false;
-
+  // TRACKING
+  // track all game objects and their previous positions
   GAME_OBJECTS.forEach((obj) => {
     assignId(obj);
     storePreviousPosition(obj);
   });
 
+  // END OF FRAME CLEANUP
+  // round player's y movement to prevent blurriness when jumping/falling
   PLAYER.y = Math.floor(PLAYER.y);
-}
 
-function updateScreenshake() {
-  if (PLAYER.screenshakesRemaining) {
-    // starts max size and gets smaller
-    let wobble = Math.round(
-      (PLAYER.screenshakesRemaining / PLAYER_HIT_SCREENSHAKES) *
-        SCREENSHAKE_MAX_SIZE
-    );
-    if (PLAYER.screenshakesRemaining % 4 < 2) wobble *= -1; // alternate left/right every 2 frames
-    context.setTransform(1, 0, 0, 1, wobble, 0);
-    PLAYER.screenshakesRemaining--;
-  } else {
-    context.setTransform(1, 0, 0, 1, 0, 0); // reset
-  }
+  // store whether or not the player hit the ground in this frame,
+  // use on next frame to determine if we render a dust effect
+  PLAYER.hit_ground_last_frame = PLAYER.hit_ground;
+  PLAYER.hit_wall = false;
+
+  checkForGameOver();
 }
 
 function draw(offset) {
@@ -394,41 +361,47 @@ function draw(offset) {
   context.fillStyle = PURPLE;
   context.fillRect(0, 0, GAME_W, GAME_H);
 
+  // ERROR MESSAGES
   if (image_loading_error) {
-    context.fillStyle = WHITE;
-    context.fillText(ERROR_MESSAGES.IMAGE_LOADING_ERROR, GAME_W / 2 - 100, 10);
-    context.fillText(ERROR_MESSAGES.CHECK_CONSOLE, GAME_W / 2 - 100, 25);
+    drawErrorMessage(ERROR_MESSAGES.IMAGE_LOADING_ERROR);
     return;
   }
 
   if (sound_loading_error) {
-    context.fillStyle = WHITE;
-    context.fillText(ERROR_MESSAGES.SOUND_LOADING_ERROR, GAME_W / 2 - 100, 10);
-    context.fillText(ERROR_MESSAGES.CHECK_CONSOLE, GAME_W / 2 - 100, 25);
+    drawErrorMessage(ERROR_MESSAGES.SOUND_LOADING_ERROR);
     return;
   }
 
+  // LOADING SCREEN
   if (!images_loaded || !sounds_loaded) {
     context.fillStyle = WHITE;
     context.fillText("Loading assets...", GAME_W / 2 - 50, 10);
     return;
   }
 
+  // SCREENSHAKE
   updateScreenshake();
+
+  // PARTICLES
   particles.draw();
 
+  // GAME/PAUSE
   if (game_state === STATES.GAME || game_state === STATES.PAUSE) {
+    // BACKGROUND
     if (images_loaded) {
       context.drawImage(IMAGES["background_1"], BACKGROUND_1.x, BACKGROUND_1.y);
       context.drawImage(IMAGES["background_2"], BACKGROUND_2.x, BACKGROUND_2.y);
       context.drawImage(IMAGES["background_3"], BACKGROUND_3.x, BACKGROUND_3.y);
     }
 
+    // DRAW OBJECTS
     GAME_OBJECTS.forEach((obj) => {
+      // render a trail based on the object's previous positions
       if (obj.has_trail) {
         drawTrail(obj);
       }
 
+      // draw text object, gradually fade out
       if (obj.type === "text") {
         context.globalAlpha = obj.alpha;
         context.fontStyle = "16px PressStart2P";
@@ -444,25 +417,30 @@ function draw(offset) {
         context.fontStyle = "8px PressStart2P";
       }
 
+      // render hitboxes in the object's given color
       if (obj.render_hitbox || render_hitboxes) {
         context.fillStyle = obj.color;
         context.fillRect(obj.x, obj.y, obj.w, obj.h);
       }
 
+      // draw a static image
       if (images_loaded && obj.sprite) {
         context.drawImage(IMAGES[obj.sprite], obj.x, obj.y);
       }
 
+      // flash white every other frame
       if (obj.hit && obj.i_frames % 2 === 0) {
         context.fillStyle = WHITE;
         context.fillRect(obj.x, obj.y, obj.w, obj.h);
       }
 
+      // play the object's current animation
       if (images_loaded && obj.animation) {
         playAnimation(obj.animation, obj.animation_speed || 1, obj.x, obj.y);
       }
     });
 
+    // DRAW SCORE
     context.fillStyle = WHITE;
     context.fillText(
       `${getText("score")}: ${Math.round(score * 100) / 100}`,
@@ -470,23 +448,28 @@ function draw(offset) {
       10
     );
 
+    // DRAW PLAYER HP
     for (i = 0; i < PLAYER.hp; i++) {
       context.fillStyle = WHITE;
       context.fillRect(GAME_W / 2 + 16 * i, 20, 8, 16);
     }
   }
 
+  // DRAW PAUSE SCREEN
   if (game_state === STATES.PAUSE) {
+    // overlay
     context.globalAlpha = 0.5;
     context.fillStyle = "black";
     context.fillRect(0, 0, GAME_W, GAME_H);
-
     context.globalAlpha = 1;
+
+    // pause text
     context.fillStyle = WHITE;
     context.fillText(getText("game_paused"), GAME_W / 2 - 90, 100);
     context.fillText(getText("press_enter_to_continue"), GAME_W / 2 - 90, 150);
   }
 
+  // DRAW GAME OVER SCREEN
   if (game_state === STATES.GAME_OVER) {
     context.fillStyle = WHITE;
     drawCenteredText(
@@ -497,6 +480,7 @@ function draw(offset) {
     drawCenteredText(`${getText("quit")}: PRESS ESC`, 150);
   }
 
+  // DRAW CURRENT MENU
   if (game_state === STATES.MENU) {
     titlescreenFX();
     context.fillStyle = WHITE;
@@ -512,7 +496,6 @@ function loop() {
   start_time = current_time;
   lag += elapsed;
 
-  gamepadListener();
   inputListener();
 
   if (game_state === STATES.PAUSE) {

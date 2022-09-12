@@ -5,6 +5,8 @@ const PLAYER_DEFAULT = {
   // position/dimensions
   x: 0,
   y: 0,
+  prev_x: 0,
+  prev_y: 0,
   w: 16,
   h: 16,
 
