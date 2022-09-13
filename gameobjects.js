@@ -27,6 +27,7 @@ const PLAYER_DEFAULT = {
     { name: "left", x: 0, y: 0, w: 4, h: 14, color: "red" },
     { name: "right", x: 0, y: 0, w: 4, h: 14, color: "red" },
   ],
+  render_hitbox: true,
 
   // health/take damage
   i_frames: 30,
@@ -49,6 +50,8 @@ const PLAYER_DEFAULT = {
   jump_rate: 8,
   hang_time: 30,
   jumping: false,
+  coyote_time: 1,
+  coyote_time_counter: 0,
 
   // shooting/kicking
   shot_timer: 0,

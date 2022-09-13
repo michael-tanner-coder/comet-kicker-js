@@ -189,16 +189,40 @@ function update(dt) {
   });
 
   // JUMPING
-  if (onHold(CONTROLS.jump) && (PLAYER.hit_ground || PLAYER.jumping)) {
+  // coyote time
+  if (PLAYER.hit_ground_last_frame) {
+    PLAYER.coyote_time_counter = PLAYER.coyote_time;
+  } else {
+    PLAYER.coyote_time_counter -= 0.1;
+  }
+
+  if (
+    onHold(CONTROLS.jump) &&
+    (PLAYER.coyote_time_counter > 0 || PLAYER.jumping)
+  ) {
     if (PLAYER.hit_ground) {
       PLAYER.jumping = true;
       fall_fx(PLAYER.x, PLAYER.y);
+      // uncomment this function to see where the player jumped (if on ground)
+      // spawnObject(
+      //   {
+      //     x: PLAYER.x,
+      //     y: PLAYER.y,
+      //     h: PLAYER.h,
+      //     w: PLAYER.w,
+      //     color: "red",
+      //     render_hitbox: true,
+      //   },
+      //   PLAYER.x,
+      //   PLAYER.y
+      // );
     }
     jump(PLAYER);
   }
 
   if (onRelease(CONTROLS.jump)) {
     PLAYER.jumping = false;
+    PLAYER.coyote_time_counter = 0;
   }
 
   // ANIMATIONS
