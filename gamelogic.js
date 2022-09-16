@@ -34,6 +34,8 @@ function rotateShield(shield) {
   shield.x = PLAYER.x + PLAYER.w / 2 + Math.sin(shield_timer) * 18;
   shield.y = PLAYER.y + PLAYER.h / 2 + Math.cos(shield_timer) * 16;
   shield_timer += 0.1;
+  shield.x = Math.floor(shield.x);
+  shield.y = Math.floor(shield.y);
 }
 
 function despawnShield(shield) {

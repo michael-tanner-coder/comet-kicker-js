@@ -23,6 +23,7 @@ const image_list = [
   { file: "collectible.png", name: "collectible" },
   { file: "hp-up.png", name: "hp_up" },
   { file: "particle.png", name: "particle" },
+  { file: "cometShiledsVersions/CometShieldv1.png", name: "shield" },
   // <-- Add your sprite in here
 ];
 

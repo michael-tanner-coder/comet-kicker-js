@@ -27,7 +27,7 @@ const PLAYER_DEFAULT = {
     { name: "left", x: 0, y: 0, w: 4, h: 14, color: "red" },
     { name: "right", x: 0, y: 0, w: 4, h: 14, color: "red" },
   ],
-  render_hitbox: true,
+  render_hitbox: false,
 
   // health/take damage
   i_frames: 30,
@@ -35,7 +35,7 @@ const PLAYER_DEFAULT = {
   hp: MAX_HP,
 
   // powerups
-  powerup: "",
+  powerup: PICKUPS.SHIELD,
   bullet_type: "",
 
   // animation/vfx
@@ -165,9 +165,10 @@ const ROTATING_SHIELD = {
   h: 10,
   w: 10,
   type: "shield",
+  sprite: "shield",
   speed: 1,
   color: YELLOW,
-  render_hitbox: true,
+  render_hitbox: false,
   has_trail: true,
 };
 
