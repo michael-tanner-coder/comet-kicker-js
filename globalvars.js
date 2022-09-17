@@ -14,6 +14,7 @@ var enemy_point_value = 10;
 var high_scores = window.localStorage.getItem("high_scores");
 var max_high_score_list_length = 5;
 var recent_scores = window.localStorage.getItem("recent_scores");
+var max_recent_score_list_length = 10;
 
 // game options
 var render_hitboxes = false;

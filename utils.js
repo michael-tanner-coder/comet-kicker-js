@@ -271,6 +271,9 @@ function initializeScores() {
 function saveScore(score) {
   // add to list of recent scores
   recent_scores?.push(score);
+  if (recent_scores?.length > max_recent_score_list_length) {
+    recent_scores?.shift();
+  }
   window.localStorage.setItem("recent_scores", JSON.stringify(recent_scores));
 
   // if no scores are recorded, make first entry in high score array

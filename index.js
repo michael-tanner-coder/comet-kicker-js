@@ -496,12 +496,22 @@ function draw(offset) {
   // DRAW GAME OVER SCREEN
   if (game_state === STATES.GAME_OVER) {
     context.fillStyle = WHITE;
+
     drawCenteredText(
       `${getText("score")}: ${Math.round(score * 100) / 100}`,
       50
     );
+
+    drawCenteredText(
+      `${getText("average_score")}: ${
+        Math.round(getAverageScore() * 100) / 100
+      }`,
+      75
+    );
+
     drawCenteredText(`${getText("retry")}: ${getText("press_enter")}`, 100);
-    drawCenteredText(`${getText("quit")}: PRESS ESC`, 150);
+
+    drawCenteredText(`${getText("quit")}: PRESS ESC`, 125);
   }
 
   // DRAW CURRENT MENU
