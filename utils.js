@@ -20,6 +20,10 @@ function easing(x, target) {
   return (x += (target - x) * 0.1);
 }
 
+function easingWithRate(x, target, rate) {
+  return (x += (target - x) * rate);
+}
+
 function choose(choices) {
   return choices[Math.floor(Math.random() * choices.length)];
 }
@@ -421,22 +425,17 @@ function toggleFullscreen() {
 
 // character actions
 function jump(obj) {
+  // actual jump force
+  obj.y -= obj.jump_velocity;
+
+  // track how high we've jumped
   if (obj.jump_height < obj.max_jump_height) {
-    obj.jump_height += obj.jump_rate;
-    obj.y -= obj.jump_rate;
+    obj.jump_height += obj.jump_velocity;
     return;
   }
 
-  if (obj.hang_time <= 0) {
-    obj.jump_rate = PLAYER_DEFAULT.jump_rate;
-    return;
-  }
-
-  if (obj.jumping) {
-    obj.jump_rate = easing(obj.jump_rate, 0);
-    obj.y -= obj.jump_rate;
-    obj.hang_time -= 1;
-  }
+  // if we hit our max jump height, start decelerating and fall
+  obj.jump_velocity = easingWithRate(obj.jump_velocity, 0, 0.1);
 }
 
 function easeMovement(obj, direction) {

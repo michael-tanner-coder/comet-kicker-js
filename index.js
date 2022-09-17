@@ -200,8 +200,8 @@ function update(dt) {
     onHold(CONTROLS.jump) &&
     (PLAYER.coyote_time_counter > 0 || PLAYER.jumping)
   ) {
+    PLAYER.jumping = true;
     if (PLAYER.hit_ground) {
-      PLAYER.jumping = true;
       fall_fx(PLAYER.x, PLAYER.y);
       // uncomment this function to see where the player jumped (if on ground)
       if (debug_mode) {
@@ -249,7 +249,7 @@ function update(dt) {
       PLAYER.jumping = false;
       PLAYER.hang_time = PLAYER_DEFAULT.hang_time;
       PLAYER.jump_height = PLAYER_DEFAULT.jump_height;
-      PLAYER.jump_rate = PLAYER_DEFAULT.jump_rate;
+      PLAYER.jump_velocity = PLAYER_DEFAULT.jump_velocity;
       if (!PLAYER.hit_ground_last_frame) fall_fx(PLAYER.x, PLAYER.y);
       PLAYER.y = PLAYER.prev_y;
     }

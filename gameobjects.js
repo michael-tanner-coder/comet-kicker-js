@@ -47,7 +47,7 @@ const PLAYER_DEFAULT = {
   // jump
   jump_height: 0,
   max_jump_height: 96,
-  jump_rate: 8,
+  jump_velocity: 8,
   hang_time: 30,
   jumping: false,
   coyote_time: 1,

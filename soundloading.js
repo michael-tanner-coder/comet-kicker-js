@@ -111,8 +111,6 @@ function playSound(
   volume = 0.2,
   loop = false
 ) {
-  console.log(buffer);
-
   if (!buffer || !audioCtx) return;
 
   var source = audioCtx.createBufferSource();
