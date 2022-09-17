@@ -204,18 +204,20 @@ function update(dt) {
       PLAYER.jumping = true;
       fall_fx(PLAYER.x, PLAYER.y);
       // uncomment this function to see where the player jumped (if on ground)
-      // spawnObject(
-      //   {
-      //     x: PLAYER.x,
-      //     y: PLAYER.y,
-      //     h: PLAYER.h,
-      //     w: PLAYER.w,
-      //     color: "red",
-      //     render_hitbox: true,
-      //   },
-      //   PLAYER.x,
-      //   PLAYER.y
-      // );
+      if (debug_mode) {
+        spawnObject(
+          {
+            x: PLAYER.x,
+            y: PLAYER.y,
+            h: PLAYER.h,
+            w: PLAYER.w,
+            color: "red",
+            render_hitbox: true,
+          },
+          PLAYER.x,
+          PLAYER.y
+        );
+      }
     }
     jump(PLAYER);
   }

@@ -1,4 +1,6 @@
 // GLOBAL VARIABLES
+// dev mode
+var debug_mode = true;
 
 // spawning
 var spawn_timer = MAX_SPAWN_TIMER;
