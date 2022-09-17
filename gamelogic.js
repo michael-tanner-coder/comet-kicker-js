@@ -25,7 +25,7 @@ function updateBackground() {
 function checkForGameOver() {
   if (PLAYER.hp <= 0) {
     resetGame();
-    playSound(SOUNDS["game_over"]);
+    playSoundEffect("game_over");
   }
 }
 
@@ -43,7 +43,7 @@ function despawnShield(shield) {
   PLAYER.powerup = PLAYER_DEFAULT.powerup;
   shield_spawned = false;
   removeObj(shield);
-  playSound(SOUNDS["shield_hit"]);
+  playSoundEffect("shield_hit");
 }
 
 // score

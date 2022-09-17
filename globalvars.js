@@ -32,6 +32,7 @@ var start_combo = false;
 
 // sounds
 var music_volume = 1;
+var sound_effect_volume = 1;
 var song_playing = false;
 var current_song_name = "test";
 var current_song = {};

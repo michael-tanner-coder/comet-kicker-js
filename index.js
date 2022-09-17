@@ -129,7 +129,7 @@ function update(dt) {
 
   if (collect_spawn_timer <= 0) {
     spawnCollectible();
-    playSound(SOUNDS["collect_spawn"]);
+    playSoundEffect("collect_spawn");
     collect_spawn_timer = MAX_COLLECT_SPAWN_TIMER;
   }
 
@@ -157,7 +157,7 @@ function update(dt) {
     let shot = spawnBullet(PLAYER, PLAYER.direction, PLAYER.bullet_type);
     spark_fx(shot.x, shot.y);
     recoil(PLAYER, shot, shot.recoil);
-    playSound(SOUNDS["shoot"]);
+    playSoundEffect("shoot");
     PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
     PLAYER.shot_fired = true;
     PLAYER.kicking = true;
@@ -278,7 +278,7 @@ function update(dt) {
 
       removeObj(coll);
 
-      playSound(SOUNDS["collect"]);
+      playSoundEffect("collect");
 
       let new_text_obj = spawnObject(TEXT_OBJECT, PLAYER.x, PLAYER.y);
       new_text_obj.text = PICKUP_TEXT[coll.pickup].toUpperCase();
@@ -330,7 +330,7 @@ function update(dt) {
       if (!PLAYER.hit) {
         PLAYER.hp -= 1;
         removeObj(enemy);
-        playSound(SOUNDS["lose_hp"]);
+        playSoundEffect("lose_hp");
       }
       PLAYER.hit = true;
       PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;

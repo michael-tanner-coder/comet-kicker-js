@@ -111,7 +111,7 @@ function spawnShield() {
   new_shield.x = PLAYER.x;
   new_shield.y = PLAYER.y;
   GAME_OBJECTS.push(new_shield);
-  playSound(SOUNDS["shield_hit"]);
+  playSoundEffect("shield_hit");
 }
 
 // powerups
@@ -335,7 +335,7 @@ function explosion(x, y) {
   sparkle_fx(x, y);
   smoke_fx(x, y);
   fire_fx(x, y);
-  playSound(SOUNDS["explode"]);
+  playSoundEffect("explode");
 }
 
 function drawBitmapCenteredAtLocationWithRotation(
@@ -381,6 +381,10 @@ function setMusicVolume(vol) {
   music_volume = vol;
 }
 
+function setSoundEffectVolume(vol) {
+  sound_effect_volume = vol;
+}
+
 function playMusic(song) {
   let playbackRate = 1;
   let pan = 0;
@@ -390,6 +394,15 @@ function playMusic(song) {
   if (sound) {
     song_playing = true;
   }
+  return sound;
+}
+
+function playSoundEffect(sound_effect) {
+  let playbackRate = 1;
+  let pan = 0;
+  let volume = sound_effect_volume / 10;
+  let loop = false;
+  let sound = playSound(SOUNDS[sound_effect], playbackRate, pan, volume, loop);
   return sound;
 }
 
