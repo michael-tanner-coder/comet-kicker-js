@@ -142,6 +142,7 @@ function checkPickupType(collectible) {
   switch (collectible.pickup) {
     case PICKUPS.HP:
       PLAYER.hp += 1;
+      playSoundEffect("heal_hp");
       break;
     case PICKUPS.POINTS:
       score += collectible.points;
