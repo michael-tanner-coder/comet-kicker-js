@@ -1,5 +1,14 @@
+// logic loop
+// -- check for errors
+// -- update music
+// -- process input
+// -- update player
+// -- update objects
+// -- run physics
+
 // LOOP FUNCTIONS
 function update(dt) {
+  // ERROR MESSAGES
   if (image_loading_error || sound_loading_error) {
     return;
   }
@@ -8,106 +17,57 @@ function update(dt) {
     return;
   }
 
+  // PARTICLE SYSTEM
   particles.update();
 
   // MUSIC
   updateMusic();
 
+  // PARALLAX BACKGROUNDS
+  updateBackground();
+
   // MENU NAVIGATION/INTERACTION
   if (game_state === STATES.MENU) {
-    // select buttons
-    if (
-      onPress(CONTROLS.accept) &&
-      getCurrentMenuElement().type === INPUT_TYPES.button
-    ) {
-      getCurrentMenu().elements[getCurrentMenu().cursor].handler();
-    }
-
-    // navigate back
-    if (onPress(CONTROLS.decline)) {
-      goBack();
-    }
-
-    // navigate menu
-    if (onPress(CONTROLS.moveDown)) {
-      moveCursor(getCurrentMenu(), 1);
-    }
-    if (onPress(CONTROLS.moveUp)) {
-      moveCursor(getCurrentMenu(), -1);
-    }
-
-    // switch options
-    if (
-      onPress(CONTROLS.moveLeft) &&
-      getCurrentMenuElement().type === INPUT_TYPES.select
-    ) {
-      changeOptions(getCurrentMenuElement(), -1);
-      getCurrentMenuElement().handler();
-    }
-    if (
-      onPress(CONTROLS.moveRight) &&
-      getCurrentMenuElement().type === INPUT_TYPES.select
-    ) {
-      changeOptions(getCurrentMenuElement(), 1);
-      getCurrentMenuElement().handler();
-    }
-
+    updateMenuNavigation();
     return;
   }
 
   if (game_state === STATES.GAME_OVER) {
-    if (onPress(CONTROLS.start)) {
-      game_state = STATES.GAME;
-      score = 0;
-    }
-
-    if (onPress(CONTROLS.select)) {
-      game_state = STATES.MENU;
-    }
-
+    updateGameOverScreen();
     return;
   }
 
+  // PAUSING
   if (game_state === STATES.GAME) {
-    if (onPress(CONTROLS.pause)) {
-      game_state = STATES.PAUSE;
-    }
+    pauseGame();
   }
 
-  // SCREEN WRAP FOR PARALLAX BACKGROUNDS
-  updateBackground();
-
+  // ==============
+  // --- PLAYER ---
+  // ==============
   // PLAYER MOVEMENT
-  PLAYER.prev_x = PLAYER.x;
-  PLAYER.prev_y = PLAYER.y;
-  PLAYER.state = PLAYER_STATES.IDLE;
+  playerMove();
 
-  if (onHold(CONTROLS.moveRight)) {
-    easeMovement(PLAYER, 0);
-  }
+  // SHOOTING
+  playerShoot();
 
-  if (onHold(CONTROLS.moveLeft)) {
-    easeMovement(PLAYER, 180);
-  }
+  // JUMPING
+  playerJump();
 
-  if (onHold(CONTROLS.moveUp)) {
-    PLAYER.direction = 270;
-  }
+  // ANIMATIONS
+  PLAYER.animation = getPlayerAnimation();
 
-  if (onHold(CONTROLS.moveDown)) {
-    PLAYER.direction = 90;
-  }
+  // POWERUPS
+  checkPlayerPowerup();
 
-  if (onRelease(CONTROLS.moveLeft) || onRelease(CONTROLS.moveRight)) {
-    PLAYER.speed = PLAYER_DEFAULT.speed;
-  }
+  // IFRAME COUNTER
+  updateIFrameCounter();
 
-  // OBJECT COLLECTIONS
-  var enemies = GAME_OBJECTS.filter((obj) => obj.type === "enemy");
-  var collectibles = GAME_OBJECTS.filter((obj) => obj.type === "collect");
-  var blocks = GAME_OBJECTS.filter((obj) => obj.type === "floor");
-  var bullets = GAME_OBJECTS.filter((obj) => obj.type === "bullet");
-  var text = GAME_OBJECTS.filter((obj) => obj.type === "text");
+  // SCREEN WRAPPING
+  screenwrap(PLAYER);
+
+  // HITBOXES
+  updateHitboxes(PLAYER);
 
   // SHIELD
   var shield = GAME_OBJECTS.find((obj) => obj.type === "shield");
@@ -119,133 +79,34 @@ function update(dt) {
     despawnShield(shield);
   }
 
-  // SCORE
-  updateScore();
-
-  // COLLECTIBLE SPAWNS
-  if (collectibles.length <= 0) {
-    collect_spawn_timer--;
-  }
-
-  if (collect_spawn_timer <= 0) {
-    spawnCollectible();
-    playSoundEffect("collect_spawn");
-    collect_spawn_timer = MAX_COLLECT_SPAWN_TIMER;
-  }
-
-  // ENEMY SPAWNS
-  if (enemies.length < SPAWN_LIMIT) {
-    spawn_timer--;
-  }
-
-  if (spawn_timer <= 0) {
-    spawnEnemy();
-    spawn_timer = MAX_SPAWN_TIMER;
-  }
-
-  // SHOOTING
-  if (!PLAYER.shot_fired) {
-    PLAYER.shot_timer--;
-  }
-
-  if (PLAYER.shot_fired) {
-    PLAYER.shot_timer = MAX_SHOT_TIMER;
-    PLAYER.shot_fired = false;
-  }
-
-  if (PLAYER.shot_timer <= 0 && onPress(CONTROLS.shoot)) {
-    let shot = spawnBullet(PLAYER, PLAYER.direction, PLAYER.bullet_type);
-    spark_fx(shot.x, shot.y);
-    recoil(PLAYER, shot, shot.recoil);
-    playSoundEffect("shoot");
-    PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
-    PLAYER.shot_fired = true;
-    PLAYER.kicking = true;
-  }
-
-  if (PLAYER.kicking) {
-    PLAYER.state = PLAYER_STATES.KICKING;
-    PLAYER.kick_time -= 1;
-  }
-
-  if (PLAYER.kick_time <= 0) {
-    PLAYER.kicking = false;
-    PLAYER.kick_time = PLAYER_DEFAULT.kick_time;
-  }
+  // ====================
+  // --- GAME OBJECTS ---
+  // ====================
+  // OBJECT COLLECTIONS
+  var enemies = GAME_OBJECTS.filter((obj) => obj.type === "enemy");
+  var collectibles = GAME_OBJECTS.filter((obj) => obj.type === "collect");
+  var blocks = GAME_OBJECTS.filter((obj) => obj.type === "floor");
+  var bullets = GAME_OBJECTS.filter((obj) => obj.type === "bullet");
+  var text = GAME_OBJECTS.filter((obj) => obj.type === "text");
 
   // UPDATE OBJECT COLLECTIONS
-  bullets.forEach((bullet) => moveInOwnDirection(bullet));
-  enemies.forEach((enemy) => {
-    screenwrap(enemy);
-    moveInOwnDirection(enemy);
-    enemy.x = Math.floor(enemy.x);
-    enemy.y = Math.floor(enemy.y);
-  });
-  text.forEach((txt) => {
-    txt.y -= txt.speed;
-    if (txt.alpha <= 0) {
-      removeObj(txt);
-    }
-  });
+  updateShots(bullets);
+  updateEnemies(enemies);
+  updateText(text);
 
-  // JUMPING
-  // coyote time
-  if (PLAYER.hit_ground_last_frame) {
-    PLAYER.coyote_time_counter = PLAYER.coyote_time;
-  } else {
-    PLAYER.coyote_time_counter -= 0.2;
-  }
+  // COLLECTIBLE SPAWNS
+  updateCollectibleSpawnTimer(collectibles);
 
-  // jump hold
-  if (
-    PLAYER.jump_height < PLAYER.max_jump_height &&
-    onHold(CONTROLS.jump) &&
-    (PLAYER.coyote_time_counter > 0 || PLAYER.jumping)
-  ) {
-    PLAYER.jumping = true;
-    if (PLAYER.hit_ground) {
-      fall_fx(PLAYER.x, PLAYER.y);
-      if (debug_mode) {
-        spawnObject(
-          {
-            x: PLAYER.x,
-            y: PLAYER.y,
-            h: PLAYER.h,
-            w: PLAYER.w,
-            color: "red",
-            render_hitbox: true,
-          },
-          PLAYER.x,
-          PLAYER.y
-        );
-      }
-    }
-    jump(PLAYER);
-  } else {
-    // fall faster when done jumping
-    PLAYER.y_velocity = easingWithRate(PLAYER.y_velocity, -1, 0.8);
-  }
+  // ENEMY SPAWNS
+  updateEnemySpawnTimer(enemies);
 
-  // jump release
-  if (onRelease(CONTROLS.jump)) {
-    PLAYER.jumping = false;
-    PLAYER.coyote_time_counter = 0;
-  }
+  // ==============
+  // --- PHYSICS ---
+  // ==============
+  // PHYSICS
+  applyGravityToObjects();
 
   PLAYER.y -= PLAYER.y_velocity;
-
-  // ANIMATIONS
-  PLAYER.animation = getPlayerAnimation();
-
-  // POWERUPS
-  checkPlayerPowerup();
-
-  // PHYSICS LOOP
-  GAME_OBJECTS.forEach((obj) => {
-    if (obj.has_gravity) {
-      obj.y += GRAVITY * time_scale;
-    }
-  });
 
   // COLLISION CHECKS
   // player to block
@@ -322,16 +183,6 @@ function update(dt) {
     });
   });
 
-  if (start_combo) {
-    multiplier_timer -= 1;
-  }
-
-  if (multiplier_timer <= 0) {
-    start_combo = false;
-    multiplier = 1;
-    multiplier_timer = 200;
-  }
-
   // enemies
   enemies.forEach((enemy) => {
     // enemy to player
@@ -354,32 +205,31 @@ function update(dt) {
     }
   });
 
-  // IFRAME COUNTER
-  if (PLAYER.hit) {
-    PLAYER.i_frames--;
-  }
+  // ===============
+  // --- SCORING ---
+  // ===============
+  // SCORE
+  updateScore();
 
-  if (PLAYER.i_frames <= 0) {
-    PLAYER.i_frames = PLAYER_DEFAULT.i_frames;
-    PLAYER.hit = false;
-  }
+  // COMBOS
+  updateComboTimer();
 
-  // SCREEN WRAPPING
-  screenwrap(PLAYER);
-
-  // HITBOXES
-  updateHitboxes(PLAYER);
-
+  // ============================
+  // --- END OF FRAME CLEANUP ---
+  // ============================
   // TRACKING
   // track all game objects and their previous positions
-  GAME_OBJECTS.forEach((obj) => {
-    assignId(obj);
-    storePreviousPosition(obj);
-  });
+  trackPositionsOfObjects();
 
-  // END OF FRAME CLEANUP
-  // round player's y movement to prevent blurriness when jumping/falling
+  // ROUNDING
+  // round object's x & y movement to prevent blurriness
+  GAME_OBJECTS.forEach((obj) => {
+    if (obj.type === "collect") return;
+    obj.x = Math.floor(obj.x);
+    obj.y = Math.floor(obj.y);
+  });
   PLAYER.y = Math.floor(PLAYER.y);
+  PLAYER.x = Math.floor(PLAYER.x);
 
   // store whether or not the player hit the ground in this frame,
   // use on next frame to determine if we render a dust effect
@@ -420,72 +270,13 @@ function draw(offset) {
 
   // GAME/PAUSE
   if (game_state === STATES.GAME || game_state === STATES.PAUSE) {
-    // BACKGROUND
-    if (images_loaded) {
-      context.drawImage(IMAGES["background_1"], BACKGROUND_1.x, BACKGROUND_1.y);
-      context.drawImage(IMAGES["background_2"], BACKGROUND_2.x, BACKGROUND_2.y);
-      context.drawImage(IMAGES["background_3"], BACKGROUND_3.x, BACKGROUND_3.y);
-    }
+    drawBackground();
 
-    // DRAW OBJECTS
-    GAME_OBJECTS.forEach((obj) => {
-      // render a trail based on the object's previous positions
-      if (obj.has_trail) {
-        drawTrail(obj);
-      }
+    drawObjects();
 
-      // draw text object, gradually fade out
-      if (obj.type === "text") {
-        context.globalAlpha = obj.alpha;
-        context.fontStyle = "16px PressStart2P";
+    drawScore();
 
-        context.fillStyle = PINK;
-        context.fillText(obj.text, obj.x, obj.y + 1);
-
-        context.fillStyle = obj.color;
-        context.fillText(obj.text, obj.x, obj.y);
-
-        obj.alpha -= 0.01;
-        context.globalAlpha = 1;
-        context.fontStyle = "8px PressStart2P";
-      }
-
-      // render hitboxes in the object's given color
-      if (obj.render_hitbox || render_hitboxes) {
-        context.fillStyle = obj.color;
-        context.fillRect(obj.x, obj.y, obj.w, obj.h);
-      }
-
-      // draw a static image
-      if (images_loaded && obj.sprite) {
-        context.drawImage(IMAGES[obj.sprite], obj.x, obj.y);
-      }
-
-      // flash white every other frame
-      if (obj.hit && obj.i_frames % 2 === 0) {
-        context.fillStyle = WHITE;
-        context.fillRect(obj.x, obj.y, obj.w, obj.h);
-      }
-
-      // play the object's current animation
-      if (images_loaded && obj.animation) {
-        playAnimation(obj.animation, obj.animation_speed || 1, obj.x, obj.y);
-      }
-    });
-
-    // DRAW SCORE
-    context.fillStyle = WHITE;
-    context.fillText(
-      `${getText("score")}: ${Math.round(score * 100) / 100}`,
-      GAME_W / 2,
-      10
-    );
-
-    // DRAW PLAYER HP
-    for (i = 0; i < PLAYER.hp; i++) {
-      context.fillStyle = WHITE;
-      context.fillRect(GAME_W / 2 + 16 * i, 20, 8, 16);
-    }
+    drawHP();
   }
 
   // DRAW PAUSE SCREEN
@@ -504,23 +295,7 @@ function draw(offset) {
 
   // DRAW GAME OVER SCREEN
   if (game_state === STATES.GAME_OVER) {
-    context.fillStyle = WHITE;
-
-    drawCenteredText(
-      `${getText("score")}: ${Math.round(score * 100) / 100}`,
-      50
-    );
-
-    drawCenteredText(
-      `${getText("average_score")}: ${
-        Math.round(getAverageScore() * 100) / 100
-      }`,
-      75
-    );
-
-    drawCenteredText(`${getText("retry")}: ${getText("press_enter")}`, 100);
-
-    drawCenteredText(`${getText("quit")}: PRESS ESC`, 125);
+    drawPauseScreen();
   }
 
   // DRAW CURRENT MENU
