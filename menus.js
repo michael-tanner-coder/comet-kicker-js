@@ -86,13 +86,6 @@ const renderMenu = (menu) => {
     //   Cursor selection
     if (menu.cursor === i) {
       // Pointer
-      context.fillStyle = YELLOW;
-      context.fillRect(
-        element.x - 1,
-        element.y - 1,
-        element.width + 2,
-        element.height + 2
-      );
       POINTER.x = element.x - POINTER.w * 2;
       POINTER.y = element.y;
     }
@@ -131,7 +124,7 @@ const renderMenu = (menu) => {
   POINTER.time += 1;
   POINTER.y = Math.floor(POINTER.y);
   drawTrail(POINTER);
-  context.drawImage(IMAGES[POINTER.sprite], POINTER.x, POINTER.y);
+  context.drawImage(IMAGES[POINTER.sprite], POINTER.x - 1, POINTER.y);
   storePreviousPosition(POINTER);
 
   // Footer
