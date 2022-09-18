@@ -425,17 +425,20 @@ function toggleFullscreen() {
 
 // character actions
 function jump(obj) {
-  // actual jump force
-  obj.y -= obj.jump_velocity;
-
-  // track how high we've jumped
-  if (obj.jump_height < obj.max_jump_height) {
-    obj.jump_height += obj.jump_velocity;
-    return;
+  // initial jump force
+  if (obj.hit_ground) {
+    obj.y_velocity += GRAVITY;
   }
 
-  // if we hit our max jump height, start decelerating and fall
-  obj.jump_velocity = easingWithRate(obj.jump_velocity, 0, 0.1);
+  // check if we reached our maximum jump height
+  let reached_max_height = obj.jump_height >= obj.max_jump_height;
+
+  // keep accelerating if we have not reached the max jump height
+  if (!reached_max_height) {
+    obj.y_velocity = easingWithRate(obj.y_velocity, obj.max_y_velocity, 0.4);
+    obj.jump_height += obj.y_velocity;
+    return;
+  }
 }
 
 function easeMovement(obj, direction) {

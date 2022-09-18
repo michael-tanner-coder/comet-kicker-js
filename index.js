@@ -193,17 +193,18 @@ function update(dt) {
   if (PLAYER.hit_ground_last_frame) {
     PLAYER.coyote_time_counter = PLAYER.coyote_time;
   } else {
-    PLAYER.coyote_time_counter -= 0.1;
+    PLAYER.coyote_time_counter -= 0.2;
   }
 
+  // jump hold
   if (
+    PLAYER.jump_height < PLAYER.max_jump_height &&
     onHold(CONTROLS.jump) &&
     (PLAYER.coyote_time_counter > 0 || PLAYER.jumping)
   ) {
     PLAYER.jumping = true;
     if (PLAYER.hit_ground) {
       fall_fx(PLAYER.x, PLAYER.y);
-      // uncomment this function to see where the player jumped (if on ground)
       if (debug_mode) {
         spawnObject(
           {
@@ -220,12 +221,18 @@ function update(dt) {
       }
     }
     jump(PLAYER);
+  } else {
+    // fall faster when done jumping
+    PLAYER.y_velocity = easingWithRate(PLAYER.y_velocity, -1, 0.8);
   }
 
+  // jump release
   if (onRelease(CONTROLS.jump)) {
     PLAYER.jumping = false;
     PLAYER.coyote_time_counter = 0;
   }
+
+  PLAYER.y -= PLAYER.y_velocity;
 
   // ANIMATIONS
   PLAYER.animation = getPlayerAnimation();
@@ -249,7 +256,7 @@ function update(dt) {
       PLAYER.jumping = false;
       PLAYER.hang_time = PLAYER_DEFAULT.hang_time;
       PLAYER.jump_height = PLAYER_DEFAULT.jump_height;
-      PLAYER.jump_velocity = PLAYER_DEFAULT.jump_velocity;
+      PLAYER.y_velocity = PLAYER_DEFAULT.y_velocity;
       if (!PLAYER.hit_ground_last_frame) fall_fx(PLAYER.x, PLAYER.y);
       PLAYER.y = PLAYER.prev_y;
     }

@@ -29,6 +29,12 @@ const PLAYER_DEFAULT = {
   ],
   render_hitbox: false,
 
+  // physics
+  x_velocity: 0,
+  y_velocity: 0,
+  max_x_velocity: 8,
+  max_y_velocity: 8,
+
   // health/take damage
   i_frames: 30,
   hit: false,
@@ -46,8 +52,7 @@ const PLAYER_DEFAULT = {
 
   // jump
   jump_height: 0,
-  max_jump_height: 96,
-  jump_velocity: 8,
+  max_jump_height: 128,
   hang_time: 30,
   jumping: false,
   coyote_time: 1,
