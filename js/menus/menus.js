@@ -2,7 +2,12 @@
 // TODO: use localstorage + global state to preserve selected options in menu
 
 // MENU INPUTS
-const INPUT_TYPES = { button: "button", select: "select", label: "label" };
+const INPUT_TYPES = {
+  button: "button",
+  select: "select",
+  label: "label",
+  text: "text",
+};
 const INPUT = {
   x: 0,
   y: 0,
@@ -36,6 +41,12 @@ const SELECT = {
   onChange: () => {
     console.log("changed option");
   },
+};
+
+const TEXT = {
+  ...INPUT,
+  text: "Test text",
+  type: INPUT_TYPES.text,
 };
 
 // MENU PROTOTYPE
@@ -240,6 +251,7 @@ createMenu({
         game_state = STATES.GAME;
       },
     },
+    { ...BUTTON, text: "HIGH SCORES", onSelect: () => goToMenu("highScoreMenu") },
     { ...BUTTON, text: "OPTIONS", onSelect: () => goToMenu("optionsMenu") },
     { ...BUTTON, text: "CREDITS", onSelect: () => goToMenu("creditsMenu") },
   ],
@@ -254,7 +266,7 @@ createMenu({
     { ...BUTTON, text: "SOUND", onSelect: () => goToMenu("soundMenu") },
     { ...BUTTON, text: "GAMEPLAY", onSelect: () => goToMenu("gameplayMenu") },
     { ...BUTTON, text: "LANGUAGE", onSelect: () => goToMenu("languageMenu") },
-    { ...BUTTON, text: "SCORE", onSelect: () => goToMenu("scoreMenu") },
+    { ...BUTTON, text: "DATA", onSelect: () => goToMenu("dataMenu") },
     { ...BUTTON, text: "CONTROLS", onSelect: () => goToMenu("controlsMenu") },
   ],
 });
@@ -347,10 +359,9 @@ createMenu({
 
 // score
 createMenu({
-  id: "scoreMenu",
-  header: "SCORES",
+  id: "dataMenu",
+  header: "DATA",
   elements: [
-    { ...BUTTON, text: "HIGH SCORES", onSelect: () => {} },
     {
       ...BUTTON,
       text: "AVERAGE SCORE",
@@ -363,6 +374,23 @@ createMenu({
       onSelect: () => {},
     },
   ],
+});
+
+// high scores
+const scores = JSON.parse(localStorage.getItem("high_scores"));
+console.log("HIGH SCORE LIST");
+console.log(scores);
+const score_list = [];
+scores.forEach((score, i) => {
+  let score_text = i + 1 + ". " + Math.floor(score);
+  let new_text = { ...TEXT };
+  new_text.text = score_text;
+  score_list.push(new_text);
+});
+createMenu({
+  id: "highScoreMenu",
+  header: "HIGH SCORES",
+  elements: [...score_list],
 });
 
 // controls
