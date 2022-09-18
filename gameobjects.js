@@ -90,6 +90,7 @@ const BULLET = {
   speed: 6,
   animation: ANIMATIONS.shoot,
   has_trail: true,
+  render_hitbox: false,
   recoil: 5,
 };
 
