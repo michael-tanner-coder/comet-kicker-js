@@ -330,11 +330,27 @@ function getPlayerAnimation() {
 
 function drawTrail(obj) {
   object_position_map[obj.id]?.forEach((pos, i) => {
+    // ratio that moves toward one as we reach the end of the trail
+    // useful for gradiaully increasing size/alpha/etc
     let ratio = (i + 1) / object_position_map[obj.id].length;
+
+    // keep height and width within range of the leading object's size
     let w = clamp(ratio * obj.w, 1, obj.w);
     let h = clamp(ratio * obj.h, 1, obj.h);
+
+    // center trail with leading object
+    let x = pos.x;
+    let y = pos.y;
+
+    x -= w / 2;
+    y -= h / 2;
+
+    x += obj.w / 2;
+    y += obj.h / 2;
+
+    // increase alpha as we get closer to the front of the trail
     context.fillStyle = "rgba(255, 255, 255, " + ratio / 2 + ")";
-    context.fillRect(pos.x, pos.y, w, h);
+    context.fillRect(x, y, w, h);
   });
 }
 
