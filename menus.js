@@ -53,6 +53,7 @@ const MENU = {
 // GLOBAL STATE FOR MENU STACK
 const MENUS = [];
 const MENU_STACK = [];
+const POINTER = { x: 0, y: 0, sprite: "shield", time: 0, w: 8, h: 8 };
 
 // FUNCTIONS
 const renderMenu = (menu) => {
@@ -84,6 +85,7 @@ const renderMenu = (menu) => {
 
     //   Cursor selection
     if (menu.cursor === i) {
+      // Pointer
       context.fillStyle = YELLOW;
       context.fillRect(
         element.x - 1,
@@ -91,6 +93,8 @@ const renderMenu = (menu) => {
         element.width + 2,
         element.height + 2
       );
+      POINTER.x = element.x - POINTER.w * 2;
+      POINTER.y = element.y;
     }
 
     //   Render input
@@ -120,6 +124,15 @@ const renderMenu = (menu) => {
       );
     }
   });
+
+  // POINTER
+  assignId(POINTER);
+  POINTER.y = POINTER.y + Math.sin(POINTER.time * 0.15) * 6;
+  POINTER.time += 1;
+  POINTER.y = Math.floor(POINTER.y);
+  drawTrail(POINTER);
+  context.drawImage(IMAGES[POINTER.sprite], POINTER.x, POINTER.y);
+  storePreviousPosition(POINTER);
 
   // Footer
   if (menu.id !== "mainMenu") {
