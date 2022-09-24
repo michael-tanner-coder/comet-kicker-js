@@ -101,6 +101,22 @@ const WIDE_BULLET = {
   animation: ANIMATIONS.wideShoot,
 };
 
+const MISSILE_SHOT = {
+  ...BULLET,
+  x: 0,
+  y: 0,
+  h: 26,
+  w: 16,
+  type: "bullet",
+  sprite: "missile",
+  speed: 2,
+  color: YELLOW,
+  render_hitbox: true,
+  has_trail: true,
+  animatiion: undefined,
+  recoil: 10,
+};
+
 // ENEMIES
 const ENEMY = {
   type: "enemy",
@@ -160,12 +176,26 @@ const COLLECT = {
   render_hitbox: false,
   sprite: "collectible",
 };
+
+const ROTATING_SHIELD = {
+  x: 0,
+  y: 0,
+  h: 10,
+  w: 10,
+  type: "shield",
+  sprite: "shield",
+  speed: 1,
+  color: YELLOW,
+  render_hitbox: false,
+  has_trail: true,
+};
+
 const WIDE_SHOT = { ...COLLECT, pickup: PICKUPS.WIDE_SHOT };
 const RAPID_FIRE = { ...COLLECT, pickup: PICKUPS.RAPID_FIRE };
 const MISSILE = { ...COLLECT, pickup: PICKUPS.MISSILE };
 const SHIELD = { ...COLLECT, pickup: PICKUPS.SHIELD };
 const HP = { ...COLLECT, pickup: PICKUPS.HP, sprite: "hp_up" };
-const COLLECTIBLES = [COLLECT, HP, SHIELD];
+const COLLECTIBLES = [COLLECT, HP, SHIELD, MISSILE];
 
 // BACKGROUNDS FOR PARALLAX
 const BACKGROUND_1 = {
@@ -185,20 +215,6 @@ const BACKGROUND_3 = {
 };
 
 const BACKGROUNDS = [BACKGROUND_1, BACKGROUND_2, BACKGROUND_3];
-
-// SHIELD
-const ROTATING_SHIELD = {
-  x: 0,
-  y: 0,
-  h: 10,
-  w: 10,
-  type: "shield",
-  sprite: "shield",
-  speed: 1,
-  color: YELLOW,
-  render_hitbox: false,
-  has_trail: true,
-};
 
 // TEXT
 const TEXT_OBJECT = {
