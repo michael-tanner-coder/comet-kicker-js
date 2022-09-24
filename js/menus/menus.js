@@ -68,14 +68,6 @@ const POINTER = { x: 0, y: 0, sprite: "shield", time: 0, w: 8, h: 8 };
 
 // FUNCTIONS
 const renderMenu = (menu) => {
-  context.fillStyle = menu.backgroundColor;
-  context.fillRect(
-    menu.boundary.x,
-    menu.boundary.y,
-    menu.boundary.width,
-    menu.boundary.height
-  );
-
   // Header
   context.fillStyle = WHITE;
   drawCenteredText(menu.header, menu.boundary.y - 32);
@@ -102,8 +94,6 @@ const renderMenu = (menu) => {
     }
 
     //   Render input
-    context.fillStyle = element.backgroundColor;
-    context.fillRect(element.x, element.y, element.width, element.height);
     context.fillStyle = element.fontColor;
     context.fillText(
       element.text,
