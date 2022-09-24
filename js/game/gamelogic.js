@@ -216,7 +216,8 @@ function updateEnemySpawnTimer(enemies) {
   }
 
   if (spawn_timer <= 0) {
-    spawnEnemy();
+    let type = Math.random() > 0.5 ? ENEMY : EXPLODING_ENEMY;
+    spawnEnemy(type);
     spawn_timer = MAX_SPAWN_TIMER;
   }
 }
