@@ -14,6 +14,7 @@ const INPUT = {
   width: 64,
   height: 16,
   fontColor: WHITE,
+  fontSize: 8,
   backgroundColor: PURPLE,
   padding: 4,
   handler: () => {},
@@ -91,6 +92,18 @@ const renderMenu = (menu) => {
       // Pointer
       POINTER.x = element.x - POINTER.w * 2;
       POINTER.y = element.y;
+      context.fillStyle = PINK;
+      if (element.type !== INPUT_TYPES.select) {
+        element.fontSize = easingWithRate(element.fontSize, 16, 0.4);
+        context.font = element.fontSize + "px PressStart2P";
+      }
+      context.fillText(
+        element.text,
+        element.x + element.padding / 2,
+        element.y + element.height / 2 + element.padding + 1
+      );
+    } else {
+      element.fontSize = easing(element.fontSize, 8);
     }
 
     //   Render input
@@ -100,16 +113,10 @@ const renderMenu = (menu) => {
       element.x + element.padding / 2,
       element.y + element.height / 2 + element.padding
     );
+    context.font = "8px PressStart2P";
 
     if (element.type === INPUT_TYPES.select) {
       // Render options for the select input
-      context.fillStyle = element.backgroundColor;
-      context.fillRect(
-        element.x + element.width,
-        element.y,
-        element.width,
-        element.height
-      );
       context.fillStyle = element.fontColor;
       context.fillText(
         `< ${element.options[element.currentOption].label} >`,
@@ -241,7 +248,11 @@ createMenu({
         game_state = STATES.GAME;
       },
     },
-    { ...BUTTON, text: "HIGH SCORES", onSelect: () => goToMenu("highScoreMenu") },
+    {
+      ...BUTTON,
+      text: "HIGH SCORES",
+      onSelect: () => goToMenu("highScoreMenu"),
+    },
     { ...BUTTON, text: "OPTIONS", onSelect: () => goToMenu("optionsMenu") },
     { ...BUTTON, text: "CREDITS", onSelect: () => goToMenu("creditsMenu") },
   ],

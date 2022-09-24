@@ -260,19 +260,23 @@ function updateMenuNavigation() {
     getCurrentMenuElement().type === INPUT_TYPES.button
   ) {
     getCurrentMenu().elements[getCurrentMenu().cursor].handler();
+    playSoundEffect("heal_hp");
   }
 
   // navigate back
   if (onPress(CONTROLS.decline)) {
     goBack();
+    playSoundEffect("lose_hp");
   }
 
   // navigate menu
   if (onPress(CONTROLS.moveDown)) {
     moveCursor(getCurrentMenu(), 1);
+    playSoundEffect("shield_hit");
   }
   if (onPress(CONTROLS.moveUp)) {
     moveCursor(getCurrentMenu(), -1);
+    playSoundEffect("shield_hit");
   }
 
   // switch options
@@ -282,6 +286,7 @@ function updateMenuNavigation() {
   ) {
     changeOptions(getCurrentMenuElement(), -1);
     getCurrentMenuElement().handler();
+    playSoundEffect("shield_hit");
   }
   if (
     onPress(CONTROLS.moveRight) &&
@@ -289,6 +294,7 @@ function updateMenuNavigation() {
   ) {
     changeOptions(getCurrentMenuElement(), 1);
     getCurrentMenuElement().handler();
+    playSoundEffect("shield_hit");
   }
 }
 

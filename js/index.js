@@ -309,11 +309,10 @@ function draw(offset) {
 
   // PARTICLES
   particles.draw();
+  drawBackground();
 
   // GAME/PAUSE
   if (game_state === STATES.GAME || game_state === STATES.PAUSE) {
-    drawBackground();
-
     drawObjects();
 
     drawScore();
@@ -342,7 +341,6 @@ function draw(offset) {
 
   // DRAW CURRENT MENU
   if (game_state === STATES.MENU) {
-    titlescreenFX();
     context.fillStyle = WHITE;
     renderMenu(getCurrentMenu());
   }
