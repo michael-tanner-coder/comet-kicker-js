@@ -92,12 +92,18 @@ function spawnBullet(source, direction, projectile) {
   return new_bullet;
 }
 
-function spawnEnemy() {
-  var new_enemy = { ...ENEMY };
-  var spawn_point = choose(SPAWN_LOCATIONS);
+function spawnEnemy(type = ENEMY) {
+  var new_enemy = { ...type };
+  var spawn_point = choose(new_enemy.spawn_points);
+
   new_enemy.x = withGrid(spawn_point.x);
   new_enemy.y = withGrid(spawn_point.y);
-  new_enemy.direction = Math.random() > 0.5 ? 180 : 0;
+
+  // direction of 180 or 0 will produce a diagnoal movement when combined with downward force of gravity
+  if (new_enemy.movement_direction === "diagnoal") {
+    new_enemy.direction = Math.random() > 0.5 ? 180 : 0;
+  }
+
   GAME_OBJECTS.push(new_enemy);
 }
 

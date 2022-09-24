@@ -41,7 +41,7 @@ const PLAYER_DEFAULT = {
   hp: MAX_HP,
 
   // powerups
-  powerup: PICKUPS.SHIELD,
+  powerup: "",
   bullet_type: "",
 
   // animation/vfx
@@ -118,10 +118,32 @@ const ENEMY = {
   ],
   hit_ground: false,
   hit_wall: false,
-  // sprite: "basic_enemy",
   has_trail: true,
   animation: ANIMATIONS.enemyMove,
   animation_speed: 12,
+  movement_direction: "diagnoal",
+  spawn_points: [
+    { x: 0, y: 3 },
+    { x: GAME_W / UNIT_SIZE, y: 3 },
+    { x: 0, y: 11 },
+  ],
+};
+
+const EXPLODING_ENEMY = {
+  ...ENEMY,
+  animation: undefined,
+  sprite: "exploding_enemy",
+  movement_direction: "vertical",
+  speed: 0.5,
+  direction: 90,
+  spawn_points: [
+    { x: 2, y: 1 },
+    { x: 4, y: 1 },
+    { x: 6, y: 1 },
+    { x: 8, y: 1 },
+    { x: 10, y: 1 },
+  ],
+  exploding: true,
 };
 
 // POWERUPS and POINT COLLECTIBLES

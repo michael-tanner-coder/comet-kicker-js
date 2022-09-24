@@ -203,6 +203,17 @@ function update(dt) {
       PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
       explosion(shield.x, shield.y);
     }
+
+    blocks.forEach((block) => {
+      if (collisionDetected(block, enemy)) {
+        if (enemy.exploding) {
+          // destroy platform
+          removeObj(enemy);
+          removeObj(block);
+          explosion(enemy.x, enemy.y);
+        }
+      }
+    });
   });
 
   // ===============
