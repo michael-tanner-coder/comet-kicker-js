@@ -138,7 +138,7 @@ const renderMenu = (menu) => {
   // Footer
   if (menu.id !== "mainMenu") {
     context.fillStyle = WHITE;
-    context.fillText("X = go back", 16, 16);
+    context.fillText("Space = go back", 16, 16);
   }
 };
 
