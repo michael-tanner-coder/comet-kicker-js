@@ -21,6 +21,16 @@ function updateText(text) {
     }
   });
 }
+
+function updateExplosions(explosions) {
+  explosions.forEach((exp) => {
+    exp.expansion_rate = easingWithRate(exp.expansion_rate, 4, 0.05);
+    exp.radius += exp.expansion_rate;
+    if (exp.radius >= exp.max_radius) {
+      removeObj(exp);
+    }
+  });
+}
 // sound
 function updateMusic() {
   if (!song_playing) {
@@ -331,6 +341,13 @@ function drawObjects() {
       context.fontStyle = "8px PressStart2P";
     }
 
+    if (obj.radius) {
+      context.fillStyle = obj.color;
+      context.beginPath();
+      context.arc(obj.x, obj.y, obj.radius, 0, 2 * Math.PI);
+      context.fill();
+    }
+
     // render hitboxes in the object's given color
     if (obj.render_hitbox || render_hitboxes) {
       context.fillStyle = obj.color;
@@ -339,7 +356,17 @@ function drawObjects() {
 
     // draw a static image
     if (images_loaded && obj.sprite) {
-      context.drawImage(IMAGES[obj.sprite], obj.x, obj.y);
+      drawBitmapCenteredAtLocationWithRotation(
+        // Sprite
+        IMAGES[obj.sprite],
+        // Position
+        obj.x + obj.w / 2,
+        obj.y + obj.h / 2,
+        // Angle
+        obj.angle,
+        // Alpha
+        1
+      );
     }
 
     // flash white every other frame

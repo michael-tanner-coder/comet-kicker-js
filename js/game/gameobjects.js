@@ -9,6 +9,7 @@ const PLAYER_DEFAULT = {
   prev_y: 0,
   w: 16,
   h: 16,
+  angle: 0,
 
   // colors
   color: WHITE,
@@ -71,6 +72,7 @@ const PLAYER = { ...PLAYER_DEFAULT };
 const BLOCK = {
   x: 0,
   y: 0,
+  angle: 0,
   color: "blue",
   w: UNIT_SIZE,
   h: UNIT_SIZE,
@@ -92,6 +94,7 @@ const BULLET = {
   has_trail: true,
   render_hitbox: false,
   recoil: 5,
+  angle: 0,
 };
 
 const WIDE_BULLET = {
@@ -105,16 +108,29 @@ const MISSILE_SHOT = {
   ...BULLET,
   x: 0,
   y: 0,
-  h: 26,
-  w: 16,
+  h: 16,
+  w: 26,
   type: "bullet",
   sprite: "missile",
-  speed: 2,
+  speed: 4,
   color: YELLOW,
   render_hitbox: true,
   has_trail: true,
   animatiion: undefined,
   recoil: 10,
+  has_rotation: true,
+  angle: 1.5,
+  exploding: true,
+};
+
+const EXPLOSION = {
+  type: "explosion",
+  x: 0,
+  y: 0,
+  radius: 1,
+  expansion_rate: 0,
+  max_radius: 64,
+  color: WHITE,
 };
 
 // ENEMIES
@@ -143,6 +159,7 @@ const ENEMY = {
     { x: GAME_W / UNIT_SIZE, y: 3 },
     { x: 0, y: 11 },
   ],
+  angle: 0,
 };
 
 const EXPLODING_ENEMY = {
@@ -175,6 +192,7 @@ const COLLECT = {
   pickup: PICKUPS.POINTS,
   render_hitbox: false,
   sprite: "collectible",
+  angle: 0,
 };
 
 const ROTATING_SHIELD = {

@@ -88,11 +88,13 @@ function update(dt) {
   var blocks = GAME_OBJECTS.filter((obj) => obj.type === "floor");
   var bullets = GAME_OBJECTS.filter((obj) => obj.type === "bullet");
   var text = GAME_OBJECTS.filter((obj) => obj.type === "text");
+  var explosions = GAME_OBJECTS.filter((obj) => obj.type === "explosion");
 
   // UPDATE OBJECT COLLECTIONS
   updateShots(bullets);
   updateEnemies(enemies);
   updateText(text);
+  updateExplosions(explosions);
 
   // COLLECTIBLE SPAWNS
   updateCollectibleSpawnTimer(collectibles);
@@ -178,7 +180,21 @@ function update(dt) {
         let text_object = spawnObject(TEXT_OBJECT, enemy.x, enemy.y);
         text_object.text = "+" + enemy_point_value + " x " + multiplier;
         explosion(enemy.x, enemy.y);
+
+        if (bullet.exploding) {
+          spawnObject(EXPLOSION, enemy.x, enemy.y);
+        }
+
         start_combo = true;
+      }
+    });
+
+    blocks.forEach((block) => {
+      if (collisionDetected(block, bullet) && bullet.exploding) {
+        explosion(block.x, block.y);
+        spawnObject(EXPLOSION, bullet.x, bullet.y);
+        removeObj(block);
+        removeObj(bullet);
       }
     });
   });
@@ -212,6 +228,21 @@ function update(dt) {
           removeObj(block);
           explosion(enemy.x, enemy.y);
         }
+      }
+    });
+  });
+
+  explosions.forEach((exp) => {
+    enemies.forEach((enemy) => {
+      if (collisionWithCircleDetected(exp, enemy)) {
+        explosion(enemy.x, enemy.y);
+        removeObj(enemy);
+      }
+    });
+    blocks.forEach((block) => {
+      if (collisionWithCircleDetected(exp, block)) {
+        explosion(block.x, block.y);
+        removeObj(block);
       }
     });
   });

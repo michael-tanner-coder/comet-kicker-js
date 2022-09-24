@@ -194,6 +194,32 @@ function collisionDetected(obj_a, obj_b) {
   );
 }
 
+function collisionWithCircleDetected(circle, rect) {
+  var distX = Math.abs(circle.x - rect.x - rect.w / 2);
+  var distY = Math.abs(circle.y - rect.y - rect.h / 2);
+
+  // not colliding
+  if (distX > rect.w / 2 + circle.radius) {
+    return false;
+  }
+  if (distY > rect.h / 2 + circle.radius) {
+    return false;
+  }
+
+  // colliding
+  if (distX <= rect.w / 2) {
+    return true;
+  }
+  if (distY <= rect.h / 2) {
+    return true;
+  }
+
+  //check for collision with rectangle corner
+  var dx = distX - rect.w / 2;
+  var dy = distY - rect.h / 2;
+  return dx * dx + dy * dy <= circle.radius * circle.radius;
+}
+
 function removeObj(obj) {
   var index = GAME_OBJECTS.indexOf(obj);
   GAME_OBJECTS.splice(index, 1);
