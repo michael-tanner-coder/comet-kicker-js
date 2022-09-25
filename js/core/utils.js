@@ -390,6 +390,24 @@ function drawTrail(obj) {
   });
 }
 
+function lerpColor(a, b, amount) {
+  var ah = parseInt(a.replace(/#/g, ""), 16),
+    ar = ah >> 16,
+    ag = (ah >> 8) & 0xff,
+    ab = ah & 0xff,
+    bh = parseInt(b.replace(/#/g, ""), 16),
+    br = bh >> 16,
+    bg = (bh >> 8) & 0xff,
+    bb = bh & 0xff,
+    rr = ar + amount * (br - ar),
+    rg = ag + amount * (bg - ag),
+    rb = ab + amount * (bb - ab);
+
+  return (
+    "#" + (((1 << 24) + (rr << 16) + (rg << 8) + rb) | 0).toString(16).slice(1)
+  );
+}
+
 function drawCircleTrail(obj) {
   object_position_map[obj.id]?.forEach((pos, i) => {
     // don't draw the head of the trail
@@ -412,17 +430,13 @@ function drawCircleTrail(obj) {
     y += Math.sin(game_timer * Math.random()) * 0.5;
     x += Math.sin(game_timer * Math.random()) * 0.5;
 
-    // increase alpha as we get closer to the front of the trail
-    context.globalAlpha = ratio;
-    context.fillStyle = obj.color;
+    // transition the trail color to the object's own color as we get closer to the front of the trail
+    context.fillStyle = lerpColor(WHITE, obj.color, ratio);
 
     // draw circle
     context.beginPath();
     context.arc(x, y, 5 * ratio, 0, 2 * Math.PI);
     context.fill();
-
-    // restore alpha to normal level
-    context.globalAlpha = 1;
   });
 }
 

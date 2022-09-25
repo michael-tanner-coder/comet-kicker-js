@@ -1,16 +1,7 @@
-// logic loop
-// -- check for errors
-// -- update music
-// -- process input
-// -- update player
-// -- update objects
-// -- run physics
-
 // LOOP FUNCTIONS
 function update(deltaTime) {
   game_timer += 1;
   dt = deltaTime;
-  console.log(dt);
 
   // ERROR MESSAGES
   if (image_loading_error || sound_loading_error) {
