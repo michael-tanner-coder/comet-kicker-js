@@ -390,6 +390,42 @@ function drawTrail(obj) {
   });
 }
 
+function drawCircleTrail(obj) {
+  object_position_map[obj.id]?.forEach((pos, i) => {
+    // don't draw the head of the trail
+    if (i === object_position_map[obj.id].length - 1) {
+      return;
+    }
+
+    // ratio that moves toward one as we reach the end of the trail
+    // useful for gradiaully increasing size/alpha/etc
+    let ratio = (i + 1) / object_position_map[obj.id].length;
+
+    // center trail with leading object
+    let x = pos.x;
+    let y = pos.y;
+
+    x += obj.w / 2;
+    y += obj.h / 2;
+
+    // add noise to position of particles
+    y += Math.sin(game_timer * Math.random()) * 0.5;
+    x += Math.sin(game_timer * Math.random()) * 0.5;
+
+    // increase alpha as we get closer to the front of the trail
+    context.globalAlpha = ratio;
+    context.fillStyle = obj.color;
+
+    // draw circle
+    context.beginPath();
+    context.arc(x, y, 5 * ratio, 0, 2 * Math.PI);
+    context.fill();
+
+    // restore alpha to normal level
+    context.globalAlpha = 1;
+  });
+}
+
 function explosion(x, y) {
   sparkle_fx(x, y);
   smoke_fx(x, y);

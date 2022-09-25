@@ -328,7 +328,7 @@ function drawObjects() {
   GAME_OBJECTS.forEach((obj) => {
     // render a trail based on the object's previous positions
     if (obj.has_trail) {
-      drawTrail(obj);
+      drawCircleTrail(obj);
     }
 
     // draw text object, gradually fade out

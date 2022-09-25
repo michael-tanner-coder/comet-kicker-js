@@ -7,7 +7,11 @@
 // -- run physics
 
 // LOOP FUNCTIONS
-function update(dt) {
+function update(deltaTime) {
+  game_timer += 1;
+  dt = deltaTime;
+  console.log(dt);
+
   // ERROR MESSAGES
   if (image_loading_error || sound_loading_error) {
     return;
@@ -349,7 +353,7 @@ function draw(offset) {
 // CORE GAME LOOP
 // fixed time-step loop with variable rendering
 function loop() {
-  let current_time = Date.now();
+  current_time = Date.now();
   let elapsed = current_time - start_time;
   start_time = current_time;
   lag += elapsed;
