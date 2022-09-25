@@ -37,6 +37,20 @@ const SELECT = {
     console.log("changed option");
   },
 };
+const SHAKES = {
+  ...INPUT,
+  text: "Shake select",
+  type: INPUT_TYPES.select,
+  currentOption: 0,
+  options: [
+    { label: "normal", value: 1 }, // no shot shake
+    { label: "off", value: 2 }, // none
+    { label: "extreme", value: 3 }, // include shots, dial up other events
+  ],
+  onChange: () => {
+    console.log("changed shake option");
+  },
+};
 
 // MENU PROTOTYPE
 const MENU = {
@@ -321,7 +335,7 @@ createMenu({
   header: "GAMEPLAY",
   elements: [
     {
-      ...SELECT,
+      ...SHAKES,
       text: "SCREENSHAKE",
     },
     {
