@@ -12,7 +12,7 @@ const PLAYER_DEFAULT = {
   angle: 0,
 
   // colors
-  color: WHITE,
+  color: PINK,
 
   // movement
   speed: 0,
@@ -49,7 +49,7 @@ const PLAYER_DEFAULT = {
   animation: ANIMATIONS.playerIdle,
   animation_speed: 6,
   state: PLAYER_STATES.IDLE,
-  has_trail: false,
+  has_trail: true,
 
   // jump
   jump_height: 0,
@@ -87,7 +87,7 @@ const BULLET = {
   h: 8,
   x: 0,
   y: 0,
-  color: WHITE,
+  color: YELLOW,
   direction: 0,
   speed: 6,
   animation: ANIMATIONS.shoot,
