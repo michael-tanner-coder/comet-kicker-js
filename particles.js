@@ -27,7 +27,7 @@ function glow_fx(x, y) {
   poof(x, y, IMAGES["glow"], 1);
 }
 function spark_fx(x, y) {
-  poof(x, y, IMAGES["particle"], 5, true);
+  poof(x, y, IMAGES["particle"], 5);
 }
 
 function titlescreenFX() {
@@ -55,7 +55,7 @@ function fall_fx(x, y) {
   }
 }
 
-function poof(x, y, img, spd, trail = false) {
+function poof(x, y, img, spd) {
   let alpha = 1;
   let num = 8;
   for (let i = 0; i < num; i++) {
@@ -66,7 +66,7 @@ function poof(x, y, img, spd, trail = false) {
     let vely = Math.random() * spd - spd / 2;
     let px = x + 8 + Math.random() * 4 - 2;
     let py = y + 8 + Math.random() * 4 - 2;
-    particles.add(px, py, img, life, rotspd, ang, velx, vely, alpha, trail);
+    particles.add(px, py, img, life, rotspd, ang, velx, vely, alpha);
   }
 }
 
@@ -86,8 +86,7 @@ function SimpleParticles() {
     forcedAngle,
     velX,
     velY,
-    myAlpha,
-    addTrail = false
+    myAlpha
   ) {
     if (!PARTICLES_ENABLED) return;
     var p, pnum, pcount;
@@ -108,7 +107,7 @@ function SimpleParticles() {
     }
     if (!p || !p.inactive) {
       // we need a new one
-      var newParticle = { inactive: true, has_trail: addTrail };
+      var newParticle = { inactive: true };
       particle.push(newParticle);
       p = newParticle;
     }
@@ -127,7 +126,6 @@ function SimpleParticles() {
       p.rotSpd = rotationSpeed;
       p.velX = velX;
       p.velY = velY;
-      p.has_trail = addTrail;
     }
   };
 
@@ -136,15 +134,12 @@ function SimpleParticles() {
     var timestamp = new Date().getTime();
     particle.forEach(function (p) {
       if (!p.inactive) {
-        if (p.has_trail) {
-          storePreviousPosition(p);
-        }
         p.age = timestamp - p.birth;
         var lifePercent = p.age / p.life;
         if (lifePercent > 1) lifePercent = 1;
         if (lifePercent < 0) lifePercent = 0;
         p.x += p.velX; // move
-        p.y += p.velY + GRAVITY * 0.05;
+        p.y += p.velY;
         p.velX *= 0.94; // slow down
         p.velY *= 0.94;
         p.alpha = (1 - lifePercent) * p.maxalpha; // fade
@@ -165,9 +160,6 @@ function SimpleParticles() {
           p.angle,
           p.alpha
         );
-        if (p.has_trail) {
-          drawParticleTrail(p);
-        }
       }
     });
   };

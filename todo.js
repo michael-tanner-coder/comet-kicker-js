@@ -9,9 +9,6 @@
 // shake
 // personality
 
-// TODO: score ui
-// TODO: sound check
-
 // ============
 // POLISH TODOS
 // ============

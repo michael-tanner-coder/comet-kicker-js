@@ -13,8 +13,6 @@ const image_list = [
   { file: "shot.png", name: "shot" },
   { file: "wide-shot.png", name: "wide_shot" },
   { file: "basic-enemy.png", name: "basic_enemy" },
-  { file: "downward-enemy.png", name: "exploding_enemy" },
-  { file: "rolling-enemy.png", name: "rolling_enemy" },
   { file: "dust.png", name: "dust" },
   { file: "smoke.png", name: "smoke" },
   { file: "fire.png", name: "fire" },
@@ -25,8 +23,6 @@ const image_list = [
   { file: "collectible.png", name: "collectible" },
   { file: "hp-up.png", name: "hp_up" },
   { file: "particle.png", name: "particle" },
-  { file: "cometShiledsVersions/CometShieldv1.png", name: "shield" },
-  { file: "missilev3.png", name: "missile" },
   // <-- Add your sprite in here
 ];
 
