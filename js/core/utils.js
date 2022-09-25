@@ -45,6 +45,10 @@ function assignId(obj) {
 
 function storePreviousPosition(obj) {
   // If no entry for this object exists, create one (default to array)
+  if (!obj.id) {
+    assignId(obj);
+  }
+
   if (!object_position_map[obj.id]) {
     object_position_map[obj.id] = [];
   }
@@ -367,7 +371,7 @@ function getPlayerAnimation() {
 function drawTrail(obj) {
   object_position_map[obj.id]?.forEach((pos, i) => {
     // ratio that moves toward one as we reach the end of the trail
-    // useful for gradiaully increasing size/alpha/etc
+    // useful for gradually increasing size/alpha/etc
     let ratio = (i + 1) / object_position_map[obj.id].length;
 
     // keep height and width within range of the leading object's size
@@ -416,7 +420,7 @@ function drawCircleTrail(obj) {
     }
 
     // ratio that moves toward one as we reach the end of the trail
-    // useful for gradiaully increasing size/alpha/etc
+    // useful for gradually increasing size/alpha/etc
     let ratio = (i + 1) / object_position_map[obj.id].length;
 
     // center trail with leading object
@@ -440,10 +444,32 @@ function drawCircleTrail(obj) {
   });
 }
 
+function drawParticleTrail(obj) {
+  object_position_map[obj.id]?.forEach((pos, i) => {
+    console.log(pos);
+    // ratio that moves toward one as we reach the end of the trail
+    // useful for gradually increasing size/alpha/etc
+    let ratio = (i + 1) / object_position_map[obj.id].length;
+
+    // center trail with leading object
+    let x = pos.x;
+    let y = pos.y;
+
+    // transition the trail color to the object's own color as we get closer to the front of the trail
+    context.fillStyle = lerpColor(WHITE, YELLOW, ratio);
+    context.globalAlpha = ratio;
+    context.fillRect(x, y, 1, 1);
+    context.globalAlpha = 1;
+  });
+}
+
 function explosion(x, y) {
-  sparkle_fx(x, y);
+  // sparkle_fx(x, y);
   smoke_fx(x, y);
-  fire_fx(x, y);
+  // fire_fx(x, y);
+  spark_fx(x, y);
+  spark_fx(x, y);
+  spark_fx(x, y);
   playSoundEffect("explode");
 }
 
