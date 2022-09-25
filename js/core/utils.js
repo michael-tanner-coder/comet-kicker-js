@@ -20,6 +20,10 @@ function easing(x, target) {
   return (x += (target - x) * 0.1);
 }
 
+function easingWithRate(x, target, rate) {
+  return (x += (target - x) * rate);
+}
+
 function choose(choices) {
   return choices[Math.floor(Math.random() * choices.length)];
 }
@@ -41,6 +45,10 @@ function assignId(obj) {
 
 function storePreviousPosition(obj) {
   // If no entry for this object exists, create one (default to array)
+  if (!obj.id) {
+    assignId(obj);
+  }
+
   if (!object_position_map[obj.id]) {
     object_position_map[obj.id] = [];
   }
@@ -88,12 +96,18 @@ function spawnBullet(source, direction, projectile) {
   return new_bullet;
 }
 
-function spawnEnemy() {
-  var new_enemy = { ...ENEMY };
-  var spawn_point = choose(SPAWN_LOCATIONS);
+function spawnEnemy(type = ENEMY) {
+  var new_enemy = { ...type };
+  var spawn_point = choose(new_enemy.spawn_points);
+
   new_enemy.x = withGrid(spawn_point.x);
   new_enemy.y = withGrid(spawn_point.y);
-  new_enemy.direction = Math.random() > 0.5 ? 180 : 0;
+
+  // direction of 180 or 0 will produce a diagnoal movement when combined with downward force of gravity
+  if (new_enemy.movement_direction === "diagnoal") {
+    new_enemy.direction = Math.random() > 0.5 ? 180 : 0;
+  }
+
   GAME_OBJECTS.push(new_enemy);
 }
 
@@ -111,7 +125,7 @@ function spawnShield() {
   new_shield.x = PLAYER.x;
   new_shield.y = PLAYER.y;
   GAME_OBJECTS.push(new_shield);
-  playSound(SOUNDS["shield_hit"]);
+  playSoundEffect("shield_hit");
 }
 
 // powerups
@@ -128,6 +142,9 @@ function checkPlayerPowerup() {
         spawnShield();
         shield_spawned = true;
       }
+    case PICKUPS.MISSILE:
+      PLAYER.bullet_type = MISSILE_SHOT;
+      break;
     default:
       PLAYER.bullet_type = BULLET;
       break;
@@ -138,6 +155,7 @@ function checkPickupType(collectible) {
   switch (collectible.pickup) {
     case PICKUPS.HP:
       PLAYER.hp += 1;
+      playSoundEffect("heal_hp");
       break;
     case PICKUPS.POINTS:
       score += collectible.points;
@@ -178,6 +196,32 @@ function collisionDetected(obj_a, obj_b) {
     obj_a.y < obj_b.y + obj_b.h &&
     obj_a.y + obj_a.h > obj_b.y
   );
+}
+
+function collisionWithCircleDetected(circle, rect) {
+  var distX = Math.abs(circle.x - rect.x - rect.w / 2);
+  var distY = Math.abs(circle.y - rect.y - rect.h / 2);
+
+  // not colliding
+  if (distX > rect.w / 2 + circle.radius) {
+    return false;
+  }
+  if (distY > rect.h / 2 + circle.radius) {
+    return false;
+  }
+
+  // colliding
+  if (distX <= rect.w / 2) {
+    return true;
+  }
+  if (distY <= rect.h / 2) {
+    return true;
+  }
+
+  //check for collision with rectangle corner
+  var dx = distX - rect.w / 2;
+  var dy = distY - rect.h / 2;
+  return dx * dx + dy * dy <= circle.radius * circle.radius;
 }
 
 function removeObj(obj) {
@@ -271,6 +315,9 @@ function initializeScores() {
 function saveScore(score) {
   // add to list of recent scores
   recent_scores?.push(score);
+  if (recent_scores?.length > max_recent_score_list_length) {
+    recent_scores?.shift();
+  }
   window.localStorage.setItem("recent_scores", JSON.stringify(recent_scores));
 
   // if no scores are recorded, make first entry in high score array
@@ -323,19 +370,106 @@ function getPlayerAnimation() {
 
 function drawTrail(obj) {
   object_position_map[obj.id]?.forEach((pos, i) => {
+    // ratio that moves toward one as we reach the end of the trail
+    // useful for gradually increasing size/alpha/etc
     let ratio = (i + 1) / object_position_map[obj.id].length;
+
+    // keep height and width within range of the leading object's size
     let w = clamp(ratio * obj.w, 1, obj.w);
     let h = clamp(ratio * obj.h, 1, obj.h);
+
+    // center trail with leading object
+    let x = pos.x;
+    let y = pos.y;
+
+    x -= w / 2;
+    y -= h / 2;
+
+    x += obj.w / 2;
+    y += obj.h / 2;
+
+    // increase alpha as we get closer to the front of the trail
     context.fillStyle = "rgba(255, 255, 255, " + ratio / 2 + ")";
-    context.fillRect(pos.x, pos.y, w, h);
+    context.fillRect(x, y, w, h);
+  });
+}
+
+function lerpColor(a, b, amount) {
+  var ah = parseInt(a.replace(/#/g, ""), 16),
+    ar = ah >> 16,
+    ag = (ah >> 8) & 0xff,
+    ab = ah & 0xff,
+    bh = parseInt(b.replace(/#/g, ""), 16),
+    br = bh >> 16,
+    bg = (bh >> 8) & 0xff,
+    bb = bh & 0xff,
+    rr = ar + amount * (br - ar),
+    rg = ag + amount * (bg - ag),
+    rb = ab + amount * (bb - ab);
+
+  return (
+    "#" + (((1 << 24) + (rr << 16) + (rg << 8) + rb) | 0).toString(16).slice(1)
+  );
+}
+
+function drawCircleTrail(obj) {
+  object_position_map[obj.id]?.forEach((pos, i) => {
+    // don't draw the head of the trail
+    if (i === object_position_map[obj.id].length - 1) {
+      return;
+    }
+
+    // ratio that moves toward one as we reach the end of the trail
+    // useful for gradually increasing size/alpha/etc
+    let ratio = (i + 1) / object_position_map[obj.id].length;
+
+    // center trail with leading object
+    let x = pos.x;
+    let y = pos.y;
+
+    x += obj.w / 2;
+    y += obj.h / 2;
+
+    // add noise to position of particles
+    y += Math.sin(game_timer * Math.random()) * 0.5;
+    x += Math.sin(game_timer * Math.random()) * 0.5;
+
+    // transition the trail color to the object's own color as we get closer to the front of the trail
+    context.fillStyle = lerpColor(WHITE, obj.color, ratio);
+
+    // draw circle
+    context.beginPath();
+    context.arc(x, y, 5 * ratio, 0, 2 * Math.PI);
+    context.fill();
+  });
+}
+
+function drawParticleTrail(obj) {
+  object_position_map[obj.id]?.forEach((pos, i) => {
+    // ratio that moves toward one as we reach the end of the trail
+    // useful for gradually increasing size/alpha/etc
+    let ratio = (i + 1) / object_position_map[obj.id].length;
+
+    // center trail with leading object
+    let x = pos.x;
+    let y = pos.y;
+
+    // transition the trail color to the object's own color as we get closer to the front of the trail
+    context.globalAlpha = ratio;
+    context.fillStyle = lerpColor(WHITE, YELLOW, ratio);
+    context.fillRect(x, y, 1, 1);
+    context.globalAlpha = 1;
   });
 }
 
 function explosion(x, y) {
-  sparkle_fx(x, y);
+  // sparkle_fx(x, y);
   smoke_fx(x, y);
-  fire_fx(x, y);
-  playSound(SOUNDS["explode"]);
+  // fire_fx(x, y);
+  spark_fx(x, y);
+  spark_fx(x, y);
+  spark_fx(x, y);
+  playSoundEffect("explode");
 }
 
 function drawBitmapCenteredAtLocationWithRotation(
@@ -381,6 +515,10 @@ function setMusicVolume(vol) {
   music_volume = vol;
 }
 
+function setSoundEffectVolume(vol) {
+  sound_effect_volume = vol;
+}
+
 function playMusic(song) {
   let playbackRate = 1;
   let pan = 0;
@@ -390,6 +528,15 @@ function playMusic(song) {
   if (sound) {
     song_playing = true;
   }
+  return sound;
+}
+
+function playSoundEffect(sound_effect) {
+  let playbackRate = 1;
+  let pan = 0;
+  let volume = sound_effect_volume / 10;
+  let loop = false;
+  let sound = playSound(SOUNDS[sound_effect], playbackRate, pan, volume, loop);
   return sound;
 }
 
@@ -405,21 +552,19 @@ function toggleFullscreen() {
 
 // character actions
 function jump(obj) {
-  if (obj.jump_height < obj.max_jump_height) {
-    obj.jump_height += obj.jump_rate;
-    obj.y -= obj.jump_rate;
-    return;
+  // initial jump force
+  if (obj.hit_ground) {
+    obj.y_velocity += GRAVITY;
   }
 
-  if (obj.hang_time <= 0) {
-    obj.jump_rate = PLAYER_DEFAULT.jump_rate;
-    return;
-  }
+  // check if we reached our maximum jump height
+  let reached_max_height = obj.jump_height >= obj.max_jump_height;
 
-  if (obj.jumping) {
-    obj.jump_rate = easing(obj.jump_rate, 0);
-    obj.y -= obj.jump_rate;
-    obj.hang_time -= 1;
+  // keep accelerating if we have not reached the max jump height
+  if (!reached_max_height) {
+    obj.y_velocity = easingWithRate(obj.y_velocity, obj.max_y_velocity, 0.4);
+    obj.jump_height += obj.y_velocity;
+    return;
   }
 }
 

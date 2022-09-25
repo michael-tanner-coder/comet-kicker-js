@@ -1,4 +1,6 @@
 // GLOBAL VARIABLES
+// dev mode
+var debug_mode = false;
 
 // spawning
 var spawn_timer = MAX_SPAWN_TIMER;
@@ -14,6 +16,7 @@ var enemy_point_value = 10;
 var high_scores = window.localStorage.getItem("high_scores");
 var max_high_score_list_length = 5;
 var recent_scores = window.localStorage.getItem("recent_scores");
+var max_recent_score_list_length = 10;
 
 // game options
 var render_hitboxes = false;
@@ -32,6 +35,7 @@ var start_combo = false;
 
 // sounds
 var music_volume = 1;
+var sound_effect_volume = 1;
 var song_playing = false;
 var current_song_name = "test";
 var current_song = {};
@@ -41,6 +45,9 @@ var fps = 60;
 var start_time = Date.now();
 var frame_duration = 1000 / 62;
 var lag = 0;
+var dt = 0;
+var current_time = Date.now();
+var game_timer = 0;
 
 // object positions/tracking
 var max_position_count = 15;

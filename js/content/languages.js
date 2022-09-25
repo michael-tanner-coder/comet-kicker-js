@@ -22,6 +22,11 @@ const TEXT_CONTENT = {
     es: "puntaje",
     fr: "score",
   },
+  average_score: {
+    en: "average score",
+    es: "puntuación media",
+    fr: "score moyen",
+  },
   retry: {
     en: "retry",
     es: "rever",

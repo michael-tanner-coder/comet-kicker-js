@@ -2,13 +2,19 @@
 // TODO: use localstorage + global state to preserve selected options in menu
 
 // MENU INPUTS
-const INPUT_TYPES = { button: "button", select: "select", label: "label" };
+const INPUT_TYPES = {
+  button: "button",
+  select: "select",
+  label: "label",
+  text: "text",
+};
 const INPUT = {
   x: 0,
   y: 0,
   width: 64,
   height: 16,
   fontColor: WHITE,
+  fontSize: 8,
   backgroundColor: PURPLE,
   padding: 4,
   handler: () => {},
@@ -52,6 +58,12 @@ const SHAKES = {
   },
 };
 
+const TEXT = {
+  ...INPUT,
+  text: "Test text",
+  type: INPUT_TYPES.text,
+};
+
 // MENU PROTOTYPE
 const MENU = {
   id: "menu",
@@ -67,17 +79,10 @@ const MENU = {
 // GLOBAL STATE FOR MENU STACK
 const MENUS = [];
 const MENU_STACK = [];
+const POINTER = { x: 0, y: 0, sprite: "shield", time: 0, w: 8, h: 8 };
 
 // FUNCTIONS
 const renderMenu = (menu) => {
-  context.fillStyle = menu.backgroundColor;
-  context.fillRect(
-    menu.boundary.x,
-    menu.boundary.y,
-    menu.boundary.width,
-    menu.boundary.height
-  );
-
   // Header
   context.fillStyle = WHITE;
   drawCenteredText(menu.header, menu.boundary.y - 32);
@@ -98,34 +103,34 @@ const renderMenu = (menu) => {
 
     //   Cursor selection
     if (menu.cursor === i) {
-      context.fillStyle = YELLOW;
-      context.fillRect(
-        element.x - 1,
-        element.y - 1,
-        element.width + 2,
-        element.height + 2
+      // Pointer
+      POINTER.x = element.x - POINTER.w * 2;
+      POINTER.y = element.y;
+      context.fillStyle = PINK;
+      if (element.type !== INPUT_TYPES.select) {
+        element.fontSize = easingWithRate(element.fontSize, 16, 0.4);
+        context.font = element.fontSize + "px PressStart2P";
+      }
+      context.fillText(
+        element.text,
+        element.x + element.padding / 2,
+        element.y + element.height / 2 + element.padding + 1
       );
+    } else {
+      element.fontSize = easing(element.fontSize, 8);
     }
 
     //   Render input
-    context.fillStyle = element.backgroundColor;
-    context.fillRect(element.x, element.y, element.width, element.height);
     context.fillStyle = element.fontColor;
     context.fillText(
       element.text,
       element.x + element.padding / 2,
       element.y + element.height / 2 + element.padding
     );
+    context.font = "8px PressStart2P";
 
     if (element.type === INPUT_TYPES.select) {
       // Render options for the select input
-      context.fillStyle = element.backgroundColor;
-      context.fillRect(
-        element.x + element.width,
-        element.y,
-        element.width,
-        element.height
-      );
       context.fillStyle = element.fontColor;
       context.fillText(
         `< ${element.options[element.currentOption].label} >`,
@@ -135,10 +140,19 @@ const renderMenu = (menu) => {
     }
   });
 
+  // POINTER
+  assignId(POINTER);
+  POINTER.y = POINTER.y + Math.sin(POINTER.time * 0.15) * 6;
+  POINTER.time += 1;
+  POINTER.y = Math.floor(POINTER.y);
+  drawTrail(POINTER);
+  context.drawImage(IMAGES[POINTER.sprite], POINTER.x - 1, POINTER.y);
+  storePreviousPosition(POINTER);
+
   // Footer
   if (menu.id !== "mainMenu") {
     context.fillStyle = WHITE;
-    context.fillText("Esc = go back", 16, 16);
+    context.fillText("Space = go back", 16, 16);
   }
 };
 
@@ -248,6 +262,11 @@ createMenu({
         game_state = STATES.GAME;
       },
     },
+    {
+      ...BUTTON,
+      text: "HIGH SCORES",
+      onSelect: () => goToMenu("highScoreMenu"),
+    },
     { ...BUTTON, text: "OPTIONS", onSelect: () => goToMenu("optionsMenu") },
     { ...BUTTON, text: "CREDITS", onSelect: () => goToMenu("creditsMenu") },
   ],
@@ -262,7 +281,7 @@ createMenu({
     { ...BUTTON, text: "SOUND", onSelect: () => goToMenu("soundMenu") },
     { ...BUTTON, text: "GAMEPLAY", onSelect: () => goToMenu("gameplayMenu") },
     { ...BUTTON, text: "LANGUAGE", onSelect: () => goToMenu("languageMenu") },
-    { ...BUTTON, text: "SCORE", onSelect: () => goToMenu("scoreMenu") },
+    { ...BUTTON, text: "DATA", onSelect: () => goToMenu("dataMenu") },
     { ...BUTTON, text: "CONTROLS", onSelect: () => goToMenu("controlsMenu") },
   ],
 });
@@ -308,6 +327,10 @@ addOptionRange(MUSIC_VOLUME_OPTION, 0, 10);
 const SFX_VOLUME_OPTION = {
   ...SELECT,
   text: "SFX VOLUME",
+  onChange: (input) => {
+    var currentOption = input.options[input.currentOption];
+    setSoundEffectVolume(currentOption.value);
+  },
 };
 addOptionRange(SFX_VOLUME_OPTION, 0, 10);
 
@@ -351,10 +374,9 @@ createMenu({
 
 // score
 createMenu({
-  id: "scoreMenu",
-  header: "SCORES",
+  id: "dataMenu",
+  header: "DATA",
   elements: [
-    { ...BUTTON, text: "HIGH SCORES", onSelect: () => {} },
     {
       ...BUTTON,
       text: "AVERAGE SCORE",
@@ -367,6 +389,23 @@ createMenu({
       onSelect: () => {},
     },
   ],
+});
+
+// high scores
+const scores = JSON.parse(localStorage.getItem("high_scores"));
+console.log("HIGH SCORE LIST");
+console.log(scores);
+const score_list = [];
+scores.forEach((score, i) => {
+  let score_text = i + 1 + ". " + Math.floor(score);
+  let new_text = { ...TEXT };
+  new_text.text = score_text;
+  score_list.push(new_text);
+});
+createMenu({
+  id: "highScoreMenu",
+  header: "HIGH SCORES",
+  elements: [...score_list],
 });
 
 // controls

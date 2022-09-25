@@ -8,6 +8,7 @@ const INPUTS = {
   ArrowDown: false,
 
   x: false,
+  z: false,
 
   // SPACE
   [" "]: false,
@@ -70,8 +71,8 @@ const CONTROLS = {
   pause: ["Escape", "start"],
   select: [" ", "select"],
   start: ["start", "Enter"],
-  accept: [" ", "Enter", "buttonA"],
-  decline: ["Escape", "buttonB"],
+  accept: ["Enter", "buttonA", "x"],
+  decline: ["Escape", "buttonB", " "],
 };
 
 function initializeInputState() {
