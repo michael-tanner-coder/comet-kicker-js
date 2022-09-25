@@ -446,7 +446,6 @@ function drawCircleTrail(obj) {
 
 function drawParticleTrail(obj) {
   object_position_map[obj.id]?.forEach((pos, i) => {
-    console.log(pos);
     // ratio that moves toward one as we reach the end of the trail
     // useful for gradually increasing size/alpha/etc
     let ratio = (i + 1) / object_position_map[obj.id].length;
@@ -456,8 +455,8 @@ function drawParticleTrail(obj) {
     let y = pos.y;
 
     // transition the trail color to the object's own color as we get closer to the front of the trail
-    context.fillStyle = lerpColor(WHITE, YELLOW, ratio);
     context.globalAlpha = ratio;
+    context.fillStyle = lerpColor(WHITE, YELLOW, ratio);
     context.fillRect(x, y, 1, 1);
     context.globalAlpha = 1;
   });
