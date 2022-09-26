@@ -2,6 +2,7 @@ const SOUNDS = {}; // GLOBAL SOUND ARRAY: DON'T EDIT
 const soundList = [
   // MUSIC
   // Add your music asset here ^
+  { file: "comet-kicker-song.wav", name: "title_music" },
 
   // SFX
   { file: "shoot.wav", name: "shoot" },
