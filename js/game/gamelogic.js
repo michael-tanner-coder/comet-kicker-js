@@ -42,6 +42,15 @@ function updateMusic() {
   }
 }
 
+function changeMusic(song) {
+  if (song_playing) {
+    current_song.sound.stop();
+    // current_song.sound.time = 0;
+    current_song_name = song;
+    current_song = playMusic(song);
+  }
+}
+
 // physics
 function updateCollisions() {}
 

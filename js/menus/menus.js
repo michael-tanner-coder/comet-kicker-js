@@ -246,6 +246,7 @@ createMenu({
       text: "START GAME",
       onSelect: () => {
         game_state = STATES.GAME;
+        changeMusic("battle_music");
       },
     },
     {

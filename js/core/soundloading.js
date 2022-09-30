@@ -2,7 +2,8 @@ const SOUNDS = {}; // GLOBAL SOUND ARRAY: DON'T EDIT
 const soundList = [
   // MUSIC
   // Add your music asset here ^
-  { file: "comet-kicker-song.wav", name: "title_music" },
+  { file: "comet-kicker-test-songv1.wav", name: "title_music" },
+  { file: "comet-kicker-menu-musicv2.wav", name: "battle_music" },
 
   // SFX
   { file: "shoot.wav", name: "shoot" },
@@ -118,6 +119,13 @@ function playSound(
   var source = audioCtx.createBufferSource();
   var gainNode = audioCtx.createGain();
   var panNode = audioCtx.createStereoPanner();
+
+  // low pass sound filter
+  // let filter = audioCtx.createBiquadFilter();
+  // source.connect(filter);
+  // filter.connect(audioCtx.destination);
+  // filter.type = "lowpass";
+  // filter.frequency.setTargetAtTime(2000, audioCtx.currentTime, 0);
 
   source.buffer = buffer;
   source.connect(panNode);
