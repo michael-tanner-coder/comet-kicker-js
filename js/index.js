@@ -272,7 +272,7 @@ function update(deltaTime) {
   // use on next frame to determine if we render a dust effect
   PLAYER.hit_ground_last_frame = PLAYER.hit_ground;
   PLAYER.hit_wall = false;
-
+  updateTimeScale();
   checkForGameOver();
 }
 
