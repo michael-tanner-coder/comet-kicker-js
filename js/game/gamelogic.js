@@ -73,6 +73,12 @@ function updateBackground() {
 }
 
 // character actions
+let t_rate = 1;
+let t_target = 1;
+function updateTimeScale() {
+  time_scale = easingWithRate(time_scale, t_target, t_rate);
+}
+
 function checkForGameOver() {
   if (PLAYER.hp <= 0) {
     resetGame();
@@ -114,6 +120,9 @@ function playerShoot() {
   if (PLAYER.kicking) {
     PLAYER.state = PLAYER_STATES.KICKING;
     PLAYER.kick_time -= 1;
+    time_scale = easingWithRate(time_scale, 0.1, 0.5);
+  } else {
+    time_scale = easingWithRate(time_scale, 1, 0.5);
   }
 
   if (PLAYER.kick_time <= 0) {
@@ -167,7 +176,9 @@ function playerJump() {
   }
 }
 
-function playerMove() {
+function testPlayerJump() {}
+
+function playerMove(dt) {
   PLAYER.prev_x = PLAYER.x;
   PLAYER.prev_y = PLAYER.y;
   PLAYER.state = PLAYER_STATES.IDLE;
