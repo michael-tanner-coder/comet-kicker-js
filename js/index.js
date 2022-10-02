@@ -38,6 +38,13 @@ function update(deltaTime) {
   }
 
   // ==============
+  // --- DEBUG ---
+  // ==============
+  if (onPress(CONTROLS.autoKill) && debug_mode) {
+    resetGame();
+  }
+
+  // ==============
   // --- PLAYER ---
   // ==============
   // PLAYER MOVEMENT
@@ -317,21 +324,12 @@ function draw(offset) {
 
   // DRAW PAUSE SCREEN
   if (game_state === STATES.PAUSE) {
-    // overlay
-    context.globalAlpha = 0.5;
-    context.fillStyle = "black";
-    context.fillRect(0, 0, GAME_W, GAME_H);
-    context.globalAlpha = 1;
-
-    // pause text
-    context.fillStyle = WHITE;
-    context.fillText(getText("game_paused"), GAME_W / 2 - 90, 100);
-    context.fillText(getText("press_enter_to_continue"), GAME_W / 2 - 90, 150);
+    drawPauseScreen();
   }
 
   // DRAW GAME OVER SCREEN
   if (game_state === STATES.GAME_OVER) {
-    drawPauseScreen();
+    drawGameOverScreen();
   }
 
   // DRAW CURRENT MENU
@@ -369,7 +367,28 @@ function loop() {
   window.requestAnimationFrame(loop);
 }
 
+async function startGameLoop() {
+  for await (const delta of gameLoop()) {
+    inputListener();
+    update(delta);
+    draw();
+  }
+}
+
+async function* gameLoop() {
+  let prevTime = await animationFrame();
+  while (true) {
+    const currentTime = await animationFrame();
+    const deltaSeconds = (currentTime - prevTime) / 1000;
+    prevTime = currentTime;
+    yield deltaSeconds;
+  }
+}
+
+const animationFrame = () => new Promise(requestAnimationFrame);
+
 // INIT
 startGame();
+startGameLoop();
 
-loop();
+// loop();

@@ -9,6 +9,7 @@ const INPUTS = {
 
   x: false,
   z: false,
+  c: false,
 
   // SPACE
   [" "]: false,
@@ -73,6 +74,7 @@ const CONTROLS = {
   start: ["start", "Enter"],
   accept: ["Enter", "buttonA", "x"],
   decline: ["Escape", "buttonB", " "],
+  autoKill: ["c"],
 };
 
 function initializeInputState() {

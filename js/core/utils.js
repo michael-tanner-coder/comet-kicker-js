@@ -363,6 +363,10 @@ function drawCenteredText(text, y_value) {
   context.fillText(text, GAME_W / 2 - getTextWidth(text) / 2, y_value);
 }
 
+function setFont(size, font = "PressStart2P") {
+  context.font = size + "px " + font;
+}
+
 // vfx/animation
 function getPlayerAnimation() {
   return ANIMATIONS[PLAYER_STATE_TO_ANIMATION[PLAYER.state]];

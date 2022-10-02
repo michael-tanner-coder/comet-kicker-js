@@ -327,6 +327,8 @@ function updateGameOverScreen() {
   if (onPress(CONTROLS.select)) {
     game_state = STATES.MENU;
   }
+
+  updateScoreSection(SCORE_SECTION);
 }
 
 function pauseGame() {
@@ -424,17 +426,31 @@ function drawHP() {
   }
 }
 
-function drawPauseScreen() {
+function drawGameOverScreen() {
   context.fillStyle = WHITE;
+  drawScoreSection(SCORE_SECTION);
 
-  drawCenteredText(`${getText("score")}: ${Math.round(score * 100) / 100}`, 50);
+  // drawCenteredText(`${getText("score")}: ${Math.round(score * 100) / 100}`, 50);
 
-  drawCenteredText(
-    `${getText("average_score")}: ${Math.round(getAverageScore() * 100) / 100}`,
-    75
-  );
+  // drawCenteredText(
+  //   `${getText("average_score")}: ${Math.round(getAverageScore() * 100) / 100}`,
+  //   75
+  // );
 
-  drawCenteredText(`${getText("retry")}: ${getText("press_enter")}`, 100);
+  // drawCenteredText(`${getText("retry")}: ${getText("press_enter")}`, 100);
 
-  drawCenteredText(`${getText("quit")}: PRESS ESC`, 125);
+  // drawCenteredText(`${getText("quit")}: PRESS ESC`, 125);
+}
+
+function drawPauseScreen() {
+  // overlay
+  context.globalAlpha = 0.5;
+  context.fillStyle = "black";
+  context.fillRect(0, 0, GAME_W, GAME_H);
+  context.globalAlpha = 1;
+
+  // pause text
+  context.fillStyle = WHITE;
+  context.fillText(getText("game_paused"), GAME_W / 2 - 90, 100);
+  context.fillText(getText("press_enter_to_continue"), GAME_W / 2 - 90, 150);
 }
