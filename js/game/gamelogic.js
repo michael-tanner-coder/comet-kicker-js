@@ -103,11 +103,17 @@ function playerShoot() {
   }
 
   if (PLAYER.shot_fired) {
-    PLAYER.shot_timer = MAX_SHOT_TIMER;
+    // lower shot timer for rapid fire powerup
+    PLAYER.shot_timer =
+      PLAYER.powerup === PICKUPS.RAPID_FIRE ? 7 : MAX_SHOT_TIMER;
     PLAYER.shot_fired = false;
   }
 
-  if (PLAYER.shot_timer <= 0 && onPress(CONTROLS.shoot)) {
+  if (
+    PLAYER.shot_timer <= 0 &&
+    (onPress(CONTROLS.shoot) ||
+      (PLAYER.powerup === PICKUPS.RAPID_FIRE && onHold(CONTROLS.shoot)))
+  ) {
     let shot = spawnBullet(PLAYER, PLAYER.direction, PLAYER.bullet_type);
     spark_fx(shot.x, shot.y);
     recoil(PLAYER, shot, shot.recoil);

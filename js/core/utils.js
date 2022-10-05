@@ -135,7 +135,7 @@ function checkPlayerPowerup() {
       PLAYER.bullet_type = WIDE_BULLET;
       break;
     case PICKUPS.RAPID_FIRE:
-      PLAYER.bullet_type = WIDE_BULLET;
+      PLAYER.bullet_type = RAPID_BULLET;
       break;
     case PICKUPS.SHIELD:
       if (!shield_spawned) {

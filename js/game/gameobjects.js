@@ -96,6 +96,21 @@ const BULLET = {
   recoil: 5,
   angle: 0,
 };
+const RAPID_BULLET = {
+  type: "bullet",
+  w: 8,
+  h: 8,
+  x: 0,
+  y: 0,
+  color: YELLOW,
+  direction: 0,
+  speed: 6,
+  animation: ANIMATIONS.shoot,
+  has_trail: true,
+  render_hitbox: false,
+  recoil: 10,
+  angle: 0,
+};
 
 const WIDE_BULLET = {
   ...BULLET,
@@ -214,7 +229,7 @@ const RAPID_FIRE = { ...COLLECT, pickup: PICKUPS.RAPID_FIRE };
 const MISSILE = { ...COLLECT, pickup: PICKUPS.MISSILE };
 const SHIELD = { ...COLLECT, pickup: PICKUPS.SHIELD };
 const HP = { ...COLLECT, pickup: PICKUPS.HP, sprite: "hp_up" };
-const COLLECTIBLES = [COLLECT, HP, SHIELD, MISSILE];
+const COLLECTIBLES = [RAPID_FIRE, WIDE_SHOT, MISSILE, SHIELD, HP, COLLECT];
 
 // BACKGROUNDS FOR PARALLAX
 const BACKGROUND_1 = {
