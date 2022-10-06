@@ -494,6 +494,7 @@ function drawBitmapCenteredAtLocationWithRotation(
 }
 
 function updateScreenshake() {
+  if (!screen_shake_on) return;
   if (PLAYER.screenshakesRemaining) {
     // starts max size and gets smaller
     let wobble = Math.round(

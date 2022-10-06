@@ -52,6 +52,18 @@ const TEXT_CONTENT = {
     es: "presiona enter para continuar",
     fr: "appuyez sur entrée pour continuer",
   },
+
+  // OPTIONS
+  on: {
+    en: "on",
+    es: "on",
+    fr: "on",
+  },
+  off: {
+    en: "off",
+    es: "off",
+    fr: "off",
+  },
 };
 
 function getText(text) {

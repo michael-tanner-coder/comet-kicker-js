@@ -1,6 +1,6 @@
 // GLOBAL VARIABLES
 // dev mode
-var debug_mode = true;
+var debug_mode = false;
 
 // spawning
 var spawn_timer = MAX_SPAWN_TIMER;
@@ -23,6 +23,7 @@ var render_hitboxes = false;
 var fullscreen = false;
 var current_language = "en";
 var time_scale = 1;
+var screen_shake_on = true;
 
 // shield
 var shield_spawned = false;

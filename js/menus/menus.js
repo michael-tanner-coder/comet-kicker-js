@@ -347,6 +347,14 @@ createMenu({
     {
       ...SELECT,
       text: "SCREENSHAKE",
+      onChange: (input) => {
+        var currentOption = input.options[input.currentOption];
+        screen_shake_on = currentOption.value;
+      },
+      options: [
+        { label: getText("on"), value: true },
+        { label: getText("off"), value: false },
+      ],
     },
     {
       ...SELECT,
