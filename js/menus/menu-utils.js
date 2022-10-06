@@ -1,5 +1,19 @@
 // TODO: add option labels to language content
 // TODO: use localstorage + global state to preserve selected options in menu
+// TODO: set option values to a default based on localStorage
+
+// Options to finish:
+// TODO: fullscreen
+// TODO: resolution
+// TODO: master volume
+// TODO: credits
+// TODO: game speed
+// TODO: language select
+// TODO: show average scores
+// TODO: show progress
+// TODO: delete data
+// TODO: remap controls
+// TODO: select presets
 
 // GLOBAL STATE FOR MENU STACK
 const MENUS = [];
@@ -66,9 +80,3 @@ const addOptionRange = (select_element, range_min, range_max) => {
     select_element.options.push({ label: i.toString(), value: i });
   }
 };
-
-
-
-
-
-
