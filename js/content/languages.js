@@ -17,6 +17,11 @@ const TEXT_CONTENT = {
   },
 
   // GAME TEXT
+  comet_kicker: {
+    en: "COMET KICKER",
+    es: "COMET KICKER",
+    fr: "COMET KICKER",
+  },
   score: {
     en: "score",
     es: "puntaje",
@@ -56,96 +61,119 @@ const TEXT_CONTENT = {
   // MENUS
   start_game: {
     en: "START GAME",
+    es: "EMPEZAR JUEGO",
   },
   high_scores: {
     en: "HIGH SCORES",
+    es: "PUNTUACIONES ALTAS",
   },
   options: {
     en: "OPTIONS",
+    es: "OPCIONES",
   },
   credits: {
     en: "CREDITS",
+    es: "CRÉDITOS",
   },
   graphics: {
     en: "GRAPHICS",
+    es: "GRÁFICOS",
   },
   sound: {
     en: "SOUND",
+    es: "SONIDO",
   },
   gameplay: {
     en: "GAMEPLAY",
+    es: "JUEGO",
   },
   language: {
     en: "LANGUAGE",
+    es: "IDIOMA",
   },
   data: {
     en: "DATA",
+    es: "DATOS",
   },
   controls: {
     en: "CONTROLS",
+    es: "CONTROL",
   },
 
   // OPTION VALUES
   on: {
     en: "on",
-    es: "on",
+    es: "en",
     fr: "on",
   },
   off: {
     en: "off",
-    es: "off",
+    es: "apagado",
     fr: "off",
   },
 
   // GRAPHICS
   fullscreen: {
     en: "FULLSCREEN",
+    es: "PANTALLA COMPLETA",
   },
   resolution: {
     en: "RESOLUTION",
+    es: "RESOLUCIÓN",
   },
 
   // SOUND
   master_volume: {
     en: "MASTER VOLUME",
+    es: "VOLUMEN PRINCIPAL",
   },
   sound_volume: {
     en: "SOUND VOLUME",
+    es: "SONIDO",
   },
   music_volume: {
     en: "MUSIC VOLUME",
+    es: "MÚSICA",
   },
 
   // GAMEPLAY
   game_speed: {
     en: "GAME SPEED",
+    es: "VELOCIDAD DEL JUEGO",
   },
   screenshake: {
     en: "SCREEN SHAKE",
+    es: "MOVIMIENTO DE PANTALLA",
   },
   invincible_mode: {
     en: "INVINCIBLE MODE",
+    es: "MODO INVENCIBLE",
   },
 
   // LANGUAGE
   select_language: {
     en: "SELECT LANGUAGE",
+    es: "SELECCIONE EL IDIOMA",
   },
 
   // DATA
   progress: {
     en: "PROGRESS",
+    es: "PROGRESO",
   },
   delete_data: {
     en: "DELETE DATA?",
+    es: "¿BORRAR DATOS?",
   },
 
   // CONTROLS
   presets: {
     en: "PRESETS",
+    es: "PREESTABLECIDA",
   },
   custom: {
     en: "CUSTOM",
+    es: "DISFRAZ",
   },
 };
 
