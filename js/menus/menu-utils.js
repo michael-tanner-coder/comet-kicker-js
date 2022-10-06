@@ -3,7 +3,6 @@
 // TODO: set option values to a default based on localStorage
 
 // Options to finish:
-// TODO: fullscreen
 // TODO: resolution
 // TODO: master volume
 // TODO: credits

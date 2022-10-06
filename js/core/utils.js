@@ -546,8 +546,8 @@ function playSoundEffect(sound_effect) {
 }
 
 // options
-function toggleFullscreen() {
-  fullscreen = !fullscreen;
+function toggleFullscreen(value) {
+  fullscreen = value;
   if (fullscreen) {
     canvas.requestFullscreen();
   } else {
