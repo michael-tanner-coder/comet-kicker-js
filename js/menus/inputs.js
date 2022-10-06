@@ -94,7 +94,7 @@ class Select extends Input {
     this.currentOption = 0;
     this.options = props?.options || [];
     this.onChange =
-      props?.onSelect ||
+      props?.onChange ||
       function () {
         console.log("changed select option");
       };
