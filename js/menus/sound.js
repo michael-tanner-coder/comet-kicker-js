@@ -1,6 +1,10 @@
 const MASTER_VOLUME_OPTION = {
   ...SELECT,
   text: "MASTER VOLUME",
+  onChange: (input) => {
+    var currentOption = input.options[input.currentOption];
+    setMasterVolume(currentOption.value);
+  },
 };
 addOptionRange(MASTER_VOLUME_OPTION, 0, 10);
 

@@ -38,7 +38,7 @@ function updateMusic() {
   }
 
   if (current_song) {
-    current_song.volume.gain.value = music_volume / 10;
+    current_song.volume.gain.value = (music_volume / 100) * (master_volume / 10);
   }
 }
 

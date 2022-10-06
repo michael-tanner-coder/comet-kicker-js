@@ -516,6 +516,10 @@ function drawErrorMessage(message) {
 }
 
 // sound
+function setMasterVolume(vol) {
+  master_volume = vol;
+}
+
 function setMusicVolume(vol) {
   music_volume = vol;
 }
@@ -527,7 +531,7 @@ function setSoundEffectVolume(vol) {
 function playMusic(song) {
   let playbackRate = 1;
   let pan = 0;
-  let volume = music_volume / 10;
+  let volume = (music_volume / 100) * (master_volume / 10);
   let loop = true;
   let sound = playSound(SOUNDS[song], playbackRate, pan, volume, loop);
   if (sound) {
@@ -539,7 +543,7 @@ function playMusic(song) {
 function playSoundEffect(sound_effect) {
   let playbackRate = 1;
   let pan = 0;
-  let volume = sound_effect_volume / 10;
+  let volume = (sound_effect_volume / 100) * (master_volume / 10);
   let loop = false;
   let sound = playSound(SOUNDS[sound_effect], playbackRate, pan, volume, loop);
   return sound;
