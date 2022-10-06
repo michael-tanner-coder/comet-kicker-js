@@ -3,7 +3,6 @@
 // TODO: set option values to a default based on localStorage
 
 // Options to finish:
-// TODO: language select
 // TODO: show average scores
 // TODO: show progress
 // TODO: delete data
