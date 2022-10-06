@@ -23,6 +23,7 @@ var render_hitboxes = false;
 var fullscreen = false;
 var current_language = "en";
 var time_scale = 1;
+var game_speed = 1;
 var screen_shake_on = true;
 var invincible_mode = false;
 

@@ -1,3 +1,13 @@
+const GAME_SPEED_OPTION = {
+  ...SELECT,
+  text: "GAME SPEED",
+  onChange: (input) => {
+    var currentOption = input.options[input.currentOption];
+    game_speed = currentOption.value / 10;
+  },
+};
+addOptionRange(GAME_SPEED_OPTION, 1, 10);
+
 createMenu({
   id: "gameplayMenu",
   header: "GAMEPLAY",
@@ -26,9 +36,6 @@ createMenu({
         { label: getText("on"), value: true },
       ],
     },
-    {
-      ...SELECT,
-      text: "GAME SPEED",
-    },
+    GAME_SPEED_OPTION,
   ],
 });

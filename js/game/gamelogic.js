@@ -38,7 +38,8 @@ function updateMusic() {
   }
 
   if (current_song) {
-    current_song.volume.gain.value = (music_volume / 100) * (master_volume / 10);
+    current_song.volume.gain.value =
+      (music_volume / 100) * (master_volume / 10);
   }
 }
 
@@ -57,7 +58,7 @@ function updateCollisions() {}
 function applyGravityToObjects() {
   GAME_OBJECTS.forEach((obj) => {
     if (obj.has_gravity) {
-      obj.y += GRAVITY * time_scale;
+      obj.y += GRAVITY * time_scale * game_speed;
     }
   });
 }
@@ -172,7 +173,8 @@ function playerJump() {
     jump(PLAYER);
   } else {
     // fall faster when done jumping
-    PLAYER.y_velocity = easingWithRate(PLAYER.y_velocity, -1, 0.8);
+    PLAYER.y_velocity =
+      easingWithRate(PLAYER.y_velocity, -1, 0.8) * game_speed * time_scale;
   }
 
   // jump release

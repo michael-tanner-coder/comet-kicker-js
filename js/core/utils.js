@@ -261,16 +261,28 @@ function drawHitboxes(object) {
 
 function recoil(object, shot, recoil_amount) {
   object.x -=
-    recoil_amount * Math.cos((shot.direction * Math.PI) / 180) * time_scale;
+    recoil_amount *
+    Math.cos((shot.direction * Math.PI) / 180) *
+    time_scale *
+    game_speed;
   object.y -=
-    recoil_amount * Math.sin((shot.direction * Math.PI) / 180) * time_scale;
+    recoil_amount *
+    Math.sin((shot.direction * Math.PI) / 180) *
+    time_scale *
+    game_speed;
 }
 
 function moveInOwnDirection(object) {
   object.x +=
-    object.speed * Math.cos((object.direction * Math.PI) / 180) * time_scale;
+    object.speed *
+    Math.cos((object.direction * Math.PI) / 180) *
+    time_scale *
+    game_speed;
   object.y +=
-    object.speed * Math.sin((object.direction * Math.PI) / 180) * time_scale;
+    object.speed *
+    Math.sin((object.direction * Math.PI) / 180) *
+    time_scale *
+    game_speed;
 }
 
 // game state
@@ -563,7 +575,7 @@ function toggleFullscreen(value) {
 function jump(obj) {
   // initial jump force
   if (obj.hit_ground) {
-    obj.y_velocity += GRAVITY;
+    obj.y_velocity += GRAVITY * game_speed * time_scale;
   }
 
   // check if we reached our maximum jump height
@@ -571,7 +583,10 @@ function jump(obj) {
 
   // keep accelerating if we have not reached the max jump height
   if (!reached_max_height) {
-    obj.y_velocity = easingWithRate(obj.y_velocity, obj.max_y_velocity, 0.4);
+    obj.y_velocity =
+      easingWithRate(obj.y_velocity, obj.max_y_velocity, 0.4) *
+      game_speed *
+      time_scale;
     obj.jump_height += obj.y_velocity;
     return;
   }
