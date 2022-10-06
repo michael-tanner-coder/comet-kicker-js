@@ -62,118 +62,141 @@ const TEXT_CONTENT = {
   start_game: {
     en: "START GAME",
     es: "EMPEZAR JUEGO",
+    fr: "DÉMARRER JEU",
   },
   high_scores: {
     en: "HIGH SCORES",
     es: "PUNTUACIONES ALTAS",
+    fr: "SCORES ÉLEVÉS",
   },
   options: {
     en: "OPTIONS",
     es: "OPCIONES",
+    fr: "OPTIONS",
   },
   credits: {
     en: "CREDITS",
     es: "CRÉDITOS",
+    fr: "CRÉDITS",
   },
   graphics: {
     en: "GRAPHICS",
     es: "GRÁFICOS",
+    fr: "GRAPHIQUE",
   },
   sound: {
     en: "SOUND",
     es: "SONIDO",
+    fr: "DU SON",
   },
   gameplay: {
     en: "GAMEPLAY",
     es: "JUEGO",
+    fr: "JEU",
   },
   language: {
     en: "LANGUAGE",
     es: "IDIOMA",
+    fr: "LANGUE",
   },
   data: {
     en: "DATA",
     es: "DATOS",
+    fr: "LES DONNÉES",
   },
   controls: {
     en: "CONTROLS",
     es: "CONTROL",
+    fr: "LES CONTRÔLES",
   },
 
   // OPTION VALUES
   on: {
     en: "on",
     es: "en",
-    fr: "on",
+    fr: "sur",
   },
   off: {
     en: "off",
     es: "apagado",
-    fr: "off",
+    fr: "à l'arrêt",
   },
 
   // GRAPHICS
   fullscreen: {
     en: "FULLSCREEN",
     es: "PANTALLA COMPLETA",
+    fr: "PLEIN ÉCRAN",
   },
   resolution: {
     en: "RESOLUTION",
     es: "RESOLUCIÓN",
+    fr: "RÉSOLUTION",
   },
 
   // SOUND
   master_volume: {
     en: "MASTER VOLUME",
     es: "VOLUMEN PRINCIPAL",
+    fr: "VOLUME PRINCIPAL",
   },
   sound_volume: {
     en: "SOUND VOLUME",
     es: "SONIDO",
+    fr: "DU SON",
   },
   music_volume: {
     en: "MUSIC VOLUME",
     es: "MÚSICA",
+    fr: "MUSIQUE",
   },
 
   // GAMEPLAY
   game_speed: {
     en: "GAME SPEED",
     es: "VELOCIDAD DEL JUEGO",
+    fr: "VITESSE DE JEU",
   },
   screenshake: {
     en: "SCREEN SHAKE",
     es: "MOVIMIENTO DE PANTALLA",
+    fr: "SECOUEMENT D'ÉCRAN",
   },
   invincible_mode: {
     en: "INVINCIBLE MODE",
     es: "MODO INVENCIBLE",
+    fr: "MODE INVINCIBLE",
   },
 
   // LANGUAGE
   select_language: {
     en: "SELECT LANGUAGE",
     es: "SELECCIONE EL IDIOMA",
+    fr: "CHOISIR LA LANGUE",
   },
 
   // DATA
   progress: {
     en: "PROGRESS",
     es: "PROGRESO",
+    fr: "LE PROGRÈS",
   },
   delete_data: {
     en: "DELETE DATA?",
     es: "¿BORRAR DATOS?",
+    fr: "SUPRIMMER LES DONNÉES?",
   },
 
   // CONTROLS
   presets: {
     en: "PRESETS",
     es: "PREESTABLECIDA",
+    fr: "PRÉCONFIGURATIONS",
   },
   custom: {
     en: "CUSTOM",
     es: "DISFRAZ",
+    fr: "DOUANE",
   },
 };
 
