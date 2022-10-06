@@ -1,0 +1,74 @@
+// TODO: add option labels to language content
+// TODO: use localstorage + global state to preserve selected options in menu
+
+// GLOBAL STATE FOR MENU STACK
+const MENUS = [];
+const MENU_STACK = [];
+const POINTER = { x: 0, y: 0, sprite: "shield", time: 0, w: 8, h: 8 };
+
+// UTILS
+const goToMenu = (menu_id) => {
+  const NEXT_MENU = MENUS.find((menu) => menu.id === menu_id);
+  MENU_STACK.push(NEXT_MENU);
+};
+
+const goBack = () => {
+  if (MENU_STACK.length > 1) {
+    MENU_STACK.pop();
+  }
+};
+
+const createMenu = (props = {}) => {
+  const NEW_MENU_PROPS = { ...props };
+  NEW_MENU_PROPS.elements.forEach((element) => {
+    element.handler = () => {
+      if (element.type == INPUT_TYPES.button) {
+        element.onSelect(element);
+      }
+
+      if (element.type == INPUT_TYPES.select) {
+        element.onChange(element);
+      }
+    };
+  });
+  const NEW_MENU = new Menu(NEW_MENU_PROPS);
+  MENUS.push(NEW_MENU);
+};
+
+const getCurrentMenu = () => {
+  return MENU_STACK[MENU_STACK.length - 1];
+};
+
+const getCurrentMenuElement = () => {
+  const current_menu = getCurrentMenu();
+  return current_menu.elements[current_menu.cursor];
+};
+
+const getMenu = (menu_id) => {
+  return MENUS.find((menu) => menu.id === menu_id);
+};
+
+const moveCursor = (menu, amount) => {
+  menu.cursor = loopClamp(menu.cursor + amount, 0, menu.elements.length - 1);
+};
+
+const changeOptions = (select, amount) => {
+  select.currentOption = loopClamp(
+    select.currentOption + amount,
+    0,
+    select.options.length - 1
+  );
+};
+
+const addOptionRange = (select_element, range_min, range_max) => {
+  select_element.options = [];
+  for (let i = range_min; i <= range_max; i++) {
+    select_element.options.push({ label: i.toString(), value: i });
+  }
+};
+
+
+
+
+
+

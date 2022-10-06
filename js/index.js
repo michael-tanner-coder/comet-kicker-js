@@ -335,7 +335,7 @@ function draw(offset) {
   // DRAW CURRENT MENU
   if (game_state === STATES.MENU) {
     context.fillStyle = WHITE;
-    renderMenu(getCurrentMenu());
+    getCurrentMenu().draw();
   }
 }
 
@@ -388,6 +388,7 @@ async function* gameLoop() {
 const animationFrame = () => new Promise(requestAnimationFrame);
 
 // INIT
+MENU_STACK.push(getMenu("mainMenu"));
 startGame();
 startGameLoop();
 
