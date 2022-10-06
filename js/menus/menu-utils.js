@@ -3,9 +3,6 @@
 // TODO: set option values to a default based on localStorage
 
 // Options to finish:
-// TODO: resolution
-// TODO: master volume
-// TODO: credits
 // TODO: game speed
 // TODO: language select
 // TODO: show average scores
@@ -13,6 +10,7 @@
 // TODO: delete data
 // TODO: remap controls
 // TODO: select presets
+// TODO: credits
 
 // GLOBAL STATE FOR MENU STACK
 const MENUS = [];
