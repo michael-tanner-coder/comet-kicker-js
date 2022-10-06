@@ -205,11 +205,11 @@ function update(deltaTime) {
   enemies.forEach((enemy) => {
     // enemy to player
     if (collisionDetected(enemy, PLAYER)) {
-      if (!PLAYER.hit) {
+      if (!PLAYER.hit && !invincible_mode) {
         PLAYER.hp -= 1;
-        removeObj(enemy);
         playSoundEffect("lose_hp");
       }
+      removeObj(enemy);
       PLAYER.hit = true;
       PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
       explosion(PLAYER.x, PLAYER.y);
