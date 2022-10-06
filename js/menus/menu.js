@@ -12,9 +12,13 @@ class Menu {
     this.padding = props?.padding || 12;
     this.verticalSpacing = props?.verticalSpacing || 12;
     this.cursor = 0;
+    this.key = props?.key || "";
   }
 
-  update() {}
+  update() {
+    this.header = getText(this.key);
+    this.elements.forEach((element) => element.update());
+  }
 
   draw() {
     // Header
@@ -55,23 +59,7 @@ class Menu {
       }
 
       //   Render input
-      context.fillStyle = element.fontColor;
-      context.fillText(
-        element.text,
-        element.x + element.padding / 2,
-        element.y + element.height / 2 + element.padding
-      );
-      context.font = "8px PressStart2P";
-
-      if (element.type === INPUT_TYPES.select) {
-        // Render options for the select input
-        context.fillStyle = element.fontColor;
-        context.fillText(
-          `< ${element.options[element.currentOption].label} >`,
-          element.x + element.width + element.padding / 2,
-          element.y + element.height / 2 + element.padding
-        );
-      }
+      element.draw();
     });
 
     // POINTER

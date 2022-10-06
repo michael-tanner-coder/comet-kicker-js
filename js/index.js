@@ -24,6 +24,7 @@ function update(deltaTime) {
   // MENU NAVIGATION/INTERACTION
   if (game_state === STATES.MENU) {
     updateMenuNavigation();
+    getCurrentMenu().update();
     return;
   }
 

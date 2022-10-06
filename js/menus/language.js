@@ -1,5 +1,6 @@
 const LANGUAGE_SELECT = new Select({
   text: "SELECT LANGUAGE",
+  key: "select_language",
   options: [
     { label: getText("english"), value: "en" },
     { label: getText("spanish"), value: "es" },
@@ -11,6 +12,7 @@ const LANGUAGE_SELECT = new Select({
   },
 });
 createMenu({
+  key: "language",
   id: "languageMenu",
   header: "LANGUAGE",
   elements: [LANGUAGE_SELECT],

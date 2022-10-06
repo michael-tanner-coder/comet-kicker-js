@@ -5,46 +5,6 @@ const INPUT_TYPES = {
   label: "label",
   text: "text",
 };
-const INPUT = {
-  x: 0,
-  y: 0,
-  width: 64,
-  height: 16,
-  fontColor: WHITE,
-  fontSize: 8,
-  backgroundColor: PURPLE,
-  padding: 4,
-  handler: () => {},
-};
-const BUTTON = {
-  ...INPUT,
-  text: "Test button",
-  type: INPUT_TYPES.button,
-  onSelect: () => {
-    console.log("selected button");
-  },
-};
-const SELECT = {
-  ...INPUT,
-  text: "Test select",
-  type: INPUT_TYPES.select,
-  currentOption: 0,
-  options: [
-    { label: "test option 1", value: 1 },
-    { label: "test option 2", value: 2 },
-    { label: "test option 3", value: 2 },
-    { label: "test option 4", value: 2 },
-    { label: "test option 5", value: 2 },
-  ],
-  onChange: () => {
-    console.log("changed option");
-  },
-};
-const TEXT = {
-  ...INPUT,
-  text: "Test text",
-  type: INPUT_TYPES.text,
-};
 
 class Input {
   constructor(props) {
@@ -56,6 +16,12 @@ class Input {
     this.fontSize = props?.fontSize || 8;
     this.backgroundColor = props?.backgroundColor || PURPLE;
     this.padding = props?.padding || 4;
+    this.text = props?.text || "";
+    this.key = props?.key || "";
+  }
+
+  update() {
+    this.text = getText(this.key);
   }
 
   draw() {
@@ -68,7 +34,6 @@ class Input {
     context.font = "8px PressStart2P";
   }
 }
-
 class Button extends Input {
   constructor(props) {
     super(props);
@@ -109,7 +74,7 @@ class Select extends Input {
     // Render options for the select input
     context.fillStyle = this.fontColor;
     context.fillText(
-      `< ${this.options[this.currentOption].label} >`,
+      `< ${this.options[this.currentOption]?.label} >`,
       this.x + this.width + this.padding / 2,
       this.y + this.height / 2 + this.padding
     );

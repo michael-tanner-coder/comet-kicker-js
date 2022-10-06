@@ -1,8 +1,10 @@
 createMenu({
   id: "graphicsMenu",
+  key: "graphics",
   header: "GRAPHICS",
   elements: [
     new Select({
+      key: "fullscreen",
       text: "FULLSCREEN",
       options: [
         { label: getText("off"), value: false },
@@ -14,6 +16,7 @@ createMenu({
       },
     }),
     new Select({
+      key: "resolution",
       text: "RESOLUTION",
       onChange: (input) => {
         var currentOption = input.options[input.currentOption];

@@ -1,8 +1,9 @@
 createMenu({
   id: "controlsMenu",
+  key: "controls",
   header: "CONTROLS",
   elements: [
-    new Select({ ...SELECT, text: "PRESETS", onSelect: () => {} }),
-    new Select({ ...SELECT, text: "CUSTOM", onSelect: () => {} }),
+    new Select({ key: "presets", text: "PRESETS", onSelect: () => {} }),
+    new Select({ key: "custom", text: "CUSTOM", onSelect: () => {} }),
   ],
 });

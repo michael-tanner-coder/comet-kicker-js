@@ -1,5 +1,6 @@
 const GAME_SPEED_OPTION = new Select({
   text: "GAME SPEED",
+  key: "game_speed",
   onChange: (input) => {
     var currentOption = input.options[input.currentOption];
     game_speed = currentOption.value / 10;
@@ -9,9 +10,11 @@ addOptionRange(GAME_SPEED_OPTION, 1, 10);
 
 createMenu({
   id: "gameplayMenu",
+  key: "gameplay",
   header: "GAMEPLAY",
   elements: [
     new Select({
+      key: "screenshake",
       text: "SCREENSHAKE",
       onChange: (input) => {
         var currentOption = input.options[input.currentOption];
@@ -23,6 +26,7 @@ createMenu({
       ],
     }),
     new Select({
+      key: "invincible_mode",
       text: "INVINCIBLE MODE",
       onChange: (input) => {
         var currentOption = input.options[input.currentOption];

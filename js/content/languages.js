@@ -53,7 +53,39 @@ const TEXT_CONTENT = {
     fr: "appuyez sur entrée pour continuer",
   },
 
-  // OPTIONS
+  // MENUS
+  start_game: {
+    en: "START GAME",
+  },
+  high_scores: {
+    en: "HIGH SCORES",
+  },
+  options: {
+    en: "OPTIONS",
+  },
+  credits: {
+    en: "CREDITS",
+  },
+  graphics: {
+    en: "GRAPHICS",
+  },
+  sound: {
+    en: "SOUND",
+  },
+  gameplay: {
+    en: "GAMEPLAY",
+  },
+  language: {
+    en: "LANGUAGE",
+  },
+  data: {
+    en: "DATA",
+  },
+  controls: {
+    en: "CONTROLS",
+  },
+
+  // OPTION VALUES
   on: {
     en: "on",
     es: "on",
@@ -63,6 +95,57 @@ const TEXT_CONTENT = {
     en: "off",
     es: "off",
     fr: "off",
+  },
+
+  // GRAPHICS
+  fullscreen: {
+    en: "FULLSCREEN",
+  },
+  resolution: {
+    en: "RESOLUTION",
+  },
+
+  // SOUND
+  master_volume: {
+    en: "MASTER VOLUME",
+  },
+  sound_volume: {
+    en: "SOUND VOLUME",
+  },
+  music_volume: {
+    en: "MUSIC VOLUME",
+  },
+
+  // GAMEPLAY
+  game_speed: {
+    en: "GAME SPEED",
+  },
+  screenshake: {
+    en: "SCREEN SHAKE",
+  },
+  invincible_mode: {
+    en: "INVINCIBLE MODE",
+  },
+
+  // LANGUAGE
+  select_language: {
+    en: "SELECT LANGUAGE",
+  },
+
+  // DATA
+  progress: {
+    en: "PROGRESS",
+  },
+  delete_data: {
+    en: "DELETE DATA?",
+  },
+
+  // CONTROLS
+  presets: {
+    en: "PRESETS",
+  },
+  custom: {
+    en: "CUSTOM",
   },
 };
 
