@@ -2,8 +2,7 @@ createMenu({
   id: "graphicsMenu",
   header: "GRAPHICS",
   elements: [
-    {
-      ...SELECT,
+    new Select({
       text: "FULLSCREEN",
       options: [
         { label: getText("off"), value: false },
@@ -13,9 +12,8 @@ createMenu({
         var currentOption = input.options[input.currentOption];
         toggleFullscreen(currentOption.value);
       },
-    },
-    {
-      ...SELECT,
+    }),
+    new Select({
       text: "RESOLUTION",
       onChange: (input) => {
         var currentOption = input.options[input.currentOption];
@@ -27,6 +25,6 @@ createMenu({
         { label: "640x480", value: { width: 640, height: 480 } },
         { label: "1280x960", value: { width: 1280, height: 960 } },
       ],
-    },
+    }),
   ],
 });

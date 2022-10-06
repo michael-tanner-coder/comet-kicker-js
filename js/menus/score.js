@@ -2,16 +2,14 @@ createMenu({
   id: "dataMenu",
   header: "DATA",
   elements: [
-    {
-      ...BUTTON,
+    new Button({
       text: "AVERAGE SCORE",
       onSelect: () => {},
-    },
-    { ...BUTTON, text: "PROGRESS", onSelect: () => {} },
-    {
-      ...BUTTON,
+    }),
+    new Button({ text: "PROGRESS", onSelect: () => {} }),
+    new Button({
       text: "DELETE DATA?",
       onSelect: () => {},
-    },
+    }),
   ],
 });

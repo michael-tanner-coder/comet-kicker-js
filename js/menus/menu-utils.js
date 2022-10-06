@@ -29,17 +29,17 @@ const goBack = () => {
 
 const createMenu = (props = {}) => {
   const NEW_MENU_PROPS = { ...props };
-  NEW_MENU_PROPS.elements.forEach((element) => {
-    element.handler = () => {
-      if (element.type == INPUT_TYPES.button) {
-        element.onSelect(element);
-      }
+  // NEW_MENU_PROPS.elements.forEach((element) => {
+  //   element.handler = () => {
+  //     if (element.type == INPUT_TYPES.button) {
+  //       element.onSelect(element);
+  //     }
 
-      if (element.type == INPUT_TYPES.select) {
-        element.onChange(element);
-      }
-    };
-  });
+  //     if (element.type == INPUT_TYPES.select) {
+  //       element.onChange(element);
+  //     }
+  //   };
+  // });
   const NEW_MENU = new Menu(NEW_MENU_PROPS);
   MENUS.push(NEW_MENU);
 };

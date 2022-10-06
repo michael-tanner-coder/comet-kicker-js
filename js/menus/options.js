@@ -2,11 +2,29 @@ createMenu({
   id: "optionsMenu",
   header: "OPTIONS",
   elements: [
-    { ...BUTTON, text: "GRAPHICS", onSelect: () => goToMenu("graphicsMenu") },
-    { ...BUTTON, text: "SOUND", onSelect: () => goToMenu("soundMenu") },
-    { ...BUTTON, text: "GAMEPLAY", onSelect: () => goToMenu("gameplayMenu") },
-    { ...BUTTON, text: "LANGUAGE", onSelect: () => goToMenu("languageMenu") },
-    { ...BUTTON, text: "DATA", onSelect: () => goToMenu("dataMenu") },
-    { ...BUTTON, text: "CONTROLS", onSelect: () => goToMenu("controlsMenu") },
+    new Button({
+      text: "GRAPHICS",
+      onSelect: () => goToMenu("graphicsMenu"),
+    }),
+    new Button({
+      text: "SOUND",
+      onSelect: () => goToMenu("soundMenu"),
+    }),
+    new Button({
+      text: "GAMEPLAY",
+      onSelect: () => goToMenu("gameplayMenu"),
+    }),
+    new Button({
+      text: "LANGUAGE",
+      onSelect: () => goToMenu("languageMenu"),
+    }),
+    new Button({
+      text: "DATA",
+      onSelect: () => goToMenu("dataMenu"),
+    }),
+    new Button({
+      text: "CONTROLS",
+      onSelect: () => goToMenu("controlsMenu"),
+    }),
   ],
 });

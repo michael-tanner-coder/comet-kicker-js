@@ -1,19 +1,17 @@
-const GAME_SPEED_OPTION = {
-  ...SELECT,
+const GAME_SPEED_OPTION = new Select({
   text: "GAME SPEED",
   onChange: (input) => {
     var currentOption = input.options[input.currentOption];
     game_speed = currentOption.value / 10;
   },
-};
+});
 addOptionRange(GAME_SPEED_OPTION, 1, 10);
 
 createMenu({
   id: "gameplayMenu",
   header: "GAMEPLAY",
   elements: [
-    {
-      ...SELECT,
+    new Select({
       text: "SCREENSHAKE",
       onChange: (input) => {
         var currentOption = input.options[input.currentOption];
@@ -23,9 +21,8 @@ createMenu({
         { label: getText("on"), value: true },
         { label: getText("off"), value: false },
       ],
-    },
-    {
-      ...SELECT,
+    }),
+    new Select({
       text: "INVINCIBLE MODE",
       onChange: (input) => {
         var currentOption = input.options[input.currentOption];
@@ -35,7 +32,7 @@ createMenu({
         { label: getText("off"), value: false },
         { label: getText("on"), value: true },
       ],
-    },
+    }),
     GAME_SPEED_OPTION,
   ],
 });

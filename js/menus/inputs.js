@@ -56,7 +56,16 @@ class Input {
     this.fontSize = props?.fontSize || 8;
     this.backgroundColor = props?.backgroundColor || PURPLE;
     this.padding = props?.padding || 4;
-    this.handler = props?.handler || function () {};
+  }
+
+  draw() {
+    context.fillStyle = this.fontColor;
+    context.fillText(
+      this.text,
+      this.x + this.padding / 2,
+      this.y + this.height / 2 + this.padding
+    );
+    context.font = "8px PressStart2P";
   }
 }
 
@@ -71,6 +80,10 @@ class Button extends Input {
         console.log("selected button");
       };
   }
+
+  handler() {
+    this.onSelect(this);
+  }
 }
 
 class Select extends Input {
@@ -79,11 +92,27 @@ class Select extends Input {
     this.text = props?.text || "Test select";
     this.type = props?.type || INPUT_TYPES.select;
     this.currentOption = 0;
+    this.options = props?.options || [];
     this.onChange =
       props?.onSelect ||
       function () {
         console.log("changed select option");
       };
+  }
+
+  handler() {
+    this.onChange(this);
+  }
+
+  draw() {
+    super.draw();
+    // Render options for the select input
+    context.fillStyle = this.fontColor;
+    context.fillText(
+      `< ${this.options[this.currentOption].label} >`,
+      this.x + this.width + this.padding / 2,
+      this.y + this.height / 2 + this.padding
+    );
   }
 }
 

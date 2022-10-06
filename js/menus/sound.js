@@ -1,31 +1,28 @@
-const MASTER_VOLUME_OPTION = {
-  ...SELECT,
+const MASTER_VOLUME_OPTION = new Select({
   text: "MASTER VOLUME",
   onChange: (input) => {
     var currentOption = input.options[input.currentOption];
     setMasterVolume(currentOption.value);
   },
-};
+});
 addOptionRange(MASTER_VOLUME_OPTION, 0, 10);
 
-const MUSIC_VOLUME_OPTION = {
-  ...SELECT,
+const MUSIC_VOLUME_OPTION = new Select({
   text: "MUSIC VOLUME",
   onChange: (input) => {
     var currentOption = input.options[input.currentOption];
     setMusicVolume(currentOption.value);
   },
-};
+});
 addOptionRange(MUSIC_VOLUME_OPTION, 0, 10);
 
-const SFX_VOLUME_OPTION = {
-  ...SELECT,
+const SFX_VOLUME_OPTION = new Select({
   text: "SFX VOLUME",
   onChange: (input) => {
     var currentOption = input.options[input.currentOption];
     setSoundEffectVolume(currentOption.value);
   },
-};
+});
 addOptionRange(SFX_VOLUME_OPTION, 0, 10);
 
 createMenu({
