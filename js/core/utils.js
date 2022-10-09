@@ -273,6 +273,8 @@ function recoil(object, shot, recoil_amount) {
 }
 
 function moveInOwnDirection(object) {
+  object.prev_x = object.x;
+  object.prev_y = object.y;
   object.x +=
     object.speed *
     Math.cos((object.direction * Math.PI) / 180) *

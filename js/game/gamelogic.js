@@ -10,6 +10,13 @@ function updateEnemies(enemies) {
   enemies.forEach((enemy) => {
     screenwrap(enemy);
     moveInOwnDirection(enemy);
+    if (enemy.hit && enemy.i_frames) {
+      enemy.i_frames--;
+      if (enemy.i_frames <= 0) {
+        enemy.i_frames = 0;
+        enemy.hit = false;
+      }
+    }
   });
 }
 
@@ -260,7 +267,7 @@ function updateEnemySpawnTimer(enemies) {
   }
 
   if (spawn_timer <= 0) {
-    let type = Math.random() > 0.5 ? ENEMY : EXPLODING_ENEMY;
+    let type = choose(ENEMIES);
     spawnEnemy(type);
     spawn_timer = MAX_SPAWN_TIMER;
   }
@@ -395,6 +402,11 @@ function drawObjects() {
     if (obj.render_hitbox || render_hitboxes) {
       context.fillStyle = obj.color;
       context.fillRect(obj.x, obj.y, obj.w, obj.h);
+
+      obj?.hitboxes.forEach((box) => {
+        context.fillStyle = box.color;
+        context.fillRect(obj.x + box.x, obj.y + box.y, box.w, box.h);
+      });
     }
 
     // draw a static image

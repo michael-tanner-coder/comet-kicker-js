@@ -78,6 +78,12 @@ const BLOCK = {
   h: UNIT_SIZE,
   type: "floor",
   sprite: "platform",
+  render_hitbox: false,
+  hitboxes: [
+    { name: "top", x: 0, y: 0, w: 16, h: 8, color: "yellow" },
+    { name: "left", x: 0, y: 2, w: 2, h: 14, color: "red" },
+    { name: "right", x: UNIT_SIZE - 2, y: 2, w: 2, h: 14, color: "red" },
+  ],
 };
 
 // PROJECTILES
@@ -155,6 +161,8 @@ const ENEMY = {
   h: 16,
   x: 0,
   y: 0,
+  prev_y: 0,
+  prev_x: 0,
   color: PINK,
   direction: 0,
   speed: 2,
@@ -194,6 +202,50 @@ const EXPLODING_ENEMY = {
   ],
   exploding: true,
 };
+
+const ROLLING_ENEMY = {
+  ...ENEMY,
+  solid: true,
+  w: 32,
+  h: 32,
+  color: VIOLET,
+  animation: undefined,
+  sprite: "rolling_enemy",
+  movement_direction: "vertical",
+  speed: 2,
+  hp: 3,
+  direction: 180,
+  spawn_points: [
+    { x: 2, y: 1 },
+    { x: 4, y: 1 },
+    { x: 6, y: 1 },
+    { x: 8, y: 1 },
+    { x: 10, y: 1 },
+  ],
+  exploding: false,
+  render_hitbox: false,
+};
+
+const BOUNCING_ENEMY = {
+  ...ENEMY,
+  solid: true,
+  color: VIOLET,
+  animation: undefined,
+  sprite: "bouncing_enemy",
+  movement_direction: "vertical",
+  speed: 0,
+  direction: 180,
+  spawn_points: [
+    { x: 2, y: 1 },
+    { x: 4, y: 1 },
+    { x: 6, y: 1 },
+    { x: 8, y: 1 },
+    { x: 10, y: 1 },
+  ],
+  exploding: false,
+};
+
+const ENEMIES = [EXPLODING_ENEMY, ENEMY, ROLLING_ENEMY];
 
 // POWERUPS and POINT COLLECTIBLES
 const COLLECT = {

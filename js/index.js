@@ -174,15 +174,25 @@ function update(deltaTime) {
   bullets.forEach((bullet) => {
     enemies.forEach((enemy) => {
       if (collisionDetected(enemy, bullet)) {
-        removeObj(enemy);
-        if (start_combo) {
-          multiplier += 1;
-          multiplier_timer = 200;
+        if (enemy.hp) {
+          enemy.hp -= 1;
+          explosion(bullet.x, bullet.y);
+          removeObj(bullet);
+          enemy.hit = true;
+          enemy.i_frames = 4;
         }
-        score += enemy_point_value * multiplier;
-        let text_object = spawnObject(TEXT_OBJECT, enemy.x, enemy.y);
-        text_object.text = "+" + enemy_point_value + " x " + multiplier;
-        explosion(enemy.x, enemy.y);
+
+        if (!enemy.hp || enemy.hp <= 0) {
+          removeObj(enemy);
+          if (start_combo) {
+            multiplier += 1;
+            multiplier_timer = 200;
+          }
+          score += enemy_point_value * multiplier;
+          let text_object = spawnObject(TEXT_OBJECT, enemy.x, enemy.y);
+          text_object.text = "+" + enemy_point_value + " x " + multiplier;
+          explosion(enemy.x, enemy.y);
+        }
 
         if (bullet.exploding) {
           spawnObject(EXPLOSION, enemy.x, enemy.y);
@@ -230,6 +240,32 @@ function update(deltaTime) {
           removeObj(enemy);
           removeObj(block);
           explosion(enemy.x, enemy.y);
+        }
+
+        if (enemy.solid) {
+          // stop vertical movement
+          // FIXME: hitboxes need smoother cornering
+          // block.hitboxes.forEach((box) => {
+          //   let block_box = {
+          //     x: block.x + box.x,
+          //     y: block.y + box.y,
+          //     h: box.h,
+          //     w: box.w,
+          //   };
+
+          //   if (
+          //     (box.name === "left" || box.name === "right") &&
+          //     collisionDetected(block_box, enemy)
+          //   ) {
+          //     console.log("HIT SIDE");
+          //     enemy.x = enemy.prev_x;
+          //   }
+
+          //   if (box.name === "top" && collisionDetected(block_box, enemy)) {
+          //     console.log("HIT TOP");
+          //   }
+          // });
+          enemy.y = enemy.prev_y;
         }
       }
     });
