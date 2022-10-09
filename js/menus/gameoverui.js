@@ -124,11 +124,17 @@ const OPTIONS_SECTION = {
   //   Section
   background_color: "black",
   x: 0,
-  y: 100,
+  y: 211,
   w: GAME_W,
   h: 105,
-  padding: 6,
+  padding_left: 7,
+  padding_top: 6,
   alpha: 0.3,
+
+  // text
+  text_size: 8,
+  retry_text_x: 0,
+  quit_text_x: GAME_W,
 };
 
 function drawScoreSection(section) {
@@ -290,13 +296,13 @@ function updateAverageScoreSection(section) {
 
   // animate each score bar in a sequence
   for (let i = 0; i < section.scores.length; i++) {
-    if (!growBarUpward(section.scores[i], section)) {
+    if (!animateBar(section.scores[i], section)) {
       break;
     }
   }
 }
 
-function growBarUpward(bar, section) {
+function animateBar(bar, section) {
   let max_score = Math.max(...section.scores.map((block) => block.score));
   let max_h = 50;
   let percentage = bar.score / max_score;
@@ -374,4 +380,27 @@ function drawAverageScoreSection(section) {
   );
 }
 
-function drawOptionsSection() {}
+function drawOptionsSection(section) {
+  // Background
+  context.globalAlpha = section.alpha;
+  context.fillStyle = section.background_color;
+  context.fillRect(section.x, section.y, section.w, section.h);
+  context.globalAlpha = 1;
+
+  // Text
+  context.font = `${section.text_size} PressStart2P`;
+  context.fillStyle = WHITE;
+  context.fillText(
+    getText("retry") + ": ENTER",
+    section.retry_text_x + section.padding_left,
+    section.y + section.text_size * 2 + section.padding_top
+  );
+
+  var text_width = context.measureText(getText("quit") + ": ESC").width;
+  section.quit_text_x = GAME_W - section.padding_left - text_width;
+  context.fillText(
+    getText("quit") + ": ESC",
+    section.quit_text_x,
+    section.y + section.text_size * 2 + section.padding_top
+  );
+}

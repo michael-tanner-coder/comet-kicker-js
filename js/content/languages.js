@@ -62,6 +62,11 @@ const TEXT_CONTENT = {
     es: "presiona enter para continuar",
     fr: "appuyez sur entrée pour continuer",
   },
+  game_over: {
+    en: "GAME OVER!",
+    es: "¡JUEGO TERMINADO!",
+    fr: "JEU TERMINÉ!",
+  },
 
   // MENUS
   start_game: {

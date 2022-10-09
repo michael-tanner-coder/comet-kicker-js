@@ -442,20 +442,15 @@ function drawHP() {
 }
 
 function drawGameOverScreen() {
+  context.fillStyle = PINK;
+  drawCenteredText(`${getText("game_over")}`, 21);
+  context.fillStyle = WHITE;
+  drawCenteredText(`${getText("game_over")}`, 20);
+
   context.fillStyle = WHITE;
   drawScoreSection(SCORE_SECTION);
   drawAverageScoreSection(AVERAGE_SCORE_SECTION);
-
-  // drawCenteredText(`${getText("score")}: ${Math.round(score * 100) / 100}`, 50);
-
-  // drawCenteredText(
-  //   `${getText("average_score")}: ${Math.round(getAverageScore() * 100) / 100}`,
-  //   75
-  // );
-
-  // drawCenteredText(`${getText("retry")}: ${getText("press_enter")}`, 100);
-
-  // drawCenteredText(`${getText("quit")}: PRESS ESC`, 125);
+  drawOptionsSection(OPTIONS_SECTION);
 }
 
 function drawPauseScreen() {
