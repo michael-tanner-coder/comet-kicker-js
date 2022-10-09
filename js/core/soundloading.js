@@ -14,6 +14,7 @@ const soundList = [
   { file: "game-over.wav", name: "game_over" },
   { file: "lose-hp.mp3", name: "lose_hp" },
   { file: "heal-hp.wav", name: "heal_hp" },
+  { file: "missile.wav", name: "missile" },
   // { file: "bg_title.mp3", name: "test" },
   // Add your sound asset here ^
 ];

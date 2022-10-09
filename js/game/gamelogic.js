@@ -118,7 +118,13 @@ function playerShoot() {
     let shot = spawnBullet(PLAYER, PLAYER.direction, PLAYER.bullet_type);
     spark_fx(shot.x, shot.y);
     recoil(PLAYER, shot, shot.recoil);
-    playSoundEffect("shoot");
+
+    if (PLAYER.bullet_type === MISSILE_SHOT) {
+      playSoundEffect("missile");
+    } else {
+      playSoundEffect("shoot");
+    }
+
     PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
     PLAYER.shot_fired = true;
     PLAYER.kicking = true;

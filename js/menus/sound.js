@@ -30,7 +30,6 @@ addOptionRange(SFX_VOLUME_OPTION, 0, 10);
 
 createMenu({
   id: "soundMenu",
-  key: "sound",
   header: "SOUND",
   elements: [MASTER_VOLUME_OPTION, MUSIC_VOLUME_OPTION, SFX_VOLUME_OPTION],
 });
