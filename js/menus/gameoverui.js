@@ -65,24 +65,70 @@ const SCORE_SECTION = {
   ],
 };
 
-const AVERAGE_SCORE_SECTION = {
-  //   Section
-  background_color: PURPLE,
+const SCORE_BLOCK = {
+  // block
+  color: YELLOW,
+  shadow_color: PINK,
+  highlight_color: WHITE,
+  highlight_w: 4,
+  highlight_h: 0,
   x: 0,
-  y: 0,
-  w: 0,
+  y: GAME_H,
+  w: 28,
   h: 0,
   padding: 0,
+  alpha: 1,
+  score: 100,
+  display_score: 0,
+  margin_bottom: 6,
+  padding_bottom: 4,
+
+  // text
+  score_color: WHITE,
+  score_shadow_color: PINK,
+  text_x: 0,
+  text_y: 0,
+  text_size: 8,
+};
+
+const AVERAGE_SCORE_SECTION = {
+  //   Section
+  background_color: "black",
+  x: 0,
+  y: 100,
+  w: GAME_W,
+  h: 105,
+  padding: 6,
+  alpha: 0.3,
+
+  // Scores
+  scores: [
+    { ...SCORE_BLOCK, score: 20 },
+    { ...SCORE_BLOCK, score: 10 },
+    { ...SCORE_BLOCK, score: 50 },
+    { ...SCORE_BLOCK, score: 40 },
+    { ...SCORE_BLOCK, score: 30 },
+  ],
+  spacing: 24,
+  score_start_x: 47,
+
+  // Text
+  average_score_text: "average",
+  text_color: WHITE,
+  text_shadow_color: PINK,
+  text_x: 0,
+  text_y: 0,
 };
 
 const OPTIONS_SECTION = {
   //   Section
-  background_color: PURPLE,
+  background_color: "black",
   x: 0,
-  y: 0,
-  w: 0,
-  h: 0,
-  padding: 0,
+  y: 100,
+  w: GAME_W,
+  h: 105,
+  padding: 6,
+  alpha: 0.3,
 };
 
 function drawScoreSection(section) {
@@ -216,6 +262,116 @@ function updateScoreSection(section) {
   });
 }
 
-function drawAverageScoreSection() {}
+function updateAverageScoreSection(section) {
+  var text_width = context.measureText(
+    getText(section.average_score_text) + ": " + Math.ceil(score)
+  ).width;
+  section.text_x = section.x + section.w / 2 - text_width / 2;
+  section.text_y = 188;
+
+  section.scores.forEach((score_block, i) => {
+    // score block
+    score_block.x =
+      section.x + section.score_start_x + i * (section.spacing + score_block.w);
+
+    // score text
+    var score_text_width = context.measureText(String(score_block.score)).width;
+    score_block.text_x =
+      score_block.x + score_block.w / 2 - score_text_width / 2;
+    score_block.text_y =
+      score_block.y +
+      score_block.h +
+      score_block.text_size +
+      score_block.margin_bottom;
+
+    // highlight
+    score_block.highlight_h = score_block.h - score_block.padding_bottom;
+  });
+
+  // animate each score bar in a sequence
+  for (let i = 0; i < section.scores.length; i++) {
+    if (!growBarUpward(section.scores[i], section)) {
+      break;
+    }
+  }
+}
+
+function growBarUpward(bar, section) {
+  let max_score = Math.max(...section.scores.map((block) => block.score));
+  let max_h = 50;
+  let percentage = bar.score / max_score;
+  let target_h = percentage * max_h;
+  let target_y = section.y + section.padding + max_h - target_h;
+
+  bar.h = easingWithRate(bar.h, target_h, 0.3);
+  bar.y = easingWithRate(bar.y, target_y, 0.3);
+  bar.display_score = easingWithRate(bar.display_score, bar.score, 0.3);
+
+  return Math.ceil(bar.h) == Math.ceil(target_h);
+}
+
+function drawAverageScoreSection(section) {
+  // Background
+  context.globalAlpha = section.alpha;
+  context.fillStyle = section.background_color;
+  context.fillRect(section.x, section.y, section.w, section.h);
+  context.globalAlpha = 1;
+
+  // Draw score blocks
+  section.scores.forEach((score_block) => {
+    // base
+    context.fillStyle = score_block.color;
+    context.fillRect(
+      section.x + score_block.x,
+      score_block.y,
+      score_block.w,
+      score_block.h
+    );
+
+    // highlight
+    context.fillStyle = score_block.highlight_color;
+    context.fillRect(
+      section.x + score_block.x + 2,
+      score_block.y + 2,
+      score_block.highlight_w,
+      score_block.highlight_h
+    );
+
+    // shadow
+    context.fillStyle = score_block.shadow_color;
+    context.fillRect(
+      section.x + score_block.x,
+      score_block.y + score_block.h,
+      score_block.w,
+      2
+    );
+
+    // text
+    context.font = `${score_block.text_size}px PressStart2P`;
+    context.fillStyle = score_block.score_color;
+    context.fillText(
+      Math.ceil(score_block.display_score),
+      score_block.text_x,
+      score_block.text_y
+    );
+  });
+
+  // Draw main text
+  let scores = section.scores.map((block) => block.score);
+  let average = getAverageScore(scores);
+  context.font = "12px PressStart2P";
+  context.fillStyle = section.text_shadow_color;
+  context.fillText(
+    getText(section.average_score_text) + ": " + Math.ceil(average),
+    section.text_x,
+    section.text_y + 1
+  );
+  context.fillStyle = section.text_color;
+  context.fillText(
+    getText(section.average_score_text) + ": " + Math.ceil(average),
+    section.text_x,
+    section.text_y
+  );
+}
 
 function drawOptionsSection() {}

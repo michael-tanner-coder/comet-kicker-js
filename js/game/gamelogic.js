@@ -343,6 +343,7 @@ function updateGameOverScreen() {
   }
 
   updateScoreSection(SCORE_SECTION);
+  updateAverageScoreSection(AVERAGE_SCORE_SECTION);
 }
 
 function pauseGame() {
@@ -443,6 +444,7 @@ function drawHP() {
 function drawGameOverScreen() {
   context.fillStyle = WHITE;
   drawScoreSection(SCORE_SECTION);
+  drawAverageScoreSection(AVERAGE_SCORE_SECTION);
 
   // drawCenteredText(`${getText("score")}: ${Math.round(score * 100) / 100}`, 50);
 

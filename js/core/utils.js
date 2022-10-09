@@ -356,11 +356,11 @@ function saveScore(score) {
   window.localStorage.setItem("high_scores", JSON.stringify(high_scores));
 }
 
-function getAverageScore() {
-  var number_of_scores = recent_scores.length;
+function getAverageScore(scores) {
+  var number_of_scores = scores.length;
   var sum = 0;
-  for (var i = 0; i < recent_scores.length; i++) {
-    sum += recent_scores[i];
+  for (var i = 0; i < scores.length; i++) {
+    sum += scores[i];
   }
 
   return sum / number_of_scores;
