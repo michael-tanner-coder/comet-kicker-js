@@ -2,13 +2,30 @@ const GAMEPAD = {
   deadzone: 0.1, // to prevent drift on old gamepads
   axis: function (num) {
     if (!navigator.getGamepads) return 0;
-    let joy = navigator.getGamepads()[0];
-    return joy ? joy.axes[num] : 0;
+
+    let gamePads = navigator.getGamepads();
+    for (let joy of gamePads) {
+      if (joy && joy.axes[num])
+      {
+        return joy.axes[num];
+      }
+    }
+    return 0
   },
   butt: function (num) {
     if (!navigator.getGamepads) return 0;
-    let joy = navigator.getGamepads()[0];
-    return joy ? joy.buttons[num].value : 0;
+
+    let gamePads = navigator.getGamepads();
+    for (let joy of gamePads) {
+      // Handle gameepads without the full button set
+      if (joy && num < joy.buttons.length) {
+        if (joy.buttons[num].value !== 0) {
+          return joy.buttons[num].value;
+        }
+      }
+    }
+
+    return 0
   },
 
   // simple on/off booleans for keyboard-like constrols
