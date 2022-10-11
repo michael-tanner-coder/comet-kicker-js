@@ -12,7 +12,8 @@ const ANIMATIONS = {
   },
 
   // PLAYER ANIMATIONS
-  playerIdle: {
+  // idle
+  playerIdleRight: {
     sprite: "player_sheet",
     frames: [
       { x: 0, y: 0, w: 16, h: 16 },
@@ -20,22 +21,62 @@ const ANIMATIONS = {
     ],
     current_frame: 0,
   },
-  playerRun: {
+  playerIdleLeft: {
     sprite: "player_sheet",
     frames: [
       { x: 0, y: 16, w: 16, h: 16 },
-      { x: 16, y: 16, w: 16, h: 16 },
       { x: 32, y: 16, w: 16, h: 16 },
-      { x: 48, y: 16, w: 16, h: 16 },
+    ],
+    current_frame: 0,
+  },
+
+  // move
+  playerRunningRight: {
+    sprite: "player_sheet",
+    frames: [
+      { x: 0, y: 32, w: 16, h: 16 },
+      { x: 16, y: 32, w: 16, h: 16 },
+      { x: 32, y: 32, w: 16, h: 16 },
+      { x: 48, y: 32, w: 16, h: 16 },
       { x: 16, y: 32, w: 16, h: 16 },
     ],
     current_frame: 0,
   },
-  playerKick: {
+  playerRunningLeft: {
     sprite: "player_sheet",
-    frames: [{ x: 0, y: 32, w: 16, h: 16 }],
+    frames: [
+      { x: 0, y: 48, w: 16, h: 16 },
+      { x: 16, y: 48, w: 16, h: 16 },
+      { x: 32, y: 48, w: 16, h: 16 },
+      { x: 48, y: 48, w: 16, h: 16 },
+      { x: 16, y: 48, w: 16, h: 16 },
+    ],
     current_frame: 0,
   },
+
+  // kick
+  playerKickingRight: {
+    sprite: "player_sheet",
+    frames: [{ x: 0, y: 64, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  playerKickingLeft: {
+    sprite: "player_sheet",
+    frames: [{ x: 16, y: 64, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  playerKickingUp: {
+    sprite: "player_sheet",
+    frames: [{ x: 32, y: 64, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  playerKickingDown: {
+    sprite: "player_sheet",
+    frames: [{ x: 48, y: 64, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+
+  // lose
   playerLose: {
     sprite: "player_sheet",
     frames: [{ x: 0, y: 48, w: 16, h: 16 }],

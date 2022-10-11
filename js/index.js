@@ -58,7 +58,7 @@ function update(deltaTime) {
   playerJump();
 
   // ANIMATIONS
-  PLAYER.animation = getPlayerAnimation();
+  PLAYER.animation = getAnimationDirection(PLAYER);
 
   // POWERUPS
   checkPlayerPowerup();

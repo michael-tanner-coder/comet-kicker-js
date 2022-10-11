@@ -1,6 +1,7 @@
 // PLAYER
 const PLAYER_DEFAULT = {
   type: "player",
+  name: "player",
 
   // position/dimensions
   x: 0,

@@ -32,10 +32,11 @@ const PICKUP_TEXT = {
 };
 const TITLE = "COMET KICKER";
 const PLAYER_STATES = {
-  IDLE: "idle",
-  RUNNING: "running",
-  KICKING: "kicking",
-  DEAD: "dead",
+  IDLE: "Idle",
+  RUNNING: "Running",
+  KICKING: "Kicking",
+  DEAD: "Lose",
+  JUMPING: "Jumping",
 };
 
 const PLAYER_STATE_TO_ANIMATION = {

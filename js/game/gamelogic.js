@@ -165,6 +165,10 @@ function playerShoot() {
 
   if (PLAYER.kick_time <= 0) {
     PLAYER.kicking = false;
+    if (PLAYER.direction === 270 || PLAYER.direction === 90) {
+      PLAYER.direction = 0;
+    }
+    PLAYER.state = PLAYER_STATES.IDLE;
     PLAYER.kick_time = PLAYER_DEFAULT.kick_time;
   }
 }
