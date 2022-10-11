@@ -176,8 +176,9 @@ function checkIfOutOfBounds(object) {
 }
 
 function buildMap() {
-  BLOCK_MAP.forEach((block) => {
+  BLOCK_MAP.forEach((block, i) => {
     var new_block = { ...BLOCK };
+    new_block.block_id = i;
     new_block.x = withGrid(block.x);
     new_block.y = withGrid(block.y);
     GAME_OBJECTS.push(new_block);

@@ -98,6 +98,7 @@ function update(deltaTime) {
   updateEnemies(enemies);
   updateText(text);
   updateExplosions(explosions);
+  updatePlatforms(blocks);
 
   // COLLECTIBLE SPAWNS
   updateCollectibleSpawnTimer(collectibles);
@@ -117,6 +118,7 @@ function update(deltaTime) {
   // player to block
   PLAYER.hit_ground = false;
   blocks.forEach((block) => {
+    if (block.destroyed) return;
     if (collisionDetected(block, PLAYER)) {
       PLAYER.hit_ground = true;
       PLAYER.jumping = false;
@@ -203,11 +205,13 @@ function update(deltaTime) {
     });
 
     blocks.forEach((block) => {
+      if (block.destroyed) return;
       if (collisionDetected(block, bullet) && bullet.exploding) {
         explosion(block.x, block.y);
         spawnObject(EXPLOSION, bullet.x, bullet.y);
-        removeObj(block);
+        // removeObj(block);
         removeObj(bullet);
+        block.destroyed = true;
       }
     });
   });
@@ -233,13 +237,16 @@ function update(deltaTime) {
       explosion(shield.x, shield.y);
     }
 
+    // enemy to block
     blocks.forEach((block) => {
+      if (block.destroyed) return;
       if (collisionDetected(block, enemy)) {
         if (enemy.exploding) {
-          // destroy platform
+          // destroy platform and add a copy to the missing platforms array
           removeObj(enemy);
-          removeObj(block);
+          // removeObj(block);
           explosion(enemy.x, enemy.y);
+          block.destroyed = true;
         }
 
         if (enemy.solid) {
@@ -279,9 +286,12 @@ function update(deltaTime) {
       }
     });
     blocks.forEach((block) => {
+      if (block.destroyed) return;
       if (collisionWithCircleDetected(exp, block)) {
         explosion(block.x, block.y);
-        removeObj(block);
+        // removeObj(block);
+        block.destroyed = true;
+        start_platform_spawn_timer = true;
       }
     });
   });
@@ -427,6 +437,6 @@ const animationFrame = () => new Promise(requestAnimationFrame);
 // INIT
 MENU_STACK.push(getMenu("mainMenu"));
 startGame();
-startGameLoop();
+// startGameLoop();
 
-// loop();
+loop();

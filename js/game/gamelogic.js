@@ -38,6 +38,27 @@ function updateExplosions(explosions) {
     }
   });
 }
+
+function updatePlatforms(platforms) {
+  platforms.forEach((plat) => {
+    if (plat.destroyed) {
+      plat.spawn_timer--;
+    }
+
+    if (plat.spawn_timer <= 0) {
+      plat.x = 0 - UNIT_SIZE;
+      plat.destroyed = false;
+      plat.spawn_timer = MAX_PLATFORM_SPAWN_TIMER;
+    }
+
+    var target_platform = BLOCK_MAP[plat.block_id];
+    plat.x = easing(plat.x, withGrid(target_platform.x));
+    plat.x = Math.ceil(plat.x);
+    // if (Math.abs(plat.x - withGrid(target_platform.x)) <= 9) {
+    //   plat.x = withGrid(target_platform.x);
+    // }
+  });
+}
 // sound
 function updateMusic() {
   if (!song_playing) {
@@ -370,6 +391,7 @@ function drawBackground() {
 
 function drawObjects() {
   GAME_OBJECTS.forEach((obj) => {
+    if (obj.destroyed) return;
     // render a trail based on the object's previous positions
     if (obj.has_trail) {
       drawCircleTrail(obj);

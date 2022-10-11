@@ -72,6 +72,7 @@ const PLAYER = { ...PLAYER_DEFAULT };
 const BLOCK = {
   x: 0,
   y: 0,
+  block_id: 0,
   angle: 0,
   color: "blue",
   w: UNIT_SIZE,
@@ -79,6 +80,7 @@ const BLOCK = {
   type: "floor",
   sprite: "platform",
   render_hitbox: false,
+  spawn_timer: MAX_PLATFORM_SPAWN_TIMER,
   hitboxes: [
     { name: "top", x: 0, y: 0, w: 16, h: 8, color: "yellow" },
     { name: "left", x: 0, y: 2, w: 2, h: 14, color: "red" },
@@ -245,7 +247,7 @@ const BOUNCING_ENEMY = {
   exploding: false,
 };
 
-const ENEMIES = [EXPLODING_ENEMY, ENEMY, ROLLING_ENEMY];
+const ENEMIES = [ENEMY, EXPLODING_ENEMY];
 
 // POWERUPS and POINT COLLECTIBLES
 const COLLECT = {
@@ -281,7 +283,7 @@ const RAPID_FIRE = { ...COLLECT, pickup: PICKUPS.RAPID_FIRE };
 const MISSILE = { ...COLLECT, pickup: PICKUPS.MISSILE };
 const SHIELD = { ...COLLECT, pickup: PICKUPS.SHIELD };
 const HP = { ...COLLECT, pickup: PICKUPS.HP, sprite: "hp_up" };
-const COLLECTIBLES = [RAPID_FIRE, WIDE_SHOT, MISSILE, SHIELD, HP, COLLECT];
+const COLLECTIBLES = [MISSILE, WIDE_SHOT, RAPID_FIRE, SHIELD, HP, COLLECT];
 
 // BACKGROUNDS FOR PARALLAX
 const BACKGROUND_1 = {

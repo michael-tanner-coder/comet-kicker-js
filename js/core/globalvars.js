@@ -5,6 +5,8 @@ var debug_mode = false;
 // spawning
 var spawn_timer = MAX_SPAWN_TIMER;
 var collect_spawn_timer = MAX_COLLECT_SPAWN_TIMER;
+var platform_spawn_timer = MAX_PLATFORM_SPAWN_TIMER;
+var start_platform_spawn_timer = false;
 
 // game state
 var game_over = false;
