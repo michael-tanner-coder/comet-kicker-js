@@ -56,7 +56,7 @@ class Select extends Input {
     super(props);
     this.text = props?.text || "Test select";
     this.type = props?.type || INPUT_TYPES.select;
-    this.currentOption = 0;
+    this.currentOption = props?.currentOption || 0;
     this.options = props?.options || [];
     this.onChange =
       props?.onChange ||

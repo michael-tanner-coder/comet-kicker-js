@@ -1,6 +1,7 @@
 const GAME_SPEED_OPTION = new Select({
   text: "GAME SPEED",
   key: "game_speed",
+  currentOption: game_speed * 10 - 1, // 0 based (1-10), so (0-9)
   onChange: (input) => {
     var currentOption = input.options[input.currentOption];
     game_speed = currentOption.value / 10;
