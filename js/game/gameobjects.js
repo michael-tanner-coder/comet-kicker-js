@@ -91,6 +91,8 @@ const BLOCK = {
 // PROJECTILES
 const BULLET = {
   type: "bullet",
+  name: "normalShot",
+  state: "Move",
   w: 8,
   h: 8,
   x: 0,
@@ -98,7 +100,7 @@ const BULLET = {
   color: YELLOW,
   direction: 0,
   speed: 6,
-  animation: ANIMATIONS.shoot,
+  animation: ANIMATIONS.normalShotMoveLeft,
   has_trail: true,
   render_hitbox: false,
   recoil: 5,
@@ -106,6 +108,8 @@ const BULLET = {
 };
 const RAPID_BULLET = {
   type: "bullet",
+  name: "normalShot",
+  state: "Move",
   w: 8,
   h: 8,
   x: 0,
@@ -113,7 +117,7 @@ const RAPID_BULLET = {
   color: YELLOW,
   direction: 0,
   speed: 6,
-  animation: ANIMATIONS.shoot,
+  animation: ANIMATIONS.normalShotMoveLeft,
   has_trail: true,
   render_hitbox: false,
   recoil: 10,
@@ -122,9 +126,12 @@ const RAPID_BULLET = {
 
 const WIDE_BULLET = {
   ...BULLET,
-  h: 24,
+  name: "wideShot",
+  state: "Move",
+  h: 32,
+  w: 32,
   recoil: 8,
-  animation: ANIMATIONS.wideShoot,
+  animation: ANIMATIONS.wideShotMoveLeft,
 };
 
 const MISSILE_SHOT = {
@@ -132,17 +139,18 @@ const MISSILE_SHOT = {
   x: 0,
   y: 0,
   h: 16,
-  w: 26,
+  w: 16,
   type: "bullet",
-  sprite: "missile",
+  name: "missile",
+  state: "Move",
   speed: 4,
   color: YELLOW,
+  animation: ANIMATIONS.missileMoveLeft,
   render_hitbox: false,
   has_trail: true,
-  animatiion: undefined,
   recoil: 10,
   has_rotation: true,
-  angle: 1.5,
+  angle: 0,
   exploding: true,
 };
 
@@ -159,6 +167,7 @@ const EXPLOSION = {
 // ENEMIES
 const ENEMY = {
   type: "enemy",
+  name: "enemy",
   w: 16,
   h: 16,
   x: 0,
@@ -176,7 +185,7 @@ const ENEMY = {
   hit_ground: false,
   hit_wall: false,
   has_trail: true,
-  animation: ANIMATIONS.enemyMove,
+  animation: ANIMATIONS.enemyMoveRight,
   animation_speed: 12,
   movement_direction: "diagnoal",
   spawn_points: [
@@ -185,13 +194,14 @@ const ENEMY = {
     { x: 0, y: 11 },
   ],
   angle: 0,
+  state: "Move",
 };
 
 const EXPLODING_ENEMY = {
   ...ENEMY,
+  name: "explodingEnemy",
   color: VIOLET,
-  animation: undefined,
-  sprite: "exploding_enemy",
+  animation: ANIMATIONS.explodingEnemyMoveDown,
   movement_direction: "vertical",
   speed: 0,
   direction: 90,
@@ -208,35 +218,23 @@ const EXPLODING_ENEMY = {
 const ROLLING_ENEMY = {
   ...ENEMY,
   solid: true,
+  name: "rollingEnemy",
   w: 32,
   h: 32,
   color: VIOLET,
-  animation: undefined,
-  sprite: "rolling_enemy",
-  movement_direction: "vertical",
+  animation: ANIMATIONS.rollingEnemyMoveLeft,
   speed: 2,
   hp: 3,
-  direction: 180,
-  spawn_points: [
-    { x: 2, y: 1 },
-    { x: 4, y: 1 },
-    { x: 6, y: 1 },
-    { x: 8, y: 1 },
-    { x: 10, y: 1 },
-  ],
-  exploding: false,
   render_hitbox: false,
 };
 
 const BOUNCING_ENEMY = {
   ...ENEMY,
   solid: true,
+  name: "bouncingEnemy",
   color: VIOLET,
-  animation: undefined,
-  sprite: "bouncing_enemy",
-  movement_direction: "vertical",
-  speed: 0,
-  direction: 180,
+  animation: ANIMATIONS.bouncingEnemyMoveLeft,
+  speed: 2,
   spawn_points: [
     { x: 2, y: 1 },
     { x: 4, y: 1 },
@@ -244,10 +242,9 @@ const BOUNCING_ENEMY = {
     { x: 8, y: 1 },
     { x: 10, y: 1 },
   ],
-  exploding: false,
 };
 
-const ENEMIES = [ENEMY, EXPLODING_ENEMY];
+const ENEMIES = [ENEMY, EXPLODING_ENEMY, ROLLING_ENEMY, BOUNCING_ENEMY];
 
 // POWERUPS and POINT COLLECTIBLES
 const COLLECT = {

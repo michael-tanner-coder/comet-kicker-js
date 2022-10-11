@@ -209,7 +209,6 @@ function update(deltaTime) {
       if (collisionDetected(block, bullet) && bullet.exploding) {
         explosion(block.x, block.y);
         spawnObject(EXPLOSION, bullet.x, bullet.y);
-        // removeObj(block);
         removeObj(bullet);
         block.destroyed = true;
       }
@@ -244,7 +243,6 @@ function update(deltaTime) {
         if (enemy.exploding) {
           // destroy platform and add a copy to the missing platforms array
           removeObj(enemy);
-          // removeObj(block);
           explosion(enemy.x, enemy.y);
           block.destroyed = true;
         }
@@ -289,7 +287,6 @@ function update(deltaTime) {
       if (block.destroyed) return;
       if (collisionWithCircleDetected(exp, block)) {
         explosion(block.x, block.y);
-        // removeObj(block);
         block.destroyed = true;
         start_platform_spawn_timer = true;
       }

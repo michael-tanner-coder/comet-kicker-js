@@ -387,6 +387,37 @@ function getPlayerAnimation() {
   return ANIMATIONS[PLAYER_STATE_TO_ANIMATION[PLAYER.state]];
 }
 
+function mapDirectionToString(direction) {
+  let map = {
+    [0]: "Right",
+    [90]: "Down",
+    [180]: "Left",
+    [270]: "Up",
+  };
+
+  return map[direction];
+}
+
+function getAnimationDirection(object) {
+  let type = object.name;
+  let action = object.state;
+
+  // return an animation that has no specific direction
+  if (ANIMATIONS[type + action]) {
+    return ANIMATIONS[animation_key];
+  }
+
+  // return an animation that has a direction
+  let direction = mapDirectionToString(object.direction);
+  let animation_key = type + action + direction;
+  if (ANIMATIONS[animation_key]) {
+    return ANIMATIONS[animation_key];
+  }
+
+  // if no other animation is available, return the object's default animation
+  return object.animation;
+}
+
 function drawTrail(obj) {
   object_position_map[obj.id]?.forEach((pos, i) => {
     // ratio that moves toward one as we reach the end of the trail

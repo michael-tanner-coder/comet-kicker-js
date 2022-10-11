@@ -43,40 +43,79 @@ const ANIMATIONS = {
   },
 
   // SHOOTING ANIMATIONS
-  shoot: {
+  // normal shot
+  normalShotMoveRight: {
     sprite: "shot",
-    frames: [{ x: 0, y: 0, w: 22, h: 17 }],
+    frames: [{ x: 0, y: 0, w: 16, h: 22 }],
     current_frame: 0,
   },
-  wideShoot: {
+  normalShotMoveLeft: {
+    sprite: "shot",
+    frames: [{ x: 16, y: 0, w: 16, h: 22 }],
+    current_frame: 0,
+  },
+  normalShotMoveDown: {
+    sprite: "shot",
+    frames: [{ x: 32, y: 0, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  normalShotMoveUp: {
+    sprite: "shot",
+    frames: [{ x: 48, y: 0, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+
+  // wide shot
+  wideShotMoveRight: {
     sprite: "wide_shot",
     frames: [{ x: 0, y: 0, w: 32, h: 32 }],
     current_frame: 0,
   },
+  wideShotMoveLeft: {
+    sprite: "wide_shot",
+    frames: [{ x: 32, y: 0, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+  wideShotMoveDown: {
+    sprite: "wide_shot",
+    frames: [{ x: 64, y: 0, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+  wideShotMoveUp: {
+    sprite: "wide_shot",
+    frames: [{ x: 96, y: 0, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+
+  // missile shot
+  missileMoveUp: {
+    sprite: "missile",
+    frames: [{ x: 0, y: 0, w: 16, h: 32 }],
+    current_frame: 0,
+  },
+  missileMoveDown: {
+    sprite: "missile",
+    frames: [{ x: 16, y: 0, w: 16, h: 32 }],
+    current_frame: 0,
+  },
+  missileMoveLeft: {
+    sprite: "missile",
+    frames: [{ x: 32, y: 16, w: 32, h: 16 }],
+    current_frame: 0,
+  },
+  missileMoveRight: {
+    sprite: "missile",
+    frames: [{ x: 32, y: 0, w: 32, h: 16 }],
+    current_frame: 0,
+  },
 
   // ENEMY ANIMATIONS
+  // basic enemy
   enemyMoveRight: {
     sprite: "enemy_sheet",
     frames: [
       // start
       { x: 0, y: 0, w: 16, h: 16 },
-      { x: 0, y: 0, w: 16, h: 16 },
-      { x: 0, y: 0, w: 16, h: 16 },
-      { x: 0, y: 0, w: 16, h: 16 },
-      { x: 0, y: 0, w: 16, h: 16 },
-      { x: 0, y: 0, w: 16, h: 16 },
-      { x: 0, y: 0, w: 16, h: 16 },
-      { x: 0, y: 0, w: 16, h: 16 },
-
-      // middle
-      { x: 16, y: 0, w: 16, h: 16 },
-      { x: 32, y: 0, w: 16, h: 16 },
-
-      // end
-      { x: 48, y: 0, w: 16, h: 16 },
-      { x: 48, y: 0, w: 16, h: 16 },
-      { x: 48, y: 0, w: 16, h: 16 },
-      { x: 48, y: 0, w: 16, h: 16 },
     ],
     current_frame: 0,
   },
@@ -85,30 +124,55 @@ const ANIMATIONS = {
     frames: [
       // start
       { x: 0, y: 16, w: 16, h: 16 },
-      { x: 0, y: 16, w: 16, h: 16 },
-      { x: 0, y: 16, w: 16, h: 16 },
-      { x: 0, y: 16, w: 16, h: 16 },
-      { x: 0, y: 16, w: 16, h: 16 },
-      { x: 0, y: 16, w: 16, h: 16 },
-      { x: 0, y: 16, w: 16, h: 16 },
-      { x: 0, y: 16, w: 16, h: 16 },
-
-      // middle
-      { x: 16, y: 16, w: 16, h: 16 },
-      { x: 32, y: 16, w: 16, h: 16 },
-
-      // end
-      { x: 48, y: 16, w: 16, h: 16 },
-      { x: 48, y: 16, w: 16, h: 16 },
-      { x: 48, y: 16, w: 16, h: 16 },
-      { x: 48, y: 16, w: 16, h: 16 },
     ],
     current_frame: 0,
   },
-  rollingEnemyMoveRight: {},
-  rollingEnemyMoveLeft: {},
-  bouncingEnemyMoveLeft: {},
-  bouncingEnemyMoveLeft: {},
+
+  // rolling enemy
+  rollingEnemyMoveRight: {
+    sprite: "rolling_enemy",
+    frames: [
+      // start
+      { x: 0, y: 0, w: 32, h: 32 },
+    ],
+    current_frame: 0,
+  },
+  rollingEnemyMoveLeft: {
+    sprite: "rolling_enemy",
+    frames: [
+      // start
+      { x: 0, y: 32, w: 32, h: 32 },
+    ],
+    current_frame: 0,
+  },
+
+  // bouncing enemy
+  bouncingEnemyMoveRight: {
+    sprite: "bouncing_enemy",
+    frames: [
+      // start
+      { x: 0, y: 0, w: 16, h: 16 },
+    ],
+    current_frame: 0,
+  },
+  bouncingEnemyMoveLeft: {
+    sprite: "bouncing_enemy",
+    frames: [
+      // start
+      { x: 0, y: 16, w: 16, h: 16 },
+    ],
+    current_frame: 0,
+  },
+
+  // exploding enemy
+  explodingEnemyMoveDown: {
+    sprite: "exploding_enemy",
+    frames: [
+      // start
+      { x: 0, y: 0, w: 16, h: 16 },
+    ],
+    current_frame: 0,
+  },
 };
 
 const playAnimation = (animation, speed, x, y, w_scale = 1, h_scale = 1) => {

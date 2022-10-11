@@ -54,9 +54,6 @@ function updatePlatforms(platforms) {
     var target_platform = BLOCK_MAP[plat.block_id];
     plat.x = easing(plat.x, withGrid(target_platform.x));
     plat.x = Math.ceil(plat.x);
-    // if (Math.abs(plat.x - withGrid(target_platform.x)) <= 9) {
-    //   plat.x = withGrid(target_platform.x);
-    // }
   });
 }
 // sound
@@ -454,6 +451,7 @@ function drawObjects() {
 
     // play the object's current animation
     if (images_loaded && obj.animation) {
+      obj.animation = getAnimationDirection(obj);
       playAnimation(obj.animation, obj.animation_speed || 1, obj.x, obj.y);
     }
   });
