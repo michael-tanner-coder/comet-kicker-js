@@ -411,29 +411,9 @@ function loop() {
   window.requestAnimationFrame(loop);
 }
 
-async function startGameLoop() {
-  for await (const delta of gameLoop()) {
-    inputListener();
-    update(delta);
-    draw();
-  }
-}
-
-async function* gameLoop() {
-  let prevTime = await animationFrame();
-  while (true) {
-    const currentTime = await animationFrame();
-    const deltaSeconds = (currentTime - prevTime) / 1000;
-    prevTime = currentTime;
-    yield deltaSeconds;
-  }
-}
-
-const animationFrame = () => new Promise(requestAnimationFrame);
-
 // INIT
 MENU_STACK.push(getMenu("mainMenu"));
 startGame();
-// startGameLoop();
+
 
 loop();
