@@ -2,18 +2,27 @@ const TEXT_CONTENT = {
   // LANGUAGES
   english: {
     en: "english",
-    es: "inglés",
-    fr: "espagnol",
+    es: "english",
+    fr: "english",
+    ch: "english",
   },
   spanish: {
-    en: "spanish",
+    en: "español",
     es: "español",
-    fr: "spanish",
+    fr: "español",
+    ch: "español",
   },
   french: {
-    en: "french",
-    es: "francés",
+    en: "français",
+    es: "français",
     fr: "français",
+    ch: "français",
+  },
+  chinese: {
+    en: "简体",
+    es: "简体",
+    fr: "简体",
+    ch: "简体",
   },
 
   // GAME TEXT
@@ -21,51 +30,61 @@ const TEXT_CONTENT = {
     en: "COMET KICKER",
     es: "COMET KICKER",
     fr: "COMET KICKER",
+    ch: "COMET KICKER",
   },
   score: {
     en: "score",
     es: "puntaje",
     fr: "score",
+    ch: "分 ",
   },
   average_score: {
     en: "average score",
     es: "puntuación media",
     fr: "score moyen",
+    ch: "平均分",
   },
   average: {
     en: "average",
     es: "media",
     fr: "moyen",
+    ch: "平均",
   },
   retry: {
     en: "retry",
     es: "rever",
     fr: "recommencez",
+    ch: "再试一次",
   },
   quit: {
     en: "quit",
     fr: "quitter",
     es: "abandonar",
+    ch: "停",
   },
   press_enter: {
     en: "press enter",
     es: "presiona enter",
     fr: "appuyez sur entrée",
+    ch: "",
   },
   game_paused: {
-    en: "game paused",
-    es: "juego pausado",
-    fr: "jeu en pause",
+    en: "paused",
+    es: "pausado",
+    fr: "pause",
+    ch: "暂停",
   },
   press_enter_to_continue: {
     en: "press enter to continue",
     es: "presiona enter para continuar",
     fr: "appuyez sur entrée pour continuer",
+    ch: "按回车键",
   },
   game_over: {
     en: "GAME OVER!",
     es: "¡JUEGO TERMINADO!",
     fr: "JEU TERMINÉ!",
+    ch: "游戏结束了!",
   },
 
   // MENUS
@@ -73,51 +92,61 @@ const TEXT_CONTENT = {
     en: "START GAME",
     es: "EMPEZAR JUEGO",
     fr: "DÉMARRER JEU",
+    ch: "",
   },
   high_scores: {
     en: "HIGH SCORES",
     es: "PUNTUACIONES ALTAS",
     fr: "SCORES ÉLEVÉS",
+    ch: "",
   },
   options: {
     en: "OPTIONS",
     es: "OPCIONES",
     fr: "OPTIONS",
+    ch: "",
   },
   credits: {
     en: "CREDITS",
     es: "CRÉDITOS",
     fr: "CRÉDITS",
+    ch: "",
   },
   graphics: {
     en: "GRAPHICS",
     es: "GRÁFICOS",
     fr: "GRAPHIQUE",
+    ch: "",
   },
   sound: {
     en: "SOUND",
     es: "SONIDO",
     fr: "DU SON",
+    ch: "",
   },
   gameplay: {
     en: "GAMEPLAY",
     es: "JUEGO",
     fr: "JEU",
+    ch: "",
   },
   language: {
     en: "LANGUAGE",
     es: "IDIOMA",
     fr: "LANGUE",
+    ch: "",
   },
   data: {
     en: "DATA",
     es: "DATOS",
     fr: "LES DONNÉES",
+    ch: "",
   },
   controls: {
     en: "CONTROLS",
     es: "CONTROL",
     fr: "LES CONTRÔLES",
+    ch: "",
   },
 
   // OPTION VALUES
@@ -125,11 +154,13 @@ const TEXT_CONTENT = {
     en: "on",
     es: "en",
     fr: "sur",
+    ch: "",
   },
   off: {
     en: "off",
     es: "apagado",
     fr: "à l'arrêt",
+    ch: "",
   },
 
   // GRAPHICS
@@ -137,11 +168,13 @@ const TEXT_CONTENT = {
     en: "FULLSCREEN",
     es: "PANTALLA COMPLETA",
     fr: "PLEIN ÉCRAN",
+    ch: "",
   },
   resolution: {
     en: "RESOLUTION",
     es: "RESOLUCIÓN",
     fr: "RÉSOLUTION",
+    ch: "",
   },
 
   // SOUND
@@ -149,16 +182,19 @@ const TEXT_CONTENT = {
     en: "MASTER VOLUME",
     es: "VOLUMEN PRINCIPAL",
     fr: "VOLUME PRINCIPAL",
+    ch: "",
   },
   sound_volume: {
     en: "SOUND VOLUME",
     es: "SONIDO",
     fr: "DU SON",
+    ch: "",
   },
   music_volume: {
     en: "MUSIC VOLUME",
     es: "MÚSICA",
     fr: "MUSIQUE",
+    ch: "",
   },
 
   // GAMEPLAY

@@ -426,7 +426,7 @@ function drawObjects() {
       context.fillStyle = obj.color;
       context.fillRect(obj.x, obj.y, obj.w, obj.h);
 
-      obj?.hitboxes.forEach((box) => {
+      obj?.hitboxes?.forEach((box) => {
         context.fillStyle = box.color;
         context.fillRect(obj.x + box.x, obj.y + box.y, box.w, box.h);
       });

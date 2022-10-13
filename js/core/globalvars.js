@@ -1,6 +1,6 @@
 // GLOBAL VARIABLES
 // dev mode
-var debug_mode = false;
+var debug_mode = true;
 
 // spawning
 var spawn_timer = MAX_SPAWN_TIMER;
@@ -23,7 +23,7 @@ var max_recent_score_list_length = 10;
 // game options
 var render_hitboxes = false;
 var fullscreen = false;
-var current_language = "en";
+var current_language = "ch";
 var time_scale = 1;
 var game_speed = 1;
 var screen_shake_on = true;
