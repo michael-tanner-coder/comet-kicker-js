@@ -182,7 +182,7 @@ const TEXT_CONTENT = {
     en: "MASTER VOLUME",
     es: "VOLUMEN PRINCIPAL",
     fr: "VOLUME PRINCIPAL",
-    ch: "",
+    ch: "音量",
   },
   sound_volume: {
     en: "SOUND VOLUME",
