@@ -23,7 +23,20 @@ var max_recent_score_list_length = 10;
 // game options
 var render_hitboxes = false;
 var fullscreen = false;
+
+// search browser preferences for the first language that matches one of the game's accepted languages
+let preferred_language = navigator.languages.find((lang_pref) =>
+  ACCEPTED_LANGUAGES.find((lang) => lang === lang_pref)
+);
+
+// default to english if no preferred language is available
 var current_language = "en";
+
+// if preferred_language is available, set our current_language to the user's preference
+if (preferred_language) {
+  current_language = preferred_language;
+}
+
 var time_scale = 1;
 var game_speed = 1;
 var screen_shake_on = true;
