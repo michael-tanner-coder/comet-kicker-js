@@ -38,7 +38,7 @@ const CHINESE = new Button({
   text: "CHINESE",
   key: "chinese",
   onSelect: (input) => {
-    current_language = "ch";
+    current_language = "zh";
   },
 });
 createMenu({
