@@ -66,7 +66,7 @@ const TEXT_CONTENT = {
     en: "press enter",
     es: "presiona enter",
     fr: "appuyez sur entrée",
-    ch: "",
+    ch: "按回车键",
   },
   game_paused: {
     en: "paused",
@@ -92,19 +92,19 @@ const TEXT_CONTENT = {
     en: "START GAME",
     es: "EMPEZAR JUEGO",
     fr: "DÉMARRER JEU",
-    ch: "",
+    ch: "开始",
   },
   high_scores: {
     en: "HIGH SCORES",
     es: "PUNTUACIONES ALTAS",
     fr: "SCORES ÉLEVÉS",
-    ch: "",
+    ch: "高分",
   },
   options: {
     en: "OPTIONS",
     es: "OPCIONES",
     fr: "OPTIONS",
-    ch: "",
+    ch: "选单",
   },
   credits: {
     en: "CREDITS",
@@ -116,37 +116,37 @@ const TEXT_CONTENT = {
     en: "GRAPHICS",
     es: "GRÁFICOS",
     fr: "GRAPHIQUE",
-    ch: "",
+    ch: "制图",
   },
   sound: {
     en: "SOUND",
     es: "SONIDO",
     fr: "DU SON",
-    ch: "",
+    ch: "声音",
   },
   gameplay: {
     en: "GAMEPLAY",
     es: "JUEGO",
     fr: "JEU",
-    ch: "",
+    ch: "游戏性",
   },
   language: {
     en: "LANGUAGE",
     es: "IDIOMA",
     fr: "LANGUE",
-    ch: "",
+    ch: "语言",
   },
   data: {
     en: "DATA",
     es: "DATOS",
     fr: "LES DONNÉES",
-    ch: "",
+    ch: "数据",
   },
   controls: {
     en: "CONTROLS",
     es: "CONTROL",
     fr: "LES CONTRÔLES",
-    ch: "",
+    ch: "游戏控制",
   },
 
   // OPTION VALUES
@@ -154,13 +154,13 @@ const TEXT_CONTENT = {
     en: "on",
     es: "en",
     fr: "sur",
-    ch: "",
+    ch: "开",
   },
   off: {
     en: "off",
     es: "apagado",
     fr: "à l'arrêt",
-    ch: "",
+    ch: "关",
   },
 
   // GRAPHICS
@@ -188,13 +188,13 @@ const TEXT_CONTENT = {
     en: "SOUND VOLUME",
     es: "SONIDO",
     fr: "DU SON",
-    ch: "",
+    ch: "声效",
   },
   music_volume: {
     en: "MUSIC VOLUME",
     es: "MÚSICA",
     fr: "MUSIQUE",
-    ch: "",
+    ch: "音乐",
   },
 
   // GAMEPLAY
