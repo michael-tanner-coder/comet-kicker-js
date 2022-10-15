@@ -1,25 +1,37 @@
 const BLOCK_MAP = [
-  // LEFT PLATFORM
+  // TOP LEFT PLATFORM
   { x: 0, y: 4 },
   { x: 1, y: 4 },
   { x: 2, y: 4 },
   { x: 3, y: 4 },
 
-  // RIGHT PLATFORM
-  { x: GAME_W / UNIT_SIZE - 1, y: 6 },
-  { x: GAME_W / UNIT_SIZE - 2, y: 6 },
-  { x: GAME_W / UNIT_SIZE - 3, y: 6 },
-  { x: GAME_W / UNIT_SIZE - 4, y: 6 },
+  // TOP RIGHT PLATFORM
+  { x: GAME_W / UNIT_SIZE - 1, y: 4 },
+  { x: GAME_W / UNIT_SIZE - 2, y: 4 },
+  { x: GAME_W / UNIT_SIZE - 3, y: 4 },
+  { x: GAME_W / UNIT_SIZE - 4, y: 4 },
+
+  // BOTTOM LEFT PLATFORM
+  { x: 0, y: 12 },
+  { x: 1, y: 12 },
+  { x: 2, y: 12 },
+  { x: 3, y: 12 },
+
+  // BOTTOM RIGHT PLATFORM
+  { x: GAME_W / UNIT_SIZE - 1, y: 12 },
+  { x: GAME_W / UNIT_SIZE - 2, y: 12 },
+  { x: GAME_W / UNIT_SIZE - 3, y: 12 },
+  { x: GAME_W / UNIT_SIZE - 4, y: 12 },
 
   // MIDDLE PLATFORM
-  { x: GAME_W / UNIT_SIZE / 2 - 1, y: 12 },
-  { x: GAME_W / UNIT_SIZE / 2 - 2, y: 12 },
-  { x: GAME_W / UNIT_SIZE / 2 - 3, y: 12 },
-  { x: GAME_W / UNIT_SIZE / 2 - 4, y: 12 },
-  { x: GAME_W / UNIT_SIZE / 2 - 5, y: 12 },
-  { x: GAME_W / UNIT_SIZE / 2 - 6, y: 12 },
-  { x: GAME_W / UNIT_SIZE / 2 - 7, y: 12 },
-  { x: GAME_W / UNIT_SIZE / 2 - 8, y: 12 },
+  { x: GAME_W / UNIT_SIZE / 2 - 1 + 4, y: 8 },
+  { x: GAME_W / UNIT_SIZE / 2 - 2 + 4, y: 8 },
+  { x: GAME_W / UNIT_SIZE / 2 - 3 + 4, y: 8 },
+  { x: GAME_W / UNIT_SIZE / 2 - 4 + 4, y: 8 },
+  { x: GAME_W / UNIT_SIZE / 2 - 5 + 4, y: 8 },
+  { x: GAME_W / UNIT_SIZE / 2 - 6 + 4, y: 8 },
+  { x: GAME_W / UNIT_SIZE / 2 - 7 + 4, y: 8 },
+  { x: GAME_W / UNIT_SIZE / 2 - 8 + 4, y: 8 },
 ];
 
 const SPAWN_LOCATIONS = [
@@ -29,7 +41,14 @@ const SPAWN_LOCATIONS = [
 ];
 
 const COLLECTIBLE_LOCATIONS = [
+  // top left
   { x: 2, y: 2 },
-  { x: 10, y: 5 },
-  { x: 5, y: 10 },
+  // top right
+  { x: GAME_W / UNIT_SIZE - 3, y: 2 },
+  // middle
+  { x: GAME_W / UNIT_SIZE / 2, y: 6 },
+  // bottom left
+  { x: 2, y: 10 },
+  // bottom right
+  { x: GAME_W / UNIT_SIZE - 3, y: 10 },
 ];
