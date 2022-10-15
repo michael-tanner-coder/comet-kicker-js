@@ -11,6 +11,8 @@ class Control {
     this.border_color = WHITE;
     this.border_width = 1;
     this.active = false;
+    this.highlight_x = 0;
+    this.highlight_y = 0;
   }
 
   draw() {
@@ -37,8 +39,8 @@ class Control {
     if (this.active) {
       context.fillStyle = WHITE;
       context.fillRect(
-        this.x - this.border_width,
-        this.y - this.border_width,
+        this.x - this.border_width + this.highlight_x,
+        this.y - this.border_width + this.highlight_y,
         this.w / 2,
         this.h / 2
       );
@@ -127,10 +129,6 @@ class ControlRow extends Input {
       }
     }
 
-    if (onPress(CONTROLS.moveDown) || onPress(CONTROLS.moveUp)) {
-      this.currentOption = 0;
-    }
-
     if (this.active && onPress(CONTROLS.accept)) {
       setTimeout(() => {
         this.waiting_for_input = true;
@@ -202,6 +200,13 @@ class ControlsMenu extends Menu {
       row.x = this.CONTROLS_SECTION.x;
       row.y = this.CONTROLS_SECTION.y + (this.row_spacing + row.h) * i;
     });
+
+    let active_row = this.elements.find((row) => row.active);
+    if (active_row) {
+      this.elements.forEach(
+        (row) => (row.currentOption = active_row.currentOption)
+      );
+    }
   }
 
   draw() {
