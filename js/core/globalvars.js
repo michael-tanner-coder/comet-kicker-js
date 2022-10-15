@@ -13,7 +13,7 @@ var game_over = false;
 var game_state = STATES.MENU;
 
 // scores
-var score = 1000;
+var score = 0;
 var enemy_point_value = 10;
 var high_scores = window.localStorage.getItem("high_scores");
 var max_high_score_list_length = 5;

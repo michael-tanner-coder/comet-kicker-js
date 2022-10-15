@@ -463,11 +463,7 @@ function drawObjects() {
 
 function drawScore() {
   context.fillStyle = WHITE;
-  context.fillText(
-    `${getText("score")}: ${Math.round(score * 100) / 100}`,
-    GAME_W / 2,
-    10
-  );
+  context.fillText(`${getText("score")}: ${Math.round(score)}`, GAME_W / 2, 10);
 }
 
 function drawHP() {
