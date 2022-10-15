@@ -1,3 +1,78 @@
+class Control {
+  constructor(props) {
+    this.x = props?.x || 0;
+    this.y = props?.y || 0;
+    this.h = props?.h || 25;
+    this.w = props?.w || 26;
+    this.input = props?.input || "";
+    this.image = props?.image || "";
+    this.spacing = 9;
+    this.color = PURPLE;
+    this.border_color = WHITE;
+    this.border_width = 1;
+    this.active = false;
+  }
+
+  draw() {
+    // border shadow
+    if (this.active) {
+      context.fillStyle = PINK;
+      context.fillRect(
+        this.x - this.border_width,
+        this.y - this.border_width,
+        this.w + this.border_width * 2,
+        this.h + this.border_width * 2 + 1
+      );
+    }
+    // yellow border
+    context.fillStyle = this.border_color;
+    context.fillRect(
+      this.x - this.border_width,
+      this.y - this.border_width,
+      this.w + this.border_width * 2,
+      this.h + this.border_width * 2
+    );
+
+    // border highlight
+    if (this.active) {
+      context.fillStyle = WHITE;
+      context.fillRect(
+        this.x - this.border_width,
+        this.y - this.border_width,
+        this.w / 2,
+        this.h / 2
+      );
+      context.fillRect(
+        this.x + this.w / 2 + this.border_width,
+        this.y + this.h / 2 + this.border_width,
+        this.w / 2,
+        this.h / 2
+      );
+    }
+
+    // background
+    context.fillStyle = this.color;
+    context.fillRect(this.x, this.y, this.w, this.h);
+    let animation = ANIMATIONS[this.input];
+    if (animation) {
+      playAnimation(
+        animation,
+        1,
+        Math.floor(this.x + this.w / 2 - animation.frames[0].w / 2),
+        Math.floor(this.y + this.h / 2 - animation.frames[0].h / 2)
+      );
+    }
+  }
+
+  update() {
+    this.border_width = easing(this.border_width, this.active ? 2 : 1);
+    console.log(this.border_width);
+    if (this.border_width < 1) {
+      this.border_width = 1;
+    }
+  }
+}
+
 class ControlRow extends Input {
   constructor(props) {
     super(props);
@@ -23,6 +98,14 @@ class ControlRow extends Input {
     this.options.forEach((control, i) => {
       control.x = this.column_space + (this.control_space + control.w) * i;
       control.y = this.y;
+      if (i === this.currentOption && this.active) {
+        control.border_color = YELLOW;
+        control.active = true;
+      } else {
+        control.border_color = WHITE;
+        control.active = false;
+      }
+      control.update();
     });
 
     if (this.waiting_for_input) {
@@ -65,50 +148,9 @@ class ControlRow extends Input {
       this.x,
       this.y + this.h / 2
     );
-    this.options.forEach((control, i) => {
-      if (i === this.currentOption && this.active) {
-        control.border_color = YELLOW;
-      } else {
-        control.border_color = WHITE;
-      }
+    this.options.forEach((control) => {
       control.draw();
     });
-  }
-}
-
-class Control {
-  constructor(props) {
-    this.x = props?.x || 0;
-    this.y = props?.y || 0;
-    this.h = props?.h || 25;
-    this.w = props?.w || 26;
-    this.input = props?.input || "";
-    this.image = props?.image || "";
-    this.spacing = 9;
-    this.color = PURPLE;
-    this.border_color = WHITE;
-    this.border_width = 1;
-  }
-
-  draw() {
-    context.fillStyle = this.border_color;
-    context.fillRect(
-      this.x - this.border_width,
-      this.y - this.border_width,
-      this.w + this.border_width * 2,
-      this.h + this.border_width * 2
-    );
-    context.fillStyle = this.color;
-    context.fillRect(this.x, this.y, this.w, this.h);
-    let animation = ANIMATIONS[this.input];
-    if (animation) {
-      playAnimation(
-        animation,
-        1,
-        Math.floor(this.x + this.w / 2 - animation.frames[0].w / 2),
-        Math.floor(this.y + this.h / 2 - animation.frames[0].h / 2)
-      );
-    }
   }
 }
 
