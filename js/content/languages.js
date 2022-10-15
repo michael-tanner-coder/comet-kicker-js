@@ -12,7 +12,7 @@ const TEXT_CONTENT = {
     fr: "español",
     zh: "español",
   },
-  frenzh: {
+  french: {
     en: "français",
     es: "français",
     fr: "français",
