@@ -72,3 +72,6 @@ var game_timer = 0;
 var max_position_count = 15;
 var object_position_map = {};
 var object_id_counter = 0;
+
+// menus
+stop_menu_nav = false;

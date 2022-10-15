@@ -212,6 +212,13 @@ function onHold(input) {
   return input.state === INPUT_STATES.held;
 }
 
+// -- Remapping ---
+function remapInput(control, newInput, index) {
+  if (CONTROLS[control]) {
+    CONTROLS[control].inputs[index] = newInput;
+  }
+}
+
 // ---Listeners---
 function keyListener() {
   const input_keys = Object.keys(CONTROLS);

@@ -13,6 +13,8 @@ class ControlRow extends Input {
     this.active = false;
     this.font_size = 8;
     this.type = "select";
+    this.waiting_for_input = false;
+    this.input = props?.input || null;
   }
 
   handler() {}
@@ -22,6 +24,36 @@ class ControlRow extends Input {
       control.x = this.column_space + (this.control_space + control.w) * i;
       control.y = this.y;
     });
+
+    if (this.waiting_for_input) {
+      // wait for the user to enter a new valid input to remap
+      let input_keys = Object.keys(INPUTS);
+      for (let i = 0; i < input_keys.length; i++) {
+        let key = input_keys[i];
+        if (INPUTS[key]) {
+          // if valid, map the user's chosen input to the current control
+          let input_to_remap = this.input.name;
+          this.options[this.currentOption].input = key;
+          remapInput(input_to_remap, key, this.currentOption);
+
+          // stop listening for new input and return back to normal menu navigation
+          this.waiting_for_input = false;
+          stop_menu_nav = false;
+          break;
+        }
+      }
+    }
+
+    if (onPress(CONTROLS.moveDown) || onPress(CONTROLS.moveUp)) {
+      this.currentOption = 0;
+    }
+
+    if (this.active && onPress(CONTROLS.accept)) {
+      setTimeout(() => {
+        this.waiting_for_input = true;
+      }, 200);
+      stop_menu_nav = true;
+    }
   }
 
   draw() {
@@ -115,6 +147,7 @@ class ControlsMenu extends Menu {
       const new_row = new ControlRow({
         options: [...new_controls],
         label: item.name,
+        input: item,
       });
       this.elements.push(new_row);
     });
@@ -132,13 +165,18 @@ class ControlsMenu extends Menu {
   draw() {
     super.draw();
     this.elements.forEach((row, i) => {
-      if (this.cursor === i) {
-        row.active = true;
-      } else {
-        row.active = false;
-      }
+      row.active = this.cursor === i;
       row.draw();
     });
+
+    let waiting_row = this.elements.find(
+      (row) => row.active && row.waiting_for_input
+    );
+    if (waiting_row) {
+      context.fillStyle = "#00000088";
+      context.fillRect(0, 0, GAME_W, GAME_H);
+      waiting_row.options[waiting_row.currentOption].draw();
+    }
   }
 }
 
