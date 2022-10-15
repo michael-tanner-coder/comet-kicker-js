@@ -1,13 +1,282 @@
 const ANIMATIONS = {
   // UI ANIMATIONS
-  controllerLoop: {
-    sprite: "input_icons",
-    frames: [
-      { x: 128, y: 16, w: 32, h: 32 },
-      { x: 160, y: 16, w: 32, h: 32 },
-      { x: 192, y: 16, w: 32, h: 32 },
-      { x: 224, y: 16, w: 32, h: 32 },
-    ],
+  // face buttons
+  buttonBlank: {
+    sprite: "controls",
+    frames: [{ x: 0, y: 0, w: 15, h: 15 }],
+    current_frame: 0,
+  },
+  buttonA: {
+    sprite: "controls",
+    frames: [{ x: 16, y: 0, w: 15, h: 15 }],
+    current_frame: 0,
+  },
+  buttonB: {
+    sprite: "controls",
+    frames: [{ x: 32, y: 0, w: 15, h: 15 }],
+    current_frame: 0,
+  },
+  buttonX: {
+    sprite: "controls",
+    frames: [{ x: 48, y: 0, w: 15, h: 15 }],
+    current_frame: 0,
+  },
+  buttonY: {
+    sprite: "controls",
+    frames: [{ x: 64, y: 0, w: 15, h: 15 }],
+    current_frame: 0,
+  },
+  // dpad
+  dpadBlank: {
+    sprite: "controls",
+    frames: [{ x: 80, y: 0, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+  dpadUp: {
+    sprite: "controls",
+    frames: [{ x: 112, y: 0, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+  dpadRight: {
+    sprite: "controls",
+    frames: [{ x: 144, y: 0, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+  dpadDown: {
+    sprite: "controls",
+    frames: [{ x: 176, y: 0, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+  dpadLeft: {
+    sprite: "controls",
+    frames: [{ x: 208, y: 0, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+  // control sticks
+  up: {
+    sprite: "controls",
+    frames: [{ x: 112, y: 32, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+  right: {
+    sprite: "controls",
+    frames: [{ x: 144, y: 32, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+  down: {
+    sprite: "controls",
+    frames: [{ x: 176, y: 32, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+  left: {
+    sprite: "controls",
+    frames: [{ x: 208, y: 32, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+  upTwo: {
+    sprite: "controls",
+    frames: [{ x: 112, y: 64, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+  rightTwo: {
+    sprite: "controls",
+    frames: [{ x: 144, y: 64, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+  downTwo: {
+    sprite: "controls",
+    frames: [{ x: 176, y: 64, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+  leftTwo: {
+    sprite: "controls",
+    frames: [{ x: 208, y: 64, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+
+  // bumpers/triggers
+  leftTrigger: {
+    sprite: "controls",
+    frames: [{ x: 0, y: 32, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+  leftShoulder: {
+    sprite: "controls",
+    frames: [{ x: 16, y: 32, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+  rightShoulder: {
+    sprite: "controls",
+    frames: [{ x: 32, y: 32, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+  rightTrigger: {
+    sprite: "controls",
+    frames: [{ x: 48, y: 32, w: 32, h: 32 }],
+    current_frame: 0,
+  },
+  // arrow keys
+  ArrowLeft: {
+    sprite: "controls",
+    frames: [{ x: 320, y: 0, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  ArrowUp: {
+    sprite: "controls",
+    frames: [{ x: 336, y: 0, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  ArrowDown: {
+    sprite: "controls",
+    frames: [{ x: 352, y: 0, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  ArrowRight: {
+    sprite: "controls",
+    frames: [{ x: 368, y: 0, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  // letter keys
+  a: {
+    sprite: "controls",
+    frames: [{ x: 320, y: 16, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  b: {
+    sprite: "controls",
+    frames: [{ x: 336, y: 16, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  c: {
+    sprite: "controls",
+    frames: [{ x: 352, y: 16, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  d: {
+    sprite: "controls",
+    frames: [{ x: 368, y: 16, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  e: {
+    sprite: "controls",
+    frames: [{ x: 320, y: 32, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  f: {
+    sprite: "controls",
+    frames: [{ x: 336, y: 32, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  g: {
+    sprite: "controls",
+    frames: [{ x: 352, y: 32, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  h: {
+    sprite: "controls",
+    frames: [{ x: 368, y: 32, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  i: {
+    sprite: "controls",
+    frames: [{ x: 320, y: 48, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  j: {
+    sprite: "controls",
+    frames: [{ x: 336, y: 48, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  k: {
+    sprite: "controls",
+    frames: [{ x: 352, y: 48, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  l: {
+    sprite: "controls",
+    frames: [{ x: 368, y: 48, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  m: {
+    sprite: "controls",
+    frames: [{ x: 320, y: 64, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  n: {
+    sprite: "controls",
+    frames: [{ x: 336, y: 64, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  o: {
+    sprite: "controls",
+    frames: [{ x: 352, y: 64, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  p: {
+    sprite: "controls",
+    frames: [{ x: 368, y: 64, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  q: {
+    sprite: "controls",
+    frames: [{ x: 320, y: 80, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  r: {
+    sprite: "controls",
+    frames: [{ x: 336, y: 80, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  s: {
+    sprite: "controls",
+    frames: [{ x: 352, y: 80, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  t: {
+    sprite: "controls",
+    frames: [{ x: 368, y: 80, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  u: {
+    sprite: "controls",
+    frames: [{ x: 320, y: 96, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  v: {
+    sprite: "controls",
+    frames: [{ x: 336, y: 96, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  w: {
+    sprite: "controls",
+    frames: [{ x: 352, y: 96, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  x: {
+    sprite: "controls",
+    frames: [{ x: 368, y: 96, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  y: {
+    sprite: "controls",
+    frames: [{ x: 320, y: 112, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  z: {
+    sprite: "controls",
+    frames: [{ x: 336, y: 112, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+
+  // misc
+  Escape: {
+    sprite: "controls",
+    frames: [{ x: 352, y: 112, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  [" "]: {
+    sprite: "controls",
+    frames: [{ x: 368, y: 112, w: 16, h: 16 }],
     current_frame: 0,
   },
 

@@ -7,9 +7,33 @@ const INPUTS = {
   ArrowUp: false,
   ArrowDown: false,
 
-  x: false,
-  z: false,
+  // Letter Keys
+  a: false,
+  b: false,
   c: false,
+  d: false,
+  e: false,
+  f: false,
+  g: false,
+  h: false,
+  i: false,
+  j: false,
+  k: false,
+  l: false,
+  m: false,
+  n: false,
+  o: false,
+  p: false,
+  q: false,
+  r: false,
+  s: false,
+  t: false,
+  u: false,
+  v: false,
+  w: false,
+  x: false,
+  y: false,
+  z: false,
 
   // SPACE
   [" "]: false,
@@ -63,8 +87,8 @@ const DEFAULT_INPUT_STATE = {
 };
 
 const CONTROLS = {
-  shoot: ["x", "buttonX"],
-  jump: [" ", "buttonA"],
+  shoot: ["x", "buttonX", "c"],
+  jump: [" ", "buttonA", "buttonY"],
   moveLeft: ["ArrowLeft", "dpadLeft", "left"],
   moveRight: ["ArrowRight", "dpadRight", "right"],
   moveUp: ["ArrowUp", "dpadUp", "up"],

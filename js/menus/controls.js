@@ -68,6 +68,15 @@ class Control {
     );
     context.fillStyle = this.color;
     context.fillRect(this.x, this.y, this.w, this.h);
+    let animation = ANIMATIONS[this.input];
+    if (animation) {
+      playAnimation(
+        animation,
+        1,
+        Math.floor(this.x + this.w / 2 - animation.frames[0].w / 2),
+        Math.floor(this.y + this.h / 2 - animation.frames[0].h / 2)
+      );
+    }
   }
 }
 
