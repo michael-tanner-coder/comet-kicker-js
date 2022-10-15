@@ -206,6 +206,7 @@ function playerJump() {
       }
     }
     jump(PLAYER);
+    PLAYER.can_jump = false;
   } else {
     // fall faster when done jumping
     PLAYER.y_velocity =
@@ -319,6 +320,8 @@ function trackPositionsOfObjects() {
 
 // menus
 function updateMenuNavigation() {
+  if (stop_menu_nav) return;
+
   // select buttons
   if (
     onPress(CONTROLS.accept) &&
