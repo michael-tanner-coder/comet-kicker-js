@@ -196,6 +196,7 @@ const ENEMY = {
   ],
   angle: 0,
   state: "Move",
+  points_to_spawn: 0,
 };
 
 const EXPLODING_ENEMY = {
@@ -214,6 +215,7 @@ const EXPLODING_ENEMY = {
     { x: 10, y: 1 },
   ],
   exploding: true,
+  points_to_spawn: 100,
 };
 
 const ROLLING_ENEMY = {
@@ -227,6 +229,7 @@ const ROLLING_ENEMY = {
   speed: 2,
   hp: 3,
   render_hitbox: false,
+  points_to_spawn: 300,
 };
 
 const BOUNCING_ENEMY = {
@@ -243,6 +246,7 @@ const BOUNCING_ENEMY = {
     { x: 8, y: 1 },
     { x: 10, y: 1 },
   ],
+  points_to_spawn: 200,
 };
 
 const ENEMIES = [ENEMY, EXPLODING_ENEMY, ROLLING_ENEMY, BOUNCING_ENEMY];

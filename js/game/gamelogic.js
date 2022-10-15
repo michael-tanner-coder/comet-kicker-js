@@ -290,8 +290,10 @@ function updateEnemySpawnTimer(enemies) {
 
   if (spawn_timer <= 0) {
     let type = choose(ENEMIES);
-    spawnEnemy(type);
-    spawn_timer = MAX_SPAWN_TIMER;
+    if (type.points_to_spawn <= score) {
+      spawnEnemy(type);
+      spawn_timer = MAX_SPAWN_TIMER;
+    }
   }
 }
 
