@@ -81,7 +81,7 @@ function initializeInputState() {
   const controls = Object.keys(CONTROLS);
   controls.forEach(function (control) {
     const inputs = [...CONTROLS[control]];
-    CONTROLS[control] = { ...DEFAULT_INPUT_STATE, inputs };
+    CONTROLS[control] = { ...DEFAULT_INPUT_STATE, inputs, name: control };
   });
 }
 
