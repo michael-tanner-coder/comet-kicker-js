@@ -142,6 +142,7 @@ function checkPlayerPowerup() {
         spawnShield();
         shield_spawned = true;
       }
+      break;
     case PICKUPS.MISSILE:
       PLAYER.bullet_type = MISSILE_SHOT;
       break;
