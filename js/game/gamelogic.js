@@ -443,8 +443,8 @@ function drawObjects() {
         // Sprite
         IMAGES[obj.sprite],
         // Position
-        obj.x + obj.w / 2,
-        obj.y + obj.h / 2,
+        Math.floor(obj.x) + obj.w / 2,
+        Math.floor(obj.y) + obj.h / 2,
         // Angle
         obj.angle,
         // Alpha
@@ -461,7 +461,12 @@ function drawObjects() {
     // play the object's current animation
     if (images_loaded && obj.animation) {
       obj.animation = getAnimationDirection(obj);
-      playAnimation(obj.animation, obj.animation_speed || 1, obj.x, obj.y);
+      playAnimation(
+          obj.animation,
+          obj.animation_speed || 1,
+          // This helps reduce blurriness by not using fractional locations
+          Math.floor(obj.x),
+          Math.floor(obj.y));
     }
   });
 }

@@ -632,7 +632,6 @@ function easeMovement(obj, direction) {
   obj.speed = easing(obj.speed, obj.max_speed);
   obj.direction = direction;
   moveInOwnDirection(obj);
-  obj.x = Math.floor(obj.x);
 }
 
 function screenwrap(obj) {

@@ -314,16 +314,6 @@ function update(deltaTime) {
   // track all game objects and their previous positions
   trackPositionsOfObjects();
 
-  // ROUNDING
-  // round object's x & y movement to prevent blurriness
-  GAME_OBJECTS.forEach((obj) => {
-    if (obj.type === "collect") return;
-    obj.x = Math.floor(obj.x);
-    obj.y = Math.floor(obj.y);
-  });
-  PLAYER.y = Math.floor(PLAYER.y);
-  PLAYER.x = Math.floor(PLAYER.x);
-
   // store whether or not the player hit the ground in this frame,
   // use on next frame to determine if we render a dust effect
   PLAYER.hit_ground_last_frame = PLAYER.hit_ground;
