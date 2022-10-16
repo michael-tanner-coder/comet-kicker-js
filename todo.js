@@ -9,15 +9,11 @@
 // shake
 // personality
 
-// TODO: score ui
-// TODO: sound check
-
 // ============
 // POLISH TODOS
 // ============
 // MOVEMENT
 // TODO: implement movement tweening (player, shots and enemy)
-// TODO: change direction of comet enemies
 
 // SPAWNS
 // TODO: avoid spawning near player

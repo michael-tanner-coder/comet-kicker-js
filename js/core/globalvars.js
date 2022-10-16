@@ -10,7 +10,7 @@ var start_platform_spawn_timer = false;
 
 // game state
 var game_over = false;
-var game_state = STATES.MENU;
+var game_state = STATES.INTRO;
 
 // scores
 var score = 0;

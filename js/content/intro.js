@@ -32,7 +32,7 @@ COMET KICKER
 
 const BEAT = {
   title: "",
-  line: {
+  text: {
     en: "",
     es: "",
     fr: "",
@@ -45,8 +45,8 @@ const BEAT = {
 const INTRO_SCRIPT = [
   {
     ...BEAT,
-    line: {
-      en: "Long",
+    text: {
+      en: "Long ago, deep in the far reaches of space,",
       es: "",
       fr: "",
       zh: "",
@@ -54,7 +54,7 @@ const INTRO_SCRIPT = [
   },
   {
     ...BEAT,
-    line: {
+    text: {
       en: "there lived a young boy known only as 'Kicker'.",
       es: "",
       fr: "",
@@ -63,7 +63,7 @@ const INTRO_SCRIPT = [
   },
   {
     ...BEAT,
-    line: {
+    text: {
       en: "In his youth, Kicker discovered he had immense, near-infinite power ",
       es: "",
       fr: "",
@@ -72,7 +72,7 @@ const INTRO_SCRIPT = [
   },
   {
     ...BEAT,
-    line: {
+    text: {
       en: "- enough power to destroy the world around him ",
       es: "",
       fr: "",
@@ -81,7 +81,7 @@ const INTRO_SCRIPT = [
   },
   {
     ...BEAT,
-    line: {
+    text: {
       en: "- and even worlds beyond his own.",
       es: "",
       fr: "",
