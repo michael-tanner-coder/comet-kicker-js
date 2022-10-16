@@ -102,6 +102,11 @@ const CONTROLS = {
 };
 
 function initializeInputState() {
+  for(let control in CONTROLS){
+    if(localStorage.getItem(control)) {
+      CONTROLS[control] = JSON.parse(localStorage.getItem(control));
+    }
+  }
   const controls = Object.keys(CONTROLS);
   controls.forEach(function (control) {
     const inputs = [...CONTROLS[control]];
@@ -216,6 +221,7 @@ function onHold(input) {
 function remapInput(control, newInput, index) {
   if (CONTROLS[control]) {
     CONTROLS[control].inputs[index] = newInput;
+    localStorage.setItem(control, JSON.stringify(CONTROLS[control].inputs));
   }
 }
 
