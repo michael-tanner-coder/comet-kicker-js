@@ -52,9 +52,9 @@ var multiplier_timer = 200;
 var start_combo = false;
 
 // sounds
-var music_volume = 1;
-var sound_effect_volume = 1;
-var master_volume = 1;
+var music_volume = localStorage.getItem('music_volume') ? JSON.parse(localStorage.getItem('music_volume')) : 5;
+var sound_effect_volume = localStorage.getItem('sound_effect_volume') ? JSON.parse(localStorage.getItem('sound_effect_volume')) : 5;
+var master_volume = localStorage.getItem('master_volume') ? JSON.parse(localStorage.getItem('master_volume')) : 5;
 var song_playing = false;
 var current_song_name = "title_music";
 var current_song = {};

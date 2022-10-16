@@ -565,14 +565,17 @@ function drawErrorMessage(message) {
 // sound
 function setMasterVolume(vol) {
   master_volume = vol;
+  localStorage.setItem('master_volume', JSON.stringify(master_volume));
 }
 
 function setMusicVolume(vol) {
   music_volume = vol;
+  localStorage.setItem('music_volume', JSON.stringify(master_volume));
 }
 
 function setSoundEffectVolume(vol) {
   sound_effect_volume = vol;
+  localStorage.setItem('sound_effect_volume', JSON.stringify(master_volume));
 }
 
 function playMusic(song) {
