@@ -28,6 +28,11 @@ function update(deltaTime) {
     return;
   }
 
+  if (game_state === STATES.INTRO) {
+    INTRO_SEQUENCE.update();
+    return;
+  }
+
   if (game_state === STATES.GAME_OVER) {
     updateGameOverScreen();
     return;
@@ -357,6 +362,12 @@ function draw(offset) {
   particles.draw();
   drawBackground();
 
+  // GAME INTRO
+  if (game_state === STATES.INTRO) {
+    INTRO_SEQUENCE.draw();
+    return;
+  }
+
   // GAME/PAUSE
   if (game_state === STATES.GAME || game_state === STATES.PAUSE) {
     drawObjects();
@@ -414,6 +425,5 @@ function loop() {
 // INIT
 MENU_STACK.push(getMenu("mainMenu"));
 startGame();
-
 
 loop();

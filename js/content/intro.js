@@ -29,3 +29,63 @@ Is he powerful enough to become …
 
 COMET KICKER
 */
+
+const BEAT = {
+  title: "",
+  line: {
+    en: "",
+    es: "",
+    fr: "",
+    zh: "",
+  },
+  image: "",
+  music: "",
+  speed: 4,
+};
+const INTRO_SCRIPT = [
+  {
+    ...BEAT,
+    line: {
+      en: "Long",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+  },
+  {
+    ...BEAT,
+    line: {
+      en: "there lived a young boy known only as 'Kicker'.",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+  },
+  {
+    ...BEAT,
+    line: {
+      en: "In his youth, Kicker discovered he had immense, near-infinite power ",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+  },
+  {
+    ...BEAT,
+    line: {
+      en: "- enough power to destroy the world around him ",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+  },
+  {
+    ...BEAT,
+    line: {
+      en: "- and even worlds beyond his own.",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+  },
+];

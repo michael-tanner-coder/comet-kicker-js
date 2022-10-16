@@ -3,4 +3,6 @@ const STATES = {
   GAME: "GAME",
   GAME_OVER: "GAME_OVER",
   PAUSE: "PAUSE",
+  INTRO: "INTRO",
+  OUTRO: "OUTRO",
 };
