@@ -124,6 +124,7 @@ class ControlRow extends Input {
           // stop listening for new input and return back to normal menu navigation
           this.waiting_for_input = false;
           stop_menu_nav = false;
+          INPUTS[key] = false;
           break;
         }
       }
