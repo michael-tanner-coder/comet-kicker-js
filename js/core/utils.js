@@ -570,12 +570,12 @@ function setMasterVolume(vol) {
 
 function setMusicVolume(vol) {
   music_volume = vol;
-  localStorage.setItem('music_volume', JSON.stringify(master_volume));
+  localStorage.setItem('music_volume', JSON.stringify(music_volume));
 }
 
 function setSoundEffectVolume(vol) {
   sound_effect_volume = vol;
-  localStorage.setItem('sound_effect_volume', JSON.stringify(master_volume));
+  localStorage.setItem('sound_effect_volume', JSON.stringify(sound_effect_volume));
 }
 
 function playMusic(song) {
