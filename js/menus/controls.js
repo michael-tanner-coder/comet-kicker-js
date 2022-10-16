@@ -163,19 +163,7 @@ class ControlsMenu extends Menu {
     this.padding = -20;
   }
 
-  // row cursor
-  BOX_CURSOR = { x: 0, y: 0, w: 0, h: 0, color: YELLOW };
-
-  // main section
   CONTROLS_SECTION = { x: 47, y: 50, w: 245, h: 190, rows: [] };
-
-  // header
-  DYNAMIC_HEADER = { x: 0, y: 0, w: 0, h: 0, render: false };
-
-  // vars
-  current_row = {};
-  current_box = {};
-  selected_input = "";
   row_spacing = 10;
 
   addControlsToMenu(list) {
