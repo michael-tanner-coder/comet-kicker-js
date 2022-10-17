@@ -74,4 +74,4 @@ var object_position_map = {};
 var object_id_counter = 0;
 
 // menus
-stop_menu_nav = false;
+var stop_menu_nav = false;
