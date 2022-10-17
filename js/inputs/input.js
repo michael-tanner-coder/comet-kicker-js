@@ -86,6 +86,20 @@ const DEFAULT_INPUT_STATE = {
   inputs: [],
 };
 
+/**
+ * This data structure gets change in initializeInputState
+ * Each element winds up looking like:
+ * {
+ *   "state": "idle",
+ *   "timer": 0,
+ *   "inputs": [
+ *     "x",
+ *     "buttonX",
+ *     "c"
+ *   ],
+ *   "name": "shoot"
+ * }
+ */
 const CONTROLS = {
   shoot: ["x", "buttonX", "c"],
   jump: [" ", "buttonA", "buttonY"],
