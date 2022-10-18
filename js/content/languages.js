@@ -86,6 +86,12 @@ const TEXT_CONTENT = {
     fr: "JEU TERMINÉ!",
     zh: "游戏结束了!",
   },
+  hp: {
+    en: "HP",
+    es: "HP",
+    fr: "HP",
+    zh: "HP",
+  },
 
   // MENUS
   start_game: {

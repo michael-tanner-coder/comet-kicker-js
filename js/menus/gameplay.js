@@ -9,6 +9,19 @@ const GAME_SPEED_OPTION = new Select({
 });
 addOptionRange(GAME_SPEED_OPTION, 1, 10);
 
+const GAME_HP_OPTION = new Select({
+  text: "MAX HP",
+  key: "hp",
+  currentOption: 0, // 0 based (1-10), so (0-9)
+  onChange: (input) => {
+    var currentOption = input.options[input.currentOption];
+    MAX_HP = currentOption.value;
+    PLAYER.hp = MAX_HP;
+    window.localStorage.setItem("MAX_HP", MAX_HP);
+  },
+});
+addOptionRange(GAME_HP_OPTION, 1, 6);
+
 createMenu({
   id: "gameplayMenu",
   key: "gameplay",
@@ -39,5 +52,6 @@ createMenu({
       ],
     }),
     GAME_SPEED_OPTION,
+    GAME_HP_OPTION,
   ],
 });

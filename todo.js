@@ -13,15 +13,12 @@
 // ===========
 // TODO: favor player on hitboxes (larger shot hitboxes, smaller player hitbox for damage)
 // TODO: stop player from tunneling into walls
-// TODO: player can easily avoid all comets on certain map areas (fix)
-// TODO: player needs more reason to move around the map
-// TODO: need more confirmation of when player takes a hit
+// TODO: need more confirmation of when player takes a hit (hitstun, health anim, sprite flash, player anim)
 // TODO: visually indicate the lifetime of a collectible
 // TODO: slightly slow down game when enemies are near player to give them a chance to move
 // TODO: balance enemy movement speed
 // TODO: assign points to powerups for unlocking them (connect to save data)
 // TODO: edit the menu theme
-// TODO: limit health via difficulty mode?
 // TODO: set a point limit to unlock the ending sequence
 // TODO: write ending sequence + add images
 // TODO: track unlockables via menu

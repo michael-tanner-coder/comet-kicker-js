@@ -23,6 +23,7 @@ var max_recent_score_list_length = 10;
 // game options
 var render_hitboxes = false;
 var fullscreen = false;
+var MAX_HP = 4;
 
 // search browser preferences for the first language that matches one of the game's accepted languages
 let preferred_language = navigator.languages.find((lang_pref) =>
@@ -52,9 +53,15 @@ var multiplier_timer = 200;
 var start_combo = false;
 
 // sounds
-var music_volume = localStorage.getItem('music_volume') ? JSON.parse(localStorage.getItem('music_volume')) : 5;
-var sound_effect_volume = localStorage.getItem('sound_effect_volume') ? JSON.parse(localStorage.getItem('sound_effect_volume')) : 5;
-var master_volume = localStorage.getItem('master_volume') ? JSON.parse(localStorage.getItem('master_volume')) : 5;
+var music_volume = localStorage.getItem("music_volume")
+  ? JSON.parse(localStorage.getItem("music_volume"))
+  : 5;
+var sound_effect_volume = localStorage.getItem("sound_effect_volume")
+  ? JSON.parse(localStorage.getItem("sound_effect_volume"))
+  : 5;
+var master_volume = localStorage.getItem("master_volume")
+  ? JSON.parse(localStorage.getItem("master_volume"))
+  : 5;
 var song_playing = false;
 var current_song_name = "title_music";
 var current_song = {};

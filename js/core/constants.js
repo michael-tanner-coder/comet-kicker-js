@@ -8,7 +8,6 @@ const MAX_SPAWN_TIMER = 160;
 const MAX_COLLECT_SPAWN_TIMER = 120;
 const MAX_PLATFORM_SPAWN_TIMER = 240;
 const SPAWN_LIMIT = 10;
-const MAX_HP = 4;
 const GAME_OBJECTS = [];
 const PLAYER_HIT_SCREENSHAKES = 16; // frames
 const SCREENSHAKE_MAX_SIZE = 1; // pixels
