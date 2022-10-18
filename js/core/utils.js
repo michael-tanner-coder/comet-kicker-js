@@ -98,10 +98,26 @@ function spawnBullet(source, direction, projectile) {
 
 function spawnEnemy(type = ENEMY) {
   var new_enemy = { ...type };
-  var spawn_point = choose(new_enemy.spawn_points);
 
-  new_enemy.x = withGrid(spawn_point.x);
-  new_enemy.y = withGrid(spawn_point.y);
+  // spawn at the location farthest from the player
+  var farthest_spawn_point = new_enemy.spawn_points[0];
+  new_enemy.spawn_points.forEach((point) => {
+    // have to adjust the spawn location coordinates to match the invisible level grid
+    var adjusted_current_point = { x: withGrid(point.x), y: withGrid(point.y) };
+    var adjusted_farthest_point = {
+      x: withGrid(farthest_spawn_point.x),
+      y: withGrid(farthest_spawn_point.y),
+    };
+
+    // compare current distance to our previous farthest distance
+    let current_distance = getDistance(adjusted_current_point, PLAYER);
+    if (current_distance >= getDistance(adjusted_farthest_point, PLAYER)) {
+      farthest_spawn_point = point;
+    }
+  });
+
+  new_enemy.x = withGrid(farthest_spawn_point.x);
+  new_enemy.y = withGrid(farthest_spawn_point.y);
 
   // direction of 180 or 0 will produce a diagnoal movement when combined with downward force of gravity
   if (new_enemy.movement_direction === "diagnoal") {
@@ -118,17 +134,15 @@ function spawnCollectible() {
   // spawn at the location farthest from the player
   var farthest_spawn_point = COLLECTIBLE_LOCATIONS[0];
   COLLECTIBLE_LOCATIONS.forEach((loc) => {
-    // have to adjust the spawn locations to match the invisible level grid
+    // have to adjust the spawn location coordinates to match the invisible level grid
     var adjusted_current_loc = { x: withGrid(loc.x), y: withGrid(loc.y) };
     var adjusted_farthest_loc = {
       x: withGrid(farthest_spawn_point.x),
       y: withGrid(farthest_spawn_point.y),
     };
 
-    //
+    // compare current distance to our previous farthest distance
     let distance = getDistance(adjusted_current_loc, PLAYER);
-    console.log("distance:");
-    console.log(distance);
     if (distance >= getDistance(adjusted_farthest_loc, PLAYER)) {
       farthest_spawn_point = loc;
     }

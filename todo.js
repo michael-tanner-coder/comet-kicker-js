@@ -11,7 +11,6 @@
 // ============
 // FINAL TODOS
 // ============
-// TODO: avoid spawning near player
 // TODO: favor player on hitboxes (larger shot hitboxes, smaller player hitbox)
 // TODO: stop player from tunneling into walls
 // TODO: player can easily avoid all comets on certain map areas (fix)
