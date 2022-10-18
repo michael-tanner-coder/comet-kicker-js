@@ -190,7 +190,7 @@ function checkPlayerPowerup() {
 function checkPickupType(collectible) {
   switch (collectible.pickup) {
     case PICKUPS.HP:
-      if (PLAYER.HP < MAX_HP) {
+      if (PLAYER.hp < MAX_HP) {
         PLAYER.hp += 1;
       }
       playSoundEffect("heal_hp");

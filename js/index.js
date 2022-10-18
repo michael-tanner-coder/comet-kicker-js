@@ -222,6 +222,13 @@ function update(deltaTime) {
 
   // enemies
   enemies.forEach((enemy) => {
+    let player_center = {
+    if (getDistance(enemy, player_center) <= PLAYER.enemy_detection_range) {
+      enemy.speed = easing(enemy.speed, -1 * ENEMY_TYPE.speed);
+    } else {
+      enemy.speed = easing(enemy.speed, ENEMY_TYPE.speed);
+    }
+
     // enemy to player
     if (collisionDetected(enemy, PLAYER)) {
       if (!PLAYER.hit && !invincible_mode) {
@@ -400,8 +407,9 @@ function loop() {
     }
   } else {
     var processedOnce = false // Makes sure we can't skip inputs if the framerate is very high
+    var processedOnce = false; // Makes sure we can't skip inputs if the framerate is very high
     while (lag > frame_duration || !processedOnce) {
-      processedOnce = true
+      processedOnce = true;
       update(elapsed);
       lag -= 1000 / fps;
       if (lag < 0) lag = 0;
