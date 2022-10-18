@@ -29,6 +29,7 @@ const image_list = [
   { file: "cometShiledsVersions/CometShieldv1.png", name: "shield" },
   { file: "missilev3.png", name: "missile" },
   { file: "control-icons.png", name: "controls" },
+  { file: "heart.png", name: "heart" },
   // <-- Add your sprite in here
 ];
 

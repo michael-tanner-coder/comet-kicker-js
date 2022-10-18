@@ -8,10 +8,10 @@
 // shake
 // personality
 
-// ============
+// ===========
 // FINAL TODOS
-// ============
-// TODO: favor player on hitboxes (larger shot hitboxes, smaller player hitbox)
+// ===========
+// TODO: favor player on hitboxes (larger shot hitboxes, smaller player hitbox for damage)
 // TODO: stop player from tunneling into walls
 // TODO: player can easily avoid all comets on certain map areas (fix)
 // TODO: player needs more reason to move around the map
@@ -21,7 +21,6 @@
 // TODO: balance enemy movement speed
 // TODO: assign points to powerups for unlocking them (connect to save data)
 // TODO: edit the menu theme
-// TODO: replace health bars with heart icons
 // TODO: set max health?
 // TODO: limit health via difficulty mode?
 // TODO: set a point limit to unlock the ending sequence

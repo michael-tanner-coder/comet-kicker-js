@@ -488,7 +488,7 @@ function drawScore() {
 function drawHP() {
   for (i = 0; i < PLAYER.hp; i++) {
     context.fillStyle = WHITE;
-    context.fillRect(GAME_W / 2 + 16 * i, 20, 8, 16);
+    context.drawImage(IMAGES["heart"], GAME_W / 2 + 16 * i, 20);
   }
 }
 
