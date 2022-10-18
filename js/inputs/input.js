@@ -169,13 +169,14 @@ function inputStateMachine(input) {
     case INPUT_STATES.idle:
       if (wasPressed(input.inputs)) {
         input.state = INPUT_STATES.pressed;
+        UNPROCESSED_INPUTS.push(input);
       }
 
       break;
 
     // PRESSED
     case INPUT_STATES.pressed:
-      UNPROCESSED_INPUTS.push(input);
+
 
       break;
 
