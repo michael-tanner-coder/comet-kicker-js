@@ -181,6 +181,10 @@ function playerJump() {
     PLAYER.coyote_time_counter -= 0.2;
   }
 
+  if (onPress(CONTROLS.jump)) {
+    PLAYER.can_jump = true;
+  }
+
   // jump hold
   if (
     PLAYER.jump_height < PLAYER.max_jump_height &&
@@ -205,10 +209,14 @@ function playerJump() {
         );
       }
     }
-    jump(PLAYER);
-    PLAYER.can_jump = false;
+    if (PLAYER.can_jump) {
+      jump(PLAYER);
+    }
   } else {
     // fall faster when done jumping
+    if (PLAYER.jumping) {
+      PLAYER.can_jump = false;
+    }
     PLAYER.y_velocity =
       easingWithRate(PLAYER.y_velocity, -1, 0.8) * game_speed * time_scale;
   }
@@ -462,11 +470,12 @@ function drawObjects() {
     if (images_loaded && obj.animation) {
       obj.animation = getAnimationDirection(obj);
       playAnimation(
-          obj.animation,
-          obj.animation_speed || 1,
-          // This helps reduce blurriness by not using fractional locations
-          Math.floor(obj.x),
-          Math.floor(obj.y));
+        obj.animation,
+        obj.animation_speed || 1,
+        // This helps reduce blurriness by not using fractional locations
+        Math.floor(obj.x),
+        Math.floor(obj.y)
+      );
     }
   });
 }
