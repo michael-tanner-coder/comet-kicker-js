@@ -148,7 +148,7 @@ function update(deltaTime) {
 
   // collectible to player
   collectibles.forEach((coll) => {
-    coll.life_timer -= 1;
+    coll.life_timer -= (game_speed * time_scale);
 
     if (coll.life_timer <= 0) {
       removeObj(coll);
