@@ -83,7 +83,7 @@ function updateCollisions() {}
 function applyGravityToObjects() {
   GAME_OBJECTS.forEach((obj) => {
     if (obj.has_gravity) {
-      obj.y += GRAVITY * time_scale * game_speed;
+      obj.y += obj.fall_rate * time_scale * game_speed;
     }
   });
 }

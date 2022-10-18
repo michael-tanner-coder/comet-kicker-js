@@ -222,11 +222,18 @@ function update(deltaTime) {
 
   // enemies
   enemies.forEach((enemy) => {
+    // check if enemy is close to player
     let player_center = {
+      x: PLAYER.x + PLAYER.w / 2,
+      y: PLAYER.y + PLAYER.h / 2,
+    };
+    const ENEMY_TYPE = ENEMIES.find((e) => e.name === enemy.name);
     if (getDistance(enemy, player_center) <= PLAYER.enemy_detection_range) {
-      enemy.speed = easing(enemy.speed, -1 * ENEMY_TYPE.speed);
+      enemy.speed = easing(enemy.speed, ENEMY_TYPE.speed * 0.5);
+      enemy.fall_rate = easing(enemy.fall_rate, ENEMY_TYPE.fall_rate * 0.5);
     } else {
       enemy.speed = easing(enemy.speed, ENEMY_TYPE.speed);
+      enemy.fall_rate = easing(enemy.fall_rate, ENEMY_TYPE.fall_rate);
     }
 
     // enemy to player
@@ -406,7 +413,6 @@ function loop() {
       game_state = STATES.GAME;
     }
   } else {
-    var processedOnce = false // Makes sure we can't skip inputs if the framerate is very high
     var processedOnce = false; // Makes sure we can't skip inputs if the framerate is very high
     while (lag > frame_duration || !processedOnce) {
       processedOnce = true;

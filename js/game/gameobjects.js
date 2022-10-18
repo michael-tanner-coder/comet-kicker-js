@@ -30,12 +30,14 @@ const PLAYER_DEFAULT = {
     { name: "right", x: 0, y: 0, w: 4, h: 14, color: "red" },
   ],
   render_hitbox: false,
+  enemy_detection_range: 64,
 
   // physics
   x_velocity: 0,
   y_velocity: 0,
   max_x_velocity: 8,
   max_y_velocity: 8,
+  fall_rate: GRAVITY,
 
   // health/take damage
   i_frames: 30,
@@ -177,7 +179,8 @@ const ENEMY = {
   prev_x: 0,
   color: PINK,
   direction: 0,
-  speed: 2,
+  speed: 1,
+  fall_rate: GRAVITY / 2,
   has_gravity: true,
   hitboxes: [
     { name: "left", x: 0, y: 0, w: 4, h: 14, color: "blue" },
@@ -226,7 +229,6 @@ const ROLLING_ENEMY = {
   h: 32,
   color: VIOLET,
   animation: ANIMATIONS.rollingEnemyMoveLeft,
-  speed: 2,
   hp: 3,
   render_hitbox: false,
   points_to_spawn: 300,
@@ -238,7 +240,6 @@ const BOUNCING_ENEMY = {
   name: "bouncingEnemy",
   color: VIOLET,
   animation: ANIMATIONS.bouncingEnemyMoveLeft,
-  speed: 2,
   spawn_points: [
     { x: 2, y: 1 },
     { x: 4, y: 1 },

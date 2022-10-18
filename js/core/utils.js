@@ -124,6 +124,10 @@ function spawnEnemy(type = ENEMY) {
     new_enemy.direction = Math.random() > 0.5 ? 180 : 0;
   }
 
+  if (score > 300) {
+    new_enemy.speed *= 2;
+    new_enemy.fall_rate *= 2;
+  }
   GAME_OBJECTS.push(new_enemy);
 }
 

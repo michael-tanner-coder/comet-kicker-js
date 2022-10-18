@@ -12,9 +12,8 @@
 // FINAL TODOS
 // ===========
 // TODO: favor player on hitboxes (larger shot hitboxes, smaller player hitbox for damage)
-// TODO: stop player from tunneling into walls
+// TODO: stop player from getting caught in respawning walls
 // TODO: need more confirmation of when player takes a hit (hitstun, health anim, sprite flash, player anim)
-// TODO: slightly slow down game when enemies are near player to give them a chance to move
 // TODO: balance enemy movement speed
 // TODO: assign points to powerups for unlocking them (connect to save data)
 // TODO: edit the menu theme
