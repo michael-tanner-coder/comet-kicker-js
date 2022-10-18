@@ -114,7 +114,7 @@ class StorySequence {
       this.resetState();
     }
 
-    if (this.script_index >= this.script.length - 1) {
+    if (this.script_index > this.script.length - 1) {
       this.skipIntro();
     }
   }
@@ -123,12 +123,13 @@ class StorySequence {
   TEXT_BOX = { x: 37, y: 0, w: 243, h: 66 };
 
   update() {
+    this.text_speed = this.current_beat.speed;
     // look ahead at the full story beat to see how the text should wrap when rendered
     this.script_lines = getWrappedText(
       this.current_beat.text[current_language],
       this.TEXT_BOX.x,
       this.TEXT_SECTION.y + this.font_size + this.text_padding,
-      8,
+      10,
       this.TEXT_BOX.w
     );
 

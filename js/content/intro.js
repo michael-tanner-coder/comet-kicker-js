@@ -40,7 +40,7 @@ const BEAT = {
   },
   image: "",
   music: "",
-  speed: 4,
+  speed: 3,
 };
 const INTRO_SCRIPT = [
   {
@@ -64,7 +64,7 @@ const INTRO_SCRIPT = [
   {
     ...BEAT,
     text: {
-      en: "In his youth, Kicker discovered he had immense, near-infinite power ",
+      en: "In his youth, Kicker discovered he had immense, near-infinite power -",
       es: "",
       fr: "",
       zh: "",
@@ -73,7 +73,7 @@ const INTRO_SCRIPT = [
   {
     ...BEAT,
     text: {
-      en: "- enough power to destroy the world around him ",
+      en: "- power so great it could destroy the world around him - ",
       es: "",
       fr: "",
       zh: "",
@@ -82,10 +82,96 @@ const INTRO_SCRIPT = [
   {
     ...BEAT,
     text: {
-      en: "- and even worlds beyond his own.",
+      en: "- and cause great harm to the people he loves.",
       es: "",
       fr: "",
       zh: "",
+    },
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "To keep his loved ones safe, Kicker isolated himself to train every day.",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "He hoped to control his powers before he could hurt anyone.",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "But in his absence, a dark force crept over their galaxy.",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    speed: 2,
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "The Agents of the Cosmos - followers of the Big Star - were determined to take control of the universe.",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "Now, Kicker must emerge from his training and defend his home.",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "But was his training enough?",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    speed: 4,
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "Can he control his powers and save the galaxy?",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    speed: 4,
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "Or will he only destroy himself and everyone around him?",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    speed: 4,
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "Is he powerful enough to become … ",
+      es: "",
+      fr: "",
+      zh: "",
+      speed: 1,
     },
   },
 ];
