@@ -174,7 +174,7 @@ function update(deltaTime) {
     }
 
     // floating animation
-    coll.y = coll.y + Math.sin(coll.life_timer * 0.1) * 0.5;
+    coll.y = coll.spawn_y + (Math.sin(coll.life_timer * .1 * game_speed) * 10);
   });
 
   // bullet to enemy
