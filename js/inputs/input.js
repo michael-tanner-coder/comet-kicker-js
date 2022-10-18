@@ -115,6 +115,8 @@ const CONTROLS = {
   autoKill: ["c"],
 };
 
+let UNPROCESSED_INPUTS = [];
+
 function initializeInputState() {
   for(let control in CONTROLS){
     if(localStorage.getItem(control)) {
@@ -173,11 +175,7 @@ function inputStateMachine(input) {
 
     // PRESSED
     case INPUT_STATES.pressed:
-      if (wasReleased(input.inputs)) {
-        input.state = INPUT_STATES.idle;
-      }
-
-      input.state = INPUT_STATES.held;
+      UNPROCESSED_INPUTS.push(input);
 
       break;
 
@@ -198,6 +196,17 @@ function inputStateMachine(input) {
 
       break;
   }
+}
+
+function releaseInputs(){
+  UNPROCESSED_INPUTS.forEach((input) => {
+    if(wasReleased(input.inputs)) {
+      input.state = INPUT_STATES.idle;
+    }else{
+      input.state = INPUT_STATES.held;
+    }
+  });
+  UNPROCESSED_INPUTS = [];
 }
 
 // ---INPUT API---
