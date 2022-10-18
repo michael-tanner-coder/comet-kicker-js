@@ -114,9 +114,30 @@ function spawnEnemy(type = ENEMY) {
 function spawnCollectible() {
   var new_collect = choose(COLLECTIBLES);
   var temp_collect = { ...new_collect };
-  var spawn_point = choose(COLLECTIBLE_LOCATIONS);
+
+  // spawn at the location farthest from the player
+  var farthest_spawn_point = COLLECTIBLE_LOCATIONS[0];
+  COLLECTIBLE_LOCATIONS.forEach((loc) => {
+    // have to adjust the spawn locations to match the invisible level grid
+    var adjusted_current_loc = { x: withGrid(loc.x), y: withGrid(loc.y) };
+    var adjusted_farthest_loc = {
+      x: withGrid(farthest_spawn_point.x),
+      y: withGrid(farthest_spawn_point.y),
+    };
+
+    //
+    let distance = getDistance(adjusted_current_loc, PLAYER);
+    console.log("distance:");
+    console.log(distance);
+    if (distance >= getDistance(adjusted_farthest_loc, PLAYER)) {
+      farthest_spawn_point = loc;
+    }
+  });
+  var spawn_point = farthest_spawn_point;
+
   temp_collect.x = withGrid(spawn_point.x);
   temp_collect.y = withGrid(spawn_point.y);
+
   GAME_OBJECTS.push(temp_collect);
 }
 
@@ -287,6 +308,10 @@ function moveInOwnDirection(object) {
     Math.sin((object.direction * Math.PI) / 180) *
     time_scale *
     game_speed;
+}
+
+function getDistance(obj_a, obj_b) {
+  return Math.hypot(obj_a.x - obj_b.x, obj_a.y - obj_b.y);
 }
 
 // game state
@@ -565,17 +590,20 @@ function drawErrorMessage(message) {
 // sound
 function setMasterVolume(vol) {
   master_volume = vol;
-  localStorage.setItem('master_volume', JSON.stringify(master_volume));
+  localStorage.setItem("master_volume", JSON.stringify(master_volume));
 }
 
 function setMusicVolume(vol) {
   music_volume = vol;
-  localStorage.setItem('music_volume', JSON.stringify(music_volume));
+  localStorage.setItem("music_volume", JSON.stringify(music_volume));
 }
 
 function setSoundEffectVolume(vol) {
   sound_effect_volume = vol;
-  localStorage.setItem('sound_effect_volume', JSON.stringify(sound_effect_volume));
+  localStorage.setItem(
+    "sound_effect_volume",
+    JSON.stringify(sound_effect_volume)
+  );
 }
 
 function playMusic(song) {
