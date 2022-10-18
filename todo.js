@@ -14,7 +14,6 @@
 // TODO: favor player on hitboxes (larger shot hitboxes, smaller player hitbox for damage)
 // TODO: stop player from tunneling into walls
 // TODO: need more confirmation of when player takes a hit (hitstun, health anim, sprite flash, player anim)
-// TODO: visually indicate the lifetime of a collectible
 // TODO: slightly slow down game when enemies are near player to give them a chance to move
 // TODO: balance enemy movement speed
 // TODO: assign points to powerups for unlocking them (connect to save data)

@@ -477,6 +477,17 @@ function drawObjects() {
         Math.floor(obj.y)
       );
     }
+
+    if (obj.type === "collect") {
+      context.fillStyle = PURPLE;
+      context.globalAlpha = 0.5;
+      let time_left_difference = COLLECT.life_timer - obj.life_timer;
+      let time_left_percent = time_left_difference / COLLECT.life_timer;
+      let h = time_left_percent * 17;
+      let w = 19;
+      context.fillRect(obj.x + 6, obj.y + 6, w, h);
+      context.globalAlpha = 1;
+    }
   });
 }
 
