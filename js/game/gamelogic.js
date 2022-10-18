@@ -314,7 +314,7 @@ function updateCollectibleSpawnTimer(collectibles) {
   if (collect_spawn_timer <= 0) {
     spawnCollectible();
     playSoundEffect("collect_spawn");
-    collect_spawn_timer = MAX_COLLECT_SPAWN_TIMER;
+    collect_spawn_timer = MAX_COLLECT_SPAWN_TIMER * (1 / game_speed); // Not using time_scale since this is a single moment in time
   }
 }
 
