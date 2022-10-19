@@ -21,7 +21,6 @@
 // TODO: track unlockables via menu
 // TODO: slow down game on hit
 // TODO: adjust spawn rate over time (tension + release)
-// TODO: assign different point values to enemies (more points for tougher enemies)
 // TODO: hitstop on gameover, switch to game over sprite
 // TODO: prevent player from sliding when under a platform
 // TODO: implement smooth cornering for player and enemies

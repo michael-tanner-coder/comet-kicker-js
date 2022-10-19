@@ -148,7 +148,7 @@ function update(deltaTime) {
 
   // collectible to player
   collectibles.forEach((coll) => {
-    coll.life_timer -= (game_speed * time_scale);
+    coll.life_timer -= game_speed * time_scale;
 
     if (coll.life_timer <= 0) {
       removeObj(coll);
@@ -174,7 +174,7 @@ function update(deltaTime) {
     }
 
     // floating animation
-    coll.y = coll.y + (Math.sin(coll.life_timer * 0.1) * 0.5 * game_speed);
+    coll.y = coll.y + Math.sin(coll.life_timer * 0.1) * 0.5 * game_speed;
   });
 
   // bullet to enemy
@@ -195,9 +195,9 @@ function update(deltaTime) {
             multiplier += 1;
             multiplier_timer = 200;
           }
-          score += enemy_point_value * multiplier;
+          score += enemy.points * multiplier;
           let text_object = spawnObject(TEXT_OBJECT, enemy.x, enemy.y);
-          text_object.text = "+" + enemy_point_value + " x " + multiplier;
+          text_object.text = "+" + enemy.points + " x " + multiplier;
           explosion(enemy.x, enemy.y);
         }
 
