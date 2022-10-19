@@ -24,7 +24,6 @@
 // TODO: hitstop on gameover, switch to game over sprite
 // TODO: prevent player from sliding when under a platform
 // TODO: implement smooth cornering for player and enemies
-// TODO: screenwrap shots
 // TODO: fix pause menu + spice up the UI
 // TODO: update text on game over menu
 // TODO: implement high pass filter on game over screen audio

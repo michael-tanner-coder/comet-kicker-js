@@ -259,6 +259,7 @@ const BOUNCING_ENEMY = {
   name: "bouncingEnemy",
   color: VIOLET,
   animation: ANIMATIONS.bouncingEnemyMoveLeft,
+  speed: 3,
   spawn_points: [
     { x: 2, y: 1 },
     { x: 4, y: 1 },
