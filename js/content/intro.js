@@ -85,7 +85,7 @@ const INTRO_SCRIPT = [
   {
     ...BEAT,
     text: {
-      en: "- power so great it could destroy the world around him - ",
+      en: "- power so great it could destroy the world around him -",
       es: "",
       fr: "",
       zh: "",
