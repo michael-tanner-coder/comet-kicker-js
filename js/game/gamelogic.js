@@ -273,7 +273,7 @@ function despawnShield(shield) {
 
 // score
 function updateScore() {
-  score -= 0.1;
+  score -= game_speed * time_scale * 0.1;
   if (score <= 0) {
     score = 0;
   }
