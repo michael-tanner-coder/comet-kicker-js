@@ -697,4 +697,8 @@ function screenwrap(obj) {
   if (obj.y + obj.h > GAME_H) {
     obj.y = 0;
   }
+
+  if (obj.y + obj.h < 0) {
+    obj.y = GAME_H - obj.h;
+  }
 }

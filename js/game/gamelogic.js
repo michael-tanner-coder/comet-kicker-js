@@ -3,7 +3,16 @@
 // UPDATE LOGIC
 // general update
 function updateShots(bullets) {
-  bullets.forEach((bullet) => moveInOwnDirection(bullet));
+  bullets.forEach((bullet) => {
+    moveInOwnDirection(bullet);
+    screenwrap(bullet);
+    bullet.life_timer -= game_speed * time_scale;
+    if (bullet.life_timer <= 0) {
+      bullet.life_timer = BULLET.life_timer;
+      spark_fx(bullet.x, bullet.y);
+      removeObj(bullet);
+    }
+  });
 }
 
 function updateEnemies(enemies) {

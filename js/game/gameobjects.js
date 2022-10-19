@@ -128,6 +128,7 @@ const BULLET = {
   x: 0,
   y: 0,
   color: YELLOW,
+  life_timer: 60,
   direction: 0,
   speed: 6,
   animation: ANIMATIONS.normalShotMoveLeft,
@@ -137,21 +138,9 @@ const BULLET = {
   angle: 0,
 };
 const RAPID_BULLET = {
-  type: "bullet",
-  name: "normalShot",
-  state: "Move",
-  w: 8,
-  h: 8,
-  x: 0,
-  y: 0,
-  color: YELLOW,
-  direction: 0,
-  speed: 6,
-  animation: ANIMATIONS.normalShotMoveLeft,
-  has_trail: true,
-  render_hitbox: false,
+  ...BULLET,
   recoil: 10,
-  angle: 0,
+  life_timer: 30,
 };
 
 const WIDE_BULLET = {
