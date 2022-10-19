@@ -462,8 +462,7 @@ function drawObjects() {
 
     // flash white every other frame
     if (obj.hit && obj.i_frames % 2 === 0) {
-      context.fillStyle = WHITE;
-      context.fillRect(obj.x, obj.y, obj.w, obj.h);
+      context.globalCompositeOperation = "lighter";
     }
 
     // play the object's current animation
@@ -476,6 +475,7 @@ function drawObjects() {
         Math.floor(obj.x),
         Math.floor(obj.y)
       );
+      context.globalCompositeOperation = "source-over";
     }
 
     if (obj.type === "collect") {
