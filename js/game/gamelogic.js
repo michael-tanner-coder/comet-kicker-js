@@ -125,7 +125,7 @@ function updateIFrameCounter() {
 
 function playerShoot() {
   if (!PLAYER.shot_fired) {
-    PLAYER.shot_timer--;
+    PLAYER.shot_timer -= game_speed * time_scale;
   }
 
   if (PLAYER.shot_fired) {
