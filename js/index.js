@@ -427,8 +427,20 @@ function loop() {
   window.requestAnimationFrame(loop);
 }
 
+function skipMenusIfUrlParamExists() {
+  const queryString = window.location.search
+  const urlParams = new URLSearchParams(queryString)
+  const start_game_immediately = urlParams.has('startGame')
+
+  if(start_game_immediately) {
+    game_state = STATES.GAME
+  }
+}
+
 // INIT
 MENU_STACK.push(getMenu("mainMenu"));
+
 startGame();
+skipMenusIfUrlParamExists()
 
 loop();
