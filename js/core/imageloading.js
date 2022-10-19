@@ -30,6 +30,8 @@ const image_list = [
   { file: "missilev3.png", name: "missile" },
   { file: "control-icons.png", name: "controls" },
   { file: "heart.png", name: "heart" },
+  { file: "intro-1.png", name: "intro_1" },
+  { file: "intro-2.png", name: "intro_2" },
   // <-- Add your sprite in here
 ];
 

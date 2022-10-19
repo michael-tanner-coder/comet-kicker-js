@@ -1,3 +1,13 @@
+// images
+// behind shot of kicker in space
+// kicker is enveloped in magic
+// kicker leaving his family/friends
+// kicker kicking (lots)
+// shot of space again, with sinister shadow
+// shot of all the comet enemies together, large figure behind them
+// front shot of kicker looking upward
+// up close shot of kicker, looking determined to fight
+
 /*
 Long ago, deep in the far reaches of space, 
 
@@ -51,6 +61,7 @@ const INTRO_SCRIPT = [
       fr: "",
       zh: "",
     },
+    image: "intro_1",
   },
   {
     ...BEAT,
@@ -60,6 +71,7 @@ const INTRO_SCRIPT = [
       fr: "",
       zh: "",
     },
+    image: "intro_2",
   },
   {
     ...BEAT,

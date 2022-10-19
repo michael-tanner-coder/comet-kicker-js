@@ -124,6 +124,9 @@ class StorySequence {
 
   update() {
     this.text_speed = this.current_beat.speed;
+    if (this.current_beat.image) {
+      this.image = this.current_beat.image;
+    }
     // look ahead at the full story beat to see how the text should wrap when rendered
     this.script_lines = getWrappedText(
       this.current_beat.text[current_language],
@@ -216,9 +219,15 @@ class StorySequence {
     );
 
     //   image section
+    context.fillStyle = WHITE;
+    context.fillRect(0, 41, GAME_W, 1);
+    context.fillRect(0, 41 + 115, GAME_W, 1);
     context.fillStyle = "#00000088";
     context.fillRect(0, 42, GAME_W, 114);
     context.fillRect(64, 42, 197, 114);
+    if (this.image) {
+      context.drawImage(IMAGES[this.image], 64, 42);
+    }
 
     //   text section
     context.fillStyle = "#00000088";
