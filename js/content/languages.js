@@ -116,7 +116,7 @@ const TEXT_CONTENT = {
     en: "CREDITS",
     es: "CRÉDITOS",
     fr: "CRÉDITS",
-    zh: "",
+    zh: "贡献者",
   },
   graphics: {
     en: "GRAPHICS",
@@ -174,13 +174,13 @@ const TEXT_CONTENT = {
     en: "FULLSCREEN",
     es: "PANTALLA COMPLETA",
     fr: "PLEIN ÉCRAN",
-    zh: "",
+    zh: "全屏",
   },
   resolution: {
     en: "RESOLUTION",
     es: "RESOLUCIÓN",
     fr: "RÉSOLUTION",
-    zh: "",
+    zh: "分辨率",
   },
 
   // SOUND
@@ -208,16 +208,19 @@ const TEXT_CONTENT = {
     en: "GAME SPEED",
     es: "VELOCIDAD DEL JUEGO",
     fr: "VITESSE DE JEU",
+    zh: "游戏速度",
   },
   screenshake: {
     en: "SCREEN SHAKE",
     es: "MOVIMIENTO DE PANTALLA",
     fr: "SECOUEMENT D'ÉCRAN",
+    zh: "屏幕震动",
   },
   invincible_mode: {
     en: "INVINCIBLE MODE",
     es: "MODO INVENCIBLE",
     fr: "MODE INVINCIBLE",
+    zh: "无敌",
   },
 
   // LANGUAGE
@@ -225,6 +228,7 @@ const TEXT_CONTENT = {
     en: "SELECT LANGUAGE",
     es: "SELECCIONE EL IDIOMA",
     fr: "CHOISIR LA LANGUE",
+    zh: "选择语言",
   },
 
   // DATA
@@ -232,11 +236,13 @@ const TEXT_CONTENT = {
     en: "PROGRESS",
     es: "PROGRESO",
     fr: "LE PROGRÈS",
+    zh: "当前进展",
   },
   delete_data: {
     en: "DELETE DATA?",
     es: "¿BORRAR DATOS?",
     fr: "SUPRIMMER LES DONNÉES?",
+    zh: "删除数据",
   },
 
   // CONTROLS
@@ -244,11 +250,13 @@ const TEXT_CONTENT = {
     en: "PRESETS",
     es: "PREESTABLECIDA",
     fr: "PRÉCONFIGURATIONS",
+    zh: "预配置",
   },
   custom: {
     en: "CUSTOM",
     es: "DISFRAZ",
     fr: "DOUANE",
+    zh: "自定义配置",
   },
 };
 
