@@ -249,6 +249,7 @@ function update(deltaTime) {
       }
       removeObj(enemy);
       PLAYER.hit = true;
+      PLAYER.state = PLAYER_STATES.HIT;
       PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
       explosion(PLAYER.x, PLAYER.y);
     }

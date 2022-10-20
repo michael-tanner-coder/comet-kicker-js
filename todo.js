@@ -12,7 +12,7 @@
 // FINAL TODOS
 // ===========
 // TODO: stop player from getting caught in respawning walls
-// TODO: need more confirmation of when player takes a hit (hitstun, health anim, sprite flash, player anim)
+// TODO: need more confirmation of when player takes a hit (health anim)
 // TODO: assign points to powerups for unlocking them (connect to save data)
 // TODO: edit the menu theme
 // TODO: set a point limit to unlock the ending sequence

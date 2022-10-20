@@ -130,6 +130,7 @@ function updateIFrameCounter() {
   if (PLAYER.i_frames <= 0) {
     PLAYER.i_frames = PLAYER_DEFAULT.i_frames;
     PLAYER.hit = false;
+    PLAYER.state = PLAYER_STATES.IDLE;
   }
 }
 
@@ -243,6 +244,9 @@ function testPlayerJump() {}
 function playerMove(dt) {
   PLAYER.prev_x = PLAYER.x;
   PLAYER.prev_y = PLAYER.y;
+  if (PLAYER.state === PLAYER_STATES.HIT) {
+    return;
+  }
   PLAYER.state = PLAYER_STATES.IDLE;
 
   if (onHold(CONTROLS.moveRight)) {

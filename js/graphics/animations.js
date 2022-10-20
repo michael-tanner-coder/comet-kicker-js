@@ -345,10 +345,20 @@ const ANIMATIONS = {
     current_frame: 0,
   },
 
-  // lose
+  // take damage
+  playerHitRight: {
+    sprite: "player_sheet",
+    frames: [{ x: 16, y: 80, w: 16, h: 16 }],
+    current_frame: 0,
+  },
+  playerHitLeft: {
+    sprite: "player_sheet",
+    frames: [{ x: 32, y: 80, w: 16, h: 16 }],
+    current_frame: 0,
+  },
   playerLose: {
     sprite: "player_sheet",
-    frames: [{ x: 0, y: 48, w: 16, h: 16 }],
+    frames: [{ x: 0, y: 80, w: 16, h: 16 }],
     current_frame: 0,
   },
 
