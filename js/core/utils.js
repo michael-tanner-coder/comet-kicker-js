@@ -77,7 +77,7 @@ function spawnBullet(source, direction, projectile) {
   var source_center_y = source.y + source.h / 2;
 
   // Bullet to spawn
-  var new_bullet = { ...projectile };
+  var new_bullet = JSON.parse(JSON.stringify({ ...projectile }));
 
   // Spawn bullet at center of source, with a buffer for the horizontal direction
   new_bullet.x = source_center_x - projectile.w / 2;
@@ -284,6 +284,14 @@ function updateHitboxes(object) {
   if (object.hitboxes) {
     const left = object.hitboxes.find((box) => box.name === "left");
     const right = object.hitboxes.find((box) => box.name === "right");
+    const damage_detection = object.hitboxes.find(
+      (box) => box.name === "damage_detection"
+    );
+
+    if (damage_detection) {
+      damage_detection.x = object.x + object.w / 2 - damage_detection.w / 2;
+      damage_detection.y = object.y + object.h / 2 - damage_detection.h / 2;
+    }
 
     if (left && right) {
       left.x = object.x;

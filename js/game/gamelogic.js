@@ -7,6 +7,7 @@ function updateShots(bullets) {
     moveInOwnDirection(bullet);
     screenwrap(bullet);
     bullet.life_timer -= game_speed * time_scale;
+    updateHitboxes(bullet);
     if (bullet.life_timer <= 0) {
       bullet.life_timer = BULLET.life_timer;
       spark_fx(bullet.x, bullet.y);
@@ -450,7 +451,7 @@ function drawObjects() {
 
       obj?.hitboxes?.forEach((box) => {
         context.fillStyle = box.color;
-        context.fillRect(obj.x + box.x, obj.y + box.y, box.w, box.h);
+        context.fillRect(box.x, box.y, box.w, box.h);
       });
     }
 

@@ -28,6 +28,7 @@ const PLAYER_DEFAULT = {
   hitboxes: [
     { name: "left", x: 0, y: 0, w: 4, h: 14, color: "red" },
     { name: "right", x: 0, y: 0, w: 4, h: 14, color: "red" },
+    { name: "damage_detection", x: 0, y: 0, w: 8, h: 8, color: "blue" },
   ],
   render_hitbox: false,
   enemy_detection_range: 64,
@@ -127,6 +128,7 @@ const BULLET = {
   h: 8,
   x: 0,
   y: 0,
+  hitboxes: [{ name: "damage_detection", x: 0, y: 0, w: 16, h: 16 }],
   color: YELLOW,
   life_timer: 60,
   direction: 0,

@@ -179,8 +179,9 @@ function update(deltaTime) {
 
   // bullet to enemy
   bullets.forEach((bullet) => {
+    const BULLET_DAMAGE_DETECTION_BOX = getHitbox(bullet, "damage_detection");
     enemies.forEach((enemy) => {
-      if (collisionDetected(enemy, bullet)) {
+      if (collisionDetected(enemy, BULLET_DAMAGE_DETECTION_BOX)) {
         if (enemy.hp) {
           enemy.hp -= 1;
           explosion(bullet.x, bullet.y);
@@ -211,7 +212,10 @@ function update(deltaTime) {
 
     blocks.forEach((block) => {
       if (block.destroyed) return;
-      if (collisionDetected(block, bullet) && bullet.exploding) {
+      if (
+        collisionDetected(block, BULLET_DAMAGE_DETECTION_BOX) &&
+        bullet.exploding
+      ) {
         explosion(block.x, block.y);
         spawnObject(EXPLOSION, bullet.x, bullet.y);
         removeObj(bullet);
@@ -237,7 +241,8 @@ function update(deltaTime) {
     }
 
     // enemy to player
-    if (collisionDetected(enemy, PLAYER)) {
+    const PLAYER_DAMAGE_DETECTION_BOX = getHitbox(PLAYER, "damage_detection");
+    if (collisionDetected(enemy, PLAYER_DAMAGE_DETECTION_BOX)) {
       if (!PLAYER.hit && !invincible_mode) {
         PLAYER.hp -= 1;
         playSoundEffect("lose_hp");
@@ -428,12 +433,12 @@ function loop() {
 }
 
 function skipMenusIfUrlParamExists() {
-  const queryString = window.location.search
-  const urlParams = new URLSearchParams(queryString)
-  const start_game_immediately = urlParams.has('startGame')
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const start_game_immediately = urlParams.has("startGame");
 
-  if(start_game_immediately) {
-    game_state = STATES.GAME
+  if (start_game_immediately) {
+    game_state = STATES.GAME;
   }
 }
 
@@ -441,6 +446,6 @@ function skipMenusIfUrlParamExists() {
 MENU_STACK.push(getMenu("mainMenu"));
 
 startGame();
-skipMenusIfUrlParamExists()
+skipMenusIfUrlParamExists();
 
 loop();
