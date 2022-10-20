@@ -118,6 +118,7 @@ function updateTimeScale() {
 function checkForGameOver() {
   if (PLAYER.hp <= 0) {
     resetGame();
+    LOST_HEARTS.length = 0;
     playSoundEffect("game_over");
   }
 }
@@ -511,9 +512,32 @@ function drawScore() {
 }
 
 function drawHP() {
+  // draw one heart image for each point of HP
   for (i = 0; i < PLAYER.hp; i++) {
     context.fillStyle = WHITE;
     context.drawImage(IMAGES["heart"], GAME_W / 2 + 16 * i, 20);
+  }
+
+  // heart fall animation
+  if (LOST_HEARTS.length > 0) {
+    let heart = LOST_HEARTS[0];
+    let target_y = 30;
+    let animation_duration = 0.5;
+    heart.alpha = easing(heart.alpha, 0);
+    heart.y = easing(heart.y, target_y);
+    context.globalAlpha = heart.alpha;
+    context.drawImage(
+      IMAGES["heart"],
+      GAME_W / 2 + 16 * PLAYER.hp + 1,
+      heart.y
+    );
+    context.globalAlpha = 1;
+
+    // when animation reaches its end, stop tracking this heart
+    heart.animation_timer += 0.01 * game_speed * time_scale;
+    if (heart.animation_timer >= animation_duration) {
+      LOST_HEARTS.shift();
+    }
   }
 }
 

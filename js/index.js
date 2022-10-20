@@ -245,6 +245,7 @@ function update(deltaTime) {
     if (collisionDetected(enemy, PLAYER_DAMAGE_DETECTION_BOX)) {
       if (!PLAYER.hit && !invincible_mode) {
         PLAYER.hp -= 1;
+        LOST_HEARTS.push(JSON.parse(JSON.stringify(HEART)));
         playSoundEffect("lose_hp");
       }
       removeObj(enemy);

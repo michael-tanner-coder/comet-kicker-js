@@ -342,3 +342,13 @@ const TEXT_OBJECT = {
   speed: 1,
   alpha: 1,
 };
+
+const HEART = {
+  x: 0,
+  y: 20,
+  w: 10,
+  h: 10,
+  animation_timer: 0,
+  alpha: 1,
+};
+const LOST_HEARTS = [];
