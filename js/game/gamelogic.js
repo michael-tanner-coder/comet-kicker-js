@@ -507,14 +507,14 @@ function drawObjects() {
 
 function drawScore() {
   context.fillStyle = WHITE;
-  context.fillText(`${getText("score")}: ${Math.round(score)}`, GAME_W / 2, 10);
+  drawCenteredText(`${getText("score")}: ${Math.round(score)}`, 10);
 }
 
 function drawHP() {
   // draw one heart image for each point of HP
   for (i = 0; i < PLAYER.hp; i++) {
     context.fillStyle = WHITE;
-    context.drawImage(IMAGES["heart"], GAME_W / 2 + 16 * i, 20);
+    context.drawImage(IMAGES["heart"], GAME_W / 2 - 32 + 16 * i, 20);
   }
 
   // heart fall animation
