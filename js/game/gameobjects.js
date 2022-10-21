@@ -130,7 +130,7 @@ const BULLET = {
   y: 0,
   hitboxes: [{ name: "damage_detection", x: 0, y: 0, w: 16, h: 16 }],
   color: YELLOW,
-  life_timer: 60,
+  life_timer: 30,
   direction: 0,
   speed: 6,
   animation: ANIMATIONS.normalShotMoveLeft,
@@ -142,7 +142,7 @@ const BULLET = {
 const RAPID_BULLET = {
   ...BULLET,
   recoil: 10,
-  life_timer: 30,
+  life_timer: 15,
 };
 
 const WIDE_BULLET = {
