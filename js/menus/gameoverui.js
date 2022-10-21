@@ -214,19 +214,27 @@ function updateScoreSection(section) {
   const scoreBar = section.score_bar;
   scoreBar.x = section.x;
   scoreBar.y = section.y + section.h / 2 - scoreBar.h / 2;
+  let anim_rate = 0.01;
+  let tolerance = 0.3;
 
   let maxValue = 1000;
-  scoreBar.value = easingWithRate(scoreBar.value, score, 0.01);
+  scoreBar.value = easingWithRate(
+    scoreBar.value,
+    Math.round(score),
+    anim_rate,
+    tolerance
+  );
   let remainder = scoreBar.value % maxValue;
   let percentage = remainder / maxValue;
   scoreBar.w = scoreBar.maxW * percentage;
 
   scoreBar.text.value = easingWithRate(
-    parseInt(scoreBar.text.value),
-    Math.round(score * 100) / 100,
-    0.01
+    scoreBar.text.value,
+    Math.round(score),
+    anim_rate,
+    tolerance
   );
-  scoreBar.text.text = "SCORE: " + scoreBar.text.value;
+  scoreBar.text.text = "SCORE: " + Math.round(scoreBar.text.value);
 
   // Goals
   const goals = section.goals;

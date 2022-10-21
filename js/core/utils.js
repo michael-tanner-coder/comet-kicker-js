@@ -20,7 +20,8 @@ function easing(x, target) {
   return (x += (target - x) * 0.1);
 }
 
-function easingWithRate(x, target, rate) {
+function easingWithRate(x, target, rate, tolerance = 0) {
+  if (tolerance > 0 && x >= target * tolerance) return easing(x, target);
   return (x += (target - x) * rate);
 }
 
