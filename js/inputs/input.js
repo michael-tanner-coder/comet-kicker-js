@@ -87,7 +87,7 @@ const DEFAULT_INPUT_STATE = {
 };
 
 /**
- * This data structure gets change in initializeInputState
+ * This data structure gets changed in initializeInputState
  * Each element winds up looking like:
  * {
  *   "state": "idle",

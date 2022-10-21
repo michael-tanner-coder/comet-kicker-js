@@ -402,9 +402,9 @@ function updateGameOverScreen() {
   updateAverageScoreSection(AVERAGE_SCORE_SECTION);
 }
 
-function pauseGame() {
+function listenForGamePause() {
   if (onPress(CONTROLS.pause)) {
-    game_state = STATES.PAUSE;
+    game_state = game_state === STATES.PAUSE ? STATES.GAME : STATES.PAUSE;
   }
 }
 

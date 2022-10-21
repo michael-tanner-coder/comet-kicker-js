@@ -39,8 +39,11 @@ function update(deltaTime) {
   }
 
   // PAUSING
-  if (game_state === STATES.GAME) {
-    pauseGame();
+  if (game_state !== STATES.MENU) {
+    listenForGamePause();
+  }
+  if (game_state === STATES.PAUSE) {
+    return;
   }
 
   // ==============
@@ -419,17 +422,11 @@ function loop() {
 
   inputListener();
 
-  if (game_state === STATES.PAUSE) {
-    if (onPress(CONTROLS.start)) {
-      game_state = STATES.GAME;
-    }
-  } else {
-    while (lag > frame_duration) {
-      update(elapsed);
-      lag -= 1000 / fps;
-      if (lag < 0) lag = 0;
-      releaseInputs();
-    }
+  while (lag > frame_duration) {
+    update(elapsed);
+    lag -= 1000 / fps;
+    if (lag < 0) lag = 0;
+    releaseInputs();
   }
 
   var lag_offset = lag / frame_duration;
