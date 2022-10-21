@@ -163,7 +163,7 @@ function drawScoreSection(section) {
   const scoreTextX = scoreText.x;
   const scoreTextY =
     scoreBar.y + scoreText.y + scoreBar.h / 2 + scoreBar.text_size / 2;
-  setFont(scoreBar.text_size);
+  setFontSize(scoreBar.text_size);
 
   context.fillStyle = scoreText.shadow.color;
   context.fillText(
@@ -196,14 +196,14 @@ function drawScoreSection(section) {
 
     //  text outline
     const goalText = goal.text;
-    setFont(goalText.text_size);
+    setFontSize(goalText.text_size);
     context.strokeStyle = goalText.outline.color;
     context.lineWidth = goalText.outline.size;
     context.strokeText(goalText.text, goal.x, goalText.y);
     context.lineWidth = 0;
 
     //  text
-    setFont(goalText.text_size);
+    setFontSize(goalText.text_size);
     context.fillStyle = goalText.color;
     context.fillText(goalText.text, goal.x, goalText.y);
   });

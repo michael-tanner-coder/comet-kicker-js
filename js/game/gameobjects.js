@@ -358,3 +358,40 @@ const HEART = {
   alpha: 1,
 };
 const LOST_HEARTS = [];
+
+// pause menu
+const PAUSE_BAR_BACK = {
+  x: -224,
+  y: 21,
+  target_x: 8,
+  w: 224,
+  h: 39,
+  color: YELLOW,
+};
+const PAUSE_BAR_FRONT = {
+  x: -224,
+  y: 12,
+  target_x: 0,
+  w: 224,
+  h: 39,
+  color: PINK,
+};
+const PAUSE_TEXT = {
+  x: 0,
+  target_x: 28,
+  y: 0,
+  text: getText("game_paused"),
+  size: 24,
+};
+
+const QUIT_PROMPT = {
+  x: 48,
+  y: 0,
+  font_size: 8,
+};
+
+const RESUME_PROMPT = {
+  x: 244,
+  y: 0,
+  font_size: 8,
+};

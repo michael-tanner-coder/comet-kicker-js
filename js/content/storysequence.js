@@ -240,7 +240,7 @@ class StorySequence {
 
     //   text rendering
     context.fillStyle = WHITE;
-    setFont(this.font_size);
+    setFontSize(this.font_size);
     this.rendered_lines.forEach((line) => {
       context.fillText(line.text, line.x, line.y);
     });

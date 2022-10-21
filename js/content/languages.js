@@ -92,6 +92,12 @@ const TEXT_CONTENT = {
     fr: "HP",
     zh: "HP",
   },
+  resume: {
+    en: "RESUME",
+    es: "RESUME",
+    fr: "RESUME",
+    zh: "RESUME",
+  },
 
   // MENUS
   start_game: {

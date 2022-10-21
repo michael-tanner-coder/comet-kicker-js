@@ -11,6 +11,7 @@ const GAME_OBJECTS = [];
 const PLAYER_HIT_SCREENSHAKES = 16; // frames
 const SCREENSHAKE_MAX_SIZE = 1; // pixels
 const ACCEPTED_LANGUAGES = ["en", "es", "fr", "zh"];
+const DEFAULT_FONT_SIZE = 8;
 const PICKUPS = {
   POINTS: "points",
   SHOT: "shot",

@@ -141,7 +141,7 @@ class ControlRow extends Input {
   draw() {
     let rendered_label = this.label;
     context.fillStyle = WHITE;
-    setFont(this.font_size);
+    setFontSize(this.font_size);
     context.fillText(
       rendered_label.replace(/([a-z0-9])([A-Z])/g, "$1 $2").toUpperCase(),
       this.x,

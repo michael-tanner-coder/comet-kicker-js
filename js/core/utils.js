@@ -433,8 +433,8 @@ function drawCenteredText(text, y_value) {
   context.fillText(text, GAME_W / 2 - getTextWidth(text) / 2, y_value);
 }
 
-function setFont(size, font = "PressStart2P") {
-  context.font = size + "px " + font;
+function setFontSize(size) {
+  context.font = size + "px PressStart2P";
 }
 
 // vfx/animation
@@ -471,6 +471,15 @@ function getAnimationDirection(object) {
 
   // if no other animation is available, return the object's default animation
   return object.animation;
+}
+
+function getInputAnimation(control) {
+  // TODO: fix this to check for the player's current input device
+  let first_input_with_animation = control.inputs.find(
+    (input) => ANIMATIONS[input]
+  );
+
+  return ANIMATIONS[first_input_with_animation];
 }
 
 function drawTrail(obj) {

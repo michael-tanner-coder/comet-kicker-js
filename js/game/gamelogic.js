@@ -406,6 +406,12 @@ function listenForGamePause() {
   if (onPress(CONTROLS.pause)) {
     game_state = game_state === STATES.PAUSE ? STATES.GAME : STATES.PAUSE;
   }
+
+  // reset pause screen animation
+  if (game_state === STATES.GAME) {
+    PAUSE_BAR_BACK.x = -1 * PAUSE_BAR_BACK.w;
+    PAUSE_BAR_FRONT.x = -1 * PAUSE_BAR_FRONT.w;
+  }
 }
 
 // DRAW LOGIC
@@ -563,8 +569,88 @@ function drawPauseScreen() {
   context.fillRect(0, 0, GAME_W, GAME_H);
   context.globalAlpha = 1;
 
-  // pause text
+  // pause section
+  PAUSE_BAR_BACK.x = easing(PAUSE_BAR_BACK.x, PAUSE_BAR_BACK.target_x);
+  PAUSE_BAR_FRONT.x = easing(PAUSE_BAR_FRONT.x, PAUSE_BAR_FRONT.target_x);
+  PAUSE_TEXT.x = easing(PAUSE_TEXT.x, PAUSE_TEXT.target_x);
+  PAUSE_TEXT.text = getText("game_paused");
+
+  context.fillStyle = PAUSE_BAR_BACK.color;
+  context.fillRect(
+    PAUSE_BAR_BACK.x,
+    PAUSE_BAR_BACK.y,
+    PAUSE_BAR_BACK.w,
+    PAUSE_BAR_BACK.h
+  );
+
+  context.fillStyle = PINK;
+  context.fillRect(
+    PAUSE_BAR_FRONT.x,
+    PAUSE_BAR_FRONT.y,
+    PAUSE_BAR_FRONT.w,
+    PAUSE_BAR_FRONT.h
+  );
+
+  context.fillStyle = PURPLE;
+  setFontSize(PAUSE_TEXT.size);
+  context.fillText(getText("game_paused"), PAUSE_TEXT.x, 44 + 2);
+
   context.fillStyle = WHITE;
-  context.fillText(getText("game_paused"), GAME_W / 2 - 90, 100);
-  context.fillText(getText("press_enter_to_continue"), GAME_W / 2 - 90, 150);
+  setFontSize(PAUSE_TEXT.size);
+  context.fillText(getText("game_paused"), PAUSE_TEXT.x, 44);
+
+  setFontSize(DEFAULT_FONT_SIZE);
+
+  // score section
+  context.globalAlpha = 0.5;
+  context.fillStyle = "black";
+  context.fillRect(0, 106, GAME_W, 28);
+  context.globalAlpha = 1;
+
+  context.fillStyle = PINK;
+  drawCenteredText(
+    `${getText("score")}: ${Math.round(score)}`,
+    Math.floor(106 + 8 + 28 / 2 - 8 / 2 + 1)
+  );
+  context.fillStyle = WHITE;
+  drawCenteredText(
+    `${getText("score")}: ${Math.round(score)}`,
+    Math.floor(106 + 8 + 28 / 2 - 8 / 2)
+  );
+
+  // controls section
+  context.globalAlpha = 0.5;
+  context.fillStyle = "black";
+  context.fillRect(0, 212, GAME_W, 28);
+  context.globalAlpha = 1;
+
+  if (getInputAnimation(CONTROLS.decline)) {
+    playAnimation(
+      getInputAnimation(CONTROLS.decline),
+      0,
+      QUIT_PROMPT.x - 32,
+      212 + 6
+    );
+  }
+  context.fillStyle = WHITE;
+  context.fillText(
+    getText("quit"),
+    QUIT_PROMPT.x,
+    Math.floor(212 + 8 + 28 / 2 - 8 / 2)
+  );
+
+  if (getInputAnimation(CONTROLS.accept)) {
+    playAnimation(
+      getInputAnimation(CONTROLS.accept),
+      0,
+      RESUME_PROMPT.x - 32,
+      212 + 6
+    );
+  }
+  context.fillStyle = WHITE;
+  context.fillText(
+    getText("resume"),
+    RESUME_PROMPT.x,
+    Math.floor(212 + 8 + 28 / 2 - 8 / 2)
+  );
 }
