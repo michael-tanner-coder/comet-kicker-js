@@ -1,4 +1,5 @@
-const IMAGES = {}; // GLOBAL IMAGE MAP: DON'T EDIT
+let IMAGES = {}; // GLOBAL IMAGE MAP: DON'T EDIT
+let playerSpritesBackup; // For our palette swapping
 var images_loaded = false;
 
 const image_list = [
@@ -37,9 +38,96 @@ const image_list = [
 
 var images_to_load = image_list.length;
 
+function setColorFromUrlParam() {
+  const queryString = window.location.search
+  const urlParams = new URLSearchParams(queryString)
+
+  // Replace with url param if it exists
+  const colorUrlParam = urlParams.get('playerColor')
+  if (colorUrlParam) {
+    playerColorKey = colorUrlParam
+  }
+}
+
+/**
+ * Backups if necessary, then returns copy so we don't edit the original
+ * and can have a palette swap based on original colors
+ */
+function getPlayerSpriteToChange() {
+  if (!playerSpritesBackup) {
+    playerSpritesBackup = IMAGES['player_sheet']
+  }
+
+  return playerSpritesBackup.cloneNode(true)
+}
+
+function swapPlayerColors() {
+  setColorFromUrlParam();
+  if (PLAYER) {
+    PLAYER.color = colorPalettes[playerColorKey].trail
+  }
+
+  let lightReplacementColor = colorPalettes[playerColorKey].light
+  let darkReplacementColor = colorPalettes[playerColorKey].dark
+
+  const imageToChange = getPlayerSpriteToChange()
+
+  let width = imageToChange.width
+  let height = imageToChange.height
+
+  // Create a new canvas so we can modify just this image
+  let canvas = document.createElement("canvas");
+  canvas.width = width
+  canvas.height = height
+  let ctx = canvas.getContext("2d");
+
+  // Draw original image to new context
+  ctx.drawImage(imageToChange, 0, 0);
+  // Now get the new imageData
+  let newImageData = ctx.getImageData(0, 0, width, height);
+
+  // Now go through every pixel and replace the values
+  // This is an array of 8 bit values in RGBA sequence
+  // So every 4 values is a pixel
+  for (let i = 0; i < newImageData.data.length; i += 4) {
+    // Original values for each set of RGBA, ignoring alpha since we won't change
+    let r = newImageData.data[i]
+    let g = newImageData.data[i + 1]
+    let b = newImageData.data[i + 2]
+
+    if (r === colorsToRemap.lightBandanna.r
+      && g === colorsToRemap.lightBandanna.g
+      && b === colorsToRemap.lightBandanna.b
+    ) {
+      newImageData.data[i] = lightReplacementColor.r
+      newImageData.data[i + 1] = lightReplacementColor.g
+      newImageData.data[i + 2] = lightReplacementColor.b
+
+    }
+    if (r === colorsToRemap.darkBandanna.r
+      && g === colorsToRemap.darkBandanna.g
+      && b === colorsToRemap.darkBandanna.b
+    ) {
+      newImageData.data[i] = darkReplacementColor.r
+      newImageData.data[i + 1] = darkReplacementColor.g
+      newImageData.data[i + 2] = darkReplacementColor.b
+    }
+  }
+
+  let ib = createImageBitmap(newImageData)
+
+  ib.then((bit) => {
+      // Set the player image to this new one
+      IMAGES['player_sheet'] = bit
+    }
+  )
+}
+
 function countLoadedImagesAndLaunchIfReady() {
   images_to_load--;
-  if (images_to_load == 0) {
+  if (images_to_load === 0) {
+    swapPlayerColors();
+
     images_loaded = true;
     console.log("images_loaded: " + images_loaded);
   }

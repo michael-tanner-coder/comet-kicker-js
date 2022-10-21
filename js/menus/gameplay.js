@@ -53,5 +53,10 @@ createMenu({
     }),
     GAME_SPEED_OPTION,
     GAME_HP_OPTION,
+    new Button({
+      key: "colors",
+      text: "COLORS",
+      onSelect: () => goToMenu("colorsMenu"),
+    }),
   ],
 });

@@ -264,6 +264,24 @@ const TEXT_CONTENT = {
     fr: "DOUANE",
     zh: "自定义配置",
   },
+  colors: {
+    en: "COLORS",
+  },
+  default: {
+    en: "default",
+  },
+  red: {
+    en: "red",
+  },
+  green: {
+    en: "green",
+  },
+  yellow: {
+    en: "yellow",
+  },
+  player_color: {
+    en: "PLAYER COLOR"
+  }
 };
 
 function getText(text) {

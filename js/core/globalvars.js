@@ -82,3 +82,72 @@ var object_id_counter = 0;
 
 // menus
 var stop_menu_nav = false;
+
+let playerColorKey = "default";
+
+const colorsToRemap = {
+    lightBandanna: {
+        r: 139,
+        g: 109,
+        b: 156
+    },
+    darkBandanna: {
+        r: 73,
+        g: 77,
+        b: 126
+    }
+}
+const colorPalettes = {
+    default: {
+        light: {
+            r: 139,
+            g: 109,
+            b: 156
+        },
+        dark: {
+            r: 73,
+            g: 77,
+            b: 126
+        },
+        trail: PINK
+    },
+    green: {
+        light: {
+            r: 0,
+            g: 255,
+            b: 0
+        },
+        dark: {
+            r: 0,
+            g: 120,
+            b: 0
+        },
+        trail: "#00FF00"
+    },
+    yellow: {
+        light: {
+            r: 255,
+            g: 255,
+            b: 0
+        },
+        dark: {
+            r: 120,
+            g: 120,
+            b: 0
+        },
+        trail: "#FFFF00"
+    },
+    red: {
+        light: {
+            r: 255,
+            g: 0,
+            b: 0
+        },
+        dark: {
+            r: 120,
+            g: 0,
+            b: 0
+        },
+        trail: "#FF0000"
+    },
+}
