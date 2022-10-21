@@ -411,9 +411,12 @@ function pauseGame() {
 // DRAW LOGIC
 function drawBackground() {
   if (images_loaded) {
-    context.drawImage(IMAGES["background_1"], BACKGROUND_1.x, BACKGROUND_1.y);
-    context.drawImage(IMAGES["background_2"], BACKGROUND_2.x, BACKGROUND_2.y);
-    context.drawImage(IMAGES["background_3"], BACKGROUND_3.x, BACKGROUND_3.y);
+    context.drawImage(IMAGES["background_2"], BACKGROUND_1.x, BACKGROUND_1.y);
+    context.drawImage(
+      IMAGES["background_2"],
+      BACKGROUND_2.x,
+      BACKGROUND_2.y + 10
+    );
   }
 }
 
