@@ -3,7 +3,6 @@ const GAME_W = canvas.width;
 const GAME_H = canvas.height;
 const UNIT_SIZE = 16;
 const GRAVITY = 3;
-const MAX_SHOT_TIMER = 14;
 const MAX_SPAWN_TIMER = 160;
 const MAX_COLLECT_SPAWN_TIMER = 120;
 const MAX_PLATFORM_SPAWN_TIMER = 240;

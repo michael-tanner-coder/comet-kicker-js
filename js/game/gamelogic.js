@@ -142,8 +142,7 @@ function playerShoot() {
 
   if (PLAYER.shot_fired) {
     // lower shot timer for rapid fire powerup
-    PLAYER.shot_timer =
-      PLAYER.powerup === PICKUPS.RAPID_FIRE ? 7 : MAX_SHOT_TIMER;
+    PLAYER.shot_timer = PLAYER.bullet_type.shot_delay;
     PLAYER.shot_fired = false;
   }
 

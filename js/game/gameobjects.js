@@ -138,11 +138,14 @@ const BULLET = {
   render_hitbox: false,
   recoil: 5,
   angle: 0,
+  shot_delay: 14,
 };
+
 const RAPID_BULLET = {
   ...BULLET,
   recoil: 10,
   life_timer: 15,
+  shot_delay: 14,
 };
 
 const WIDE_BULLET = {
@@ -153,6 +156,7 @@ const WIDE_BULLET = {
   w: 32,
   recoil: 8,
   animation: ANIMATIONS.wideShotMoveLeft,
+  shot_delay: 24,
 };
 
 const MISSILE_SHOT = {
@@ -173,6 +177,8 @@ const MISSILE_SHOT = {
   has_rotation: true,
   angle: 0,
   exploding: true,
+  shot_delay: 28,
+  life_timer: 60,
 };
 
 const EXPLOSION = {
