@@ -507,6 +507,7 @@ function drawObjects() {
 
 function drawScore() {
   context.fillStyle = WHITE;
+  context.font = "8px PressStart2P";
   drawCenteredText(`${getText("score")}: ${Math.round(score)}`, 10);
 }
 
