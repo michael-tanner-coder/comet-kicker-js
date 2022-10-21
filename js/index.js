@@ -305,8 +305,12 @@ function update(deltaTime) {
   explosions.forEach((exp) => {
     enemies.forEach((enemy) => {
       if (collisionWithCircleDetected(exp, enemy)) {
+        score += enemy.points * multiplier;
+        let text_object = spawnObject(TEXT_OBJECT, enemy.x, enemy.y);
+        text_object.text = "+" + enemy.points + " x " + multiplier;
         explosion(enemy.x, enemy.y);
         removeObj(enemy);
+        start_combo = true;
       }
     });
     blocks.forEach((block) => {
