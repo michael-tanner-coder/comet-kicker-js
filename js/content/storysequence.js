@@ -64,7 +64,7 @@ class StorySequence {
     this.script_index = 0;
 
     // visuals
-    this.image = {};
+    this.image = undefined
 
     // text progression
     this.text_speed = 2;
