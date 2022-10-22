@@ -22,4 +22,4 @@
 // TODO: prevent player from sliding when under a platform
 // TODO: implement smooth cornering for player and enemies
 // TODO: update text on game over menu
-// TODO: implement high pass filter on game over screen audio
+// TODO: implement low pass filter on game over screen audio

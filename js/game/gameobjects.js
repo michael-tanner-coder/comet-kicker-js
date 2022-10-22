@@ -243,7 +243,7 @@ const EXPLODING_ENEMY = {
     { x: 10, y: 1 },
   ],
   exploding: true,
-  points_to_spawn: 100,
+  points_to_spawn: 200,
   points: 15,
 };
 
@@ -257,7 +257,7 @@ const ROLLING_ENEMY = {
   animation: ANIMATIONS.rollingEnemyMoveLeft,
   hp: 3,
   render_hitbox: false,
-  points_to_spawn: 300,
+  points_to_spawn: 600,
   points: 25,
 };
 
@@ -275,7 +275,7 @@ const BOUNCING_ENEMY = {
     { x: 8, y: 1 },
     { x: 10, y: 1 },
   ],
-  points_to_spawn: 200,
+  points_to_spawn: 400,
   points: 20,
 };
 
