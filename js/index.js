@@ -139,7 +139,6 @@ function update(deltaTime) {
       PLAYER.hit_wall = true;
       PLAYER.x = PLAYER.prev_x;
       PLAYER.can_wall_jump = true;
-      continue;
     }
     if (blocks[i].destroyed) return;
     if (collisionDetected(blocks[i], PLAYER)) {
