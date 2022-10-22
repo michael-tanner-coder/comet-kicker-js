@@ -47,3 +47,10 @@ const PLAYER_STATE_TO_ANIMATION = {
   [PLAYER_STATES.DEAD]: "playerLose",
   [PLAYER_STATES.HIT]: "playerHit",
 };
+
+const DIRECTIONS = {
+  right: 0,
+  down: 90,
+  left: 180,
+  up: 270,
+};

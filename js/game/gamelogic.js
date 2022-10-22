@@ -18,7 +18,13 @@ function updateShots(bullets) {
 
 function updateEnemies(enemies) {
   enemies.forEach((enemy) => {
-    screenwrap(enemy);
+    if (enemy.screenwrap_timer < 0) {
+      screenwrap(enemy);
+      enemy.screenwrap = 0;
+    }
+
+    enemy.screenwrap_timer -= game_speed * time_scale;
+
     moveInOwnDirection(enemy);
     if (enemy.hit && enemy.i_frames) {
       enemy.i_frames--;
@@ -213,7 +219,10 @@ function playerJump() {
     }
   }
 
-  if ((PLAYER.coyote_time_counter > 0 || PLAYER.can_wall_jump) && onHold(CONTROLS.jump)) {
+  if (
+    (PLAYER.coyote_time_counter > 0 || PLAYER.can_wall_jump) &&
+    onHold(CONTROLS.jump)
+  ) {
     PLAYER.jumping = true;
     //if jump is being held and we've been on the ground recently
     PLAYER.coyote_time_counter = 0;
@@ -238,7 +247,8 @@ function playerJump() {
   }
 
   //apply the y velocity
-  PLAYER.y_velocity -= ((PLAYER.fall_rate * dt) / 1000) * time_scale*game_speed;
+  PLAYER.y_velocity -=
+    ((PLAYER.fall_rate * dt) / 1000) * time_scale * game_speed;
   //clamp falling velocity
   if (PLAYER.y_velocity < 0) {
     PLAYER.y_velocity = Math.max(-PLAYER.max_y_velocity, PLAYER.y_velocity);

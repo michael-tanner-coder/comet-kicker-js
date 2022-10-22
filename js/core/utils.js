@@ -120,15 +120,13 @@ function spawnEnemy(type = ENEMY) {
   new_enemy.x = withGrid(farthest_spawn_point.x);
   new_enemy.y = withGrid(farthest_spawn_point.y);
 
-  // direction of 180 or 0 will produce a diagnoal movement when combined with downward force of gravity
-  if (new_enemy.movement_direction === "diagnoal") {
-    new_enemy.direction = Math.random() > 0.5 ? 180 : 0;
-  }
+  new_enemy.direction = farthest_spawn_point.direction;
 
   if (score > 300) {
     new_enemy.speed *= 2;
     new_enemy.fall_rate *= 2;
   }
+
   GAME_OBJECTS.push(new_enemy);
 }
 

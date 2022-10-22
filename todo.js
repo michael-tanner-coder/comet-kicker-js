@@ -19,7 +19,5 @@
 // TODO: track unlockables via menu
 // TODO: adjust spawn rate over time (tension + release)
 // TODO: hitstop on gameover, switch to game over sprite
-// TODO: prevent player from sliding when under a platform
-// TODO: implement smooth cornering for player and enemies
 // TODO: update text on game over menu
 // TODO: implement low pass filter on game over screen audio
