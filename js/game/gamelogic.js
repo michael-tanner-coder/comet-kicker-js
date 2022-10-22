@@ -213,7 +213,7 @@ function playerJump() {
     }
   }
 
-  if (PLAYER.coyote_time_counter > 0 && onHold(CONTROLS.jump)) {
+  if ((PLAYER.coyote_time_counter > 0 || PLAYER.can_wall_jump) && onHold(CONTROLS.jump)) {
     PLAYER.jumping = true;
     //if jump is being held and we've been on the ground recently
     PLAYER.coyote_time_counter = 0;

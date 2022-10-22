@@ -63,6 +63,7 @@ const PLAYER_DEFAULT = {
   coyote_time: 1,
   coyote_time_counter: 0,
   can_jump: true,
+  can_wall_jump: false,
 
   //test jump 2
   maxJumpHeight: 1.3,
