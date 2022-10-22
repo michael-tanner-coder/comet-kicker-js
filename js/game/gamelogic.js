@@ -318,7 +318,7 @@ function updateComboTimer() {
 // spawning
 function updateEnemySpawnTimer(enemies) {
   if (enemies.length < SPAWN_LIMIT) {
-    spawn_timer--;
+    spawn_timer -= game_speed * time_scale;
   }
 
   if (spawn_timer <= 0) {
