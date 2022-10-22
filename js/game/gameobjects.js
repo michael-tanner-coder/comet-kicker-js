@@ -19,7 +19,7 @@ const PLAYER_DEFAULT = {
   speed: 0,
   max_speed: 5,
   direction: 0,
-  has_gravity: true,
+  has_gravity: false,
 
   // collision
   hit_ground: false,
@@ -89,6 +89,12 @@ const PLAYER_DEFAULT = {
   last_jump_pressed: 0,
   can_use_coyote: false,
   has_buffered_jump: false,
+
+  //test jump 2
+  maxJumpHeight: .9,
+  standard_gravity: 50,
+  jump_release_gravity_multiplier: 10,
+
 
   // shooting/kicking
   shot_timer: 0,

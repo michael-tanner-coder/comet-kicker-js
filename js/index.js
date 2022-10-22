@@ -63,7 +63,7 @@ function update(deltaTime) {
   playerShoot();
 
   // JUMPING
-  playerJump();
+  playerJump2();
 
   // ANIMATIONS
   PLAYER.color = colorPalettes[playerColorKey].trail;
@@ -121,7 +121,7 @@ function update(deltaTime) {
   // PHYSICS
   applyGravityToObjects();
 
-  PLAYER.y -= PLAYER.y_velocity;
+  PLAYER.y -= PLAYER.y_velocity * time_scale;
 
   // COLLISION CHECKS
   // player to block
