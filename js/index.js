@@ -131,7 +131,32 @@ function update(deltaTime) {
   const leftBox = getHitbox(PLAYER, "left");
   const rightBox = getHitbox(PLAYER, "right");
 
+  blocks.forEach((block) => {
+    if (block.destroyed) return;
+
+    if (
+        collisionDetected(block, leftBox) ||
+        collisionDetected(block, rightBox)
+    ) {
+      PLAYER.hit_wall = true;
+      PLAYER.x = PLAYER.prev_x;
+      PLAYER.can_wall_jump = true;
+    }
+
+    if (collisionDetected(block, PLAYER)) {
+      PLAYER.hit_ground = true;
+      PLAYER.jumping = false;
+      PLAYER.hang_time = PLAYER_DEFAULT.hang_time;
+      PLAYER.jump_height = PLAYER_DEFAULT.jump_height;
+      PLAYER.y_velocity = PLAYER_DEFAULT.y_velocity;
+      if (!PLAYER.hit_ground_last_frame) fall_fx(PLAYER.x, PLAYER.y);
+      PLAYER.y = PLAYER.prev_y;
+    }
+  });
+  /*
   for(let i = 0; i < blocks.length; i++){
+    if (blocks[i].destroyed) return;
+
     if (
         collisionDetected(blocks[i], leftBox) ||
         collisionDetected(blocks[i], rightBox)
@@ -140,7 +165,7 @@ function update(deltaTime) {
       PLAYER.x = PLAYER.prev_x;
       PLAYER.can_wall_jump = true;
     }
-    if (blocks[i].destroyed) return;
+
     if (collisionDetected(blocks[i], PLAYER)) {
       PLAYER.hit_ground = true;
       PLAYER.jumping = false;
@@ -151,7 +176,7 @@ function update(deltaTime) {
       PLAYER.y = PLAYER.prev_y;
     }
   }
-
+  */
   // collectible to player
   collectibles.forEach((coll) => {
     coll.life_timer -= game_speed * time_scale;
