@@ -99,28 +99,32 @@ function spawnBullet(source, direction, projectile) {
 
 function spawnEnemy(type = ENEMY) {
   var new_enemy = { ...type };
+  var player_center = {
+    x: PLAYER.x + PLAYER.w / 2,
+    y: PLAYER.y + PLAYER.h / 2,
+  };
 
-  // spawn at the location farthest from the player
-  var farthest_spawn_point = new_enemy.spawn_points[0];
-  new_enemy.spawn_points.forEach((point) => {
-    // have to adjust the spawn location coordinates to match the invisible level grid
+  // **only spawn enemies outside the detection range of the player**
+
+  // get all spawn points
+  let all_spawn_points = new_enemy.spawn_points;
+
+  // filter out points that are within range
+  let available_spawn_points = all_spawn_points.filter((point) => {
     var adjusted_current_point = { x: withGrid(point.x), y: withGrid(point.y) };
-    var adjusted_farthest_point = {
-      x: withGrid(farthest_spawn_point.x),
-      y: withGrid(farthest_spawn_point.y),
-    };
-
-    // compare current distance to our previous farthest distance
-    let current_distance = getDistance(adjusted_current_point, PLAYER);
-    if (current_distance >= getDistance(adjusted_farthest_point, PLAYER)) {
-      farthest_spawn_point = point;
-    }
+    return (
+      getDistance(adjusted_current_point, player_center) >
+      PLAYER.enemy_detection_range
+    );
   });
 
-  new_enemy.x = withGrid(farthest_spawn_point.x);
-  new_enemy.y = withGrid(farthest_spawn_point.y);
+  // pick randomly from remaining points
+  chosen_spawn_point = choose(available_spawn_points);
 
-  new_enemy.direction = farthest_spawn_point.direction;
+  new_enemy.x = withGrid(chosen_spawn_point.x);
+  new_enemy.y = withGrid(chosen_spawn_point.y);
+
+  new_enemy.direction = chosen_spawn_point.direction;
 
   if (score > 300) {
     new_enemy.speed *= 2;
@@ -436,6 +440,14 @@ function setFontSize(size) {
 }
 
 // vfx/animation
+function drawCircleAroundObject(obj, radius, color) {
+  let obj_center = { x: obj.x + obj.w / 2, y: obj.y + obj.h / 2 };
+  context.fillStyle = color;
+  context.beginPath();
+  context.arc(obj_center.x, obj_center.y, radius, 0, 2 * Math.PI);
+  context.stroke();
+}
+
 function getPlayerAnimation() {
   return ANIMATIONS[PLAYER_STATE_TO_ANIMATION[PLAYER.state]];
 }

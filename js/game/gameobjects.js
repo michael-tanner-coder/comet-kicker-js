@@ -32,6 +32,8 @@ const PLAYER_DEFAULT = {
   ],
   render_hitbox: false,
   enemy_detection_range: 64,
+  range_color: PINK,
+  render_radius: false,
 
   // physics
   x_velocity: 0,

@@ -488,6 +488,11 @@ function drawObjects() {
       });
     }
 
+    // render player's detection radius for testing purposes
+    if (obj.render_radius) {
+      drawCircleAroundObject(obj, obj.enemy_detection_range, obj.range_color);
+    }
+
     // draw a static image
     if (images_loaded && obj.sprite) {
       drawBitmapCenteredAtLocationWithRotation(
