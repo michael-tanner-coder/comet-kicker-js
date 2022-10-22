@@ -66,6 +66,7 @@ function update(deltaTime) {
   playerJump();
 
   // ANIMATIONS
+  PLAYER.color = colorPalettes[playerColorKey].trail;
   PLAYER.animation = getAnimationDirection(PLAYER);
 
   // POWERUPS
