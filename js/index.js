@@ -121,7 +121,7 @@ function update(deltaTime) {
   // PHYSICS
   applyGravityToObjects();
 
-  PLAYER.y -= PLAYER.y_velocity * time_scale;
+  PLAYER.y -= PLAYER.y_velocity * time_scale * game_speed;
 
   // COLLISION CHECKS
   // player to block

@@ -238,7 +238,7 @@ function playerJump() {
   }
 
   //apply the y velocity
-  PLAYER.y_velocity -= ((PLAYER.fall_rate * dt) / 1000) * time_scale;
+  PLAYER.y_velocity -= ((PLAYER.fall_rate * dt) / 1000) * time_scale*game_speed;
   //clamp falling velocity
   if (PLAYER.y_velocity < 0) {
     PLAYER.y_velocity = Math.max(-PLAYER.max_y_velocity, PLAYER.y_velocity);
