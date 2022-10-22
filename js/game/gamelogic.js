@@ -183,38 +183,8 @@ function playerShoot() {
     PLAYER.kick_time = PLAYER_DEFAULT.kick_time;
   }
 }
-function playerJump2(){
-  PLAYER.has_gravity = false;
-  // coyote time
-  if (PLAYER.hit_ground_last_frame) {
-    PLAYER.coyote_time_counter = PLAYER.coyote_time;
-  } else {
-    PLAYER.coyote_time_counter -= 0.2;
-  }
-
-  if(PLAYER.coyote_time_counter > 0 && onHold(CONTROLS.jump)){ //if jump is being held and we've been on the ground recently
-    PLAYER.coyote_time_counter = 0;
-    //set a y velocity based on gravity and max jump height
-    PLAYER.y_velocity = Math.sqrt(2 * PLAYER.standard_gravity * PLAYER.maxJumpHeight);
-    PLAYER.fall_rate = PLAYER.standard_gravity;
-  }else if (PLAYER.y_velocity > 0 && !onHold(CONTROLS.jump)){ // else if we released jump, but we're still moving upwards
-    //increase gravity to get us down quicker
-    PLAYER.fall_rate = PLAYER.standard_gravity * PLAYER.jump_release_gravity_multiplier;
-  }else{
-    // if we're not jumping use the standard gravity
-    PLAYER.fall_rate = PLAYER.standard_gravity;
-  }
-
-  //apply the y velocity
-  PLAYER.y_velocity -= PLAYER.fall_rate * dt/1000 * time_scale;
-  //clamp falling velocity
-  if(PLAYER.y_velocity < 0) {
-    PLAYER.y_velocity = Math.max(-PLAYER.max_y_velocity, PLAYER.y_velocity);
-  }
-
-}
 function playerJump() {
-  PLAYER.has_gravity = true;
+  PLAYER.has_gravity = false;
   // coyote time
   if (PLAYER.hit_ground_last_frame) {
     PLAYER.coyote_time_counter = PLAYER.coyote_time;
@@ -224,15 +194,6 @@ function playerJump() {
 
   if (onPress(CONTROLS.jump)) {
     PLAYER.can_jump = true;
-  }
-
-  // jump hold
-  if (
-    PLAYER.jump_height < PLAYER.max_jump_height &&
-    onHold(CONTROLS.jump) &&
-    (PLAYER.coyote_time_counter > 0 || PLAYER.jumping)
-  ) {
-    PLAYER.jumping = true;
     if (PLAYER.hit_ground) {
       fall_fx(PLAYER.x, PLAYER.y);
       if (debug_mode) {
@@ -250,16 +211,37 @@ function playerJump() {
         );
       }
     }
+  }
+
+  if (PLAYER.coyote_time_counter > 0 && onHold(CONTROLS.jump)) {
+    PLAYER.jumping = true;
+    //if jump is being held and we've been on the ground recently
+    PLAYER.coyote_time_counter = 0;
+    //set a y velocity based on gravity and max jump height
     if (PLAYER.can_jump) {
-      jump(PLAYER);
+      PLAYER.y_velocity = Math.sqrt(
+        2 * PLAYER.standard_gravity * PLAYER.maxJumpHeight
+      );
     }
+    PLAYER.fall_rate = PLAYER.standard_gravity;
+  } else if (PLAYER.y_velocity > 0 && !onHold(CONTROLS.jump)) {
+    // else if we released jump, but we're still moving upwards
+    //increase gravity to get us down quicker
+    PLAYER.fall_rate =
+      PLAYER.standard_gravity * PLAYER.jump_release_gravity_multiplier;
   } else {
-    // fall faster when done jumping
+    // if we're not jumping use the standard gravity
+    PLAYER.fall_rate = PLAYER.standard_gravity;
     if (PLAYER.jumping) {
       PLAYER.can_jump = false;
     }
-    PLAYER.y_velocity =
-      easingWithRate(PLAYER.y_velocity, -1, 0.8) * game_speed * time_scale;
+  }
+
+  //apply the y velocity
+  PLAYER.y_velocity -= ((PLAYER.fall_rate * dt) / 1000) * time_scale;
+  //clamp falling velocity
+  if (PLAYER.y_velocity < 0) {
+    PLAYER.y_velocity = Math.max(-PLAYER.max_y_velocity, PLAYER.y_velocity);
   }
 
   // jump release
@@ -268,8 +250,6 @@ function playerJump() {
     PLAYER.coyote_time_counter = 0;
   }
 }
-
-function testPlayerJump() {}
 
 function playerMove(dt) {
   PLAYER.prev_x = PLAYER.x;

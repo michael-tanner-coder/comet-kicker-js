@@ -63,7 +63,7 @@ function update(deltaTime) {
   playerShoot();
 
   // JUMPING
-  playerJump2();
+  playerJump();
 
   // ANIMATIONS
   PLAYER.color = colorPalettes[playerColorKey].trail;
