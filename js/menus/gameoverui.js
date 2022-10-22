@@ -177,36 +177,36 @@ function drawScoreSection(section) {
 
   // Goals
   const goals = section.goals;
-  goals.forEach((goal) => {
-    //  goal bar
-    context.globalAlpha = 0.5;
-    const goalShadow = goal.shadow;
-    context.fillStyle = goalShadow.color;
-    context.fillRect(
-      goal.x + goalShadow.x,
-      goal.y + goalShadow.y,
-      goal.w,
-      goal.h
-    );
-    context.globalAlpha = 1;
-    context.fillStyle = goal.underside.color;
-    context.fillRect(goal.x, goal.y, goal.w, goal.h + goal.underside.size);
-    context.fillStyle = goal.color;
-    context.fillRect(goal.x, goal.y, goal.w, goal.h);
+  // goals.forEach((goal) => {
+  //   //  goal bar
+  //   context.globalAlpha = 0.5;
+  //   const goalShadow = goal.shadow;
+  //   context.fillStyle = goalShadow.color;
+  //   context.fillRect(
+  //     goal.x + goalShadow.x,
+  //     goal.y + goalShadow.y,
+  //     goal.w,
+  //     goal.h
+  //   );
+  //   context.globalAlpha = 1;
+  //   context.fillStyle = goal.underside.color;
+  //   context.fillRect(goal.x, goal.y, goal.w, goal.h + goal.underside.size);
+  //   context.fillStyle = goal.color;
+  //   context.fillRect(goal.x, goal.y, goal.w, goal.h);
 
-    //  text outline
-    const goalText = goal.text;
-    setFontSize(goalText.text_size);
-    context.strokeStyle = goalText.outline.color;
-    context.lineWidth = goalText.outline.size;
-    context.strokeText(goalText.text, goal.x, goalText.y);
-    context.lineWidth = 0;
+  //   //  text outline
+  //   const goalText = goal.text;
+  //   setFontSize(goalText.text_size);
+  //   context.strokeStyle = goalText.outline.color;
+  //   context.lineWidth = goalText.outline.size;
+  //   context.strokeText(goalText.text, goal.x, goalText.y);
+  //   context.lineWidth = 0;
 
-    //  text
-    setFontSize(goalText.text_size);
-    context.fillStyle = goalText.color;
-    context.fillText(goalText.text, goal.x, goalText.y);
-  });
+  //   //  text
+  //   setFontSize(goalText.text_size);
+  //   context.fillStyle = goalText.color;
+  //   context.fillText(goalText.text, goal.x, goalText.y);
+  // });
 }
 
 function updateScoreSection(section) {
