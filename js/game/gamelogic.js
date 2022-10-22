@@ -301,7 +301,7 @@ function updateComboTimer() {
   if (multiplier_timer <= 0) {
     start_combo = false;
     multiplier = 1;
-    multiplier_timer = 200;
+    multiplier_timer = max_multiplier_timer;
   }
 }
 

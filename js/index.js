@@ -198,7 +198,7 @@ function update(deltaTime) {
           removeObj(enemy);
           if (start_combo) {
             multiplier += 1;
-            multiplier_timer = 200;
+            multiplier_timer = max_multiplier_timer;
           }
           score += enemy.points * multiplier;
           let text_object = spawnObject(TEXT_OBJECT, enemy.x, enemy.y);
