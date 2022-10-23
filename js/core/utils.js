@@ -361,6 +361,7 @@ function resetGame() {
   GAME_OBJECTS.length = 0;
   GAME_OBJECTS.push(PLAYER);
   game_state = STATES.GAME_OVER;
+  turnOnAudioLowpassFilter();
   resetPlayer();
   saveScore(score);
   buildMap();

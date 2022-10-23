@@ -22,8 +22,9 @@ const soundList = [
 
 // set only once the user interacts with the page
 // to comply with browser "no autoplaying audio" rules
-var audioCtx, audioMaster, compressor;
-
+var audioCtx, audioMaster, compressor, shelf;
+var shelf_filter_gain_value = -40;
+var shelf_filter_fequency_value = 2000;
 var sounds_to_load;
 var sounds_loaded = false;
 
@@ -91,6 +92,14 @@ function initSounds(sound_object) {
   audioMaster.connect(compressor);
   compressor.connect(audioCtx.destination);
 
+  //low pass sound filter
+  shelf = audioCtx.createBiquadFilter();
+  shelf.connect(audioMaster);
+  shelf.type = "highshelf";
+  shelf.frequency.value = shelf_filter_fequency_value;
+  shelf.gain.value = 0;
+  //shelf.frequency.setTargetAtTime(2000, audioCtx.currentTime, 0);
+
   // finally we are allowed to run this safely
   return loadSounds(sound_object);
 }
@@ -122,17 +131,10 @@ function playSound(
   var gainNode = audioCtx.createGain();
   var panNode = audioCtx.createStereoPanner();
 
-  // low pass sound filter
-  // let filter = audioCtx.createBiquadFilter();
-  // source.connect(filter);
-  // filter.connect(audioCtx.destination);
-  // filter.type = "lowpass";
-  // filter.frequency.setTargetAtTime(2000, audioCtx.currentTime, 0);
-
   source.buffer = buffer;
   source.connect(panNode);
   panNode.connect(gainNode);
-
+  source.connect(shelf);
   gainNode.connect(audioMaster);
 
   source.playbackRate.value = playbackRate;
@@ -141,6 +143,14 @@ function playSound(
   panNode.pan.value = pan;
   source.start();
   return { volume: gainNode, sound: source };
+}
+
+function turnOnAudioLowpassFilter(){
+  shelf.gain.value = shelf_filter_gain_value;
+}
+
+function turnOffAudioLowpassFilter(){
+  shelf.gain.value = 0;
 }
 
 initSounds(SOUNDS);

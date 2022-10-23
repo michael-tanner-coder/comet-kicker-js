@@ -412,10 +412,12 @@ function updateGameOverScreen() {
   if (onPress(CONTROLS.start)) {
     game_state = STATES.GAME;
     score = 0;
+    turnOffAudioLowpassFilter();
   }
 
   if (onPress(CONTROLS.select)) {
     game_state = STATES.MENU;
+    turnOffAudioLowpassFilter();
   }
 
   updateScoreSection(SCORE_SECTION);
@@ -424,7 +426,13 @@ function updateGameOverScreen() {
 
 function listenForGamePause() {
   if (onPress(CONTROLS.pause)) {
-    game_state = game_state === STATES.PAUSE ? STATES.GAME : STATES.PAUSE;
+    if(game_state === STATES.PAUSE){
+      game_state = STATES.GAME;
+      turnOffAudioLowpassFilter();
+    }else{
+      game_state = STATES.PAUSE;
+      turnOnAudioLowpassFilter();
+    }
   }
 
   // reset pause screen animation
