@@ -90,15 +90,14 @@ function initSounds(sound_object) {
   compressor.attack.setValueAtTime(0, audioCtx.currentTime);
   compressor.release.setValueAtTime(0.25, audioCtx.currentTime);
   audioMaster.connect(compressor);
-  compressor.connect(audioCtx.destination);
 
   //low pass sound filter
   shelf = audioCtx.createBiquadFilter();
-  shelf.connect(audioMaster);
   shelf.type = "highshelf";
   shelf.frequency.value = shelf_filter_fequency_value;
   shelf.gain.value = 0;
-  //shelf.frequency.setTargetAtTime(2000, audioCtx.currentTime, 0);
+  compressor.connect(shelf);
+  shelf.connect(audioCtx.destination);
 
   // finally we are allowed to run this safely
   return loadSounds(sound_object);
@@ -134,7 +133,6 @@ function playSound(
   source.buffer = buffer;
   source.connect(panNode);
   panNode.connect(gainNode);
-  source.connect(shelf);
   gainNode.connect(audioMaster);
 
   source.playbackRate.value = playbackRate;
