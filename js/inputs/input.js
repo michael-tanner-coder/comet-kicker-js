@@ -107,11 +107,9 @@ const CONTROLS = {
   moveRight: ["ArrowRight", "dpadRight", "right"],
   moveUp: ["ArrowUp", "dpadUp", "up"],
   moveDown: ["ArrowDown", "dpadDown", "down"],
-  pause: ["Escape", "start"],
-  select: ["Escape", "select"],
-  start: ["start", "Enter"],
-  accept: ["Enter", "buttonA", "x"],
-  decline: ["Escape", "buttonB", " "],
+  pause: ["p", "start"],
+  accept: ["x", "buttonA", "start"],
+  decline: [" ", "buttonB", "select"],
   autoKill: ["c"],
 };
 
