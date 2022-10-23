@@ -43,6 +43,12 @@ function update(deltaTime) {
     listenForGamePause();
   }
   if (game_state === STATES.PAUSE) {
+    if(onPress(CONTROLS.accept)){
+      resumeGame();
+    }
+    if(onPress(CONTROLS.decline)){
+      //TODO: Go back to main menu
+    }
     return;
   }
 

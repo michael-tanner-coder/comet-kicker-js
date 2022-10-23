@@ -409,13 +409,13 @@ function updateMenuNavigation() {
 }
 
 function updateGameOverScreen() {
-  if (onPress(CONTROLS.start)) {
+  if (onPress(CONTROLS.accept)) {
     game_state = STATES.GAME;
     score = 0;
     turnOffAudioLowpassFilter();
   }
 
-  if (onPress(CONTROLS.select)) {
+  if (onPress(CONTROLS.decline)) {
     game_state = STATES.MENU;
     turnOffAudioLowpassFilter();
   }
@@ -427,11 +427,9 @@ function updateGameOverScreen() {
 function listenForGamePause() {
   if (onPress(CONTROLS.pause)) {
     if(game_state === STATES.PAUSE){
-      game_state = STATES.GAME;
-      turnOffAudioLowpassFilter();
+      resumeGame();
     }else{
-      game_state = STATES.PAUSE;
-      turnOnAudioLowpassFilter();
+      pauseGame();
     }
   }
 
