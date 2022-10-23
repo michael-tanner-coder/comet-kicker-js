@@ -503,7 +503,15 @@ function getInputAnimation(control) {
 
   return ANIMATIONS[first_input_with_animation];
 }
+function resumeGame(){
+  game_state = STATES.GAME;
+  turnOffAudioLowpassFilter();
+}
 
+function pauseGame(){
+  game_state = STATES.PAUSE;
+  turnOnAudioLowpassFilter();
+}
 function drawTrail(obj) {
   object_position_map[obj.id]?.forEach((pos, i) => {
     // ratio that moves toward one as we reach the end of the trail
