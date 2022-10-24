@@ -49,6 +49,7 @@ var shield_timer = 0;
 
 // multiplier
 var multiplier = 1;
+var max_multiplier = 5;
 var max_multiplier_timer = 100;
 var multiplier_timer = max_multiplier_timer;
 var start_combo = false;

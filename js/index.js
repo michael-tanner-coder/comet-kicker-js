@@ -244,6 +244,7 @@ function update(deltaTime) {
           removeObj(enemy);
           if (start_combo) {
             multiplier += 1;
+            multiplier = clamp(multiplier, 0, max_multiplier);
             multiplier_timer = max_multiplier_timer;
           }
           score += enemy.points * multiplier;
