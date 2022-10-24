@@ -114,7 +114,9 @@ function applyGravityToObjects() {
 // vfx/animation
 function updateBackground() {
   BACKGROUNDS.forEach((bg) => {
-    bg.x += bg.speed;
+    // increase speed of background along with the current spawn rate
+    bg.x += bg.speed * (75 / getSpawnRate()) * game_speed * time_scale;
+
     if (bg.x > GAME_W) {
       bg.x = -1 * GAME_W;
     }
