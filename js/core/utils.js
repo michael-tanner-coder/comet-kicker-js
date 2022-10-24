@@ -397,8 +397,15 @@ function initializeScores() {
 }
 
 function saveScore(score) {
+
+  // fix for ? bug below (first time run on cleared localstorage)
+  if (recent_scores==undefined || recent_scores=="") {
+    console.log("recent scores is null. creating a new array.");
+    recent_scores = [];
+  }
+
   // add to list of recent scores
-  recent_scores?.push(score);
+  recent_scores?.push(score); // this fires a console error in win10 latest chrome
   if (recent_scores?.length > max_recent_score_list_length) {
     recent_scores?.shift();
   }
