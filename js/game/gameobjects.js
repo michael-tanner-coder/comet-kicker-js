@@ -46,6 +46,8 @@ const PLAYER_DEFAULT = {
   i_frames: 30,
   hit: false,
   hp: MAX_HP,
+  hitstop_time: 30,
+  game_over: false,
 
   // powerups
   powerup: "",

@@ -11,13 +11,10 @@
 // ===========
 // FINAL TODOS
 // ===========
-// TODO: stop player from getting caught in respawning walls
 // TODO: assign points to powerups for unlocking them (connect to save data)
 // TODO: edit the menu theme
 // TODO: set a point limit to unlock the ending sequence
 // TODO: write ending sequence + add images
 // TODO: track unlockables via menu
 // TODO: adjust spawn rate over time (tension + release)
-// TODO: hitstop on gameover, switch to game over sprite
 // TODO: update text on game over menu
-// TODO: implement low pass filter on game over screen audio

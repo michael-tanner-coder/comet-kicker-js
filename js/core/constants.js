@@ -35,7 +35,7 @@ const PLAYER_STATES = {
   IDLE: "Idle",
   RUNNING: "Running",
   KICKING: "Kicking",
-  DEAD: "Lose",
+  LOSE: "Lose",
   JUMPING: "Jumping",
   HIT: "Hit",
 };
@@ -44,7 +44,7 @@ const PLAYER_STATE_TO_ANIMATION = {
   [PLAYER_STATES.IDLE]: "playerIdle",
   [PLAYER_STATES.RUNNING]: "playerRun",
   [PLAYER_STATES.KICKING]: "playerKick",
-  [PLAYER_STATES.DEAD]: "playerLose",
+  [PLAYER_STATES.LOSE]: "playerLose",
   [PLAYER_STATES.HIT]: "playerHit",
 };
 

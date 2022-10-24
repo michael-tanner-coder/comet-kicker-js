@@ -43,10 +43,10 @@ function update(deltaTime) {
     listenForGamePause();
   }
   if (game_state === STATES.PAUSE) {
-    if(onPress(CONTROLS.accept)){
+    if (onPress(CONTROLS.accept)) {
       resumeGame();
     }
-    if(onPress(CONTROLS.decline)){
+    if (onPress(CONTROLS.decline)) {
       //TODO: Go back to main menu
     }
     return;
@@ -63,13 +63,16 @@ function update(deltaTime) {
   // --- PLAYER ---
   // ==============
   // PLAYER MOVEMENT
-  playerMove();
 
-  // SHOOTING
-  playerShoot();
+  if (!PLAYER.game_over) {
+    playerMove();
 
-  // JUMPING
-  playerJump();
+    // SHOOTING
+    playerShoot();
+
+    // JUMPING
+    playerJump();
+  }
 
   // ANIMATIONS
   PLAYER.color = colorPalettes[playerColorKey].trail;
@@ -141,8 +144,8 @@ function update(deltaTime) {
     if (block.destroyed) return;
 
     if (
-        collisionDetected(block, leftBox) ||
-        collisionDetected(block, rightBox)
+      collisionDetected(block, leftBox) ||
+      collisionDetected(block, rightBox)
     ) {
       PLAYER.hit_wall = true;
       PLAYER.x = PLAYER.prev_x;
@@ -157,8 +160,9 @@ function update(deltaTime) {
       PLAYER.y_velocity = PLAYER_DEFAULT.y_velocity;
       if (!PLAYER.hit_ground_last_frame) fall_fx(PLAYER.x, PLAYER.y);
       PLAYER.y = PLAYER.prev_y;
-      
-      if (collisionDetected(block, PLAYER)) { // still?? a rare edge case
+
+      if (collisionDetected(block, PLAYER)) {
+        // still?? a rare edge case
         PLAYER.y--; // shift up one pixel. a simple fix!
         // the reasoning:
         // sometimes a block was moving (respawning)
@@ -166,7 +170,6 @@ function update(deltaTime) {
         // therefore prev_y can still be inside the new block
         // in the rare case this happens, we get spit out of the block
       }
-
     }
   });
   /*
@@ -374,7 +377,9 @@ function update(deltaTime) {
   // --- SCORING ---
   // ===============
   // SCORE
-  updateScore();
+  if (!PLAYER.game_over) {
+    updateScore();
+  }
 
   // COMBOS
   updateComboTimer();

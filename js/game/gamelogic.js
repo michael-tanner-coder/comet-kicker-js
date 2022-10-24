@@ -68,16 +68,15 @@ function updatePlatforms(platforms) {
     }
 
     var target_platform = BLOCK_MAP[plat.block_id];
-    
+
     // slide platform back in if required
     let targetX = withGrid(target_platform.x);
     if (plat.x != targetX) {
-        plat.x = easing(plat.x, targetX);
-        plat.x = Math.ceil(plat.x);
-        // note: this can get the player stuck inside a plat so push them upwards
-        // however a bugfix is in place to account for it in the collisionDetected function
+      plat.x = easing(plat.x, targetX);
+      plat.x = Math.ceil(plat.x);
+      // note: this can get the player stuck inside a plat so push them upwards
+      // however a bugfix is in place to account for it in the collisionDetected function
     }
-
   });
 }
 // sound
@@ -130,7 +129,19 @@ function updateTimeScale() {
 }
 
 function checkForGameOver() {
-  if (PLAYER.hp <= 0) {
+  if (PLAYER.hp <= 0 && !PLAYER.game_over) {
+    game_speed /= 4;
+    PLAYER.y_velocity = 0;
+    PLAYER.fall_rate = 0;
+    PLAYER.game_over = true;
+  }
+
+  if (PLAYER.game_over) {
+    PLAYER.state = PLAYER_STATES.LOSE;
+    PLAYER.hitstop_time -= game_speed * time_scale;
+  }
+
+  if (PLAYER.hitstop_time <= 0) {
     resetGame();
     LOST_HEARTS.length = 0;
     playSoundEffect("game_over");
@@ -434,9 +445,9 @@ function updateGameOverScreen() {
 
 function listenForGamePause() {
   if (onPress(CONTROLS.pause)) {
-    if(game_state === STATES.PAUSE){
+    if (game_state === STATES.PAUSE) {
       resumeGame();
-    }else{
+    } else {
       pauseGame();
     }
   }

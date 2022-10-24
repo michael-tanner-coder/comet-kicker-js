@@ -361,6 +361,7 @@ function resetGame() {
   GAME_OBJECTS.length = 0;
   GAME_OBJECTS.push(PLAYER);
   game_state = STATES.GAME_OVER;
+  game_speed = 1;
   turnOnAudioLowpassFilter();
   resetPlayer();
   saveScore(score);
@@ -397,9 +398,8 @@ function initializeScores() {
 }
 
 function saveScore(score) {
-
   // fix for ? bug below (first time run on cleared localstorage)
-  if (recent_scores==undefined || recent_scores=="") {
+  if (recent_scores == undefined || recent_scores == "") {
     console.log("recent scores is null. creating a new array.");
     recent_scores = [];
   }
@@ -488,7 +488,7 @@ function getAnimationDirection(object) {
 
   // return an animation that has no specific direction
   if (ANIMATIONS[type + action]) {
-    return ANIMATIONS[animation_key];
+    return ANIMATIONS[type + action];
   }
 
   // return an animation that has a direction
@@ -510,12 +510,12 @@ function getInputAnimation(control) {
 
   return ANIMATIONS[first_input_with_animation];
 }
-function resumeGame(){
+function resumeGame() {
   game_state = STATES.GAME;
   turnOffAudioLowpassFilter();
 }
 
-function pauseGame(){
+function pauseGame() {
   game_state = STATES.PAUSE;
   turnOnAudioLowpassFilter();
 }
