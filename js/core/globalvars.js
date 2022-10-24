@@ -7,6 +7,15 @@ var spawn_timer = MAX_SPAWN_TIMER;
 var collect_spawn_timer = MAX_COLLECT_SPAWN_TIMER;
 var platform_spawn_timer = MAX_PLATFORM_SPAWN_TIMER;
 var start_platform_spawn_timer = false;
+var spawn_pacing_timer = MAX_SPAWN_PACING_TIMER; // lasts for one minute
+
+// every 15 seconds, the spawn rate will change to increase intensity over time
+var spawn_pacing = {
+  [spawn_pacing_timer / 4]: MAX_SPAWN_TIMER / 4, // fastest spawn rate
+  [spawn_pacing_timer / 3]: MAX_SPAWN_TIMER / 3,
+  [spawn_pacing_timer / 2]: MAX_SPAWN_TIMER / 2,
+  [spawn_pacing_timer]: MAX_SPAWN_TIMER, // slowest spawn rate
+};
 
 // game state
 var game_over = false;
@@ -88,68 +97,68 @@ var stop_menu_nav = false;
 let playerColorKey = "default";
 
 const colorsToRemap = {
-    lightBandanna: {
-        r: 139,
-        g: 109,
-        b: 156
-    },
-    darkBandanna: {
-        r: 73,
-        g: 77,
-        b: 126
-    }
-}
+  lightBandanna: {
+    r: 139,
+    g: 109,
+    b: 156,
+  },
+  darkBandanna: {
+    r: 73,
+    g: 77,
+    b: 126,
+  },
+};
 const colorPalettes = {
-    default: {
-        light: {
-            r: 139,
-            g: 109,
-            b: 156
-        },
-        dark: {
-            r: 73,
-            g: 77,
-            b: 126
-        },
-        trail: PINK
+  default: {
+    light: {
+      r: 139,
+      g: 109,
+      b: 156,
     },
-    green: {
-        light: {
-            r: 0,
-            g: 255,
-            b: 0
-        },
-        dark: {
-            r: 0,
-            g: 120,
-            b: 0
-        },
-        trail: "#00FF00"
+    dark: {
+      r: 73,
+      g: 77,
+      b: 126,
     },
-    yellow: {
-        light: {
-            r: 255,
-            g: 255,
-            b: 0
-        },
-        dark: {
-            r: 120,
-            g: 120,
-            b: 0
-        },
-        trail: "#FFFF00"
+    trail: PINK,
+  },
+  green: {
+    light: {
+      r: 0,
+      g: 255,
+      b: 0,
     },
-    red: {
-        light: {
-            r: 255,
-            g: 0,
-            b: 0
-        },
-        dark: {
-            r: 120,
-            g: 0,
-            b: 0
-        },
-        trail: "#FF0000"
+    dark: {
+      r: 0,
+      g: 120,
+      b: 0,
     },
-}
+    trail: "#00FF00",
+  },
+  yellow: {
+    light: {
+      r: 255,
+      g: 255,
+      b: 0,
+    },
+    dark: {
+      r: 120,
+      g: 120,
+      b: 0,
+    },
+    trail: "#FFFF00",
+  },
+  red: {
+    light: {
+      r: 255,
+      g: 0,
+      b: 0,
+    },
+    dark: {
+      r: 120,
+      g: 0,
+      b: 0,
+    },
+    trail: "#FF0000",
+  },
+};

@@ -345,7 +345,25 @@ function updateComboTimer() {
 }
 
 // spawning
+
+function getSpawnRate() {
+  let rate = MAX_SPAWN_TIMER;
+  const spawn_rates = Object.keys(spawn_pacing);
+  for (var i = 0; i < spawn_rates.length; i++) {
+    if (spawn_pacing_timer <= parseFloat(spawn_rates[i])) {
+      rate = spawn_pacing[spawn_rates[i]];
+      break;
+    }
+  }
+  return rate;
+}
+
 function updateEnemySpawnTimer(enemies) {
+  spawn_pacing_timer -= game_speed * time_scale;
+  if (spawn_pacing_timer <= 0) {
+    spawn_pacing_timer = MAX_SPAWN_PACING_TIMER;
+  }
+
   if (enemies.length < SPAWN_LIMIT) {
     spawn_timer -= game_speed * time_scale;
   }
@@ -354,7 +372,10 @@ function updateEnemySpawnTimer(enemies) {
     let type = choose(ENEMIES);
     if (type.points_to_spawn <= score) {
       spawnEnemy(type);
-      spawn_timer = MAX_SPAWN_TIMER;
+
+      // update the spawn rate
+      spawn_timer = getSpawnRate();
+      spawn_timer = clamp(spawn_timer, MAX_SPAWN_TIMER / 4, MAX_SPAWN_TIMER);
     }
   }
 }
