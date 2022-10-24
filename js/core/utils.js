@@ -405,7 +405,7 @@ function saveScore(score) {
   }
 
   // add to list of recent scores
-  recent_scores?.push(score); // this fires a console error in win10 latest chrome
+  recent_scores?.push(score); // this used to fires a console error in win10 latest chrome on very first run only - fixed above with null check
   if (recent_scores?.length > max_recent_score_list_length) {
     recent_scores?.shift();
   }

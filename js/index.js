@@ -157,6 +157,16 @@ function update(deltaTime) {
       PLAYER.y_velocity = PLAYER_DEFAULT.y_velocity;
       if (!PLAYER.hit_ground_last_frame) fall_fx(PLAYER.x, PLAYER.y);
       PLAYER.y = PLAYER.prev_y;
+      
+      if (collisionDetected(block, PLAYER)) { // still?? a rare edge case
+        PLAYER.y--; // shift up one pixel. a simple fix!
+        // the reasoning:
+        // sometimes a block was moving (respawning)
+        // so we might be suddenly embedded halfway inside a block
+        // therefore prev_y can still be inside the new block
+        // in the rare case this happens, we get spit out of the block
+      }
+
     }
   });
   /*

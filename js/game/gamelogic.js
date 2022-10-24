@@ -68,8 +68,16 @@ function updatePlatforms(platforms) {
     }
 
     var target_platform = BLOCK_MAP[plat.block_id];
-    plat.x = easing(plat.x, withGrid(target_platform.x));
-    plat.x = Math.ceil(plat.x);
+    
+    // slide platform back in if required
+    let targetX = withGrid(target_platform.x);
+    if (plat.x != targetX) {
+        plat.x = easing(plat.x, targetX);
+        plat.x = Math.ceil(plat.x);
+        // note: this can get the player stuck inside a plat so push them upwards
+        // however a bugfix is in place to account for it in the collisionDetected function
+    }
+
   });
 }
 // sound
