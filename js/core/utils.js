@@ -121,6 +121,10 @@ function spawnEnemy(type = ENEMY) {
   // pick randomly from remaining points
   chosen_spawn_point = choose(available_spawn_points);
 
+  if (!chosen_spawn_point) {
+    return;
+  }
+
   new_enemy.x = withGrid(chosen_spawn_point.x);
   new_enemy.y = withGrid(chosen_spawn_point.y);
 
