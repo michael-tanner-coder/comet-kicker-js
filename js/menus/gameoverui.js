@@ -399,16 +399,31 @@ function drawOptionsSection(section) {
   context.font = `${section.text_size} PressStart2P`;
   context.fillStyle = WHITE;
   context.fillText(
-    getText("retry") + ": ENTER",
+    getText("retry") + ":",
     section.retry_text_x + section.padding_left,
     section.y + section.text_size * 2 + section.padding_top
+  );
+  playAnimation(
+    getInputAnimation(CONTROLS.accept),
+    0,
+    section.retry_text_x +
+      section.padding_left +
+      context.measureText(getText("retry")).width +
+      16,
+    section.y + section.padding_top
   );
 
   var text_width = context.measureText(getText("quit") + ": ESC").width;
   section.quit_text_x = GAME_W - section.padding_left - text_width;
   context.fillText(
-    getText("quit") + ": ESC",
+    getText("quit") + ":",
     section.quit_text_x,
     section.y + section.text_size * 2 + section.padding_top
+  );
+  playAnimation(
+    getInputAnimation(CONTROLS.decline),
+    0,
+    section.quit_text_x + context.measureText(getText("retry")).width,
+    section.y + section.padding_top
   );
 }
