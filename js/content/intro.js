@@ -124,7 +124,7 @@ const INTRO_SCRIPT = [
   {
     ...BEAT,
     text: {
-      en: "The Agents of the Cosmos - followers of the Big Star - were determined to take control of the universe.",
+      en: "The Agents of the Cosmos - followers of the Big Comet - were determined to take control of the universe.",
       es: "",
       fr: "",
       zh: "",
