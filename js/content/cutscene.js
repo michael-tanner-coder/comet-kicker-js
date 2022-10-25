@@ -56,7 +56,7 @@ function getWrappedText(text, x, y, line_height, fit_width) {
   return lines;
 }
 
-class StorySequence {
+class Cutscene {
   constructor(props) {
     // script
     this.script = props?.script || [];
@@ -64,7 +64,7 @@ class StorySequence {
     this.script_index = 0;
 
     // visuals
-    this.image = undefined
+    this.image = undefined;
 
     // text progression
     this.text_speed = 2;
@@ -225,7 +225,7 @@ class StorySequence {
     context.fillStyle = "#00000088";
     context.fillRect(0, 42, GAME_W, 114);
     context.fillRect(64, 42, 197, 114);
-    if (this.image) {
+    if (this.image && IMAGES[this.image]) {
       context.drawImage(IMAGES[this.image], 64, 42);
     }
 
@@ -257,5 +257,11 @@ class StorySequence {
   }
 }
 
-const INTRO_SEQUENCE = new StorySequence({ script: INTRO_SCRIPT });
+const INTRO_SEQUENCE = new Cutscene({ script: INTRO_SCRIPT });
+const OUTRO_SEQUENCE = new Cutscene({ script: OUTRO_SCRIPT });
+
 INTRO_SEQUENCE.init();
+OUTRO_SEQUENCE.init();
+
+const CUTSCENES = [INTRO_SEQUENCE, OUTRO_SEQUENCE];
+var cutscene_index = 0;
