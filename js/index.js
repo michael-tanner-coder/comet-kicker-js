@@ -57,6 +57,8 @@ function update(deltaTime) {
   // ==============
   if (onPress(CONTROLS.autoKill) && debug_mode) {
     resetGame();
+    LOST_HEARTS.length = 0;
+    playSoundEffect("game_over");
   }
 
   // ==============
