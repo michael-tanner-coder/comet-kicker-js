@@ -29,7 +29,12 @@ function update(deltaTime) {
   }
 
   if (game_state === STATES.INTRO) {
-    INTRO_SEQUENCE.update();
+    CUTSCENES[0].update();
+    return;
+  }
+
+  if (game_state === STATES.OUTRO) {
+    CUTSCENES[1].update();
     return;
   }
 
@@ -434,7 +439,12 @@ function draw(offset) {
 
   // GAME INTRO
   if (game_state === STATES.INTRO) {
-    INTRO_SEQUENCE.draw();
+    CUTSCENES[0].draw();
+    return;
+  }
+
+  if (game_state === STATES.OUTRO) {
+    CUTSCENES[1].draw();
     return;
   }
 
