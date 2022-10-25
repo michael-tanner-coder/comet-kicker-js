@@ -4,7 +4,7 @@ const PLAYER_DEFAULT = {
   name: "player",
 
   // position/dimensions
-  x: 0,
+  x: GAME_W / 2,
   y: 0,
   prev_x: 0,
   prev_y: 0,
