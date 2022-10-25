@@ -1,4 +1,5 @@
 /*
+[INTRO]
 Long ago, deep in the far reaches of space, 
 
 there lived a young boy known only as “Kicker”. 
@@ -13,7 +14,7 @@ To keep his loved ones safe, Kicker isolated himself to train every day, hoping 
 
 But in his absence, a dark force crept over their galaxy. 
 
-The Agents of the Cosmos - followers of the Big Star - were determined to take control of every planet across the universe.
+The Agents of the Cosmos - followers of the Big Comet - were determined to take control of every planet across the universe.
 
 Now Kicker must emerge from his training to defend his home
 
@@ -28,6 +29,19 @@ Is he powerful enough to become …
 [cut to title screen]
 
 COMET KICKER
+*/
+
+/*
+[ENDING]
+  With the Big Comet defeated, Kicker saved his home. [IMAGE: Big Comet being destroyed]
+
+  Kicker returned to his family, fully in command of his own power. [IMAGE: Kicker returning to his family (reversed from intro)]
+
+  He had proven he could control his powers and defeat any evil that lurks deep in the galaxy. [IMAGE: shot of space, same as the beginning]
+
+  He no longer had to be separated from his loved ones, no longer scared that he'd hurt them all. [IMAGE: same as outro 2]
+
+  Finally, he was safe. [IMAGE: Kicker surrounded by his family, smiling]
 */
 
 const BEAT = {
@@ -182,5 +196,57 @@ const INTRO_SCRIPT = [
       speed: 1,
     },
     image: "intro_9",
+  },
+];
+const OUTRO_SCRIPT = [
+  {
+    ...BEAT,
+    text: {
+      en: " With the Big Comet defeated, Kicker saved his home.",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "outro_1",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "Kicker returned to his family, fully in command of his own power.",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "outro_2",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "He had proven he could control his powers and defeat any evil that lurks deep in the galaxy.",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "intro_1",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "He no longer had to be separated from his loved ones, no longer scared that he'd hurt them all.",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "outro_2",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "Finally, he was safe.",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "outro_3",
   },
 ];
