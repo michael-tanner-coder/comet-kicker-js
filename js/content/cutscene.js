@@ -210,7 +210,7 @@ class Cutscene {
 
   draw() {
     //   skip button
-    playAnimation(getInputAnimation(CONTROLS.decline), 1, GAME_W - 64, 2);
+    playAnimation(getInputAnimation(CONTROLS.decline), 1, GAME_W - 80, 2);
     context.fillStyle = WHITE;
     context.measureText("SKIP").width;
     context.fillText(

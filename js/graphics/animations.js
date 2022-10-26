@@ -276,7 +276,7 @@ const ANIMATIONS = {
   },
   [" "]: {
     sprite: "controls",
-    frames: [{ x: 368, y: 112, w: 16, h: 16 }],
+    frames: [{ x: 368, y: 112, w: 32, h: 16 }],
     current_frame: 0,
   },
 
