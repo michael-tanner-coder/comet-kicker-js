@@ -236,7 +236,7 @@ const EXPLODING_ENEMY = {
     { x: 17, y: 1, direction: DIRECTIONS.down, spawn_count: 4 },
   ],
   exploding: true,
-  points_to_spawn: 200,
+  points_to_spawn: 500,
   points: 15,
 };
 
@@ -250,7 +250,7 @@ const ROLLING_ENEMY = {
   animation: ANIMATIONS.rollingEnemyMoveLeft,
   hp: 3,
   render_hitbox: false,
-  points_to_spawn: 600,
+  points_to_spawn: 3000,
   points: 25,
 };
 
@@ -268,8 +268,16 @@ const BOUNCING_ENEMY = {
     { x: 8, y: 1, direction: DIRECTIONS.left },
     { x: 10, y: 1, direction: DIRECTIONS.left },
   ],
-  points_to_spawn: 400,
+  points_to_spawn: 5000,
   points: 20,
+};
+
+const BIG_COMET = {
+  ...ENEMY,
+  name: "bigComet",
+  points_to_spawn: 10000,
+  points: 5000,
+  hp: 100,
 };
 
 const ENEMIES = [ENEMY, EXPLODING_ENEMY, ROLLING_ENEMY, BOUNCING_ENEMY];
