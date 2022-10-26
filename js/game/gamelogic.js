@@ -178,6 +178,13 @@ function playerShoot() {
     (onPress(CONTROLS.shoot) ||
       (PLAYER.powerup === PICKUPS.RAPID_FIRE && onHold(CONTROLS.shoot)))
   ) {
+    // buddy shot
+    var buddy = GAME_OBJECTS.find((obj) => obj.type === "shield");
+    if (buddy) {
+      let buddy_shot = spawnBullet(buddy, PLAYER.direction, PLAYER.bullet_type);
+      spark_fx(buddy_shot.x, buddy_shot.y);
+    }
+
     let shot = spawnBullet(PLAYER, PLAYER.direction, PLAYER.bullet_type);
     spark_fx(shot.x, shot.y);
     recoil(PLAYER, shot, shot.recoil);

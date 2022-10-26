@@ -28,7 +28,7 @@ const PICKUP_TEXT = {
   rapid_fire: "rapid fire",
   wide_shot: "Wide Shot",
   missile: "Missile Shot",
-  shield: "Shield",
+  shield: "Buddy!",
   hp: "HP",
 };
 const TITLE = "COMET KICKER";

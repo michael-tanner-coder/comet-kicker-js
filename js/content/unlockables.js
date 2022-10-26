@@ -39,7 +39,7 @@ const UNLOCK_MISSILE = {
 };
 const UNLOCK_BUDDY = {
   ...UNLOCKABLE,
-  name: "Buddy",
+  name: "Buddy!",
   powerup: SHIELD,
   points: 6000,
   effect: UNLOCK_EFFECTS.POWERUP,
