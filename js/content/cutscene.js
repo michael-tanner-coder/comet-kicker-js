@@ -95,6 +95,7 @@ class Cutscene {
 
   skipIntro() {
     playSound(SOUNDS["collect_spawn"]);
+    changeMusic("title_music");
     game_state = STATES.MENU;
   }
 

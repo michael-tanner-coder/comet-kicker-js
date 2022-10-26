@@ -4,6 +4,7 @@ const soundList = [
   // Add your music asset here ^
   { file: "comet-kicker-test-songv1.wav", name: "title_music" },
   { file: "comet-kicker-menu-musicv2.wav", name: "battle_music" },
+  { file: "comet-kicker-intro.wav", name: "intro_music" },
 
   // SFX
   { file: "shoot.wav", name: "shoot" },
@@ -143,11 +144,11 @@ function playSound(
   return { volume: gainNode, sound: source };
 }
 
-function turnOnAudioLowpassFilter(){
+function turnOnAudioLowpassFilter() {
   shelf.gain.value = shelf_filter_gain_value;
 }
 
-function turnOffAudioLowpassFilter(){
+function turnOffAudioLowpassFilter() {
   shelf.gain.value = 0;
 }
 
