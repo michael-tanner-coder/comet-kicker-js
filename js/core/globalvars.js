@@ -162,3 +162,6 @@ const colorPalettes = {
     trail: "#FF0000",
   },
 };
+
+// inputs
+var current_device = "keyboard";

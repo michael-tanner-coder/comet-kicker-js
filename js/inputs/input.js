@@ -1,6 +1,5 @@
 // ---Input Constants---
-const INPUTS = {
-  // == KEYBOARD ==
+const KEYBOARD_INPUTS = {
   // Arrow keys
   ArrowLeft: false,
   ArrowRight: false,
@@ -41,8 +40,9 @@ const INPUTS = {
   // MISC KEYS
   Enter: false,
   Escape: false,
-
-  // == GAMEPAD ==
+};
+const GAMEPAD_INPUTS = {
+  // left analog stick
   left: false,
   right: false,
   down: false,
@@ -50,27 +50,34 @@ const INPUTS = {
   lookleft: false,
   lookright: false,
 
-  // analog sticks
-  leftStick_xAxis: false,
-  leftStick_yAxis: false,
-  rightStick_xAxis: false,
-  rightStick_yAxis: false,
-
-  // buttons
+  // face buttons
   buttonA: false,
   buttonB: false,
   buttonX: false,
   buttonY: false,
+
+  // shoulders/triggers
   leftShoulder: false,
   rightShoulder: false,
   leftTrigger: false,
   rightTrigger: false,
-  select: false,
-  start: false,
+
+  // d-pad
   dpadUp: false,
   dpadDown: false,
   dpadLeft: false,
   dpadRight: false,
+
+  // misc buttons
+  select: false,
+  start: false,
+};
+
+const INPUTS = {
+  // == KEYBOARD ==
+  ...KEYBOARD_INPUTS,
+  // == GAMEPAD ==
+  ...GAMEPAD_INPUTS,
 };
 
 const INPUT_STATES = {
@@ -116,8 +123,8 @@ const CONTROLS = {
 let UNPROCESSED_INPUTS = [];
 
 function initializeInputState() {
-  for(let control in CONTROLS){
-    if(localStorage.getItem(control)) {
+  for (let control in CONTROLS) {
+    if (localStorage.getItem(control)) {
       CONTROLS[control] = JSON.parse(localStorage.getItem(control));
     }
   }
@@ -174,8 +181,6 @@ function inputStateMachine(input) {
 
     // PRESSED
     case INPUT_STATES.pressed:
-
-
       break;
 
     // HELD
@@ -197,11 +202,11 @@ function inputStateMachine(input) {
   }
 }
 
-function releaseInputs(){
+function releaseInputs() {
   UNPROCESSED_INPUTS.forEach((input) => {
-    if(wasReleased(input.inputs)) {
+    if (wasReleased(input.inputs)) {
       input.state = INPUT_STATES.idle;
-    }else{
+    } else {
       input.state = INPUT_STATES.held;
     }
   });
@@ -268,7 +273,25 @@ function gamepadListener() {
   });
 }
 
+function getCurrentInputDevice() {
+  const keyboard_inputs = Object.keys(KEYBOARD_INPUTS);
+  const gamepad_inputs = Object.keys(GAMEPAD_INPUTS);
+
+  gamepad_inputs.forEach((input) => {
+    if (INPUTS[input]) {
+      current_device = "gamepad";
+    }
+  });
+
+  keyboard_inputs.forEach((input) => {
+    if (INPUTS[input]) {
+      current_device = "keyboard";
+    }
+  });
+}
+
 function inputListener() {
+  getCurrentInputDevice();
   gamepadListener();
   keyListener();
 }
