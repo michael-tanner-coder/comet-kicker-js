@@ -128,11 +128,15 @@ function spawnEnemy(type = ENEMY) {
   new_enemy.x = withGrid(chosen_spawn_point.x);
   new_enemy.y = withGrid(chosen_spawn_point.y);
 
+  if (new_enemy.name === "explodingEnemy") {
+    new_enemy.x = PLAYER.x - new_enemy.w;
+  }
+
   // spawn exploding enemies in a lineup
   if (chosen_spawn_point.spawn_count) {
     for (i = 1; i < chosen_spawn_point.spawn_count; i++) {
       let extra_enemy = JSON.parse(JSON.stringify(type));
-      extra_enemy.x = withGrid(chosen_spawn_point.x + i);
+      extra_enemy.x = new_enemy.x + extra_enemy.w * i;
       extra_enemy.y = withGrid(chosen_spawn_point.y - i);
       extra_enemy.direction = chosen_spawn_point.direction;
       GAME_OBJECTS.push(extra_enemy);
