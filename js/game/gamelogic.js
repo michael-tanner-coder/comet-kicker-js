@@ -502,8 +502,14 @@ function drawBackground() {
 }
 
 function drawObjects() {
+  // put player at end of objects array so that they render in front of all other objects
+  const PLAYER_INDEX = GAME_OBJECTS.indexOf(PLAYER);
+  GAME_OBJECTS.splice(PLAYER_INDEX, 1);
+  GAME_OBJECTS.push(PLAYER);
+
   GAME_OBJECTS.forEach((obj) => {
     if (obj.destroyed) return;
+
     // render a trail based on the object's previous positions
     if (obj.has_trail) {
       drawCircleTrail(obj);
