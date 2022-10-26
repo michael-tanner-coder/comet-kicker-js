@@ -13,6 +13,7 @@ class Menu {
     this.verticalSpacing = props?.verticalSpacing || 12;
     this.cursor = 0;
     this.key = props?.key || "";
+    this.no_options_text = props?.no_options_text || "";
   }
 
   update() {
@@ -63,13 +64,21 @@ class Menu {
     });
 
     // POINTER
-    assignId(POINTER);
-    POINTER.y = POINTER.y + Math.sin(POINTER.time * 0.15) * 6;
-    POINTER.time += 1;
-    POINTER.y = Math.floor(POINTER.y);
-    drawTrail(POINTER);
-    context.drawImage(IMAGES[POINTER.sprite], POINTER.x - 1, POINTER.y);
-    storePreviousPosition(POINTER);
+    if (this.elements.length > 0) {
+      assignId(POINTER);
+      POINTER.y = POINTER.y + Math.sin(POINTER.time * 0.15) * 6;
+      POINTER.time += 1;
+      POINTER.y = Math.floor(POINTER.y);
+      drawTrail(POINTER);
+      context.drawImage(IMAGES[POINTER.sprite], POINTER.x - 1, POINTER.y);
+      storePreviousPosition(POINTER);
+    }
+
+    // No options available
+    if (this.elements.length === 0) {
+      context.fillStyle = WHITE;
+      drawCenteredText(this.no_options_text, GAME_H / 2);
+    }
 
     // Footer
     if (this.id !== "mainMenu") {

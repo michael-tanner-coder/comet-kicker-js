@@ -14,4 +14,5 @@ createMenu({
   key: "high_scores",
   header: "HIGH SCORES",
   elements: [...score_list],
+  no_options_text: "No scores yet!",
 });
