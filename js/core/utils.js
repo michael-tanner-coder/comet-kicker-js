@@ -508,9 +508,24 @@ function getAnimationDirection(object) {
 
 function getInputAnimation(control) {
   // TODO: fix this to check for the player's current input device
-  let first_input_with_animation = control.inputs.find(
+
+  // filter out inputs that don't match the current device
+  const inputs_for_current_device = control.inputs.filter((input) => {
+    if (current_device === "keyboard") {
+      return KEYBOARD_INPUTS.hasOwnProperty(input);
+    } else {
+      return GAMEPAD_INPUTS.hasOwnProperty(input);
+    }
+  });
+
+  console.log(inputs_for_current_device);
+
+  // search through remaining inputs that have an icon
+  let first_input_with_animation = inputs_for_current_device.find(
     (input) => ANIMATIONS[input]
   );
+
+  console.log(ANIMATIONS[first_input_with_animation]);
 
   return ANIMATIONS[first_input_with_animation];
 }

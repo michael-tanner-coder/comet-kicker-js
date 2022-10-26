@@ -209,7 +209,7 @@ class Cutscene {
 
   draw() {
     //   skip button
-    playAnimation(ANIMATIONS.buttonB, 1, GAME_W - 64, 2);
+    playAnimation(getInputAnimation(CONTROLS.decline), 1, GAME_W - 64, 2);
     context.fillStyle = WHITE;
     context.measureText("SKIP").width;
     context.fillText(
@@ -246,7 +246,7 @@ class Cutscene {
     });
 
     //   continue button
-    playAnimation(ANIMATIONS.buttonA, 1, 127, 218);
+    playAnimation(getInputAnimation(CONTROLS.accept), 1, 127, 218);
     context.fillStyle = WHITE;
     context.measureText("NEXT").width;
     context.fillText(

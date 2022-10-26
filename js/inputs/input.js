@@ -115,7 +115,7 @@ const CONTROLS = {
   moveUp: ["ArrowUp", "dpadUp", "up"],
   moveDown: ["ArrowDown", "dpadDown", "down"],
   pause: ["p", "start"],
-  accept: ["x", "buttonA", "start"],
+  accept: ["x", "buttonA"],
   decline: [" ", "buttonB", "select"],
   autoKill: ["c"],
 };
@@ -220,6 +220,17 @@ function releaseInputs() {
 //    (...some logic)
 // }
 function onPress(input) {
+  // detect which device the input came from
+  input.inputs.forEach((i) => {
+    if (KEYBOARD_INPUTS.hasOwnProperty(i) && INPUTS[i] === true) {
+      current_device = "keyboard";
+    }
+
+    if (GAMEPAD_INPUTS.hasOwnProperty(i) && INPUTS[i] === true) {
+      current_device = "gamepad";
+    }
+  });
+
   return input.state === INPUT_STATES.pressed;
 }
 
@@ -291,7 +302,6 @@ function getCurrentInputDevice() {
 }
 
 function inputListener() {
-  getCurrentInputDevice();
   gamepadListener();
   keyListener();
 }
