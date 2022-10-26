@@ -531,6 +531,10 @@ function drawObjects() {
       context.fontStyle = "8px PressStart2P";
     }
 
+    if (obj.alpha) {
+      context.globalAlpha = obj.alpha;
+    }
+
     if (obj.radius) {
       context.fillStyle = obj.color;
       context.beginPath();
@@ -597,6 +601,8 @@ function drawObjects() {
       context.fillRect(obj.x + 6, obj.y + 6, w, h);
       context.globalAlpha = 1;
     }
+
+    context.globalAlpha = 1;
   });
 }
 

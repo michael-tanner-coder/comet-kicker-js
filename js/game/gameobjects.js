@@ -123,6 +123,7 @@ const BULLET = {
   recoil: 5,
   angle: 0,
   shot_delay: 14,
+  alpha: 1,
 };
 
 const RAPID_BULLET = {
