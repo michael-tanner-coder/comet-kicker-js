@@ -12,6 +12,5 @@
 // FINAL TODOS
 // ===========
 // TODO: edit the menu theme
-// TODO: ending sequence images
 // TODO: set a point limit to unlock the ending sequence
 // TODO: track unlockables via menu
