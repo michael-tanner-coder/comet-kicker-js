@@ -44,6 +44,12 @@ const UNLOCK_BUDDY = {
   points: 6000,
   effect: UNLOCK_EFFECTS.POWERUP,
 };
+const WEAPON_UNLOCKS = [
+  UNLOCK_RAPID_FIRE,
+  UNLOCK_WIDE_SHOT,
+  UNLOCK_MISSILE,
+  UNLOCK_BUDDY,
+];
 
 // health unlocks
 const UPGRADE_HP_2 = {
@@ -76,6 +82,14 @@ const UPGRADE_HP_6 = {
   effect: UNLOCK_EFFECTS.HP,
   points: 7500,
 };
+const HEALTH_UNLOCKS = [
+  UPGRADE_HP_2,
+  UPGRADE_HP_3,
+  UPGRADE_HP_4,
+  UPGRADE_HP_5,
+  UPGRADE_HP_6,
+  UPGRADE_HP_7,
+];
 
 // point box unlocks
 const UPGRADE_POINT_BOXES_1 = {
@@ -99,6 +113,11 @@ const UPGRADE_POINT_BOXES_3 = {
   points: 7000,
   value: 500,
 };
+const POINT_BOXES = [
+  UPGRADE_POINT_BOXES_1,
+  UPGRADE_POINT_BOXES_2,
+  UPGRADE_POINT_BOXES_3,
+];
 
 // powerup time unlocks
 const UPGRADE_POWERUP_TIME = {
@@ -139,6 +158,13 @@ const UPGRADE_MAX_MULTIPLIER_7 = {
   effect: UNLOCK_EFFECTS.MULTIPLIER,
   points: 15000,
 };
+const MULTIPLIER_UNLOCKS = [
+  UPGRADE_MAX_MULTIPLIER_3,
+  UPGRADE_MAX_MULTIPLIER_4,
+  UPGRADE_MAX_MULTIPLIER_5,
+  UPGRADE_MAX_MULTIPLIER_6,
+  UPGRADE_MAX_MULTIPLIER_7,
+];
 
 const UNLOCK_ENDLESS_MODE = {
   ...UNLOCKABLE,
@@ -148,3 +174,13 @@ const UNLOCK_ENDLESS_MODE = {
 
 // track which upgrades have been unlocked
 const UNLOCKED = [];
+
+// collection for all unlockables
+const UNLOCKABLES = [
+  ...WEAPON_UNLOCKS,
+  ...HEALTH_UNLOCKS,
+  ...MULTIPLIER_UNLOCKS,
+  ...POINT_BOXES,
+  UPGRADE_POWERUP_TIME,
+  UNLOCK_ENDLESS_MODE,
+];

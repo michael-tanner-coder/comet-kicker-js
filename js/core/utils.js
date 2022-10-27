@@ -780,3 +780,8 @@ function screenwrap(obj) {
     obj.y = GAME_H - obj.h;
   }
 }
+
+// progression
+function checkIfUnlocked() {}
+function getAllUnlocked(points) {}
+function sortUnlocksByPoints() {}
