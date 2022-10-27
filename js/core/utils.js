@@ -773,6 +773,9 @@ function screenwrap(obj) {
   }
 
   if (obj.y + obj.h > GAME_H) {
+    if (obj.min_y_velocity) {
+      obj.min_y_velocity = -3;
+    }
     obj.y = 0;
   }
 

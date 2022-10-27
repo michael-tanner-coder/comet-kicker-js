@@ -161,6 +161,7 @@ function update(deltaTime) {
 
     if (collisionDetected(block, PLAYER)) {
       PLAYER.hit_ground = true;
+      PLAYER.min_y_velocity = -PLAYER.max_y_velocity;
       PLAYER.jumping = false;
       PLAYER.hang_time = PLAYER_DEFAULT.hang_time;
       PLAYER.jump_height = PLAYER_DEFAULT.jump_height;

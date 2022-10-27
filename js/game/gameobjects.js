@@ -40,6 +40,7 @@ const PLAYER_DEFAULT = {
   y_velocity: 0,
   max_x_velocity: 8,
   max_y_velocity: 8,
+  min_y_velocity: -8,
   fall_rate: GRAVITY,
 
   // health/take damage
