@@ -43,6 +43,7 @@ const image_list = [
   { file: "outro-1.png", name: "outro_1" },
   { file: "outro-2.png", name: "outro_2" },
   { file: "outro-3.png", name: "outro_3" },
+  { file: "logo.png", name: "logo" },
   // <-- Add your sprite in here
 ];
 

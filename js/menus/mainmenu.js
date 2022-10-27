@@ -2,6 +2,13 @@ createMenu({
   id: "mainMenu",
   key: "comet_kicker",
   header: "COMET KICKER",
+  image: "logo",
+  boundary: {
+    x: GAME_W / 4,
+    y: GAME_H / 4 + 50,
+    width: 160,
+    height: 128,
+  },
   elements: [
     new Button({
       key: "start_game",

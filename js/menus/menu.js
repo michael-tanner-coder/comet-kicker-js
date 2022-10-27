@@ -14,6 +14,7 @@ class Menu {
     this.cursor = 0;
     this.key = props?.key || "";
     this.no_options_text = props?.no_options_text || "";
+    this.image = props?.image || null;
   }
 
   update() {
@@ -24,7 +25,15 @@ class Menu {
   draw() {
     // Header
     context.fillStyle = WHITE;
-    drawCenteredText(this.header, this.boundary.y - 32);
+    if (!this.image) {
+      drawCenteredText(this.header, this.boundary.y - 32);
+    }
+
+    if (this.image) {
+      context.fillStyle = "#00000088";
+      context.fillRect(0, 10, GAME_W, 95);
+      context.drawImage(IMAGES[this.image], GAME_W / 2 - 123, 0);
+    }
 
     // Elements
     this.elements.forEach((element, i) => {
