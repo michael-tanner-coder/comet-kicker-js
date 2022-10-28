@@ -80,6 +80,8 @@ const PLAYER_DEFAULT = {
   shot_fired: false,
   kicking: false,
   kick_time: 15,
+
+  slow_mo_transition: false,
 };
 
 const PLAYER = { ...PLAYER_DEFAULT };
@@ -290,7 +292,7 @@ const BIG_COMET = {
   animation: ANIMATIONS.bigCometMoveLeft,
   points_to_spawn: 0,
   points: 5000,
-  hp: 100,
+  hp: 10,
   can_screenwrap: false,
   can_teleport: true,
   fade_out: false,
@@ -309,10 +311,17 @@ const BIG_COMET = {
       direction: DIRECTIONS.left,
     },
   ],
+  boss: true,
 };
 
 const ENEMIES = [ENEMY, EXPLODING_ENEMY, ROLLING_ENEMY, BOUNCING_ENEMY];
-const ENEMY_TYPES = [ENEMY, EXPLODING_ENEMY, ROLLING_ENEMY, BOUNCING_ENEMY, BIG_COMET];
+const ENEMY_TYPES = [
+  ENEMY,
+  EXPLODING_ENEMY,
+  ROLLING_ENEMY,
+  BOUNCING_ENEMY,
+  BIG_COMET,
+];
 
 // POWERUPS and POINT COLLECTIBLES
 const COLLECT = {

@@ -249,12 +249,19 @@ function update(deltaTime) {
         }
 
         if (!enemy.hp || enemy.hp <= 0) {
+          if (enemy.boss) {
+            PLAYER.slow_mo_transition = true;
+            PLAYER.hp = MAX_HP;
+          }
+
           removeObj(enemy);
+
           if (start_combo) {
             multiplier += 1;
             multiplier = clamp(multiplier, 0, max_multiplier);
             multiplier_timer = max_multiplier_timer;
           }
+
           score += enemy.points * multiplier;
           let text_object = spawnObject(TEXT_OBJECT, enemy.x, enemy.y);
           text_object.text = "+" + enemy.points + " x " + multiplier;
@@ -392,6 +399,7 @@ function update(deltaTime) {
   PLAYER.hit_wall = false;
   updateTimeScale();
   checkForGameOver();
+  checkForGameWon();
 }
 
 function draw(offset) {

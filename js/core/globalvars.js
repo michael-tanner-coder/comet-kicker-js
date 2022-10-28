@@ -34,6 +34,7 @@ var max_recent_score_list_length = 10;
 var spawned_boss = false;
 var final_boss_stage = true;
 var points_to_enter_final_boss = 10000;
+var beat_boss = false;
 
 // game options
 var render_hitboxes = false;

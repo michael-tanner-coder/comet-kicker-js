@@ -168,6 +168,26 @@ function checkForGameOver() {
   }
 }
 
+function checkForGameWon() {
+  if (PLAYER.slow_mo_transition) {
+    game_speed /= 8;
+    PLAYER.y_velocity = 0;
+    PLAYER.fall_rate = 0;
+    PLAYER.won = true;
+    PLAYER.slow_mo_transition = false;
+  }
+
+  if (PLAYER.won) {
+    PLAYER.hitstop_time -= game_speed * time_scale;
+  }
+
+  if (PLAYER.hitstop_time <= 0) {
+    resetGame();
+    LOST_HEARTS.length = 0;
+    game_state = STATES.OUTRO;
+  }
+}
+
 function updateIFrameCounter() {
   if (PLAYER.hit) {
     PLAYER.i_frames--;
