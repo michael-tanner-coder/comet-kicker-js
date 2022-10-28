@@ -54,7 +54,7 @@ const SCORE_SECTION = {
       y: 0,
       shadow: { color: VIOLET, x: 0, y: 1 },
     },
-    text_size: 12,
+    text_size: 16,
   },
 
   //   Goals
@@ -163,50 +163,24 @@ function drawScoreSection(section) {
   const scoreTextX = scoreText.x;
   const scoreTextY =
     scoreBar.y + scoreText.y + scoreBar.h / 2 + scoreBar.text_size / 2;
-  setFontSize(scoreBar.text_size);
+  setFontSize(16);
 
   context.fillStyle = scoreText.shadow.color;
   context.fillText(
     scoreText.text,
-    scoreTextX + scoreText.shadow.x,
-    scoreTextY + scoreText.shadow.y
+    Math.floor(scoreTextX + scoreText.shadow.x),
+    Math.floor(scoreTextY + scoreText.shadow.y)
   );
 
   context.fillStyle = scoreText.color;
-  context.fillText(scoreText.text, scoreTextX, scoreTextY);
+  context.fillText(
+    scoreText.text,
+    Math.floor(scoreTextX),
+    Math.floor(scoreTextY)
+  );
 
   // Goals
   const goals = section.goals;
-  // goals.forEach((goal) => {
-  //   //  goal bar
-  //   context.globalAlpha = 0.5;
-  //   const goalShadow = goal.shadow;
-  //   context.fillStyle = goalShadow.color;
-  //   context.fillRect(
-  //     goal.x + goalShadow.x,
-  //     goal.y + goalShadow.y,
-  //     goal.w,
-  //     goal.h
-  //   );
-  //   context.globalAlpha = 1;
-  //   context.fillStyle = goal.underside.color;
-  //   context.fillRect(goal.x, goal.y, goal.w, goal.h + goal.underside.size);
-  //   context.fillStyle = goal.color;
-  //   context.fillRect(goal.x, goal.y, goal.w, goal.h);
-
-  //   //  text outline
-  //   const goalText = goal.text;
-  //   setFontSize(goalText.text_size);
-  //   context.strokeStyle = goalText.outline.color;
-  //   context.lineWidth = goalText.outline.size;
-  //   context.strokeText(goalText.text, goal.x, goalText.y);
-  //   context.lineWidth = 0;
-
-  //   //  text
-  //   setFontSize(goalText.text_size);
-  //   context.fillStyle = goalText.color;
-  //   context.fillText(goalText.text, goal.x, goalText.y);
-  // });
 }
 
 function updateScoreSection(section) {
@@ -373,18 +347,18 @@ function drawAverageScoreSection(section) {
   // Draw main text
   let scores = section.scores.map((block) => block.score);
   let average = getAverageScore(scores);
-  context.font = "12px PressStart2P";
+  context.font = "16px PressStart2P";
   context.fillStyle = section.text_shadow_color;
   context.fillText(
     getText(section.average_score_text) + ": " + Math.ceil(average),
     section.text_x,
-    section.text_y + 1
+    section.text_y + 9
   );
   context.fillStyle = section.text_color;
   context.fillText(
     getText(section.average_score_text) + ": " + Math.ceil(average),
     section.text_x,
-    section.text_y
+    section.text_y + 8
   );
 }
 

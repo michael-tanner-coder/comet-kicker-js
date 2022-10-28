@@ -11,6 +11,9 @@
 // ===========
 // FINAL TODOS
 // ===========
-// TODO: set a point limit to unlock the ending sequence
 // TODO: track unlockables via menu
 // TODO: edit the menu theme
+
+// TODO: fix slow text on menus
+// TODO: connect options + UI to save data
+// TODO: test boss loop
