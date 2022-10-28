@@ -331,7 +331,18 @@ function update(deltaTime) {
 
     // enemy to shield
     if (shield && collisionDetected(enemy, shield)) {
-      removeObj(enemy);
+      if (enemy.boss) {
+        enemy.fade_out = true;
+      }
+
+      if (enemy.hp) {
+        enemy.hp -= 1;
+      }
+
+      if (!enemy.hp || enemy.hp <= 0) {
+        removeObj(enemy);
+      }
+
       PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
       explosion(shield.x, shield.y);
     }
@@ -358,8 +369,11 @@ function update(deltaTime) {
     enemies.forEach((enemy) => {
       if (collisionWithCircleDetected(exp, enemy)) {
         if (enemy.boss) {
-          enemy.hp -= 3;
           enemy.fade_out = true;
+        }
+
+        if (enemy.hp) {
+          enemy.hp -= 3;
         }
 
         if (!enemy.hp || enemy.hp <= 0) {
