@@ -15,6 +15,11 @@ class Menu {
     this.key = props?.key || "";
     this.no_options_text = props?.no_options_text || "";
     this.image = props?.image || null;
+    this.refreshMenuCallback = props?.refreshMenu || function () {};
+  }
+
+  refreshMenu() {
+    this.refreshMenuCallback(this);
   }
 
   update() {
@@ -56,7 +61,8 @@ class Menu {
         POINTER.y = element.y;
         context.fillStyle = PINK;
         if (element.type !== INPUT_TYPES.select) {
-          element.fontSize = easingWithRate(element.fontSize, 16, 0.4);
+          // element.fontSize = easingWithRate(element.fontSize, 16, 0.4);
+          element.fontSize = 16;
           context.font = element.fontSize + "px PressStart2P";
         }
         context.fillText(
@@ -65,7 +71,8 @@ class Menu {
           element.y + element.height / 2 + element.padding + 1
         );
       } else {
-        element.fontSize = easing(element.fontSize, 8);
+        // element.fontSize = easing(element.fontSize, 8);
+        element.fontSize = 8;
       }
 
       //   Render input

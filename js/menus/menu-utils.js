@@ -18,6 +18,7 @@ const POINTER = { x: 0, y: 0, sprite: "shield", time: 0, w: 8, h: 8 };
 // UTILS
 const goToMenu = (menu_id) => {
   const NEXT_MENU = MENUS.find((menu) => menu.id === menu_id);
+  NEXT_MENU.refreshMenu();
   MENU_STACK.push(NEXT_MENU);
 };
 
@@ -43,7 +44,9 @@ const getCurrentMenuElement = () => {
 };
 
 const getMenu = (menu_id) => {
-  return MENUS.find((menu) => menu.id === menu_id);
+  const retrieved_menu = MENUS.find((menu) => menu.id === menu_id);
+  retrieved_menu.refreshMenu();
+  return retrieved_menu;
 };
 
 const moveCursor = (menu, amount) => {

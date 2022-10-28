@@ -518,6 +518,7 @@ function updateGameOverScreen() {
   }
 
   updateScoreSection(SCORE_SECTION);
+
   updateAverageScoreSection(AVERAGE_SCORE_SECTION);
 }
 
@@ -659,7 +660,7 @@ function drawScore() {
   context.font = "8px PressStart2P";
   drawCenteredText(`${getText("score")}: ${Math.round(score)}`, 10);
 }
-const HEALTH_WIDTH = 16
+const HEALTH_WIDTH = 16;
 function drawHP() {
   // draw one heart image for each point of HP
   for (i = 0; i < PLAYER.hp; i++) {
@@ -677,7 +678,9 @@ function drawHP() {
     context.globalAlpha = heart.alpha;
     context.drawImage(
       IMAGES["heart"],
-        (GAME_W / 2) - (HEALTH_WIDTH * 2) /* 2 on left side */ + (HEALTH_WIDTH * PLAYER.hp),
+      GAME_W / 2 -
+        HEALTH_WIDTH * 2 /* 2 on left side */ +
+        HEALTH_WIDTH * PLAYER.hp,
       heart.y
     );
     context.globalAlpha = 1;
