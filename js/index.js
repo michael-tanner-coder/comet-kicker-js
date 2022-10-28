@@ -333,28 +333,6 @@ function update(deltaTime) {
         }
 
         if (enemy.solid) {
-          // stop vertical movement
-          // FIXME: hitboxes need smoother cornering
-          // block.hitboxes.forEach((box) => {
-          //   let block_box = {
-          //     x: block.x + box.x,
-          //     y: block.y + box.y,
-          //     h: box.h,
-          //     w: box.w,
-          //   };
-
-          //   if (
-          //     (box.name === "left" || box.name === "right") &&
-          //     collisionDetected(block_box, enemy)
-          //   ) {
-          //     console.log("HIT SIDE");
-          //     enemy.x = enemy.prev_x;
-          //   }
-
-          //   if (box.name === "top" && collisionDetected(block_box, enemy)) {
-          //     console.log("HIT TOP");
-          //   }
-          // });
           enemy.y = enemy.prev_y;
         }
       }

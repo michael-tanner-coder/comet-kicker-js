@@ -522,14 +522,10 @@ function getInputAnimation(control) {
     }
   });
 
-  console.log(inputs_for_current_device);
-
   // search through remaining inputs that have an icon
   let first_input_with_animation = inputs_for_current_device.find(
     (input) => ANIMATIONS[input]
   );
-
-  console.log(ANIMATIONS[first_input_with_animation]);
 
   return ANIMATIONS[first_input_with_animation];
 }

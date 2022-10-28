@@ -307,17 +307,13 @@ function inputListener() {
 }
 
 window.addEventListener("keydown", function (e) {
-  console.log(e);
   if (Object.keys(INPUTS).includes(e.key)) {
-    console.log(e.key + " is held");
     INPUTS[e.key] = true;
   }
 });
 
 window.addEventListener("keyup", function (e) {
-  console.log(e);
   if (Object.keys(INPUTS).includes(e.key)) {
-    console.log(e.key + " is lifted");
     INPUTS[e.key] = false;
   }
 });

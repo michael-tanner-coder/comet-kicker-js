@@ -68,7 +68,6 @@ class Control {
 
   update() {
     this.border_width = easing(this.border_width, this.active ? 2 : 1);
-    console.log(this.border_width);
     if (this.border_width < 1) {
       this.border_width = 1;
     }
