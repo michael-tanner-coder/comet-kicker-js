@@ -8,6 +8,7 @@ var collect_spawn_timer = MAX_COLLECT_SPAWN_TIMER;
 var platform_spawn_timer = MAX_PLATFORM_SPAWN_TIMER;
 var start_platform_spawn_timer = false;
 var spawn_pacing_timer = MAX_SPAWN_PACING_TIMER; // lasts for one minute
+var stop_spawning = false;
 
 // every 15 seconds, the spawn rate will change to increase intensity over time
 var spawn_pacing = {
@@ -28,6 +29,12 @@ var high_scores = window.localStorage.getItem("high_scores");
 var max_high_score_list_length = 5;
 var recent_scores = window.localStorage.getItem("recent_scores");
 var max_recent_score_list_length = 10;
+
+// boss
+var final_boss_health_max = 100;
+var final_boss_health = final_boss_health_max;
+var final_boss_stage = true;
+var points_to_enter_final_boss = 10000;
 
 // game options
 var render_hitboxes = false;
