@@ -1,4 +1,5 @@
 const GAME_SPEED = 60;
+const TRY_TO_MAKE_FONTS_MORE_CRISP = true; 
 const GAME_W = canvas.width;
 const GAME_H = canvas.height;
 const UNIT_SIZE = 16;

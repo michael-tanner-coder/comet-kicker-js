@@ -89,6 +89,12 @@ function swapPlayerColors() {
   canvas.height = height;
   let ctx = canvas.getContext("2d");
 
+  // a temp canvas used to make fonts crisp
+  let fontcanvas = document.createElement("canvas");
+  fontcanvas.width = width * 4;
+  fontcanvas.height = height * 4;
+  let fontctx = fontcanvas.getContext("2d");
+
   // Draw original image to new context
   ctx.drawImage(imageToChange, 0, 0);
   // Now get the new imageData
