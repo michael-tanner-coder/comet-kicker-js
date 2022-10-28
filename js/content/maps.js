@@ -1,24 +1,24 @@
 const BLOCK_MAP = [
   // TOP LEFT PLATFORM
-  { x: 0, y: 5 },
+  // { x: 0, y: 5 },
   { x: 1, y: 5 },
   { x: 2, y: 5 },
   { x: 3, y: 5 },
 
   // TOP RIGHT PLATFORM
-  { x: GAME_W / UNIT_SIZE - 1, y: 5 },
+  // { x: GAME_W / UNIT_SIZE - 1, y: 5 },
   { x: GAME_W / UNIT_SIZE - 2, y: 5 },
   { x: GAME_W / UNIT_SIZE - 3, y: 5 },
   { x: GAME_W / UNIT_SIZE - 4, y: 5 },
 
   // BOTTOM LEFT PLATFORM
-  { x: 0, y: 12 },
+  // { x: 0, y: 12 },
   { x: 1, y: 12 },
   { x: 2, y: 12 },
   { x: 3, y: 12 },
 
   // BOTTOM RIGHT PLATFORM
-  { x: GAME_W / UNIT_SIZE - 1, y: 12 },
+  // { x: GAME_W / UNIT_SIZE - 1, y: 12 },
   { x: GAME_W / UNIT_SIZE - 2, y: 12 },
   { x: GAME_W / UNIT_SIZE - 3, y: 12 },
   { x: GAME_W / UNIT_SIZE - 4, y: 12 },
