@@ -213,6 +213,10 @@ const ENEMY = {
   points: 10,
   screenwrap_timer: 20,
   can_screenwrap: true,
+  can_damage: true,
+  can_teleport: false,
+  fade_out: false,
+  alpha: 1,
 };
 
 const EXPLODING_ENEMY = {
@@ -288,6 +292,23 @@ const BIG_COMET = {
   points: 5000,
   hp: 100,
   can_screenwrap: false,
+  can_teleport: true,
+  fade_out: false,
+  no_damage: false,
+  spawn_points: [
+    { x: -6, y: -6, direction: DIRECTIONS.right },
+    {
+      x: GAME_W / UNIT_SIZE + 6,
+      y: -6,
+      direction: DIRECTIONS.left,
+    },
+    { x: -6, y: GAME_H / UNIT_SIZE + 6, direction: DIRECTIONS.right },
+    {
+      x: GAME_W / UNIT_SIZE + 6,
+      y: GAME_H / UNIT_SIZE - 6,
+      direction: DIRECTIONS.left,
+    },
+  ],
 };
 
 const ENEMIES = [

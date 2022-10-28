@@ -302,16 +302,24 @@ function update(deltaTime) {
     // enemy to player
     const PLAYER_DAMAGE_DETECTION_BOX = getHitbox(PLAYER, "damage_detection");
     if (collisionDetected(enemy, PLAYER_DAMAGE_DETECTION_BOX)) {
-      if (!PLAYER.hit && !invincible_mode) {
+      if (!PLAYER.hit && !invincible_mode && enemy.can_damage) {
         PLAYER.hp -= 1;
+        enemy.can_damage = false;
         LOST_HEARTS.push(JSON.parse(JSON.stringify(HEART)));
         playSoundEffect("lose_hp");
+        PLAYER.hit = true;
+        PLAYER.state = PLAYER_STATES.HIT;
+        PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
+        explosion(PLAYER.x, PLAYER.y);
       }
-      removeObj(enemy);
-      PLAYER.hit = true;
-      PLAYER.state = PLAYER_STATES.HIT;
-      PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;
-      explosion(PLAYER.x, PLAYER.y);
+
+      if (!enemy.can_teleport) {
+        removeObj(enemy);
+      }
+
+      if (enemy.can_teleport) {
+        enemy.fade_out = true;
+      }
     }
 
     // enemy to shield

@@ -38,6 +38,19 @@ function updateEnemies(enemies) {
         enemy.hit = false;
       }
     }
+
+    if (enemy.fade_out) {
+      enemy.alpha = easing(enemy.alpha, 0);
+    }
+
+    if (enemy.can_teleport && enemy.alpha <= 0.01) {
+      let teleport_point = choose(enemy.spawn_points);
+      enemy.x = withGrid(teleport_point.x);
+      enemy.y = withGrid(teleport_point.y);
+      enemy.fade_out = false;
+      enemy.alpha = 1;
+      enemy.can_damage = true;
+    }
   });
 }
 
