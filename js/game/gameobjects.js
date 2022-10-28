@@ -212,6 +212,7 @@ const ENEMY = {
   points_to_spawn: 0,
   points: 10,
   screenwrap_timer: 20,
+  can_screenwrap: true,
 };
 
 const EXPLODING_ENEMY = {
@@ -277,12 +278,25 @@ const BOUNCING_ENEMY = {
 const BIG_COMET = {
   ...ENEMY,
   name: "bigComet",
-  points_to_spawn: 10000,
+  h: 128,
+  w: 128,
+  fall_rate: 0,
+  movement_direction: "follow",
+  has_gravity: false,
+  animation: ANIMATIONS.bigCometMoveLeft,
+  points_to_spawn: 0,
   points: 5000,
   hp: 100,
+  can_screenwrap: false,
 };
 
-const ENEMIES = [ENEMY, EXPLODING_ENEMY, ROLLING_ENEMY, BOUNCING_ENEMY];
+const ENEMIES = [
+  ENEMY,
+  EXPLODING_ENEMY,
+  ROLLING_ENEMY,
+  BOUNCING_ENEMY,
+  BIG_COMET,
+];
 
 // POWERUPS and POINT COLLECTIBLES
 const COLLECT = {

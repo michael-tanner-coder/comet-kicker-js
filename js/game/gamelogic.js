@@ -18,14 +18,19 @@ function updateShots(bullets) {
 
 function updateEnemies(enemies) {
   enemies.forEach((enemy) => {
-    if (enemy.screenwrap_timer < 0) {
+    if (enemy.screenwrap_timer < 0 && enemy.can_screenwrap) {
       screenwrap(enemy);
       enemy.screenwrap = 0;
     }
 
     enemy.screenwrap_timer -= game_speed * time_scale;
 
-    moveInOwnDirection(enemy);
+    if (enemy.movement_direction === "follow") {
+      enemy.x = easingWithRate(enemy.x, PLAYER.x, 0.01);
+      enemy.y = easingWithRate(enemy.y, PLAYER.y, 0.01);
+    } else {
+      moveInOwnDirection(enemy);
+    }
     if (enemy.hit && enemy.i_frames) {
       enemy.i_frames--;
       if (enemy.i_frames <= 0) {
