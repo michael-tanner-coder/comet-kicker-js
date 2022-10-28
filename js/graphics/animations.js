@@ -493,6 +493,24 @@ const ANIMATIONS = {
     ],
     current_frame: 0,
   },
+
+  // big comet
+  bigCometMoveLeft: {
+    sprite: "big_comet",
+    frames: [
+      // start
+      { x: 0, y: 0, w: 128, h: 128 },
+    ],
+    current_frame: 0,
+  },
+  bigCometMoveRight: {
+    sprite: "big_comet",
+    frames: [
+      // start
+      { x: 128, y: 0, w: 128, h: 128 },
+    ],
+    current_frame: 0,
+  },
 };
 
 const playAnimation = (animation, speed, x, y, w_scale = 1, h_scale = 1) => {
