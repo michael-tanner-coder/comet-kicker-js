@@ -513,6 +513,7 @@ function updateGameOverScreen() {
 
   if (onPress(CONTROLS.decline)) {
     game_state = STATES.MENU;
+    score = 0;
     turnOffAudioLowpassFilter();
   }
 

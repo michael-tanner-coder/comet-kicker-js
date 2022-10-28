@@ -14,6 +14,7 @@ createMenu({
       key: "start_game",
       text: "START GAME",
       onSelect: () => {
+        score = 0; // bugfix: ensure new games start at zero
         game_state = STATES.GAME;
         changeMusic("battle_music");
       },
