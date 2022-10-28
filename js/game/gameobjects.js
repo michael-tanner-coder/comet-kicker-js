@@ -292,7 +292,7 @@ const BIG_COMET = {
   animation: ANIMATIONS.bigCometMoveLeft,
   points_to_spawn: 0,
   points: 5000,
-  hp: 10,
+  hp: 100,
   can_screenwrap: false,
   can_teleport: true,
   fade_out: false,
