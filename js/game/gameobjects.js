@@ -290,7 +290,7 @@ const BIG_COMET = {
   movement_direction: "follow",
   has_gravity: false,
   animation: ANIMATIONS.bigCometMoveLeft,
-  points_to_spawn: 0,
+  points_to_spawn: 10000,
   points: 5000,
   hp: 100,
   can_screenwrap: false,

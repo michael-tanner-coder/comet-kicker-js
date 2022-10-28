@@ -32,7 +32,7 @@ var max_recent_score_list_length = 10;
 
 // boss
 var spawned_boss = false;
-var final_boss_stage = true;
+var final_boss_stage = false;
 var points_to_enter_final_boss = 10000;
 var beat_boss = false;
 

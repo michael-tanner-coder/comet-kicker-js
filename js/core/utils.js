@@ -370,6 +370,8 @@ function resetGame() {
   GAME_OBJECTS.push(PLAYER);
   game_state = STATES.GAME_OVER;
   game_speed = 1;
+  spawned_boss = false;
+  final_boss_stage = false;
   turnOnAudioLowpassFilter();
   resetPlayer();
   saveScore(score);

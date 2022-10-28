@@ -340,6 +340,10 @@ function update(deltaTime) {
       }
 
       if (!enemy.hp || enemy.hp <= 0) {
+        if (enemy.boss) {
+          PLAYER.slow_mo_transition = true;
+          PLAYER.hp = MAX_HP;
+        }
         removeObj(enemy);
       }
 
@@ -377,6 +381,10 @@ function update(deltaTime) {
         }
 
         if (!enemy.hp || enemy.hp <= 0) {
+          if (enemy.boss) {
+            PLAYER.slow_mo_transition = true;
+            PLAYER.hp = MAX_HP;
+          }
           score += enemy.points * multiplier;
           let text_object = spawnObject(TEXT_OBJECT, enemy.x, enemy.y);
           text_object.text = "+" + enemy.points + " x " + multiplier;
@@ -421,6 +429,8 @@ function update(deltaTime) {
   updateTimeScale();
   checkForGameOver();
   checkForGameWon();
+
+  final_boss_stage = score >= points_to_enter_final_boss;
 }
 
 function draw(offset) {
