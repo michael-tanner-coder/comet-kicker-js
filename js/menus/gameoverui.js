@@ -264,8 +264,7 @@ function updateAverageScoreSection(section) {
 
     // score text
     var score_text_width = context.measureText(String(score_block.score)).width;
-    score_block.text_x =
-      score_block.x + score_block.w / 2 - score_text_width / 2;
+    score_block.text_x = score_block.x;
     score_block.text_y =
       score_block.y +
       score_block.h +
@@ -338,7 +337,7 @@ function drawAverageScoreSection(section) {
     context.font = `${score_block.text_size}px PressStart2P`;
     context.fillStyle = score_block.score_color;
     context.fillText(
-      Math.ceil(score_block.display_score),
+      Math.floor(score_block.display_score),
       score_block.text_x,
       score_block.text_y
     );
