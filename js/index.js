@@ -290,7 +290,7 @@ function update(deltaTime) {
       x: PLAYER.x + PLAYER.w / 2,
       y: PLAYER.y + PLAYER.h / 2,
     };
-    const ENEMY_TYPE = ENEMIES.find((e) => e.name === enemy.name);
+    const ENEMY_TYPE = ENEMY_TYPES.find((e) => e.name === enemy.name);
     if (getDistance(enemy, player_center) <= PLAYER.enemy_detection_range) {
       enemy.speed = easing(enemy.speed, ENEMY_TYPE.speed * 0.5);
       enemy.fall_rate = easing(enemy.fall_rate, ENEMY_TYPE.fall_rate * 0.5);

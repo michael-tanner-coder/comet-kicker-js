@@ -395,6 +395,12 @@ function updateEnemySpawnTimer(enemies) {
     spawn_timer -= game_speed * time_scale;
   }
 
+  // if at the final boss stage, spawn the boss but only allow one to be spawned
+  if (final_boss_stage && !spawned_boss) {
+    spawnEnemy(BIG_COMET);
+    spawned_boss = true;
+  }
+
   if (spawn_timer <= 0) {
     let type = choose(ENEMIES);
     if (type.points_to_spawn <= score) {
@@ -403,6 +409,9 @@ function updateEnemySpawnTimer(enemies) {
       // update the spawn rate
       spawn_timer = getSpawnRate();
       spawn_timer = clamp(spawn_timer, MAX_SPAWN_TIMER / 4, MAX_SPAWN_TIMER);
+      if (final_boss_stage) {
+        spawn_timer = MAX_SPAWN_TIMER * 2;
+      }
     }
   }
 }

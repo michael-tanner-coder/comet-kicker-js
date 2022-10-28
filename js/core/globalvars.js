@@ -31,8 +31,7 @@ var recent_scores = window.localStorage.getItem("recent_scores");
 var max_recent_score_list_length = 10;
 
 // boss
-var final_boss_health_max = 100;
-var final_boss_health = final_boss_health_max;
+var spawned_boss = false;
 var final_boss_stage = true;
 var points_to_enter_final_boss = 10000;
 
