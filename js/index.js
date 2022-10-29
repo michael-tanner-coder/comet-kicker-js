@@ -226,8 +226,9 @@ function update(deltaTime) {
         new_text_obj.text = "+" + coll.points;
       }
 
-      if (coll.pickup !== PICKUPS.HP || coll.pickup !== PICKUPS.POINTS) {
+      if (coll.pickup !== PICKUPS.HP && coll.pickup !== PICKUPS.POINTS) {
         PLAYER.powerup = coll.pickup;
+        PLAYER.powerup_timer = PLAYER_DEFAULT.powerup_timer;
       }
     }
 

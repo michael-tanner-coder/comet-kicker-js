@@ -191,6 +191,16 @@ function spawnShield() {
 
 // powerups
 function checkPlayerPowerup() {
+  if (PLAYER.powerup !== "") {
+    PLAYER.powerup_timer -= game_speed * time_scale;
+  } else {
+    PLAYER.powerup_timer = 0;
+  }
+
+  if (PLAYER.powerup_timer <= 0) {
+    PLAYER.powerup = "";
+  }
+
   switch (PLAYER.powerup) {
     case PICKUPS.WIDE_SHOT:
       PLAYER.bullet_type = WIDE_BULLET;
@@ -669,6 +679,38 @@ function drawBitmapCenteredAtLocationWithRotation(
   context.drawImage(graphic, -graphic.width / 2, -graphic.height / 2); // center, draw
   if (alpha != undefined) context.globalAlpha = 1;
   context.restore(); // undo the translation movement and rotation since save()
+}
+
+function drawCircleTimer(x, y, per, radius, thickness) {
+  Math.radians = function (degrees) {
+    return (degrees * Math.PI) / 180;
+  };
+
+  context.beginPath();
+  context.arc(
+    x,
+    y,
+    radius,
+    -Math.PI / 2,
+    Math.radians(per * 3.6) - Math.PI / 2,
+    false
+  );
+  context.arc(
+    x,
+    y,
+    radius - thickness,
+    Math.radians(per * 3.6) - Math.PI / 2,
+    -Math.PI / 2,
+    true
+  );
+  context.lineWidth = 1;
+  if (per > 50) {
+    context.fillStyle = YELLOW;
+  } else if (per > 0) {
+    context.fillStyle = PINK;
+  }
+  context.closePath();
+  context.fill();
 }
 
 function updateScreenshake() {

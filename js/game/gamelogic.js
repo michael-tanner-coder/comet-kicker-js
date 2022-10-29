@@ -404,7 +404,6 @@ function rotateShield(shield) {
 
 function despawnShield(shield) {
   shield_timer = 0;
-  PLAYER.powerup = PLAYER_DEFAULT.powerup;
   shield_spawned = false;
   removeObj(shield);
   playSoundEffect("shield_hit");
@@ -602,6 +601,16 @@ function drawObjects() {
     // render a trail based on the object's previous positions
     if (obj.has_trail) {
       drawCircleTrail(obj);
+    }
+
+    if (obj.powerup_timer && obj.powerup_timer > 0) {
+      drawCircleTimer(
+        obj.x + obj.w / 2,
+        obj.y + obj.h / 2,
+        (obj.powerup_timer / PLAYER_DEFAULT.powerup_timer) * 100,
+        obj.w,
+        2
+      );
     }
 
     // draw text object, gradually fade out
