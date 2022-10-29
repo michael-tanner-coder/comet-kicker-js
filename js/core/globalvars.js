@@ -56,7 +56,9 @@ if (preferred_language) {
 
 var time_scale = 1;
 var game_speed = 1;
-var screen_shake_on = true;
+var screen_shake_on = localStorage.getItem("screen_shake_on")
+  ? JSON.parse(localStorage.getItem("screen_shake_on"))
+  : true;
 var invincible_mode = false;
 
 // shield

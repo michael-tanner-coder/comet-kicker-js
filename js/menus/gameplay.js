@@ -30,9 +30,10 @@ createMenu({
     new Select({
       key: "screenshake",
       text: "SCREENSHAKE",
+      currentOption: screen_shake_on ? 0 : 1,
       onChange: (input) => {
         var currentOption = input.options[input.currentOption];
-        screen_shake_on = currentOption.value;
+        toggleScreenshake(currentOption.value);
       },
       options: [
         { label: getText("on"), value: true },
@@ -52,7 +53,6 @@ createMenu({
       ],
     }),
     GAME_SPEED_OPTION,
-    GAME_HP_OPTION,
     new Button({
       key: "colors",
       text: "COLORS",

@@ -15,9 +15,6 @@
 // TODO: edit the menu/intro themes
 // TODO: fix slow text on menus
 // TODO: connect options + UI to save data
-// --- master volume
-// --- music volume
-// --- sound volume
 // --- screenshake
 // --- invincible
 // --- game speed

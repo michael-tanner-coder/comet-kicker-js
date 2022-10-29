@@ -743,6 +743,11 @@ function toggleFullscreen(value) {
   }
 }
 
+function toggleScreenshake(value) {
+  screen_shake_on = value;
+  localStorage.setItem("screen_shake_on", screen_shake_on);
+}
+
 // character actions
 function jump(obj) {
   // initial jump force
