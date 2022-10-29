@@ -823,13 +823,21 @@ function easeMovement(obj, direction) {
   moveInOwnDirection(obj);
 }
 
+function resetDamageTimer(obj) {
+  if (obj.can_damage_timer !== undefined || obj.can_damage_timer !== null) {
+    obj.can_damage_timer = obj.can_damage_timer_max;
+  }
+}
+
 function screenwrap(obj) {
   if (obj.x + obj.w > GAME_W) {
     obj.x = 0;
+    resetDamageTimer(obj);
   }
 
   if (obj.x + obj.w < 0) {
     obj.x = GAME_W - obj.w;
+    resetDamageTimer(obj);
   }
 
   if (obj.y + obj.h > GAME_H) {
@@ -837,10 +845,12 @@ function screenwrap(obj) {
       obj.min_y_velocity = -3;
     }
     obj.y = 0;
+    resetDamageTimer(obj);
   }
 
   if (obj.y + obj.h < 0) {
     obj.y = GAME_H - obj.h;
+    resetDamageTimer(obj);
   }
 }
 

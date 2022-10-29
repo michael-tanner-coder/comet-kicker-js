@@ -16,12 +16,30 @@ function updateShots(bullets) {
   });
 }
 
+function updateEnemyDamageTimer(enemy) {
+  if (!enemy.boss) {
+    enemy.can_damage = false;
+    enemy.can_damage_timer -= game_speed * time_scale;
+    enemy.can_damage_timer = clamp(
+      enemy.can_damage_timer,
+      0,
+      enemy.can_damage_timer_max
+    );
+  }
+
+  if (enemy.can_damage_timer <= 0 && !enemy.boss) {
+    enemy.can_damage = true;
+  }
+}
+
 function updateEnemies(enemies) {
   enemies.forEach((enemy) => {
     if (enemy.screenwrap_timer < 0 && enemy.can_screenwrap) {
       screenwrap(enemy);
-      enemy.screenwrap = 0;
+      enemy.screenwrap_timer = 0;
     }
+
+    updateEnemyDamageTimer(enemy);
 
     enemy.screenwrap_timer -= game_speed * time_scale;
 

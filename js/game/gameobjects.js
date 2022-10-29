@@ -216,10 +216,13 @@ const ENEMY = {
   points: 10,
   screenwrap_timer: 20,
   can_screenwrap: true,
-  can_damage: true,
+  can_damage: false,
   can_teleport: false,
   fade_out: false,
   alpha: 1,
+  can_damage_timer: 35,
+  can_damage_timer_max: 35,
+  boss: false,
 };
 
 const EXPLODING_ENEMY = {
@@ -313,6 +316,8 @@ const BIG_COMET = {
     },
   ],
   boss: true,
+  can_damage_timer: 0,
+  can_damage: true,
 };
 
 const ENEMIES = [ENEMY, EXPLODING_ENEMY, ROLLING_ENEMY, BOUNCING_ENEMY];

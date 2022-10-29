@@ -11,7 +11,7 @@
 // ===========
 // FINAL TODOS
 // ===========
-// TODO: add warning for when enemies are about to spawn
+// TODO: include tutorial prompts
 // TODO: reset boss spawn after game over
 // TODO: test boss loop
 // TODO: balance spawn rates

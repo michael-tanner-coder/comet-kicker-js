@@ -312,7 +312,9 @@ function update(deltaTime) {
     if (collisionDetected(enemy, PLAYER_DAMAGE_DETECTION_BOX)) {
       if (!PLAYER.hit && !invincible_mode && enemy.can_damage) {
         PLAYER.hp -= 1;
-        enemy.can_damage = false;
+        if (enemy.boss) {
+          enemy.can_damage = false;
+        }
         LOST_HEARTS.push(JSON.parse(JSON.stringify(HEART)));
         playSoundEffect("lose_hp");
         PLAYER.hit = true;
@@ -321,7 +323,7 @@ function update(deltaTime) {
         explosion(PLAYER.x, PLAYER.y);
       }
 
-      if (!enemy.can_teleport) {
+      if (!enemy.can_teleport && enemy.can_damage) {
         removeObj(enemy);
       }
 
