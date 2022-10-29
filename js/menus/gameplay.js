@@ -43,9 +43,10 @@ createMenu({
     new Select({
       key: "invincible_mode",
       text: "INVINCIBLE MODE",
+      currentOption: invincible_mode ? 1 : 0,
       onChange: (input) => {
         var currentOption = input.options[input.currentOption];
-        invincible_mode = currentOption.value;
+        toggleInvincibleMode(currentOption.value);
       },
       options: [
         { label: getText("off"), value: false },

@@ -748,6 +748,11 @@ function toggleScreenshake(value) {
   localStorage.setItem("screen_shake_on", screen_shake_on);
 }
 
+function toggleInvincibleMode(value) {
+  invincible_mode = value;
+  localStorage.setItem("invincible", invincible_mode);
+}
+
 // character actions
 function jump(obj) {
   // initial jump force

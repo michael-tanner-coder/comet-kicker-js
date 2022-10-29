@@ -59,7 +59,9 @@ var game_speed = 1;
 var screen_shake_on = localStorage.getItem("screen_shake_on")
   ? JSON.parse(localStorage.getItem("screen_shake_on"))
   : true;
-var invincible_mode = false;
+var invincible_mode = localStorage.getItem("invincible_mode")
+  ? JSON.parse(localStorage.getItem("invincible_mode"))
+  : false;
 
 // shield
 var shield_spawned = false;
