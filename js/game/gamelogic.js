@@ -603,12 +603,48 @@ function drawObjects() {
       drawCircleTrail(obj);
     }
 
+    // render timer bar for powerups
     if (obj.powerup_timer && obj.powerup_timer > 0) {
-      drawCircleTimer(
-        obj.x + obj.w / 2,
-        obj.y + obj.h / 2,
-        (obj.powerup_timer / PLAYER_DEFAULT.powerup_timer) * 100,
-        obj.w,
+      let percentage = obj.powerup_timer / PLAYER_DEFAULT.powerup_timer;
+
+      // frame
+      context.fillStyle = WHITE;
+      context.fillRect(GAME_W / 2 - 32 - 1, GAME_H - 24 - 1, 66, 18);
+      context.fillStyle = PURPLE;
+      context.fillRect(GAME_W / 2 - 32, GAME_H - 24, 64, 16);
+
+      // bar
+      if (percentage * 100 < 50) {
+        context.fillStyle = PINK;
+      } else {
+        context.fillStyle = YELLOW;
+      }
+      context.fillRect(
+        GAME_W / 2 - 32,
+        GAME_H - 24,
+        Math.ceil(64 * percentage),
+        16
+      );
+
+      // shadow
+      if (percentage * 100 < 50) {
+        context.fillStyle = VIOLET;
+      } else {
+        context.fillStyle = "#ab9679";
+      }
+      context.fillRect(
+        GAME_W / 2 - 32,
+        GAME_H - 24 + 12,
+        Math.ceil(64 * percentage),
+        4
+      );
+
+      // highlight
+      context.fillStyle = WHITE;
+      context.fillRect(
+        GAME_W / 2 - 32,
+        GAME_H - 24 + 3,
+        Math.ceil(64 * percentage),
         2
       );
     }
