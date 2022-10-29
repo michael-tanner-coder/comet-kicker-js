@@ -433,7 +433,9 @@ function update(deltaTime) {
   checkForGameOver();
   checkForGameWon();
 
-  final_boss_stage = score >= points_to_enter_final_boss;
+  if (game_state === STATES.GAME) {
+    final_boss_stage = score >= points_to_enter_final_boss;
+  }
 }
 
 function draw(offset) {
