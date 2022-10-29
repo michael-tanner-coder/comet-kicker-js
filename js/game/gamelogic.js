@@ -463,7 +463,7 @@ function updateMenuNavigation() {
   // select buttons
   if (
     onPress(CONTROLS.accept) &&
-    getCurrentMenuElement().type === INPUT_TYPES.button
+    (getCurrentMenuElement() != null && getCurrentMenuElement().type === INPUT_TYPES.button) // null check stops credits crash from key
   ) {
     getCurrentMenu().elements[getCurrentMenu().cursor].handler();
     playSoundEffect("heal_hp");

@@ -1,3 +1,4 @@
+this.creditsShowHack = false;
 class Menu {
   constructor(props) {
     this.id = props?.id || "";
@@ -23,7 +24,11 @@ class Menu {
   }
 
   update() {
-    this.header = getText(this.key);
+    if(this.key) {
+      this.header = getText(this.key);
+    } else {
+      this.header = "";
+    }
     this.elements.forEach((element) => element.update());
   }
 

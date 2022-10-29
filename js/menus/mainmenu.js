@@ -32,7 +32,7 @@ createMenu({
     new Button({
       key: "credits",
       text: "CREDITS",
-      onSelect: () => goToMenu("creditsMenu"),
+      onSelect: () => { goToMenu("creditsMenu"); globalCreditsShowHack = true; console.log("credits display override"); },
     }),
   ],
 });

@@ -24,6 +24,10 @@ const goToMenu = (menu_id) => {
 
 const goBack = () => {
   if (MENU_STACK.length > 1) {
+    if(globalCreditsShowHack) {
+      globalCreditsShowHack = false;
+      console.log("turning off credits display hack");
+    }
     MENU_STACK.pop();
   }
 };
