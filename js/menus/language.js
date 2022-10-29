@@ -18,6 +18,7 @@ const ENGLISH = new Button({
   key: "english",
   onSelect: (input) => {
     current_language = "en";
+    localStorage.setItem("current_language", current_language);
   },
 });
 const SPANISH = new Button({
@@ -25,6 +26,7 @@ const SPANISH = new Button({
   key: "spanish",
   onSelect: (input) => {
     current_language = "es";
+    localStorage.setItem("current_language", current_language);
   },
 });
 const FRENCH = new Button({
@@ -32,6 +34,7 @@ const FRENCH = new Button({
   key: "french",
   onSelect: (input) => {
     current_language = "fr";
+    localStorage.setItem("current_language", current_language);
   },
 });
 const CHINESE = new Button({
@@ -39,6 +42,7 @@ const CHINESE = new Button({
   key: "chinese",
   onSelect: (input) => {
     current_language = "zh";
+    localStorage.setItem("current_language", current_language);
   },
 });
 createMenu({

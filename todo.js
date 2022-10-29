@@ -14,9 +14,4 @@
 // TODO: track unlockables via menu
 // TODO: edit the menu/intro themes
 // TODO: fix slow text on menus
-// TODO: connect options + UI to save data
-// --- game speed
-// --- player color
-// --- language
-// --- controls
 // TODO: test boss loop

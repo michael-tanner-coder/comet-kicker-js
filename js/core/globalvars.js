@@ -51,11 +51,15 @@ var current_language = "en";
 
 // if preferred_language is available, set our current_language to the user's preference
 if (preferred_language) {
-  current_language = preferred_language;
+  current_language = localStorage.getItem("current_language")
+    ? localStorage.getItem("current_language")
+    : preferred_language;
 }
 
 var time_scale = 1;
-var game_speed = 1;
+var game_speed = localStorage.getItem("game_speed")
+  ? JSON.parse(localStorage.getItem("game_speed"))
+  : 1;
 var screen_shake_on = localStorage.getItem("screen_shake_on")
   ? JSON.parse(localStorage.getItem("screen_shake_on"))
   : true;
@@ -105,7 +109,9 @@ var object_id_counter = 0;
 // menus
 var stop_menu_nav = false;
 
-let playerColorKey = "default";
+let playerColorKey = localStorage.getItem("playerColorKey")
+  ? localStorage.getItem("playerColorKey")
+  : "default";
 
 const colorsToRemap = {
   lightBandanna: {

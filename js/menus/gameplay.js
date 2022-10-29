@@ -5,6 +5,7 @@ const GAME_SPEED_OPTION = new Select({
   onChange: (input) => {
     var currentOption = input.options[input.currentOption];
     game_speed = currentOption.value / 10;
+    localStorage.setItem("game_speed", game_speed);
   },
 });
 addOptionRange(GAME_SPEED_OPTION, 1, 10);
