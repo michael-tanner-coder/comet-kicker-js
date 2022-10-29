@@ -224,6 +224,45 @@ function playerShoot() {
     }
 
     let shot = spawnBullet(PLAYER, PLAYER.direction, PLAYER.bullet_type);
+    if (PLAYER.bullet_type === WIDE_BULLET) {
+      let x_offset = 0;
+      let y_offset = 0;
+
+      x_offset =
+        PLAYER.direction === DIRECTIONS.right ||
+        PLAYER.direction === DIRECTIONS.left
+          ? 0
+          : PLAYER.w;
+
+      y_offset =
+        PLAYER.direction === DIRECTIONS.right ||
+        PLAYER.direction === DIRECTIONS.left
+          ? PLAYER.h
+          : 0;
+      let upper_shot = spawnBullet(
+        {
+          x: PLAYER.x + x_offset,
+          y: PLAYER.y - y_offset,
+          w: PLAYER.w,
+          h: PLAYER.h,
+        },
+        PLAYER.direction,
+        PLAYER.bullet_type
+      );
+      spark_fx(upper_shot.x, upper_shot.y);
+
+      let lower_shot = spawnBullet(
+        {
+          x: PLAYER.x - x_offset,
+          y: PLAYER.y + y_offset,
+          w: PLAYER.w,
+          h: PLAYER.h,
+        },
+        PLAYER.direction,
+        PLAYER.bullet_type
+      );
+      spark_fx(lower_shot.x, lower_shot.y);
+    }
     spark_fx(shot.x, shot.y);
     recoil(PLAYER, shot, shot.recoil);
 
@@ -463,7 +502,8 @@ function updateMenuNavigation() {
   // select buttons
   if (
     onPress(CONTROLS.accept) &&
-    (getCurrentMenuElement() != null && getCurrentMenuElement().type === INPUT_TYPES.button) // null check stops credits crash from key
+    getCurrentMenuElement() != null &&
+    getCurrentMenuElement().type === INPUT_TYPES.button // null check stops credits crash from key
   ) {
     getCurrentMenu().elements[getCurrentMenu().cursor].handler();
     playSoundEffect("heal_hp");
