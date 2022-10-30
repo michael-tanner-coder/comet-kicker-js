@@ -3,7 +3,7 @@ const soundList = [
   // MUSIC
   // Add your music asset here ^
   { file: "comet-kicker-test-songv1.wav", name: "title_music" },
-  { file: "comet-kicker-menu-musicv2.wav", name: "battle_music" },
+  { file: "comet-kicker-fight-theme.wav", name: "battle_music" },
   { file: "comet-kicker-intro.wav", name: "intro_music" },
 
   // SFX
