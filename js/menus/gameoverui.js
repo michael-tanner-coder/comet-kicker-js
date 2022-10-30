@@ -1,29 +1,3 @@
-const GOAL = {
-  points: 0,
-  x: 0,
-  y: 0,
-  h: 28,
-  w: 2,
-  color: WHITE,
-  shadow: { x: 0, y: 0, w: 0, h: 0, color: "black" },
-  underside: { color: YELLOW, size: 0 },
-  text: {
-    x: 0,
-    y: 0,
-    default_text: "goal",
-    reached_text: "reached goal!",
-    text: "goal",
-    color: WHITE,
-    shadow: { x: 0, y: 0, w: 0, h: 0, color: "black" },
-    outline: { size: 0, color: VIOLET },
-    text_size: 6,
-  },
-};
-
-function newGoal(goal = {}) {
-  return JSON.parse(JSON.stringify(goal));
-}
-
 const SCORE_SECTION = {
   //   Section
   background_color: "black",
@@ -56,13 +30,6 @@ const SCORE_SECTION = {
     },
     text_size: 16,
   },
-
-  //   Goals
-  goals: [
-    newGoal({ ...GOAL, y: 47, points: 250 }),
-    newGoal({ ...GOAL, y: 47, points: 500 }),
-    newGoal({ ...GOAL, y: 47, points: 750 }),
-  ],
 };
 
 const SCORE_BLOCK = {
@@ -73,7 +40,7 @@ const SCORE_BLOCK = {
   highlight_w: 4,
   highlight_h: 0,
   x: 0,
-  y: GAME_H,
+  y: GAME_H + 4,
   w: 28,
   h: 0,
   padding: 0,
@@ -178,9 +145,6 @@ function drawScoreSection(section) {
     Math.floor(scoreTextX),
     Math.floor(scoreTextY)
   );
-
-  // Goals
-  const goals = section.goals;
 }
 
 function updateScoreSection(section) {
@@ -209,45 +173,6 @@ function updateScoreSection(section) {
     tolerance
   );
   scoreBar.text.text = "SCORE: " + Math.round(scoreBar.text.value);
-
-  // Goals
-  const goals = section.goals;
-  goals.forEach((goal, i) => {
-    const goalText = goal.text;
-    goal.y = scoreBar.y + scoreBar.h / 2 - goal.h / 2;
-
-    // alternate y position of goal text
-    if (i % 2 === 0) {
-      goalText.y = goal.y - 8;
-    } else {
-      goalText.y = goal.y + goal.h + 8;
-    }
-
-    let remainder = goal.points % 1000 === 0 ? 900 : goal.points % 1000;
-    let percentage = remainder / 1000;
-    let position = scoreBar.maxW * percentage;
-    goal.x = Math.floor(position);
-
-    if (scoreBar.text.value >= goal.points) {
-      goal.text.text = goalText.reached_text;
-
-      goal.w = easing(goal.w, 4);
-      goal.h = easing(goal.h, 29);
-      goal.y -= 2;
-
-      goal.shadow.x = easing(goal.shadow.x, 2);
-      goal.shadow.y = easing(goal.shadow.y, 4);
-
-      goal.underside.size = easing(goal.underside.size, 3);
-      goal.text.outline.size = easing(goal.text.outline.size, 3);
-
-      //   goal.text.color = lerpColor(goal.text.color, YELLOW, 0.1);
-    }
-
-    goal.w = Math.ceil(goal.w);
-    goal.h = Math.ceil(goal.h);
-    goal.underside.size = Math.ceil(goal.underside.size);
-  });
 }
 
 function updateAverageScoreSection(section) {
@@ -386,8 +311,9 @@ function drawOptionsSection(section) {
     section.y + section.padding_top
   );
 
-  var text_width = context.measureText(getText("quit") + ": ESC").width;
-  section.quit_text_x = GAME_W - section.padding_left - text_width;
+  var text_width = context.measureText(getText("quit") + ":").width;
+  var icon_width = getInputAnimation(CONTROLS.decline).frames[0].w;
+  section.quit_text_x = GAME_W - section.padding_left - text_width - icon_width;
   context.fillText(
     getText("quit") + ":",
     section.quit_text_x,
@@ -396,7 +322,7 @@ function drawOptionsSection(section) {
   playAnimation(
     getInputAnimation(CONTROLS.decline),
     0,
-    section.quit_text_x + context.measureText(getText("retry")).width,
+    section.quit_text_x + text_width,
     section.y + section.padding_top
   );
 }
