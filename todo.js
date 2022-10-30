@@ -11,7 +11,8 @@
 // ===========
 // FINAL TODOS
 // ===========
-// TODO: test boss loop
-// TODO: edit the menu/intro themes
-// TODO: track unlockables via menu
+// TODO: buddy timer
+// TODO: script edits
+// TODO: music edits
 // TODO: refresh UI when data is deleted
+// TODO: track unlockables via menu

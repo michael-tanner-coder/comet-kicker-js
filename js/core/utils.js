@@ -154,7 +154,25 @@ function spawnEnemy(type = ENEMY) {
 }
 
 function spawnCollectible() {
-  var new_collect = choose(COLLECTIBLES);
+  let valid_choice = false;
+
+  var new_collect = undefined;
+
+  // check if the newly spawned collectible is a valid choice
+  while (!valid_choice) {
+    new_collect = JSON.parse(JSON.stringify(choose(COLLECTIBLES)));
+
+    // don't spawn the same collectible twice
+    if (new_collect.pickup !== most_recent_pickup) {
+      valid_choice = true;
+    }
+
+    // don't spawn HP if the player has max health
+    if (new_collect.pickup === PICKUPS.HP && PLAYER.hp === MAX_HP) {
+      valid_choice = false;
+    }
+  }
+
   var temp_collect = { ...new_collect };
 
   // spawn at the location farthest from the player
@@ -178,6 +196,12 @@ function spawnCollectible() {
   temp_collect.x = withGrid(spawn_point.x);
   temp_collect.y = withGrid(spawn_point.y);
 
+  if (
+    temp_collect.pickup !== PICKUPS.HP ||
+    temp_collect.pickup !== PICKUPS.POINTS
+  ) {
+    most_recent_pickup = temp_collect.pickup;
+  }
   GAME_OBJECTS.push(temp_collect);
 }
 

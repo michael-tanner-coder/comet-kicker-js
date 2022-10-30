@@ -9,6 +9,7 @@ var platform_spawn_timer = MAX_PLATFORM_SPAWN_TIMER;
 var start_platform_spawn_timer = false;
 var spawn_pacing_timer = MAX_SPAWN_PACING_TIMER; // lasts for one minute
 var stop_spawning = false;
+var most_recent_pickup = "";
 
 // every 15 seconds, the spawn rate will change to increase intensity over time
 var spawn_pacing = {
