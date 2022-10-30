@@ -52,7 +52,8 @@ function update(deltaTime) {
       resumeGame();
     }
     if (onPress(CONTROLS.decline)) {
-      //TODO: Go back to main menu
+      resetGame();
+      game_state = STATES.MENU;
     }
     return;
   }
