@@ -8,20 +8,15 @@ const PROMPT = {
   controls: ["shoot", "moveUp", "moveDown"],
 };
 
-// CONTROL PROMPTS
+// TUTORIAL PROMPTS
 const SHOOT_PROMPT = {
   ...PROMPT,
-  text: "SHOOT: ",
+  text: "KICK: ",
   controls: ["shoot"],
 };
-const SHORT_JUMP_PROMPT = {
+const JUMP_PROMPT = {
   ...PROMPT,
-  text: "SHORT JUMP (tap): ",
-  controls: ["jump"],
-};
-const LONG_JUMP_PROMPT = {
-  ...PROMPT,
-  text: "LONG JUMP (hold): ",
+  text: "JUMP: ",
   controls: ["jump"],
 };
 const MOVE_LEFT_PROMPT = {
@@ -36,14 +31,29 @@ const MOVE_RIGHT_PROMPT = {
 };
 const SHOOT_UP_PROMPT = {
   ...PROMPT,
-  text: "SHOOT UP: ",
+  text: "KICK UP: ",
   controls: ["shoot", "moveUp"],
 };
 const SHOOT_DOWN_PROMPT = {
   ...PROMPT,
-  text: "SHOOT UP: ",
+  text: "KICK DOWN: ",
   controls: ["shoot", "moveDown"],
 };
+
+const PROMPTS = [
+  // Movement
+  MOVE_LEFT_PROMPT,
+  MOVE_RIGHT_PROMPT,
+
+  // Shooting
+  SHOOT_PROMPT,
+  SHOOT_UP_PROMPT,
+  SHOOT_DOWN_PROMPT,
+
+  // Jumping
+  JUMP_PROMPT,
+];
+var tutorial_index = 0;
 
 const drawPrompt = (prompt) => {
   prompt.w = context.measureText(prompt.text).width;
@@ -70,4 +80,21 @@ const drawPrompt = (prompt) => {
       context.fillText("+", prompt.x + prompt.w + 32 * i + 20, prompt.y);
     }
   });
+};
+
+const updatePrompt = (prompt) => {
+  let all_pressed = true;
+
+  prompt.controls.forEach((control) => {
+    if (!onHold(CONTROLS[control])) {
+      all_pressed = false;
+    }
+  });
+
+  if (all_pressed) {
+    tutorial_index += 1;
+    if (tutorial_index > PROMPTS.length - 1) {
+      finished_tutorial = true;
+    }
+  }
 };

@@ -126,6 +126,10 @@ function update(deltaTime) {
   updateExplosions(explosions);
   updatePlatforms(blocks);
 
+  if (game_state === STATES.GAME && !finished_tutorial) {
+    updatePrompt(PROMPTS[tutorial_index]);
+  }
+
   // COLLECTIBLE SPAWNS
   updateCollectibleSpawnTimer(collectibles);
 
@@ -488,7 +492,9 @@ function draw(offset) {
 
     drawHP();
 
-    drawPrompt(PROMPT);
+    if (!finished_tutorial) {
+      drawPrompt(PROMPTS[tutorial_index]);
+    }
   }
 
   // DRAW PAUSE SCREEN
