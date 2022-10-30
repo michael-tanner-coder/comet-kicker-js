@@ -206,7 +206,7 @@ function spawnCollectible() {
 }
 
 function spawnShield() {
-  var new_shield = { ...ROTATING_SHIELD };
+  var new_shield = JSON.parse(JSON.stringify({ ...ROTATING_SHIELD }));
   new_shield.x = PLAYER.x;
   new_shield.y = PLAYER.y;
   GAME_OBJECTS.push(new_shield);
