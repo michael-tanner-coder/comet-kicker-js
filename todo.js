@@ -11,8 +11,6 @@
 // ===========
 // FINAL TODOS
 // ===========
-// TODO: buddy timer
-// TODO: script edits
 // TODO: music edits
 // TODO: refresh UI when data is deleted
 // TODO: track unlockables via menu

@@ -1,49 +1,3 @@
-/*
-[INTRO]
-Long ago, deep in the far reaches of space, 
-
-there lived a young boy known only as “Kicker”. 
-
-In his youth, Kicker discovered he had immense, near-infinite power 
-
-- enough power to destroy the world around him 
-
-- and even worlds beyond his own. 
-
-To keep his loved ones safe, Kicker isolated himself to train every day, hoping he could control his powers before they harmed anyone else.
-
-But in his absence, a dark force crept over their galaxy. 
-
-The Agents of the Cosmos - followers of the Big Comet - were determined to take control of every planet across the universe.
-
-Now Kicker must emerge from his training to defend his home
-
-Was his training enough? 
-
-Can he control his powers and save the galaxy? 
-
-Or will he only destroy himself and everyone around him?
-
-Is he powerful enough to become … 
-
-[cut to title screen]
-
-COMET KICKER
-*/
-
-/*
-[ENDING]
-  With the Big Comet defeated, Kicker saved his home. [IMAGE: Big Comet being destroyed]
-
-  Kicker returned to his family, fully in command of his own power. [IMAGE: Kicker returning to his family (reversed from intro)]
-
-  He had proven he could control his powers and defeat any evil that lurks deep in the galaxy. [IMAGE: shot of space, same as the beginning]
-
-  He no longer had to be separated from his loved ones, no longer scared that he'd hurt them all. [IMAGE: same as outro 2]
-
-  Finally, he was safe. [IMAGE: Kicker surrounded by his family, smiling]
-*/
-
 const BEAT = {
   title: "",
   text: {
@@ -99,7 +53,7 @@ const INTRO_SCRIPT = [
   {
     ...BEAT,
     text: {
-      en: "- and cause great harm to the people he loves.",
+      en: "- and cause great harm to the people he loved.",
       es: "",
       fr: "",
       zh: "",
@@ -118,7 +72,7 @@ const INTRO_SCRIPT = [
   {
     ...BEAT,
     text: {
-      en: "He hoped to control his powers before he could hurt anyone.",
+      en: "He hoped to control his powers before he could ever hurt anyone.",
       es: "",
       fr: "",
       zh: "",
@@ -202,7 +156,7 @@ const OUTRO_SCRIPT = [
   {
     ...BEAT,
     text: {
-      en: " With the Big Comet defeated, Kicker saved his home.",
+      en: "With the Big Comet defeated, Kicker saved his home.",
       es: "",
       fr: "",
       zh: "",
@@ -212,7 +166,7 @@ const OUTRO_SCRIPT = [
   {
     ...BEAT,
     text: {
-      en: "Kicker returned to his family, fully in command of his own power.",
+      en: "Kicker returned to his family, fully in command of his powers.",
       es: "",
       fr: "",
       zh: "",
@@ -222,7 +176,7 @@ const OUTRO_SCRIPT = [
   {
     ...BEAT,
     text: {
-      en: "He had proven he could control his powers and defeat any evil that lurks deep in the galaxy.",
+      en: "He had proven he could control his powers and defeat any evil lurking deep in the galaxy.",
       es: "",
       fr: "",
       zh: "",
@@ -232,21 +186,203 @@ const OUTRO_SCRIPT = [
   {
     ...BEAT,
     text: {
-      en: "He no longer had to be separated from his loved ones, no longer scared that he'd hurt them all.",
+      en: "He no longer had to be separated from his loved ones, no longer scared he'd hurt them all.",
       es: "",
       fr: "",
       zh: "",
     },
     image: "outro_2",
+    speed: 2,
   },
   {
     ...BEAT,
     text: {
-      en: "Finally, he was safe.",
+      en: "Finally ... he was safe.",
       es: "",
       fr: "",
       zh: "",
     },
     image: "outro_3",
+    speed: 1,
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "- CREDITS - ",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "LEAD, CODE, ART, MUSIC, SCRIPT, & DESIGN                - Michael Monty - ",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "CODE, DESIGN FEEDBACK, TESTING - Patrick Moffett - ",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "CODE, DEV SUPPORT, ACCESSIBILITY                 - Mike DG - ",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "ADDITIONAL MUSIC, SOUND, & ART - Rodrigo Bonzerr Lopez - ",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: 'CODE, VFX, GAMEPAD SUPPORT     - Christer "McFunkypants" Kaitila -',
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "ADDITIONAL CODE & SOUND, MANDARIN TRANSLATION          - Jared Rigby -",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "MANDARIN TRANSLATION          - Tammy Tran -",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "- PLAYTESTERS -",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "Klaim (A. Joël Lamotte)",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "Cassidy Noble",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "Patrick J. Thompson",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "Mike DG",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "Patrick McKeown",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "Rodrigo Bonzerr Lopez",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "Rohit Narwal Kumar",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "Tor Andreas Johnsen",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "",
+  },
+  {
+    ...BEAT,
+    text: {
+      en: "Thank you for playing!",
+      es: "",
+      fr: "",
+      zh: "",
+    },
+    image: "",
   },
 ];
