@@ -371,7 +371,7 @@ function update(deltaTime) {
         }
 
         if (enemy.solid) {
-          enemy.y = enemy.prev_y;
+          enemy.y--;
         }
       }
     });

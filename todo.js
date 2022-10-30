@@ -11,8 +11,7 @@
 // ===========
 // FINAL TODOS
 // ===========
-// TODO: include tutorial prompts
 // TODO: test boss loop
-// TODO: track unlockables via menu
 // TODO: edit the menu/intro themes
+// TODO: track unlockables via menu
 // TODO: refresh UI when data is deleted
