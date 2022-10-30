@@ -623,7 +623,7 @@ function drawObjects() {
 
     // render timer bar for powerups
     if (obj.powerup_timer && obj.powerup_timer > 0) {
-      let percentage = obj.powerup_timer / PLAYER_DEFAULT.powerup_timer;
+      let percentage = obj.powerup_timer / PLAYER_DEFAULT.powerup_timer_max;
 
       // frame
       context.fillStyle = WHITE;

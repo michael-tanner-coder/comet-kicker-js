@@ -233,7 +233,7 @@ function update(deltaTime) {
 
       if (coll.pickup !== PICKUPS.HP && coll.pickup !== PICKUPS.POINTS) {
         PLAYER.powerup = coll.pickup;
-        PLAYER.powerup_timer = PLAYER_DEFAULT.powerup_timer;
+        PLAYER.powerup_timer = PLAYER_DEFAULT.powerup_timer_max;
       }
     }
 

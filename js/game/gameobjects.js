@@ -53,7 +53,8 @@ const PLAYER_DEFAULT = {
   // powerups
   powerup: "",
   bullet_type: "",
-  powerup_timer: 300,
+  powerup_timer: 0,
+  powerup_timer_max: 300,
 
   // animation/vfx
   animation: ANIMATIONS.playerIdle,
