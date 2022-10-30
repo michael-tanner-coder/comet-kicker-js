@@ -94,7 +94,7 @@ class Cutscene {
   }
 
   skipIntro() {
-    playSound(SOUNDS["collect_spawn"]);
+    playSoundEffect("collect_spawn");
     changeMusic("title_music");
     game_state = STATES.MENU;
   }
@@ -111,7 +111,10 @@ class Cutscene {
   progressScript() {
     if (this.script[this.script_index]) {
       this.current_beat = this.script[this.script_index];
-      playSound(SOUNDS["collect_spawn"]);
+      if (this.current_beat.music !== "") {
+        changeMusic(this.current_beat.music);
+      }
+      playSoundEffect("collect_spawn");
       this.resetState();
     }
 
@@ -188,7 +191,7 @@ class Cutscene {
 
       // reset timer and play sound
       this.text_timer = 10;
-      playSound(SOUNDS["text"]);
+      playSoundEffect("text", 1);
     }
 
     // progress sequence
@@ -199,7 +202,7 @@ class Cutscene {
       this.current_text = this.current_line;
       this.rendered_lines = this.script_lines;
       this.beat_finished = true;
-      playSound(SOUNDS["text"]);
+      playSoundEffect("text");
     }
 
     // skip sequence

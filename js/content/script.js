@@ -30,6 +30,7 @@ const INTRO_SCRIPT = [
       zh: "",
     },
     image: "intro_2",
+    music: "intro_music_1"
   },
   {
     ...BEAT,
@@ -88,6 +89,7 @@ const INTRO_SCRIPT = [
     },
     speed: 2,
     image: "intro_5",
+    music: "intro_music_2",
   },
   {
     ...BEAT,
@@ -98,6 +100,7 @@ const INTRO_SCRIPT = [
       zh: "",
     },
     image: "intro_6",
+    music: "intro_music_2_2",
   },
   {
     ...BEAT,

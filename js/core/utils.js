@@ -778,10 +778,10 @@ function setSoundEffectVolume(vol) {
   );
 }
 
-function playMusic(song) {
+function playMusic(song, vol = 1) {
   let playbackRate = 1;
   let pan = 0;
-  let volume = (music_volume / 100) * (master_volume / 10);
+  let volume = (music_volume / 100) * (master_volume / 10) * vol;
   let loop = true;
   let sound = playSound(SOUNDS[song], playbackRate, pan, volume, loop);
   if (sound) {
@@ -790,10 +790,10 @@ function playMusic(song) {
   return sound;
 }
 
-function playSoundEffect(sound_effect) {
+function playSoundEffect(sound_effect, vol = 1) {
   let playbackRate = 1;
   let pan = 0;
-  let volume = (sound_effect_volume / 100) * (master_volume / 10);
+  let volume = (sound_effect_volume / 100) * (master_volume / 10) * vol;
   let loop = false;
   let sound = playSound(SOUNDS[sound_effect], playbackRate, pan, volume, loop);
   return sound;

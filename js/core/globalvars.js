@@ -87,13 +87,13 @@ var start_combo = false;
 // sounds
 var music_volume = localStorage.getItem("music_volume")
   ? JSON.parse(localStorage.getItem("music_volume"))
-  : 6;
+  : 10;
 var sound_effect_volume = localStorage.getItem("sound_effect_volume")
   ? JSON.parse(localStorage.getItem("sound_effect_volume"))
-  : 4;
+  : 10;
 var master_volume = localStorage.getItem("master_volume")
   ? JSON.parse(localStorage.getItem("master_volume"))
-  : 5;
+  : 10;
 var song_playing = false;
 var current_song_name = "intro_music";
 var current_song = {};

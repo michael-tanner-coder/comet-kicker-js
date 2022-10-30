@@ -116,23 +116,22 @@ function updatePlatforms(platforms) {
   });
 }
 // sound
-function updateMusic() {
+function updateMusic(vol = 1) {
   if (!song_playing) {
-    current_song = playMusic(current_song_name);
+    current_song = playMusic(current_song_name, vol);
   }
 
   if (current_song) {
     current_song.volume.gain.value =
-      (music_volume / 100) * (master_volume / 10);
+      (music_volume / 100) * (master_volume / 10) * vol;
   }
 }
 
-function changeMusic(song) {
+function changeMusic(song, vol = 1) {
   if (song_playing) {
     current_song.sound.stop();
-    // current_song.sound.time = 0;
     current_song_name = song;
-    current_song = playMusic(song);
+    current_song = playMusic(song, vol);
   }
 }
 
