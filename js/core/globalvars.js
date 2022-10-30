@@ -68,7 +68,9 @@ var invincible_mode = localStorage.getItem("invincible_mode")
   : false;
 
 // tutorial
-var finished_tutorial = false;
+var finished_tutorial = localStorage.getItem("finished_tutorial")
+  ? JSON.parse(localStorage.getItem("finished_tutorial"))
+  : false;
 
 // shield
 var shield_spawned = false;

@@ -109,6 +109,7 @@ const updatePrompt = (prompt) => {
     playSoundEffect("heal_hp");
     if (tutorial_index > PROMPTS.length - 1) {
       finished_tutorial = true;
+      localStorage.setItem("finished_tutorial", finished_tutorial);
     }
   }
 
