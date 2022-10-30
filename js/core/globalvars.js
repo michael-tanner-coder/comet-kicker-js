@@ -95,7 +95,7 @@ var master_volume = localStorage.getItem("master_volume")
   ? JSON.parse(localStorage.getItem("master_volume"))
   : 10;
 var song_playing = false;
-var current_song_name = "intro_music";
+var current_song_name = "intro_music_1";
 var current_song = {};
 
 // game loop
