@@ -63,15 +63,21 @@ const drawPrompt = (prompt) => {
   context.fillRect(0, GAME_H - prompt.h, GAME_W, prompt.h);
 
   context.fillStyle = prompt.color;
-  context.fillText(prompt.text, prompt.x, prompt.y);
+  context.fillText(prompt.text, prompt.x, prompt.y - 2);
 
   prompt.controls.forEach((control, i) => {
+    let input_width = getInputAnimation(CONTROLS[control]).frames[0].w;
+    let input_height = getInputAnimation(CONTROLS[control]).frames[0].h;
+    let bar_midpoint = GAME_H - prompt.h + prompt.h / 2;
+    let input_y = bar_midpoint - input_height / 2;
+
     playAnimation(
       getInputAnimation(CONTROLS[control]),
       1,
       prompt.x + prompt.w + 32 * i,
-      prompt.y - 12
+      Math.floor(input_y)
     );
+
     if (i !== prompt.controls.length - 1) {
       context.fillText("+", prompt.x + prompt.w + 32 * i + 20, prompt.y);
     }
