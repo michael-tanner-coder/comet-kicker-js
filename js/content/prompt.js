@@ -6,7 +6,10 @@ const PROMPT = {
   color: WHITE,
   text: "SHOOT: ",
   controls: ["shoot", "moveUp", "moveDown"],
+  ready: false,
 };
+
+const MOTIVATIONS = ["Nice!", "Great!", "Go get 'em!", "Got it!"];
 
 // TUTORIAL PROMPTS
 const SHOOT_PROMPT = {
@@ -93,6 +96,9 @@ const updatePrompt = (prompt) => {
 
   if (all_pressed) {
     tutorial_index += 1;
+    let text_object = spawnObject(TEXT_OBJECT, PLAYER.x, PLAYER.y);
+    text_object.text = choose(MOTIVATIONS);
+    playSoundEffect("heal_hp");
     if (tutorial_index > PROMPTS.length - 1) {
       finished_tutorial = true;
     }
