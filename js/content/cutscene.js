@@ -58,6 +58,7 @@ function getWrappedText(text, x, y, line_height, fit_width) {
 
 class Cutscene {
   constructor(props) {
+    this.initialized = false;
     // script
     this.script = props?.script || [];
     this.script_lines = [];
@@ -111,11 +112,12 @@ class Cutscene {
   progressScript() {
     if (this.script[this.script_index]) {
       this.current_beat = this.script[this.script_index];
-      if (this.current_beat.music !== "") {
+      if (this.current_beat.music !== "" && this.initialized) {
         changeMusic(this.current_beat.music);
       }
       playSoundEffect("collect_spawn");
       this.resetState();
+      this.initialized = true;
     }
 
     if (this.script_index > this.script.length - 1) {
