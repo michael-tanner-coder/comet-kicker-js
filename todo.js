@@ -11,6 +11,5 @@
 // ===========
 // FINAL TODOS
 // ===========
-// TODO: music edits
 // TODO: refresh UI when data is deleted
 // TODO: track unlockables via menu

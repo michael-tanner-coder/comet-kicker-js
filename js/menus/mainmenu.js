@@ -16,7 +16,7 @@ createMenu({
       onSelect: () => {
         score = 0; // bugfix: ensure new games start at zero
         game_state = STATES.GAME;
-        changeMusic("battle_music");
+        changeMusic("battle_music", 0.8);
       },
     }),
     new Button({

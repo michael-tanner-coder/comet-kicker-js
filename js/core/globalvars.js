@@ -90,7 +90,7 @@ var music_volume = localStorage.getItem("music_volume")
   : 10;
 var sound_effect_volume = localStorage.getItem("sound_effect_volume")
   ? JSON.parse(localStorage.getItem("sound_effect_volume"))
-  : 10;
+  : 8;
 var master_volume = localStorage.getItem("master_volume")
   ? JSON.parse(localStorage.getItem("master_volume"))
   : 10;

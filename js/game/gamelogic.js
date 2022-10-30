@@ -286,7 +286,7 @@ function playerShoot() {
     if (PLAYER.bullet_type === MISSILE_SHOT) {
       playSoundEffect("missile");
     } else {
-      playSoundEffect("shoot");
+      playSoundEffect("shoot", 1.5);
     }
 
     PLAYER.screenshakesRemaining = PLAYER_HIT_SCREENSHAKES;

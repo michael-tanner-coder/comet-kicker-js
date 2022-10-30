@@ -24,7 +24,7 @@ class Menu {
   }
 
   update() {
-    if(this.key) {
+    if (this.key) {
       this.header = getText(this.key);
     } else {
       this.header = "";
@@ -101,40 +101,43 @@ class Menu {
       drawCenteredText(this.no_options_text, GAME_H / 2);
     }
 
-    if(globalCreditsShowHack) {
+    if (globalCreditsShowHack) {
       context.fillStyle = WHITE;
       var wasFont = context.font;
-      context.font = "5px Arial"
-      for(var i=0;i<creditsList.length;i++) {
-        context.fillText(creditsList[i], 13, 7+i*8);
+      context.font = "5px Arial";
+      for (var i = 0; i < creditsList.length; i++) {
+        context.fillText(creditsList[i], 13, 7 + i * 8);
       }
       context.font = wasFont;
-    } else if (this.id !== "mainMenu") { // Footer
+    } else if (this.id !== "mainMenu") {
+      // Footer
       context.fillStyle = WHITE;
-      context.fillText("Space = go back", 16, 16);
+      // context.fillText("Space = go back", 16, 16);
+      playAnimation(getInputAnimation(CONTROLS.decline), 16, 16);
     }
   }
 }
 
 var creditsList = [
-"Michael Monty: Project lead, core gameplay, player control, main sprites and related animations (platform, player, enemy, shots), title and intro music, Spanish and French translations, powerups, invulnerability frames, score tracking, parallax backgrounds, UI, intro sequence including images, audio and animation code, sounds (explosion, shot), menu system, tuning, color trails, logo, control remapping",
-"Patrick Moffett: New jump physics, wall sticking, drop through platform (firing up), save/restore of input and sound settings, assorted fixes (sound menu, high refresh rate input, audio during pause or game over, missiles bug), game over to reset, low pass filter, util functions",
-"mike dg: Color selection, various fixes (high score freeze, device detection, high refresh rate physics, spawn timers, collectible duration, move consistency, spawn frequency)",
-"Rodrigo Bonzerr Lopez: Future music, missile art, collection sound, lose hp sound, rotating shield sprites",
-"Christer \"McFunkypants\" Kaitila: Gamepad, screenshake, particles (dust, smoke, fire, sparkle, glow, explosion), title screen decoration, score initialization bug correction, collision fix, blurry font fix",
-"Jared Rigby: Chinese translation, shield hit noise, pause system",
-"Playtesters: Klaim (A. Joël Lamotte), Cassidy Noble, Patrick J Thompson, mike dg, Patrick McKeown, Rodrigo Bonzerr Lopez, Rohit Narwal Kumar, Tor Andreas Johnsen",
-"=== PRESS SPACEBAR to GO BACK ==="
+  "Michael Monty: Project lead, core gameplay, player control, main sprites and related animations (platform, player, enemy, shots), title and intro music, Spanish and French translations, powerups, invulnerability frames, score tracking, parallax backgrounds, UI, intro sequence including images, audio and animation code, sounds (explosion, shot), menu system, tuning, color trails, logo, control remapping",
+  "Patrick Moffett: New jump physics, wall sticking, drop through platform (firing up), save/restore of input and sound settings, assorted fixes (sound menu, high refresh rate input, audio during pause or game over, missiles bug), game over to reset, low pass filter, util functions",
+  "mike dg: Color selection, various fixes (high score freeze, device detection, high refresh rate physics, spawn timers, collectible duration, move consistency, spawn frequency)",
+  "Rodrigo Bonzerr Lopez: Future music, missile art, collection sound, lose hp sound, rotating shield sprites",
+  'Christer "McFunkypants" Kaitila: Gamepad, screenshake, particles (dust, smoke, fire, sparkle, glow, explosion), title screen decoration, score initialization bug correction, collision fix, blurry font fix',
+  "Jared Rigby: Chinese translation, shield hit noise, pause system",
+  "Playtesters: Klaim (A. Joël Lamotte), Cassidy Noble, Patrick J Thompson, mike dg, Patrick McKeown, Rodrigo Bonzerr Lopez, Rohit Narwal Kumar, Tor Andreas Johnsen",
+  "=== PRESS SPACEBAR to GO BACK ===",
 ];
 
-function lineWrapCredits() { // note: gets calling immediately after definition!
+function lineWrapCredits() {
+  // note: gets calling immediately after definition!
   const newCut = [];
   var maxLineChar = 57;
   var findEnd;
 
-  for(let i = 0; i < creditsList.length; i++) {
+  for (let i = 0; i < creditsList.length; i++) {
     const currentLine = creditsList[i];
-    for(let j = 0; j < currentLine.length; j++) {
+    for (let j = 0; j < currentLine.length; j++) {
       /*const aChar = currentLine[j];
       if(aChar === ":") {
         if(i !== 0) {
@@ -143,8 +146,8 @@ function lineWrapCredits() { // note: gets calling immediately after definition!
         newCut.push(currentLine.substring(0, j + 1));
         newCut.push(currentLine.substring(j + 2, currentLine.length));
         break;
-      } else*/ if(j === currentLine.length - 1) {
-        if((i === 0) || (i >= creditsList.length - 2)) {
+      } else*/ if (j === currentLine.length - 1) {
+        if (i === 0 || i >= creditsList.length - 2) {
           newCut.push(currentLine);
         } else {
           newCut.push(currentLine.substring(0, currentLine.length));
@@ -154,13 +157,13 @@ function lineWrapCredits() { // note: gets calling immediately after definition!
   }
 
   const newerCut = [];
-  for(var i=0;i<newCut.length;i++) {
-    while(newCut[i].length > 0) {
+  for (var i = 0; i < newCut.length; i++) {
+    while (newCut[i].length > 0) {
       findEnd = maxLineChar;
-      if(newCut[i].length > maxLineChar) {
-        for(var ii=findEnd;ii>0;ii--) {
-          if(newCut[i].charAt(ii) == " ") {
-            findEnd=ii;
+      if (newCut[i].length > maxLineChar) {
+        for (var ii = findEnd; ii > 0; ii--) {
+          if (newCut[i].charAt(ii) == " ") {
+            findEnd = ii;
             break;
           }
         }
