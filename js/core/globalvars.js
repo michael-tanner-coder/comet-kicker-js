@@ -12,8 +12,8 @@ var stop_spawning = false;
 
 // every 15 seconds, the spawn rate will change to increase intensity over time
 var spawn_pacing = {
-  [spawn_pacing_timer / 4]: MAX_SPAWN_TIMER / 4, // fastest spawn rate
-  [spawn_pacing_timer / 3]: MAX_SPAWN_TIMER / 3,
+  [spawn_pacing_timer / 4]: MAX_SPAWN_TIMER / 3, // fastest spawn rate
+  [spawn_pacing_timer / 3]: MAX_SPAWN_TIMER / 2,
   [spawn_pacing_timer / 2]: MAX_SPAWN_TIMER / 2,
   [spawn_pacing_timer]: MAX_SPAWN_TIMER, // slowest spawn rate
 };
