@@ -197,7 +197,7 @@ function spawnCollectible() {
   temp_collect.y = withGrid(spawn_point.y);
 
   if (
-    temp_collect.pickup !== PICKUPS.HP ||
+    temp_collect.pickup !== PICKUPS.HP &&
     temp_collect.pickup !== PICKUPS.POINTS
   ) {
     most_recent_pickup = temp_collect.pickup;
