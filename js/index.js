@@ -487,6 +487,8 @@ function draw(offset) {
     drawScore();
 
     drawHP();
+
+    drawPrompt(PROMPT);
   }
 
   // DRAW PAUSE SCREEN
