@@ -1,6 +1,6 @@
 const PROMPT = {
-  x: GAME_W / 2,
-  y: GAME_H,
+  x: 0,
+  y: GAME_H + 32,
   w: 0,
   h: 32,
   color: WHITE,
@@ -59,13 +59,6 @@ const PROMPTS = [
 var tutorial_index = 0;
 
 const drawPrompt = (prompt) => {
-  prompt.w = context.measureText(prompt.text).width;
-  prompt.x = GAME_W / 2 - prompt.w / 2;
-  prompt.y = GAME_H - prompt.h + 22;
-
-  prompt.x = Math.floor(prompt.x);
-  prompt.y = Math.floor(prompt.y);
-
   context.fillStyle = "#00000088";
   context.fillRect(0, GAME_H - prompt.h, GAME_W, prompt.h);
 
@@ -86,6 +79,21 @@ const drawPrompt = (prompt) => {
 };
 
 const updatePrompt = (prompt) => {
+  prompt.w = context.measureText(prompt.text).width;
+
+  if (!prompt.ready) {
+    prompt.x = GAME_W / 2 - prompt.w / 2;
+    let target_y = GAME_H - prompt.h + 22;
+    prompt.y = prompt.y = easing(prompt.y, target_y);
+
+    if (Math.abs(prompt.y - target_y) < 0.01) {
+      prompt.ready = true;
+    }
+    prompt.x = Math.floor(prompt.x);
+    prompt.y = Math.floor(prompt.y);
+    return;
+  }
+
   let all_pressed = true;
 
   prompt.controls.forEach((control) => {
@@ -103,4 +111,7 @@ const updatePrompt = (prompt) => {
       finished_tutorial = true;
     }
   }
+
+  prompt.x = Math.floor(prompt.x);
+  prompt.y = Math.floor(prompt.y);
 };
