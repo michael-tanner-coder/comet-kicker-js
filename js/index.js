@@ -104,7 +104,7 @@ function update(deltaTime) {
     rotateShield(shield); // updates shield timer
   }
 
-  if (shield && shield_timer > 80) {
+  if (shield && PLAYER.powerup_timer <= 0) {
     despawnShield(shield);
   }
 
