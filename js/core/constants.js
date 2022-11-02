@@ -1,5 +1,5 @@
 const GAME_SPEED = 60;
-const TRY_TO_MAKE_FONTS_MORE_CRISP = true; 
+const TRY_TO_MAKE_FONTS_MORE_CRISP = true;
 const GAME_W = canvas.width;
 const GAME_H = canvas.height;
 const UNIT_SIZE = 16;
@@ -56,3 +56,11 @@ const DIRECTIONS = {
   left: 180,
   up: 270,
 };
+
+const LOADING_SCREEN_MESSAGES = [
+  "TIP: collect boxes for powerups!",
+  "TIP: score combos for extra points!",
+  "TIP: missiles destroy platforms!",
+  "Can you get 10,000 points?",
+  "TIP: all platforms can respawn",
+];

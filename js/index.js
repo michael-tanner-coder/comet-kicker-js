@@ -443,6 +443,11 @@ function update(deltaTime) {
   }
 }
 
+function loadingTips() {
+  tip = choose(LOADING_SCREEN_MESSAGES);
+}
+let loadInterval = setInterval(loadingTips, 3000);
+
 function draw(offset) {
   context.globalAlpha = 1;
   context.fillStyle = PURPLE;
@@ -461,12 +466,18 @@ function draw(offset) {
 
   // LOADING SCREEN
   if (!images_loaded || !sounds_loaded) {
+    if (!loading_tip) {
+      tip = choose(LOADING_SCREEN_MESSAGES);
+      loading_tip = true;
+    }
     context.fillStyle = WHITE;
-    drawCenteredText("Loading...", GAME_H / 3);
+    drawCenteredText("Loading ...", GAME_H / 3);
+    drawCenteredText(tip, GAME_H / 2);
     return;
   }
 
   if (images_loaded && sounds_loaded && !started) {
+    clearInterval(loadInterval);
     context.fillStyle = WHITE;
     drawCenteredText("Loading done", GAME_H / 3);
     drawCenteredText("Click to start", GAME_H / 3 + 20);
