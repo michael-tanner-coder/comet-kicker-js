@@ -36,7 +36,7 @@ class Menu {
     // Header
     context.fillStyle = WHITE;
     if (!this.image) {
-      drawCenteredText(this.header, this.boundary.y - 32);
+      drawCenteredText(this.header, this.boundary.y - 16);
     }
 
     if (this.image) {
@@ -112,8 +112,46 @@ class Menu {
     } else if (this.id !== "mainMenu") {
       // Footer
       context.fillStyle = WHITE;
-      // context.fillText("Space = go back", 16, 16);
-      playAnimation(getInputAnimation(CONTROLS.decline), 16, 16);
+
+      // Controls
+      let button_padding = 4;
+      let section_margin = 16;
+
+      // background
+      context.fillStyle = "#00000088";
+      context.fillRect(0, 0, GAME_W, 22);
+      context.fillStyle = WHITE;
+
+      // select button
+      let select_text = "SELECT";
+      let select_text_width = context.measureText(select_text).width;
+      let select_button_width = getInputAnimation(CONTROLS.accept).frames[0].w;
+      playAnimation(
+        getInputAnimation(CONTROLS.accept),
+        1,
+        GAME_W -
+          select_text_width -
+          select_button_width -
+          button_padding -
+          section_margin,
+        2
+      );
+      context.fillText(
+        select_text,
+        GAME_W - select_text_width - section_margin,
+        14
+      );
+
+      // back button
+      let back_text = "BACK";
+      let back_text_width = context.measureText(back_text).width;
+      let back_button_width = getInputAnimation(CONTROLS.decline).frames[0].w;
+      playAnimation(getInputAnimation(CONTROLS.decline), 1, section_margin, 2);
+      context.fillText(
+        back_text,
+        section_margin + back_button_width + button_padding,
+        14
+      );
     }
   }
 }
