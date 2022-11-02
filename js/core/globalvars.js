@@ -1,4 +1,7 @@
 // GLOBAL VARIABLES
+// loading
+started = false;
+
 // dev mode
 var debug_mode = false;
 

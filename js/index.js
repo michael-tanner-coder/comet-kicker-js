@@ -462,7 +462,14 @@ function draw(offset) {
   // LOADING SCREEN
   if (!images_loaded || !sounds_loaded) {
     context.fillStyle = WHITE;
-    context.fillText("Loading assets...", GAME_W / 2 - 50, 10);
+    drawCenteredText("Loading...", GAME_H / 3);
+    return;
+  }
+
+  if (images_loaded && sounds_loaded && !started) {
+    context.fillStyle = WHITE;
+    drawCenteredText("Loading done", GAME_H / 3);
+    drawCenteredText("Click to start", GAME_H / 3 + 20);
     return;
   }
 

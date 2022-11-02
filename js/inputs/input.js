@@ -317,3 +317,14 @@ window.addEventListener("keyup", function (e) {
     INPUTS[e.key] = false;
   }
 });
+
+window.addEventListener("mousedown", function (e) {
+  if (!started) {
+    let rect = canvas.getBoundingClientRect();
+    let x = e.clientX - rect.left;
+    let y = e.clientY - rect.top;
+    if (x > rect.left && x < rect.right && y > rect.top && y < rect.bottom) {
+      started = true;
+    }
+  }
+});
