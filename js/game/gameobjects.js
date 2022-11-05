@@ -266,6 +266,7 @@ const ROLLING_ENEMY = {
   render_hitbox: false,
   points_to_spawn: 3000,
   points: 25,
+  screenwrap_timer: 60,
 };
 
 const BOUNCING_ENEMY = {

@@ -854,17 +854,17 @@ function resetDamageTimer(obj) {
 }
 
 function screenwrap(obj) {
-  if (obj.x + obj.w > GAME_W) {
+  if (obj.x > GAME_W + obj.w) {
     obj.x = 0;
     resetDamageTimer(obj);
   }
 
-  if (obj.x + obj.w < 0) {
+  if (obj.x < -1 * obj.w) {
     obj.x = GAME_W - obj.w;
     resetDamageTimer(obj);
   }
 
-  if (obj.y + obj.h > GAME_H) {
+  if (obj.y > GAME_H + obj.h) {
     if (obj.min_y_velocity) {
       obj.min_y_velocity = -3;
     }
@@ -872,7 +872,7 @@ function screenwrap(obj) {
     resetDamageTimer(obj);
   }
 
-  if (obj.y + obj.h < 0) {
+  if (obj.y < 0 - obj.h) {
     obj.y = GAME_H - obj.h;
     resetDamageTimer(obj);
   }
