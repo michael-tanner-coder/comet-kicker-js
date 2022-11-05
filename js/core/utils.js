@@ -406,6 +406,7 @@ function resetGame() {
   game_speed = 1;
   spawned_boss = false;
   final_boss_stage = false;
+  shield_spawned = false;
   turnOnAudioLowpassFilter();
   resetPlayer();
   saveScore(score);
