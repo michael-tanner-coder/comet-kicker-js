@@ -87,7 +87,7 @@ class Menu {
     // POINTER
     if (this.elements.length > 0) {
       assignId(POINTER);
-      POINTER.y = POINTER.y + Math.sin(POINTER.time * 0.15) * 6;
+      POINTER.y = POINTER.y + Math.sin(game_speed * time_scale * POINTER.time * 0.15) * 6;
       POINTER.time += 1;
       POINTER.y = Math.floor(POINTER.y);
       drawTrail(POINTER);
