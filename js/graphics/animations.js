@@ -538,7 +538,7 @@ const playAnimation = (animation, speed, x, y, w_scale = 1, h_scale = 1) => {
     );
 
     // Prevent frame index from going out of bounds
-    anim.current_frame += speed * 0.01;
+    anim.current_frame += game_speed * time_scale * speed * 0.01;
     if (Math.floor(anim.current_frame) > anim.frames.length - 1) {
       anim.current_frame = 0;
     }
