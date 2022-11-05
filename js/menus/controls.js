@@ -184,9 +184,10 @@ class ControlsMenu extends Menu {
   update() {
     super.update();
     this.elements.forEach((row, i) => {
-      row.update();
+      row.active = this.cursor === i;
       row.x = this.CONTROLS_SECTION.x;
       row.y = this.CONTROLS_SECTION.y + (this.row_spacing + row.h) * i;
+      row.update();
     });
 
     let active_row = this.elements.find((row) => row.active);
@@ -199,8 +200,7 @@ class ControlsMenu extends Menu {
 
   draw() {
     super.draw();
-    this.elements.forEach((row, i) => {
-      row.active = this.cursor === i;
+    this.elements.forEach((row) => {
       row.draw();
     });
 
