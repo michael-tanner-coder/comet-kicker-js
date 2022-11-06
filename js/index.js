@@ -12,6 +12,10 @@ function update(deltaTime) {
     return;
   }
 
+  if (!started) {
+    return;
+  }
+
   // PARTICLE SYSTEM
   particles.update();
 
