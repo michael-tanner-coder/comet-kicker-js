@@ -46,6 +46,15 @@ function updateEnemies(enemies) {
     if (enemy.movement_direction === "follow") {
       enemy.x = easingWithRate(enemy.x, PLAYER.x, 0.01);
       enemy.y = easingWithRate(enemy.y, PLAYER.y, 0.01);
+      if (PLAYER.x <= enemy.x) {
+        enemy.direction = DIRECTIONS.LEFT;
+        enemy.animation = ANIMATIONS.bigCometMoveLeft;
+      }
+      
+      if (PLAYER.x > enemy.x) {
+        enemy.direction = DIRECTIONS.RIGHT;
+        enemy.animation = ANIMATIONS.bigCometMoveRight;
+      }
     } else {
       moveInOwnDirection(enemy);
     }
