@@ -6,7 +6,7 @@ const soundList = [
   { file: "comet-kicker-fight-theme.wav", name: "battle_music" },
   { file: "comet-kicker-intro-1.wav", name: "intro_music_1" },
   { file: "comet-kicker-intro-2.wav", name: "intro_music_2" },
-  { file: "comet-kicker-intro-2-2.wav", name: "intro_music_2_2" },
+  { file: "comet-kicker-intro-2-2.wav", name: "intro_music_3" },
 
   // SFX
   { file: "shoot.wav", name: "shoot" },

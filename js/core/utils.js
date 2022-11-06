@@ -404,10 +404,35 @@ function resetGame() {
   GAME_OBJECTS.push(PLAYER);
   game_state = STATES.GAME_OVER;
   game_speed = 1;
+  if (spawned_boss) {
+    changeMusic("battle_music");
+  }
   spawned_boss = false;
   final_boss_stage = false;
   shield_spawned = false;
   turnOnAudioLowpassFilter();
+  resetPlayer();
+  saveScore(score);
+  buildMap();
+
+  // set average score list for game over UI
+  let average_score_list = JSON.parse(localStorage.getItem("recent_scores"));
+  if (average_score_list) {
+    AVERAGE_SCORE_SECTION.scores = average_score_list.map((recent_score) => {
+      return { ...SCORE_BLOCK, score: recent_score };
+    });
+  } else {
+    AVERAGE_SCORE_SECTION.scores.length = 0;
+  }
+}
+
+function winGame() {
+  GAME_OBJECTS.length = 0;
+  GAME_OBJECTS.push(PLAYER);
+  game_speed = 1;
+  spawned_boss = false;
+  final_boss_stage = false;
+  shield_spawned = false;
   resetPlayer();
   saveScore(score);
   buildMap();

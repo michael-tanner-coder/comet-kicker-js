@@ -100,7 +100,7 @@ const INTRO_SCRIPT = [
       zh: "",
     },
     image: "intro_6",
-    music: "intro_music_2_2",
+    music: "intro_music_3",
   },
   {
     ...BEAT,

@@ -192,6 +192,7 @@ function checkForGameWon() {
     PLAYER.fall_rate = 0;
     PLAYER.won = true;
     PLAYER.slow_mo_transition = false;
+    changeMusic("intro_music_1");
   }
 
   if (PLAYER.won) {
@@ -199,7 +200,7 @@ function checkForGameWon() {
   }
 
   if (PLAYER.hitstop_time <= 0) {
-    resetGame();
+    winGame();
     LOST_HEARTS.length = 0;
     game_state = STATES.OUTRO;
   }
@@ -474,6 +475,7 @@ function updateEnemySpawnTimer(enemies) {
   if (final_boss_stage && !spawned_boss) {
     spawnEnemy(BIG_COMET);
     spawned_boss = true;
+    changeMusic("intro_music_3", 3);
   }
 
   if (spawn_timer <= 0) {
