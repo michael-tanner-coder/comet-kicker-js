@@ -57,6 +57,7 @@ function update(deltaTime) {
     }
     if (onPress(CONTROLS.decline)) {
       resetGame();
+      turnOffAudioLowpassFilter();
       game_state = STATES.MENU;
     }
     return;
