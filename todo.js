@@ -13,7 +13,5 @@
 // ===========
 // TODO: refresh UI when data is deleted
 // TODO: track unlockables via menu
-
-// missiles are damaging enemies every frame of collision
-// sometimes inputs are not detected continuously from gamepad
+// TODO: fix when inputs are not detected continuously from gamepad
 

@@ -254,6 +254,9 @@ function update(deltaTime) {
         if (enemy.hp) {
           enemy.hp -= 1;
           explosion(bullet.x, bullet.y);
+          if (bullet.exploding) {
+            spawnObject(EXPLOSION, enemy.x, enemy.y);
+          }
           removeObj(bullet);
           enemy.hit = true;
           enemy.i_frames = 4;
@@ -281,6 +284,7 @@ function update(deltaTime) {
 
         if (bullet.exploding) {
           spawnObject(EXPLOSION, enemy.x, enemy.y);
+          removeObj(bullet);
         }
 
         start_combo = true;
@@ -385,12 +389,16 @@ function update(deltaTime) {
   explosions.forEach((exp) => {
     enemies.forEach((enemy) => {
       if (collisionWithCircleDetected(exp, enemy)) {
+        if (enemy.hp && !enemy.fade_out) {
+          enemy.hp -= 3;
+        }
+
         if (enemy.boss) {
           enemy.fade_out = true;
         }
 
-        if (enemy.hp) {
-          enemy.hp -= 3;
+        if (enemy.can_teleport) {
+          enemy.fade_out = true;
         }
 
         if (!enemy.hp || enemy.hp <= 0) {
