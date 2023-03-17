@@ -162,8 +162,9 @@ function updateScoreSection(section) {
     anim_rate,
     tolerance
   );
-  let remainder = scoreBar.value % maxValue;
-  let percentage = remainder / maxValue;
+  // let remainder = scoreBar.value % maxValue;
+  let percentage = scoreBar.value / maxValue;
+  percentage = clamp(percentage, 0, 1);
   scoreBar.w = scoreBar.maxW * percentage;
 
   scoreBar.text.value = easingWithRate(
