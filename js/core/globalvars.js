@@ -46,7 +46,7 @@ var beat_boss = false;
 // game options
 var render_hitboxes = false;
 var fullscreen = false;
-var MAX_HP = 4;
+var MAX_HP = 1;
 
 // search browser preferences for the first language that matches one of the game's accepted languages
 let preferred_language = navigator.languages.find((lang_pref) =>
