@@ -12,7 +12,7 @@ function update(deltaTime) {
     return;
   }
 
-  if (!started) {
+  if (!started && !dev_mode) {
     return;
   }
 
@@ -489,7 +489,7 @@ function draw(offset) {
     return;
   }
 
-  if (images_loaded && sounds_loaded && !started) {
+  if (images_loaded && sounds_loaded && !started && !dev_mode) {
     clearInterval(loadInterval);
     context.fillStyle = WHITE;
     drawCenteredText("Loading done", GAME_H / 3);

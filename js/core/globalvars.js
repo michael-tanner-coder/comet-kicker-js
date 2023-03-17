@@ -1,5 +1,6 @@
 // GLOBAL VARIABLES
 // loading
+var dev_mode = true;
 var started = false;
 var loading_tip = false;
 var tip = "";
