@@ -340,7 +340,7 @@ const COLLECT = {
   y: 0,
   color: "yellow",
   life_timer: 360,
-  points: 100,
+  points: 10,
   pickup: PICKUPS.POINTS,
   render_hitbox: false,
   sprite: "collectible",
