@@ -163,7 +163,7 @@ function spawnCollectible() {
     new_collect = JSON.parse(JSON.stringify(choose(COLLECTIBLES)));
 
     // don't spawn the same collectible twice
-    if (new_collect.pickup !== most_recent_pickup) {
+    if (new_collect.pickup !== most_recent_pickup || COLLECTIBLES.length === 1) {
       valid_choice = true;
     }
 
