@@ -12,6 +12,8 @@
 // FINAL TODOS
 // ===========
 // TODO: refresh UI when data is deleted
-// TODO: track unlockables via menu
+// TODO: track unlockables via menu and gameoverui
+// TODO: change logo colors
+// TODO: add tutorial prompt for score falling
 // TODO: fix when inputs are not detected continuously from gamepad
 
