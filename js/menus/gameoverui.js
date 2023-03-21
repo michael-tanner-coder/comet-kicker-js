@@ -128,8 +128,7 @@ function drawScoreSection(section) {
 
   const scoreText = scoreBar.text;
   const scoreTextX = scoreText.x;
-  const scoreTextY =
-    scoreBar.y + scoreText.y + scoreBar.h / 2 + scoreBar.text_size / 2;
+  const scoreTextY = scoreBar.y - 1;
   setFontSize(16);
 
   context.fillStyle = scoreText.shadow.color;
@@ -145,6 +144,21 @@ function drawScoreSection(section) {
     Math.floor(scoreTextX),
     Math.floor(scoreTextY)
   );
+
+  // Unlockables
+  UNLOCKABLES?.forEach((unlock, i) => {
+    let x = Math.floor(GAME_W * (unlock.points / points_to_enter_final_boss));
+    let y = scoreBar.y + 4;
+    context.fillStyle = WHITE;
+    if (scoreBar.w > x) {
+      context.fillStyle = YELLOW;
+      if (!RECENT_UNLOCKS.includes(unlock)) {
+        RECENT_UNLOCKS.push(unlock);
+        console.log("Unlocked " + unlock.name);
+      }
+    }
+    context.fillRect(x, y, 8, 16);
+  });
 }
 
 function updateScoreSection(section) {
