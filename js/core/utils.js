@@ -163,7 +163,10 @@ function spawnCollectible() {
     new_collect = JSON.parse(JSON.stringify(choose(COLLECTIBLES)));
 
     // don't spawn the same collectible twice
-    if (new_collect.pickup !== most_recent_pickup || COLLECTIBLES.length === 1) {
+    if (
+      new_collect.pickup !== most_recent_pickup ||
+      COLLECTIBLES.length === 1
+    ) {
       valid_choice = true;
     }
 
@@ -279,6 +282,8 @@ function buildMap() {
     new_block.block_id = i;
     new_block.x = withGrid(block.x);
     new_block.y = withGrid(block.y);
+    new_block.left_end = block.left_end;
+    new_block.right_end = block.right_end;
     GAME_OBJECTS.push(new_block);
   });
 }

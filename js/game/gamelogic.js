@@ -50,7 +50,7 @@ function updateEnemies(enemies) {
         enemy.direction = DIRECTIONS.LEFT;
         enemy.animation = ANIMATIONS.bigCometMoveLeft;
       }
-      
+
       if (PLAYER.x > enemy.x) {
         enemy.direction = DIRECTIONS.RIGHT;
         enemy.animation = ANIMATIONS.bigCometMoveRight;
@@ -762,6 +762,15 @@ function drawObjects() {
       let w = 19;
       context.fillRect(obj.x + 6, obj.y + 6, w, h);
       context.globalAlpha = 1;
+    }
+
+    if (obj.type === "floor") {
+      if (obj.left_end) {
+        context.drawImage(IMAGES["platform_end_left"], obj.x - obj.w, obj.y);
+      }
+      if (obj.right_end) {
+        context.drawImage(IMAGES["platform_end_right"], obj.x + obj.w, obj.y);
+      }
     }
 
     context.globalAlpha = 1;
