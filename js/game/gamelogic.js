@@ -247,7 +247,7 @@ function playerShoot() {
     var buddy = GAME_OBJECTS.find((obj) => obj.type === "shield");
     if (buddy) {
       let buddy_shot = spawnBullet(buddy, PLAYER.direction, PLAYER.bullet_type);
-      spark_fx(buddy_shot.x, buddy_shot.y);
+      // spark_fx(buddy_shot.x, buddy_shot.y);
     }
 
     let shot = spawnBullet(PLAYER, PLAYER.direction, PLAYER.bullet_type);
@@ -276,7 +276,7 @@ function playerShoot() {
         PLAYER.direction,
         PLAYER.bullet_type
       );
-      spark_fx(upper_shot.x, upper_shot.y);
+      // spark_fx(upper_shot.x, upper_shot.y);
 
       let lower_shot = spawnBullet(
         {
@@ -288,9 +288,9 @@ function playerShoot() {
         PLAYER.direction,
         PLAYER.bullet_type
       );
-      spark_fx(lower_shot.x, lower_shot.y);
+      // spark_fx(lower_shot.x, lower_shot.y);
     }
-    spark_fx(shot.x, shot.y);
+    // spark_fx(shot.x, shot.y);
     recoil(PLAYER, shot, shot.recoil);
 
     if (PLAYER.bullet_type === MISSILE_SHOT) {
