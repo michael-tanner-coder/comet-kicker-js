@@ -1,3 +1,5 @@
+const RECENT_UNLOCKS = [];
+
 const UNLOCK_EFFECTS = {
   HP: "hp",
   POWERUP: "powerup",
@@ -88,7 +90,6 @@ const HEALTH_UNLOCKS = [
   UPGRADE_HP_4,
   UPGRADE_HP_5,
   UPGRADE_HP_6,
-  UPGRADE_HP_7,
 ];
 
 // point box unlocks
