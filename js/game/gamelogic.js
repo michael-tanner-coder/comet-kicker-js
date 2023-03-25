@@ -960,6 +960,7 @@ function activateUpgradeEffect(upgrade) {
       PLAYER_DEFAULT.powerup_timer_max = upgrade.value;
       break;
     case UNLOCK_EFFECTS.MULTIPLIER:
+      max_multiplier += 1;
       break;
     case UNLOCK_EFFECTS.POINT_BOXES:
       break;
