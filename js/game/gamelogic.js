@@ -828,6 +828,10 @@ function drawGameOverScreen() {
   drawScoreSection(SCORE_SECTION);
   drawAverageScoreSection(AVERAGE_SCORE_SECTION);
   drawOptionsSection(OPTIONS_SECTION);
+
+  RECENT_UNLOCKS.forEach((unlock) => {
+    drawUnlockPrompt(unlock);
+  });
 }
 
 function drawPauseScreen() {
