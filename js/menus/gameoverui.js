@@ -341,3 +341,16 @@ function drawOptionsSection(section) {
     section.y + section.padding_top
   );
 }
+
+function drawUnlockPrompt(unlock) {
+  let prompt_w = GAME_W;
+  let prompt_h = 80;
+  let prompt_x = 0;
+  let prompt_y = GAME_H / 2 - prompt_h / 2;
+
+  context.fillStyle = PURPLE;
+  context.fillRect(prompt_x, prompt_y, prompt_w, prompt_h);
+
+  context.fillStyle = WHITE;
+  drawCenteredText(unlock.name, prompt_y + 32);
+}
