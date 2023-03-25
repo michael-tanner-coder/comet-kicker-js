@@ -279,7 +279,7 @@ function update(deltaTime) {
           score += enemy.points * multiplier;
           let text_object = spawnObject(TEXT_OBJECT, enemy.x, enemy.y);
           text_object.text = "+" + enemy.points + " x " + multiplier;
-          explosion(enemy.x, enemy.y);
+          explosion(enemy.x, enemy.y, PLAYER);
         }
 
         if (bullet.exploding) {
@@ -409,7 +409,7 @@ function update(deltaTime) {
           score += enemy.points * multiplier;
           let text_object = spawnObject(TEXT_OBJECT, enemy.x, enemy.y);
           text_object.text = "+" + enemy.points + " x " + multiplier;
-          explosion(enemy.x, enemy.y);
+          explosion(enemy.x, enemy.y, PLAYER);
           removeObj(enemy);
           start_combo = true;
         }
