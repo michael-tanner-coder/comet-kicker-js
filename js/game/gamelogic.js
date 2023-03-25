@@ -944,3 +944,26 @@ function drawPauseScreen() {
     Math.floor(212 + 8 + 28 / 2 - 8 / 2)
   );
 }
+
+function activateUpgradeEffect(upgrade) {
+  switch (upgrade.effect) {
+    case UNLOCK_EFFECTS.HP:
+      MAX_HP += 1;
+      PLAYER_DEFAULT.hp = MAX_HP;
+      PLAYER.hp = MAX_HP;
+      break;
+    case UNLOCK_EFFECTS.POWERUP:
+      break;
+    case UNLOCK_EFFECTS.POWERUP_TIME:
+      break;
+    case UNLOCK_EFFECTS.MULTIPLIER:
+      break;
+    case UNLOCK_EFFECTS.POINT_BOXES:
+      break;
+    case UNLOCK_EFFECTS.MODE:
+      break;
+    default:
+      console.log("no effect");
+      break;
+  }
+}
