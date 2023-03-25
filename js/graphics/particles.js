@@ -26,8 +26,8 @@ function sparkle_fx(x, y) {
 function glow_fx(x, y) {
   poof(x, y, IMAGES["glow"], 1);
 }
-function spark_fx(x, y) {
-  poof(x, y, IMAGES["particle"], 5, true);
+function spark_fx(x, y, target) {
+  poof(x, y, IMAGES["particle"], 5, true, target);
 }
 
 function titlescreenFX() {
@@ -55,7 +55,7 @@ function fall_fx(x, y) {
   }
 }
 
-function poof(x, y, img, spd, trail = false) {
+function poof(x, y, img, spd, trail = false, target = null) {
   let alpha = 1;
   let num = 8;
   for (let i = 0; i < num; i++) {
@@ -66,7 +66,19 @@ function poof(x, y, img, spd, trail = false) {
     let vely = Math.random() * spd - spd / 2;
     let px = x + 8 + Math.random() * 4 - 2;
     let py = y + 8 + Math.random() * 4 - 2;
-    particles.add(px, py, img, life, rotspd, ang, velx, vely, alpha, trail);
+    particles.add(
+      px,
+      py,
+      img,
+      life,
+      rotspd,
+      ang,
+      velx,
+      vely,
+      alpha,
+      trail,
+      target
+    );
   }
 }
 
@@ -87,7 +99,8 @@ function SimpleParticles() {
     velX,
     velY,
     myAlpha,
-    addTrail = false
+    addTrail = false,
+    target = undefined
   ) {
     if (!PARTICLES_ENABLED) return;
     var p, pnum, pcount;
@@ -128,6 +141,7 @@ function SimpleParticles() {
       p.velX = velX;
       p.velY = velY;
       p.has_trail = addTrail;
+      p.target = target;
     }
   };
 
@@ -143,13 +157,27 @@ function SimpleParticles() {
         var lifePercent = p.age / p.life;
         if (lifePercent > 1) lifePercent = 1;
         if (lifePercent < 0) lifePercent = 0;
+        Math.floor(p.x);
+        Math.floor(p.y);
         p.x += p.velX; // move
         p.y += p.velY + GRAVITY * 0.05;
+        if (p.target) {
+          p.x = easingWithRate(p.x, p.target.x, 0.1);
+          p.y = easingWithRate(p.y, p.target.y, 0.1);
+        }
         p.velX *= 0.94; // slow down
         p.velY *= 0.94;
         p.alpha = (1 - lifePercent) * p.maxalpha; // fade
         if (p.rotSpd) p.angle = Math.PI * 2 * lifePercent * p.rotSpd;
-        if (timestamp >= p.death) p.inactive = true;
+        if (timestamp >= p.death && !p.target) p.inactive = true;
+        if (
+          p.target &&
+          p.x >= p.target.x &&
+          p.x <= p.target.x + p.target.w &&
+          p.y >= p.target.y &&
+          p.y <= p.target.y + p.target.h
+        )
+          p.inactive = true;
       }
     });
   };
