@@ -358,11 +358,21 @@ function drawUnlockPrompt(unlock) {
   let prompt_w = GAME_W;
   let prompt_h = 80;
   let prompt_x = 0;
-  let prompt_y = GAME_H / 2 - prompt_h / 2;
+  let prompt_y = 50;
 
-  context.fillStyle = PURPLE;
+  // OVERLAY
+  context.fillStyle = DARK_OVERLAY;
+  context.fillRect(0, 0, GAME_W, GAME_H);
+
+  // BG
+  context.fillStyle = VIOLET;
   context.fillRect(prompt_x, prompt_y, prompt_w, prompt_h);
 
+  // HEADER
+  context.fillStyle = DARK_OVERLAY;
+  drawCenteredText(unlock.name, prompt_y + 34);
+  context.fillStyle = PINK;
+  drawCenteredText(unlock.name, prompt_y + 33);
   context.fillStyle = WHITE;
   drawCenteredText(unlock.name, prompt_y + 32);
 }
