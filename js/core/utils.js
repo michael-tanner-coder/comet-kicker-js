@@ -709,13 +709,11 @@ function drawParticleTrail(obj) {
   });
 }
 
-function explosion(x, y) {
-  // sparkle_fx(x, y);
+function explosion(x, y, target) {
   smoke_fx(x, y);
-  // fire_fx(x, y);
-  spark_fx(x, y);
-  spark_fx(x, y);
-  spark_fx(x, y);
+  spark_fx(x, y, target);
+  spark_fx(x, y, target);
+  spark_fx(x, y, target);
   playSoundEffect("explode");
 }
 
