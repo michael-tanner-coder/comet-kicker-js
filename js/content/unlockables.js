@@ -106,21 +106,21 @@ const HEALTH_UNLOCKS = [
 const UPGRADE_POINT_BOXES_1 = {
   ...UNLOCKABLE,
   name: UNLOCK_LABELS.box + "100",
-  effect: UNLOCK_EFFECTS.POWERUP_TIME,
+  effect: UNLOCK_EFFECTS.POINT_BOXES,
   points: 500,
   value: 100,
 };
 const UPGRADE_POINT_BOXES_2 = {
   ...UNLOCKABLE,
   name: UNLOCK_LABELS.box + "200",
-  effect: UNLOCK_EFFECTS.POWERUP_TIME,
+  effect: UNLOCK_EFFECTS.POINT_BOXES,
   points: 4500,
   value: 200,
 };
 const UPGRADE_POINT_BOXES_3 = {
   ...UNLOCKABLE,
   name: UNLOCK_LABELS.box + "500",
-  effect: UNLOCK_EFFECTS.POWERUP_TIME,
+  effect: UNLOCK_EFFECTS.POINT_BOXES,
   points: 7000,
   value: 500,
 };
