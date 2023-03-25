@@ -147,15 +147,14 @@ function drawScoreSection(section) {
 
   // Unlockables
   UNLOCKABLES?.forEach((unlock, i) => {
+    if (UNLOCKED.includes(unlock)) {
+      return;
+    }
     let x = Math.floor(GAME_W * (unlock.points / points_to_enter_final_boss));
     let y = scoreBar.y + 4;
     context.fillStyle = WHITE;
     if (scoreBar.w > x) {
       context.fillStyle = YELLOW;
-      if (!RECENT_UNLOCKS.includes(unlock)) {
-        RECENT_UNLOCKS.push(unlock);
-        console.log("Unlocked " + unlock.name);
-      }
     }
     context.fillRect(x, y, 8, 16);
   });
