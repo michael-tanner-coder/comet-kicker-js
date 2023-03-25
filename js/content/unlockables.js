@@ -1,3 +1,5 @@
+// max name length: 18 characters
+
 const RECENT_UNLOCKS = [];
 
 const UNLOCK_EFFECTS = {
@@ -7,6 +9,14 @@ const UNLOCK_EFFECTS = {
   MULTIPLIER: "multiplier",
   POINT_BOXES: "point_boxes",
   MODE: "mode",
+};
+
+const UNLOCK_LABELS = {
+  combo: "Max Combo +1",
+  hp: "Max HP +1",
+  box: "Box Points: ",
+  powerup_time: "More Powerup Time",
+  endless_mode: UNLOCK_LABELS.endless_mode,
 };
 
 const UNLOCKABLE = {
@@ -20,7 +30,7 @@ const UNLOCKABLE = {
 // weapon unlocks
 const UNLOCK_RAPID_FIRE = {
   ...UNLOCKABLE,
-  name: "Wide Shot",
+  name: "Rapid Fire",
   powerup: RAPID_BULLET,
   points: 1000,
   effect: UNLOCK_EFFECTS.POWERUP,
@@ -56,31 +66,31 @@ const WEAPON_UNLOCKS = [
 // health unlocks
 const UPGRADE_HP_2 = {
   ...UNLOCKABLE,
-  name: "2 HP",
+  name: UNLOCK_LABELS.hp,
   effect: UNLOCK_EFFECTS.HP,
   points: 200,
 };
 const UPGRADE_HP_3 = {
   ...UNLOCKABLE,
-  name: "3 HP",
+  name: UNLOCK_LABELS.hp,
   effect: UNLOCK_EFFECTS.HP,
   points: 1200,
 };
 const UPGRADE_HP_4 = {
   ...UNLOCKABLE,
-  name: "4 HP",
+  name: UNLOCK_LABELS.hp,
   effect: UNLOCK_EFFECTS.HP,
   points: 3000,
 };
 const UPGRADE_HP_5 = {
   ...UNLOCKABLE,
-  name: "5 HP",
+  name: UNLOCK_LABELS.hp,
   effect: UNLOCK_EFFECTS.HP,
   points: 4500,
 };
 const UPGRADE_HP_6 = {
   ...UNLOCKABLE,
-  name: "6 HP",
+  name: UNLOCK_LABELS.hp,
   effect: UNLOCK_EFFECTS.HP,
   points: 7500,
 };
@@ -95,21 +105,21 @@ const HEALTH_UNLOCKS = [
 // point box unlocks
 const UPGRADE_POINT_BOXES_1 = {
   ...UNLOCKABLE,
-  name: "Points from Boxes: 100",
+  name: UNLOCK_LABELS.box + "100",
   effect: UNLOCK_EFFECTS.POWERUP_TIME,
   points: 500,
   value: 100,
 };
 const UPGRADE_POINT_BOXES_2 = {
   ...UNLOCKABLE,
-  name: "Points from Boxes: 200",
+  name: UNLOCK_LABELS.box + "200",
   effect: UNLOCK_EFFECTS.POWERUP_TIME,
   points: 4500,
   value: 200,
 };
 const UPGRADE_POINT_BOXES_3 = {
   ...UNLOCKABLE,
-  name: "Points from Boxes: 500",
+  name: UNLOCK_LABELS.box + "500",
   effect: UNLOCK_EFFECTS.POWERUP_TIME,
   points: 7000,
   value: 500,
@@ -123,7 +133,7 @@ const POINT_BOXES = [
 // powerup time unlocks
 const UPGRADE_POWERUP_TIME = {
   ...UNLOCKABLE,
-  name: "Increased powerup time",
+  name: UNLOCK_LABELS.powerup_time,
   effect: UNLOCK_EFFECTS.POWERUP_TIME,
   points: 5000,
 };
@@ -131,31 +141,31 @@ const UPGRADE_POWERUP_TIME = {
 // score multiplier unlocks
 const UPGRADE_MAX_MULTIPLIER_3 = {
   ...UNLOCKABLE,
-  name: "Max Combo: 3",
+  name: UNLOCK_LABELS.combo,
   effect: UNLOCK_EFFECTS.MULTIPLIER,
   points: 800,
 };
 const UPGRADE_MAX_MULTIPLIER_4 = {
   ...UNLOCKABLE,
-  name: "Max Combo: 4",
+  name: UNLOCK_LABELS.combo,
   points: 2500,
   effect: UNLOCK_EFFECTS.MULTIPLIER,
 };
 const UPGRADE_MAX_MULTIPLIER_5 = {
   ...UNLOCKABLE,
-  name: "Max Combo: 5",
+  name: UNLOCK_LABELS.combo,
   points: 5500,
   effect: UNLOCK_EFFECTS.MULTIPLIER,
 };
 const UPGRADE_MAX_MULTIPLIER_6 = {
   ...UNLOCKABLE,
-  name: "Max Combo: 6",
+  name: UNLOCK_LABELS.combo,
   effect: UNLOCK_EFFECTS.MULTIPLIER,
   points: 8000,
 };
 const UPGRADE_MAX_MULTIPLIER_7 = {
   ...UNLOCKABLE,
-  name: "Max Combo: 7",
+  name: UNLOCK_LABELS.combo,
   effect: UNLOCK_EFFECTS.MULTIPLIER,
   points: 15000,
 };
@@ -169,7 +179,7 @@ const MULTIPLIER_UNLOCKS = [
 
 const UNLOCK_ENDLESS_MODE = {
   ...UNLOCKABLE,
-  name: "Endless Mode",
+  name: UNLOCK_LABELS.endless_mode,
   points: 15000,
 };
 
