@@ -954,6 +954,7 @@ function activateUpgradeEffect(upgrade) {
       PLAYER.hp = MAX_HP;
       break;
     case UNLOCK_EFFECTS.POWERUP:
+      COLLECTIBLES.push(upgrade.powerup);
       break;
     case UNLOCK_EFFECTS.POWERUP_TIME:
       break;
