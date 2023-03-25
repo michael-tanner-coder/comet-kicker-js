@@ -375,4 +375,11 @@ function drawUnlockPrompt(unlock) {
   drawCenteredText(unlock.name, prompt_y + 33);
   context.fillStyle = WHITE;
   drawCenteredText(unlock.name, prompt_y + 32);
+
+  // DESCRIPTION
+  if (unlock.description) {
+    context.font = `8px PressStart2P`;
+    context.fillStyle = WHITE;
+    drawCenteredText(unlock.description, prompt_y + 64);
+  }
 }

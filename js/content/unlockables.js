@@ -31,6 +31,7 @@ const UNLOCKABLE = {
 const UNLOCK_RAPID_FIRE = {
   ...UNLOCKABLE,
   name: "Rapid Fire",
+  description: "Hold down the fire button",
   powerup: RAPID_FIRE,
   points: 1000,
   effect: UNLOCK_EFFECTS.POWERUP,
