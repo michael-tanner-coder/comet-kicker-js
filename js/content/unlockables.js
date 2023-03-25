@@ -31,21 +31,21 @@ const UNLOCKABLE = {
 const UNLOCK_RAPID_FIRE = {
   ...UNLOCKABLE,
   name: "Rapid Fire",
-  powerup: RAPID_BULLET,
+  powerup: RAPID_FIRE,
   points: 1000,
   effect: UNLOCK_EFFECTS.POWERUP,
 };
 const UNLOCK_WIDE_SHOT = {
   ...UNLOCKABLE,
   name: "Wide Shot",
-  powerup: WIDE_BULLET,
+  powerup: WIDE_SHOT,
   points: 2000,
   effect: UNLOCK_EFFECTS.POWERUP,
 };
 const UNLOCK_MISSILE = {
   ...UNLOCKABLE,
   name: "Missile",
-  powerup: MISSILE_SHOT,
+  powerup: MISSILE,
   points: 3000,
   effect: UNLOCK_EFFECTS.POWERUP,
 };
