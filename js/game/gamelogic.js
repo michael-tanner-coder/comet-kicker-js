@@ -584,6 +584,7 @@ function updateGameOverScreen() {
     if (onPress(CONTROLS.accept)) {
       RECENT_UNLOCKS.forEach((unlock) => {
         UNLOCKED.push(unlock);
+        activateUpgradeEffect(unlock);
       });
       RECENT_UNLOCKS.length = 0;
     }
