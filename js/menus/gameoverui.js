@@ -187,6 +187,19 @@ function updateScoreSection(section) {
     tolerance
   );
   scoreBar.text.text = "SCORE: " + Math.round(scoreBar.text.value);
+
+  // Unlockables
+  UNLOCKABLES?.forEach((unlock, i) => {
+    if (UNLOCKED.includes(unlock)) {
+      return;
+    }
+    let x = Math.floor(GAME_W * (unlock.points / points_to_enter_final_boss));
+    if (scoreBar.w > x) {
+      if (!RECENT_UNLOCKS.includes(unlock)) {
+        RECENT_UNLOCKS.push(unlock);
+      }
+    }
+  });
 }
 
 function updateAverageScoreSection(section) {
