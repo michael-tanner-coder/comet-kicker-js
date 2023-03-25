@@ -16,7 +16,7 @@ const UNLOCK_LABELS = {
   hp: "Max HP +1",
   box: "Box Points: ",
   powerup_time: "More Powerup Time",
-  endless_mode: UNLOCK_LABELS.endless_mode,
+  endless_mode: "Endless Mode",
 };
 
 const UNLOCKABLE = {
