@@ -136,6 +136,7 @@ const UPGRADE_POWERUP_TIME = {
   name: UNLOCK_LABELS.powerup_time,
   effect: UNLOCK_EFFECTS.POWERUP_TIME,
   points: 5000,
+  value: 450,
 };
 
 // score multiplier unlocks
