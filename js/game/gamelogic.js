@@ -581,10 +581,12 @@ function updateMenuNavigation() {
 
 function updateGameOverScreen() {
   if (RECENT_UNLOCKS.length > 0) {
+    animatePrompt();
     if (onPress(CONTROLS.accept)) {
       RECENT_UNLOCKS.forEach((unlock) => {
         UNLOCKED.push(unlock);
         activateUpgradeEffect(unlock);
+        resetPrompt()
       });
       RECENT_UNLOCKS.length = 0;
     }
