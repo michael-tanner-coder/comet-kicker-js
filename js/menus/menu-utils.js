@@ -1,14 +1,6 @@
-// TODO: add option labels to language content
-// TODO: use localstorage + global state to preserve selected options in menu
-// TODO: set option values to a default based on localStorage
 
 // Options to finish:
-// TODO: show average scores
-// TODO: show progress
-// TODO: delete data
-// TODO: remap controls
-// TODO: select presets
-// TODO: credits
+// TODO: select control presets
 
 // GLOBAL STATE FOR MENU STACK
 const MENUS = [];

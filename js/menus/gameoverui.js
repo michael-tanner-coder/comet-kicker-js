@@ -1,3 +1,14 @@
+// TODO: center score text
+// TODO: add a frame to the unlock prompts
+// TODO: add upgrades to local storage
+// TODO: apply upgrades on startup
+// TODO: prompt animation
+// TODO: delay average score animation until prompts are done
+// TODO: reset score progress bar after game over
+// TODO: add an unlock upgrade sound + add confirm sound
+// TODO: give unlocks an icon
+// TODO: balance unlock progression
+
 const SCORE_SECTION = {
   //   Section
   background_color: "black",
@@ -102,6 +113,11 @@ const OPTIONS_SECTION = {
   text_size: 8,
   retry_text_x: 0,
   quit_text_x: GAME_W,
+};
+
+const UNLOCK_PROMPT = {
+  x: 0,
+  y: 50,
 };
 
 function drawScoreSection(section) {
@@ -357,8 +373,6 @@ function drawOptionsSection(section) {
 function drawUnlockPrompt(unlock) {
   let prompt_w = GAME_W;
   let prompt_h = 80;
-  let prompt_x = 0;
-  let prompt_y = 50;
 
   // OVERLAY
   context.fillStyle = DARK_OVERLAY;
@@ -366,20 +380,20 @@ function drawUnlockPrompt(unlock) {
 
   // BG
   context.fillStyle = VIOLET;
-  context.fillRect(prompt_x, prompt_y, prompt_w, prompt_h);
+  context.fillRect(UNLOCK_PROMPT.x, UNLOCK_PROMPT.y, prompt_w, prompt_h);
 
   // HEADER
   context.fillStyle = DARK_OVERLAY;
-  drawCenteredText(unlock.name, prompt_y + 34);
+  drawCenteredText(unlock.name, UNLOCK_PROMPT.y + 34);
   context.fillStyle = PINK;
-  drawCenteredText(unlock.name, prompt_y + 33);
+  drawCenteredText(unlock.name, UNLOCK_PROMPT.y + 33);
   context.fillStyle = WHITE;
-  drawCenteredText(unlock.name, prompt_y + 32);
+  drawCenteredText(unlock.name, UNLOCK_PROMPT.y + 32);
 
   // DESCRIPTION
   if (unlock.description) {
     context.font = `8px PressStart2P`;
     context.fillStyle = WHITE;
-    drawCenteredText(unlock.description, prompt_y + 64);
+    drawCenteredText(unlock.description, UNLOCK_PROMPT.y + 64);
   }
 }
