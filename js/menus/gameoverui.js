@@ -1,7 +1,6 @@
 // TODO: add upgrades to local storage
 // TODO: apply upgrades on startup
 // TODO: delay average score animation until prompts are done
-// TODO: add an unlock upgrade sound + add confirm sound
 // TODO: balance unlock progression
 
 const SCORE_SECTION = {
@@ -205,6 +204,8 @@ function updateScoreSection(section) {
     if (scoreBar.w > x) {
       if (!RECENT_UNLOCKS.includes(unlock)) {
         RECENT_UNLOCKS.push(unlock);
+        turnOffAudioLowpassFilter();
+        playSoundEffect("missile");
       }
     }
   });

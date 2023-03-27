@@ -571,14 +571,6 @@ function updateMenuNavigation() {
   }
 }
 
-// on game over screen:
-// show score progress to the next set of unlocks
-// for each unlock hit, show an unlocked prompt:
-// -- show name of unlock
-// -- explain effect
-// -- press to continue
-// -- when stack is empty, go to regular game over update
-
 function updateGameOverScreen() {
   if (RECENT_UNLOCKS.length > 0) {
     animatePrompt();
@@ -586,7 +578,9 @@ function updateGameOverScreen() {
       RECENT_UNLOCKS.forEach((unlock) => {
         UNLOCKED.push(unlock);
         activateUpgradeEffect(unlock);
-        resetPrompt()
+        resetPrompt();
+        playSoundEffect("heal_hp");
+        turnOnAudioLowpassFilter();
       });
       RECENT_UNLOCKS.length = 0;
     }
@@ -599,7 +593,7 @@ function updateGameOverScreen() {
     turnOffAudioLowpassFilter();
     SCORE_SECTION.score_bar.value = 0;
   }
-  
+
   if (onPress(CONTROLS.decline)) {
     game_state = STATES.MENU;
     score = 0;
