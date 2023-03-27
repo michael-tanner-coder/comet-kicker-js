@@ -1,4 +1,3 @@
-// TODO: center score text
 // TODO: add a frame to the unlock prompts
 // TODO: add upgrades to local storage
 // TODO: apply upgrades on startup
@@ -143,23 +142,14 @@ function drawScoreSection(section) {
   context.fillRect(scoreBar.x, scoreBar.y, scoreBar.w, scoreBar.h);
 
   const scoreText = scoreBar.text;
-  const scoreTextX = scoreText.x;
   const scoreTextY = scoreBar.y - 1;
   setFontSize(16);
 
   context.fillStyle = scoreText.shadow.color;
-  context.fillText(
-    scoreText.text,
-    Math.floor(scoreTextX + scoreText.shadow.x),
-    Math.floor(scoreTextY + scoreText.shadow.y)
-  );
+  drawCenteredText(scoreText.text, Math.floor(scoreTextY + scoreText.shadow.y));
 
   context.fillStyle = scoreText.color;
-  context.fillText(
-    scoreText.text,
-    Math.floor(scoreTextX),
-    Math.floor(scoreTextY)
-  );
+  drawCenteredText(scoreText.text, Math.floor(scoreTextY));
 
   // Unlockables
   UNLOCKABLES?.forEach((unlock, i) => {
