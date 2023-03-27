@@ -214,7 +214,7 @@ const ENEMY = {
   angle: 0,
   state: "Move",
   points_to_spawn: 0,
-  points: 100,
+  points: 10,
   screenwrap_timer: 20,
   can_screenwrap: true,
   can_damage: false,
