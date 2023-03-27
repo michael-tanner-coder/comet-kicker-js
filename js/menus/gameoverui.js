@@ -2,7 +2,6 @@
 // TODO: apply upgrades on startup
 // TODO: delay average score animation until prompts are done
 // TODO: add an unlock upgrade sound + add confirm sound
-// TODO: give unlocks an icon
 // TODO: balance unlock progression
 
 const SCORE_SECTION = {
@@ -159,17 +158,13 @@ function drawScoreSection(section) {
   drawCenteredText(scoreText.text, Math.floor(scoreTextY));
 
   // Unlockables
-  UNLOCKABLES?.forEach((unlock, i) => {
+  UNLOCKABLES?.forEach((unlock) => {
     if (UNLOCKED.includes(unlock)) {
       return;
     }
     let x = Math.floor(GAME_W * (unlock.points / points_to_enter_final_boss));
-    let y = scoreBar.y + 4;
-    context.fillStyle = WHITE;
-    if (scoreBar.w > x) {
-      context.fillStyle = YELLOW;
-    }
-    context.fillRect(x, y, 8, 16);
+    let y = scoreBar.y - 4;
+    context.drawImage(IMAGES["collectible"], x, y);
   });
 }
 
