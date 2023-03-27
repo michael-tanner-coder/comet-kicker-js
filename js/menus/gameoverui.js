@@ -1,7 +1,6 @@
 // TODO: add upgrades to local storage
 // TODO: apply upgrades on startup
 // TODO: delay average score animation until prompts are done
-// TODO: reset score progress bar after game over
 // TODO: add an unlock upgrade sound + add confirm sound
 // TODO: give unlocks an icon
 // TODO: balance unlock progression

@@ -597,12 +597,14 @@ function updateGameOverScreen() {
     game_state = STATES.GAME;
     score = 0;
     turnOffAudioLowpassFilter();
+    SCORE_SECTION.score_bar.value = 0;
   }
-
+  
   if (onPress(CONTROLS.decline)) {
     game_state = STATES.MENU;
     score = 0;
     turnOffAudioLowpassFilter();
+    SCORE_SECTION.score_bar.value = 0;
   }
 
   updateScoreSection(SCORE_SECTION);
