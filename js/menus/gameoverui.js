@@ -1,4 +1,3 @@
-// TODO: add a frame to the unlock prompts
 // TODO: add upgrades to local storage
 // TODO: apply upgrades on startup
 // TODO: prompt animation
@@ -117,6 +116,8 @@ const OPTIONS_SECTION = {
 const UNLOCK_PROMPT = {
   x: 0,
   y: 50,
+  w: GAME_W,
+  h: 80,
 };
 
 function drawScoreSection(section) {
@@ -361,16 +362,54 @@ function drawOptionsSection(section) {
 }
 
 function drawUnlockPrompt(unlock) {
-  let prompt_w = GAME_W;
-  let prompt_h = 80;
+  let border_width = 2;
 
   // OVERLAY
   context.fillStyle = DARK_OVERLAY;
   context.fillRect(0, 0, GAME_W, GAME_H);
 
+  // BORDER
+  // border shadow
+  context.fillStyle = PINK;
+  context.fillRect(
+    UNLOCK_PROMPT.x - border_width,
+    UNLOCK_PROMPT.y - border_width,
+    UNLOCK_PROMPT.w + border_width * 2,
+    UNLOCK_PROMPT.h + border_width * 2 + 1
+  );
+
+  // yellow border
+  context.fillStyle = YELLOW;
+  context.fillRect(
+    UNLOCK_PROMPT.x - border_width,
+    UNLOCK_PROMPT.y - border_width,
+    UNLOCK_PROMPT.w + border_width * 2,
+    UNLOCK_PROMPT.h + border_width * 2
+  );
+
+  // border highlight
+  context.fillStyle = WHITE;
+  context.fillRect(
+    UNLOCK_PROMPT.x - border_width,
+    UNLOCK_PROMPT.y - border_width,
+    UNLOCK_PROMPT.w / 2,
+    UNLOCK_PROMPT.h / 2
+  );
+  context.fillRect(
+    UNLOCK_PROMPT.x + UNLOCK_PROMPT.w / 2 + border_width,
+    UNLOCK_PROMPT.y + UNLOCK_PROMPT.h / 2 + border_width,
+    UNLOCK_PROMPT.w / 2,
+    UNLOCK_PROMPT.h / 2
+  );
+
   // BG
   context.fillStyle = VIOLET;
-  context.fillRect(UNLOCK_PROMPT.x, UNLOCK_PROMPT.y, prompt_w, prompt_h);
+  context.fillRect(
+    UNLOCK_PROMPT.x + border_width,
+    UNLOCK_PROMPT.y,
+    UNLOCK_PROMPT.w - border_width * 2,
+    UNLOCK_PROMPT.h
+  );
 
   // HEADER
   context.fillStyle = DARK_OVERLAY;
