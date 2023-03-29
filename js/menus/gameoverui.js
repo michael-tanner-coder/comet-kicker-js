@@ -1,7 +1,7 @@
 // TODO: delay average score animation until prompts are done
 // TODO: balance unlock progression
 // TODO: balance enemy progression
-// TODO: add an "attempt" counter
+
 
 const SCORE_SECTION = {
   //   Section
@@ -169,6 +169,12 @@ function drawScoreSection(section) {
   let x = Math.floor(GAME_W - 24);
   let y = scoreBar.y + Math.floor(Math.sin(game_speed * time_scale * game_timer * 0.1) * 3);
   context.drawImage(IMAGES["big_comet_icon"], x,y);
+
+  // attempts
+  setFontSize(8);
+  context.fillStyle = scoreText.color;
+  drawCenteredText(`Attempts: ${attempts}`, Math.floor(scoreBar.y + scoreBar.h + barShadow.h) + 12);
+
 }
 
 function updateScoreSection(section) {

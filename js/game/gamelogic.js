@@ -592,6 +592,7 @@ function updateGameOverScreen() {
     score = 0;
     turnOffAudioLowpassFilter();
     SCORE_SECTION.score_bar.value = 0;
+    attempts += 1;
   }
 
   if (onPress(CONTROLS.decline)) {
@@ -599,6 +600,7 @@ function updateGameOverScreen() {
     score = 0;
     turnOffAudioLowpassFilter();
     SCORE_SECTION.score_bar.value = 0;
+    attempts = 1;
   }
 
   updateScoreSection(SCORE_SECTION);
