@@ -2,7 +2,6 @@
 // TODO: balance unlock progression
 // TODO: balance enemy progression
 // TODO: add an "attempt" counter
-// TODO: add boss icon at end
 
 const SCORE_SECTION = {
   //   Section
@@ -158,14 +157,18 @@ function drawScoreSection(section) {
   drawCenteredText(scoreText.text, Math.floor(scoreTextY));
 
   // Unlockables
-  UNLOCKABLES?.forEach((unlock) => {
+  UNLOCKABLES?.forEach((unlock, i) => {
     if (UNLOCKED.includes(unlock)) {
       return;
     }
     let x = Math.floor(GAME_W * (unlock.points / points_to_enter_final_boss));
-    let y = scoreBar.y - 4;
+    let y = scoreBar.y + Math.floor(Math.sin(game_speed * time_scale * (game_timer + i) * 0.1) * 3) - 4;
     context.drawImage(IMAGES["collectible"], x, y);
   });
+
+  let x = Math.floor(GAME_W - 24);
+  let y = scoreBar.y + Math.floor(Math.sin(game_speed * time_scale * game_timer * 0.1) * 3);
+  context.drawImage(IMAGES["big_comet_icon"], x,y);
 }
 
 function updateScoreSection(section) {

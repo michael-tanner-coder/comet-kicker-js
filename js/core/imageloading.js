@@ -26,6 +26,7 @@ const image_list = [
   { file: "player-spritesheet.png", name: "player_sheet" },
   { file: "basic-enemy-sheet.png", name: "enemy_sheet" },
   { file: "big-comet.png", name: "big_comet" },
+  { file: "big-comet-icon.png", name: "big_comet_icon" },
   { file: "collectible.png", name: "collectible" },
   { file: "hp-up.png", name: "hp_up" },
   { file: "particle.png", name: "particle" },
