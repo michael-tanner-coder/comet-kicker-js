@@ -1,7 +1,8 @@
-// TODO: add upgrades to local storage
-// TODO: apply upgrades on startup
 // TODO: delay average score animation until prompts are done
 // TODO: balance unlock progression
+// TODO: balance enemy progression
+// TODO: add an "attempt" counter
+// TODO: add boss icon at end
 
 const SCORE_SECTION = {
   //   Section
