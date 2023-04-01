@@ -250,7 +250,7 @@ const EXPLODING_ENEMY = {
     { x: 17, y: 1, direction: DIRECTIONS.down, spawn_count: 4 },
   ],
   exploding: true,
-  points_to_spawn: 500,
+  points_to_spawn: 250,
   points: 15,
 };
 
@@ -264,7 +264,7 @@ const ROLLING_ENEMY = {
   animation: ANIMATIONS.rollingEnemyMoveLeft,
   hp: 3,
   render_hitbox: false,
-  points_to_spawn: 3000,
+  points_to_spawn: 2000,
   points: 25,
   screenwrap_timer: 60,
 };
@@ -296,7 +296,7 @@ const BIG_COMET = {
   movement_direction: "follow",
   has_gravity: false,
   animation: ANIMATIONS.bigCometMoveLeft,
-  points_to_spawn: 10000,
+  points_to_spawn: points_to_enter_final_boss,
   points: 5000,
   hp: 100,
   can_screenwrap: false,
