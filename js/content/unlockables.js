@@ -188,12 +188,27 @@ const UNLOCK_ENDLESS_MODE = {
 // track which upgrades have been unlocked
 const UNLOCKED = [];
 
-// collection for all unlockables
-const UNLOCKABLES = [
-  ...WEAPON_UNLOCKS,
+// collection for all possible unlockables
+const POTENTIAL_UNLOCKABLES = [
   ...HEALTH_UNLOCKS,
+  ...WEAPON_UNLOCKS,
   ...MULTIPLIER_UNLOCKS,
   ...POINT_BOXES,
   UPGRADE_POWERUP_TIME,
   UNLOCK_ENDLESS_MODE,
 ];
+
+// randomise the unlockables array based on potential unlockables
+const UNLOCKABLES = [];
+let count = 0;
+while (count < 9) {
+  var unlock = choose(POTENTIAL_UNLOCKABLES);
+  if (!UNLOCKABLES.includes(unlock)) {
+    UNLOCKABLES.push(unlock);
+    count += 1;
+  }
+}
+
+UNLOCKABLES.forEach((unlockable, i) => {
+  unlockable.points = i * (points_to_enter_final_boss / 10);
+});

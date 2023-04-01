@@ -1,6 +1,5 @@
 // TODO: delay average score animation until prompts are done
 // TODO: balance unlock progression
-// TODO: balance enemy progression
 
 
 const SCORE_SECTION = {
