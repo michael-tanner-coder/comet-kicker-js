@@ -39,6 +39,7 @@ const UNLOCK_RAPID_FIRE = {
 const UNLOCK_WIDE_SHOT = {
   ...UNLOCKABLE,
   name: "Wide Shot",
+  description: "Shoot three shots at once",
   powerup: WIDE_SHOT,
   points: 2000,
   effect: UNLOCK_EFFECTS.POWERUP,
@@ -46,6 +47,7 @@ const UNLOCK_WIDE_SHOT = {
 const UNLOCK_MISSILE = {
   ...UNLOCKABLE,
   name: "Missile",
+  description: "Blow. Up. Everything.",
   powerup: MISSILE,
   points: 3000,
   effect: UNLOCK_EFFECTS.POWERUP,
@@ -53,6 +55,7 @@ const UNLOCK_MISSILE = {
 const UNLOCK_BUDDY = {
   ...UNLOCKABLE,
   name: "Buddy!",
+  description: "He'll do exactly what you do",
   powerup: SHIELD,
   points: 6000,
   effect: UNLOCK_EFFECTS.POWERUP,
