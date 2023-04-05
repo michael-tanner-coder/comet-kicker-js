@@ -35,6 +35,8 @@ const UNLOCK_RAPID_FIRE = {
   powerup: RAPID_FIRE,
   points: 1000,
   effect: UNLOCK_EFFECTS.POWERUP,
+  sprite: "rapid_fire_icon",
+  position: 2,
 };
 const UNLOCK_WIDE_SHOT = {
   ...UNLOCKABLE,
@@ -43,6 +45,8 @@ const UNLOCK_WIDE_SHOT = {
   powerup: WIDE_SHOT,
   points: 2000,
   effect: UNLOCK_EFFECTS.POWERUP,
+  sprite: "wide_shot_icon",
+  position: 4,
 };
 const UNLOCK_MISSILE = {
   ...UNLOCKABLE,
@@ -51,6 +55,8 @@ const UNLOCK_MISSILE = {
   powerup: MISSILE,
   points: 3000,
   effect: UNLOCK_EFFECTS.POWERUP,
+  sprite: "missile_icon",
+  position: 6,
 };
 const UNLOCK_BUDDY = {
   ...UNLOCKABLE,
@@ -59,6 +65,8 @@ const UNLOCK_BUDDY = {
   powerup: SHIELD,
   points: 6000,
   effect: UNLOCK_EFFECTS.POWERUP,
+  sprite: "buddy_icon",
+  position: 8,
 };
 const WEAPON_UNLOCKS = [
   UNLOCK_RAPID_FIRE,
@@ -194,7 +202,6 @@ const UNLOCKED = [];
 // collection for all possible unlockables
 const POTENTIAL_UNLOCKABLES = [
   ...HEALTH_UNLOCKS,
-  ...WEAPON_UNLOCKS,
   ...MULTIPLIER_UNLOCKS,
   ...POINT_BOXES,
   UPGRADE_POWERUP_TIME,
@@ -204,13 +211,17 @@ const POTENTIAL_UNLOCKABLES = [
 // randomise the unlockables array based on potential unlockables
 const UNLOCKABLES = [];
 let count = 0;
-while (count < 9) {
+while (count < 5) {
   var unlock = choose(POTENTIAL_UNLOCKABLES);
   if (!UNLOCKABLES.includes(unlock)) {
     UNLOCKABLES.push(unlock);
     count += 1;
   }
 }
+
+WEAPON_UNLOCKS.forEach((unlockable, i) => {
+  UNLOCKABLES.splice(unlockable.position - 1, 0, unlockable);
+});
 
 UNLOCKABLES.forEach((unlockable, i) => {
   unlockable.points = i * (points_to_enter_final_boss / 10);

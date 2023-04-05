@@ -167,7 +167,11 @@ function drawScoreSection(section) {
         Math.sin(game_speed * time_scale * (game_timer + i) * 0.1) * 3
       ) -
       4;
-    context.drawImage(IMAGES["collectible"], x, y);
+    if (unlock.sprite) {
+      context.drawImage(IMAGES[unlock.sprite], x, y);
+    } else {
+      context.drawImage(IMAGES["collectible"], x, y);
+    }
   });
 
   let x = Math.floor(GAME_W - 24);
