@@ -113,14 +113,59 @@ const UNLOCK_PROMPT = {
   y: 50,
   w: GAME_W,
   h: 80,
+  cursor: 0,
+  choices: [],
 };
 
 function animatePrompt() {
+  // animate prompt
   UNLOCK_PROMPT.x = easingWithRate(UNLOCK_PROMPT.x, 0, 0.2, 0.1);
+
+  if (UNLOCK_PROMPT.choices.length === 0) {
+    return;
+  }
+
+  // position choices
+  UNLOCK_PROMPT.choices.forEach((choice, i) => {
+    let group_width = UNLOCK_PROMPT.choices.length * choice.w;
+    let margin_x = 8;
+    choice.x = Math.floor(
+      UNLOCK_PROMPT.x +
+        UNLOCK_PROMPT.w / 2 -
+        group_width / 2 +
+        i * choice.w +
+        margin_x * i
+    );
+    choice.y = Math.floor(UNLOCK_PROMPT.y + UNLOCK_PROMPT.h / 2 - choice.h / 2);
+
+    choice.active = UNLOCK_PROMPT.cursor === i;
+  });
+
+  // controls - cursor
+  if (onPress(CONTROLS.moveLeft)) {
+    UNLOCK_PROMPT.cursor--;
+  }
+  if (onPress(CONTROLS.moveRight)) {
+    UNLOCK_PROMPT.cursor++;
+  }
+  if (UNLOCK_PROMPT.cursor < 0) {
+    UNLOCK_PROMPT.cursor = UNLOCK_PROMPT.choices.length - 1;
+  }
+  if (UNLOCK_PROMPT.cursor > UNLOCK_PROMPT.choices.length - 1) {
+    UNLOCK_PROMPT.cursor = 0;
+  }
+
+  // controls - select
+  if (onPress(CONTROLS.accept))
+  {
+    activateUpgradeEffect(UNLOCK_PROMPT.choices[UNLOCK_PROMPT.cursor]);
+  }
 }
 
 function resetPrompt() {
   UNLOCK_PROMPT.x = -GAME_W;
+  UNLOCK_PROMPT.choices = [];
+  UNLOCK_PROMPT.cursor = 0;
 }
 
 function drawScoreSection(section) {
@@ -385,6 +430,53 @@ function drawOptionsSection(section) {
   );
 }
 
+function drawUpgradeChoice(upgrade) {
+  // border shadow
+  if (upgrade.active) {
+    context.fillStyle = PINK;
+    context.fillRect(
+      upgrade.x - upgrade.border_width,
+      upgrade.y - upgrade.border_width,
+      upgrade.w + upgrade.border_width * 2,
+      upgrade.h + upgrade.border_width * 2 + 1
+    );
+  }
+  // yellow border
+  context.fillStyle = upgrade.border_color;
+  context.fillRect(
+    upgrade.x - upgrade.border_width,
+    upgrade.y - upgrade.border_width,
+    upgrade.w + upgrade.border_width * 2,
+    upgrade.h + upgrade.border_width * 2
+  );
+
+  // border highlight
+  if (upgrade.active) {
+    context.fillStyle = WHITE;
+    context.fillRect(
+      upgrade.x - upgrade.border_width + upgrade.highlight_x,
+      upgrade.y - upgrade.border_width + upgrade.highlight_y,
+      upgrade.w / 2,
+      upgrade.h / 2
+    );
+    context.fillRect(
+      upgrade.x + upgrade.w / 2 + upgrade.border_width,
+      upgrade.y + upgrade.h / 2 + upgrade.border_width,
+      upgrade.w / 2,
+      upgrade.h / 2
+    );
+  }
+
+  // image + bg
+  context.fillStyle = upgrade.color;
+  context.fillRect(upgrade.x, upgrade.y, upgrade.w, upgrade.h);
+  context.drawImage(
+    IMAGES[upgrade.image],
+    upgrade.x - Math.floor(upgrade.w / 8) + 1,
+    upgrade.y - Math.floor(upgrade.h / 8)
+  );
+}
+
 function drawUnlockPrompt(unlock) {
   let border_width = 2;
 
@@ -436,26 +528,36 @@ function drawUnlockPrompt(unlock) {
   );
 
   // HEADER
+  let header_offset = 24;
   context.fillStyle = DARK_OVERLAY;
   context.fillText(
     unlock.name,
     GAME_W / 2 - getTextWidth(unlock.name) / 2 + UNLOCK_PROMPT.x,
-    UNLOCK_PROMPT.y + 34
+    UNLOCK_PROMPT.y + header_offset
   );
 
   context.fillStyle = PINK;
   context.fillText(
     unlock.name,
     GAME_W / 2 - getTextWidth(unlock.name) / 2 + UNLOCK_PROMPT.x,
-    UNLOCK_PROMPT.y + 33
+    UNLOCK_PROMPT.y + header_offset - 1
   );
 
   context.fillStyle = WHITE;
   context.fillText(
     unlock.name,
     GAME_W / 2 - getTextWidth(unlock.name) / 2 + UNLOCK_PROMPT.x,
-    UNLOCK_PROMPT.y + 32
+    UNLOCK_PROMPT.y + header_offset - 2
   );
+
+  // CHOICES
+  if (unlock.type === "choice") {
+    UNLOCK_PROMPT.choices = [...unlock.choices];
+  }
+
+  UNLOCK_PROMPT.choices.forEach((choice, i) => {
+    drawUpgradeChoice(choice, UNLOCK_PROMPT);
+  });
 
   // DESCRIPTION
   if (unlock.description) {
