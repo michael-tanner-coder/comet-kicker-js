@@ -114,6 +114,7 @@ const UNLOCK_PROMPT = {
   h: 80,
   cursor: 0,
   choices: [],
+  unlock: undefined,
 };
 
 function animatePrompt() {
@@ -140,6 +141,11 @@ function animatePrompt() {
     choice.active = UNLOCK_PROMPT.cursor === i;
   });
 
+  if (UNLOCK_PROMPT.unlock) {
+    UNLOCK_PROMPT.unlock.description =
+      UNLOCK_PROMPT.choices[UNLOCK_PROMPT.cursor].description;
+  }
+
   // controls - cursor
   if (onPress(CONTROLS.moveLeft)) {
     UNLOCK_PROMPT.cursor--;
@@ -155,8 +161,7 @@ function animatePrompt() {
   }
 
   // controls - select
-  if (onPress(CONTROLS.accept))
-  {
+  if (onPress(CONTROLS.accept)) {
     activateUpgradeEffect(UNLOCK_PROMPT.choices[UNLOCK_PROMPT.cursor]);
   }
 }
@@ -552,6 +557,7 @@ function drawUnlockPrompt(unlock) {
   // CHOICES
   if (unlock.type === "choice") {
     UNLOCK_PROMPT.choices = [...unlock.choices];
+    UNLOCK_PROMPT.unlock = unlock;
   }
 
   UNLOCK_PROMPT.choices.forEach((choice, i) => {
