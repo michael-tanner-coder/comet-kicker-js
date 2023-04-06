@@ -235,8 +235,8 @@ const POINT_UPGRADE = {
 };
 
 const CHOICE_UNLOCK = {
-  name: "CHOOSE",
-  description: "Select an upgrade",
+  name: "CHOOSE AN UPGRADE",
+  description: "",
   sprite: "collectible",
   points: 1000,
   type: "choice",
