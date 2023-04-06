@@ -1,6 +1,5 @@
 // TODO: delay average score animation until prompts are done
 // TODO: add descriptions and confirmation control prompts
-// TODO: balance unlock progression
 
 const SCORE_SECTION = {
   //   Section
