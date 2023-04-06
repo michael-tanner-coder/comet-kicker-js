@@ -216,21 +216,21 @@ const UPGRADE = {
 const HP_UPGRADE = {
   ...UPGRADE,
   image: "hp_up",
-  name: "HP UP",
+  description: "+1 MAX HP",
   effect: UNLOCK_EFFECTS.HP,
 };
 
 const COMBO_UPGRADE = {
   ...UPGRADE,
-  image: "hp_up",
-  name: "BIGGER COMBOS",
+  image: "combo_up",
+  description: "BIGGER COMBOS",
   effect: UNLOCK_EFFECTS.MULTIPLIER,
 };
 
 const POINT_UPGRADE = {
   ...UPGRADE,
-  image: "hp_up",
-  name: "BOX POINTS",
+  image: "box_points_up",
+  description: "MORE BOX POINTS",
   effect: UNLOCK_EFFECTS.POINT_BOXES,
 };
 
