@@ -29,6 +29,8 @@ const image_list = [
   { file: "big-comet-icon.png", name: "big_comet_icon" },
   { file: "collectible.png", name: "collectible" },
   { file: "hp-up.png", name: "hp_up" },
+  { file: "combo-up.png", name: "combo_up" },
+  { file: "box-points-up.png", name: "box_points_up" },
   { file: "particle.png", name: "particle" },
   { file: "cometShiledsVersions/CometShieldv1.png", name: "shield" },
   { file: "missilev3.png", name: "missile" },
