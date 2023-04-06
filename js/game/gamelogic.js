@@ -573,6 +573,7 @@ function updateMenuNavigation() {
 
 function updateGameOverScreen() {
   if (RECENT_UNLOCKS.length > 0) {
+
     animatePrompt();
     if (onPress(CONTROLS.accept)) {
       RECENT_UNLOCKS.forEach((unlock) => {
@@ -963,7 +964,7 @@ function activateUpgradeEffect(upgrade) {
       max_multiplier += 1;
       break;
     case UNLOCK_EFFECTS.POINT_BOXES:
-      COLLECT.points = upgrade.value;
+      COLLECT.points += 100;
       break;
     case UNLOCK_EFFECTS.MODE:
       // TODO: create a flag for endless mode that lets the player keep playing forever (including final boss respawns)
