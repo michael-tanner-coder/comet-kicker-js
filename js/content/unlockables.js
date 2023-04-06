@@ -196,6 +196,53 @@ const UNLOCK_ENDLESS_MODE = {
   points: 15000,
 };
 
+const UPGRADE = {
+  x: 0,
+  y: 0,
+  h: 25,
+  w: 27,
+  input: "",
+  image: "collectible",
+  spacing: 9,
+  color: PURPLE,
+  border_color: WHITE,
+  border_width: 1,
+  active: false,
+  highlight_x: 0,
+  highlight_y: 0,
+  name: "",
+};
+
+const HP_UPGRADE = {
+  ...UPGRADE,
+  image: "hp_up",
+  name: "HP UP",
+  effect: UNLOCK_EFFECTS.HP,
+};
+
+const COMBO_UPGRADE = {
+  ...UPGRADE,
+  image: "hp_up",
+  name: "BIGGER COMBOS",
+  effect: UNLOCK_EFFECTS.MULTIPLIER,
+};
+
+const POINT_UPGRADE = {
+  ...UPGRADE,
+  image: "hp_up",
+  name: "BOX POINTS",
+  effect: UNLOCK_EFFECTS.POINT_BOXES,
+};
+
+const CHOICE_UNLOCK = {
+  name: "CHOOSE",
+  description: "Select an upgrade",
+  sprite: "collectible",
+  points: 1000,
+  type: "choice",
+  choices: [HP_UPGRADE, COMBO_UPGRADE, POINT_UPGRADE],
+};
+
 // track which upgrades have been unlocked
 const UNLOCKED = [];
 
@@ -209,19 +256,29 @@ const POTENTIAL_UNLOCKABLES = [
 ];
 
 // randomise the unlockables array based on potential unlockables
-const UNLOCKABLES = [];
-let count = 0;
-while (count < 5) {
-  var unlock = choose(POTENTIAL_UNLOCKABLES);
-  if (!UNLOCKABLES.includes(unlock)) {
-    UNLOCKABLES.push(unlock);
-    count += 1;
-  }
-}
+const UNLOCKABLES = [
+  { ...CHOICE_UNLOCK },
+  UNLOCK_RAPID_FIRE,
+  { ...CHOICE_UNLOCK },
+  UNLOCK_WIDE_SHOT,
+  { ...CHOICE_UNLOCK },
+  UNLOCK_MISSILE,
+  { ...CHOICE_UNLOCK },
+  UNLOCK_BUDDY,
+  { ...CHOICE_UNLOCK },
+];
+// let count = 0;
+// while (count < 5) {
+//   var unlock = choose(POTENTIAL_UNLOCKABLES);
+//   if (!UNLOCKABLES.includes(unlock)) {
+//     UNLOCKABLES.push(unlock);
+//     count += 1;
+//   }
+// }
 
-WEAPON_UNLOCKS.forEach((unlockable, i) => {
-  UNLOCKABLES.splice(unlockable.position - 1, 0, unlockable);
-});
+// WEAPON_UNLOCKS.forEach((unlockable, i) => {
+//   UNLOCKABLES.splice(unlockable.position - 1, 0, unlockable);
+// });
 
 UNLOCKABLES.forEach((unlockable, i) => {
   unlockable.points = i * (points_to_enter_final_boss / 10);
