@@ -1,5 +1,3 @@
-// TODO: delay average score animation until prompts are done
-
 const SCORE_SECTION = {
   //   Section
   background_color: "black",
@@ -249,16 +247,16 @@ function updateScoreSection(section) {
   let tolerance = 0.9;
 
   let maxValue = points_to_enter_final_boss;
-  scoreBar.value = Math.ceil(easingWithRate(
+  scoreBar.value = easingWithRate(
     scoreBar.value,
     Math.round(score),
     anim_rate,
     tolerance
-  ));
+  );
   // let remainder = scoreBar.value % maxValue;
   let percentage = scoreBar.value / maxValue;
   percentage = clamp(percentage, 0, 1);
-  scoreBar.w = scoreBar.maxW * percentage;
+  scoreBar.w = Math.ceil(scoreBar.maxW * percentage);
 
   scoreBar.text.value = easingWithRate(
     scoreBar.text.value,
