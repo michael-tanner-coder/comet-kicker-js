@@ -32,6 +32,7 @@ const SCORE_SECTION = {
     },
     text_size: 16,
   },
+  finished: false,
 };
 
 const SCORE_BLOCK = {
@@ -87,6 +88,8 @@ const AVERAGE_SCORE_SECTION = {
   text_shadow_color: PINK,
   text_x: 0,
   text_y: 0,
+
+  finished: false,
 };
 
 const OPTIONS_SECTION = {
