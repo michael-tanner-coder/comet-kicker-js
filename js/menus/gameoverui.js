@@ -1,5 +1,4 @@
 // TODO: delay average score animation until prompts are done
-// TODO: add descriptions and confirmation control prompts
 
 const SCORE_SECTION = {
   //   Section
@@ -566,12 +565,35 @@ function drawUnlockPrompt(unlock) {
 
   // DESCRIPTION
   if (unlock.description) {
+    let description_y = unlock.type === "choice" ? 64 : 26;
     context.font = `8px PressStart2P`;
     context.fillStyle = WHITE;
     context.fillText(
       unlock.description,
       GAME_W / 2 - getTextWidth(unlock.description) / 2 + UNLOCK_PROMPT.x,
-      UNLOCK_PROMPT.y + 64
+      UNLOCK_PROMPT.y + description_y
     );
   }
+
+  // CONTROLS
+  context.font = `8px PressStart2P`;
+  context.fillStyle = WHITE;
+  let confirm_text = "CONFIRM:";
+  let icon_width = getInputAnimation(CONTROLS.accept).frames[0].w;
+  let icon_height = getInputAnimation(CONTROLS.accept).frames[0].h;
+  let text_width = context.measureText(confirm_text).width;
+  let text_height = 8;
+  let right_padding = 6;
+  let bottom_padding = 3;
+  context.fillText(
+    confirm_text,
+    UNLOCK_PROMPT.x + UNLOCK_PROMPT.w - icon_width - text_width - right_padding,
+    UNLOCK_PROMPT.y + UNLOCK_PROMPT.h - text_height + icon_height / 8
+  );
+  playAnimation(
+    getInputAnimation(CONTROLS.accept),
+    0,
+    UNLOCK_PROMPT.x + UNLOCK_PROMPT.w - icon_width - right_padding,
+    UNLOCK_PROMPT.y + UNLOCK_PROMPT.h - icon_height - bottom_padding
+  );
 }
