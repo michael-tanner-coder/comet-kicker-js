@@ -172,6 +172,14 @@ function resetPrompt() {
   UNLOCK_PROMPT.cursor = 0;
 }
 
+function updateUpgrades(unlock) {
+  if (unlock.animating) {
+    unlock.y = easingWithRate(unlock.y, 0, 0.2, 0.1);
+    console.log(unlock.y);
+    if (unlock.y <= 0) unlock.animating = false;
+  }
+}
+
 function drawScoreSection(section) {
   // Background
   context.globalAlpha = section.alpha;
