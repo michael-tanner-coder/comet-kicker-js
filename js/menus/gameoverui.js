@@ -264,6 +264,10 @@ function updateScoreSection(section) {
     tolerance
   );
   scoreBar.text.text = "SCORE: " + Math.round(scoreBar.text.value);
+  
+  if (scoreBar.text.value == Math.round(score)) {
+    SCORE_SECTION.finished = true;
+  }
 
   // Unlockables
   UNLOCKABLES?.forEach((unlock, i) => {
@@ -305,6 +309,9 @@ function updateAverageScoreSection(section) {
     // highlight
     score_block.highlight_h = score_block.h - score_block.padding_bottom;
   });
+
+    return;
+  }
 
   // animate each score bar in a sequence
   for (let i = 0; i < section.scores.length; i++) {
