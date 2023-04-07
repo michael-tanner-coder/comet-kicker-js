@@ -245,16 +245,16 @@ function updateScoreSection(section) {
   const scoreBar = section.score_bar;
   scoreBar.x = section.x;
   scoreBar.y = section.y + section.h / 2 - scoreBar.h / 2;
-  let anim_rate = 0.01;
-  let tolerance = 0.3;
+  let anim_rate = 0.04;
+  let tolerance = 0.9;
 
   let maxValue = points_to_enter_final_boss;
-  scoreBar.value = easingWithRate(
+  scoreBar.value = Math.ceil(easingWithRate(
     scoreBar.value,
     Math.round(score),
     anim_rate,
     tolerance
-  );
+  ));
   // let remainder = scoreBar.value % maxValue;
   let percentage = scoreBar.value / maxValue;
   percentage = clamp(percentage, 0, 1);
@@ -313,6 +313,7 @@ function updateAverageScoreSection(section) {
     score_block.highlight_h = score_block.h - score_block.padding_bottom;
   });
 
+  if (!SCORE_SECTION.finished) {
     return;
   }
 
