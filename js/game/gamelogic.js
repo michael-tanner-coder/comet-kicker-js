@@ -593,14 +593,16 @@ function updateGameOverScreen() {
     score = 0;
     turnOffAudioLowpassFilter();
     SCORE_SECTION.score_bar.value = 0;
+    SCORE_SECTION.finished = false;
     attempts += 1;
   }
-
+  
   if (onPress(CONTROLS.decline)) {
     game_state = STATES.MENU;
     score = 0;
     turnOffAudioLowpassFilter();
     SCORE_SECTION.score_bar.value = 0;
+    SCORE_SECTION.finished = false;
     attempts = 1;
   }
 
