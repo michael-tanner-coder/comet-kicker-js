@@ -13,7 +13,7 @@
 // ===========
 // TODO: refresh UI when data is deleted
 // TODO: track unlockables via menu and gameoverui
-// TODO: add tutorial prompt for score falling
+// TODO: add tutorial prompt for score falling + screenwrapping
 // TODO: fix when inputs are not detected continuously from gamepad
 // TODO: fix color change option
 
