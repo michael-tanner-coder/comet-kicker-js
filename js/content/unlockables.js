@@ -1,5 +1,22 @@
 // max name length: 18 characters
 
+const UPGRADE = {
+  x: 0,
+  y: 0,
+  h: 25,
+  w: 27,
+  input: "",
+  image: "collectible",
+  spacing: 9,
+  color: PURPLE,
+  border_color: WHITE,
+  border_width: 1,
+  active: false,
+  highlight_x: 0,
+  highlight_y: 0,
+  name: "",
+};
+
 const RECENT_UNLOCKS = [];
 
 const UNLOCK_EFFECTS = {
@@ -30,6 +47,7 @@ const UNLOCKABLE = {
 // weapon unlocks
 const UNLOCK_RAPID_FIRE = {
   ...UNLOCKABLE,
+  ...UPGRADE,
   name: "Rapid Fire",
   description: "Hold down the fire button",
   powerup: RAPID_FIRE,
@@ -40,6 +58,7 @@ const UNLOCK_RAPID_FIRE = {
 };
 const UNLOCK_WIDE_SHOT = {
   ...UNLOCKABLE,
+  ...UPGRADE,
   name: "Wide Shot",
   description: "Shoot three shots at once",
   powerup: WIDE_SHOT,
@@ -50,6 +69,7 @@ const UNLOCK_WIDE_SHOT = {
 };
 const UNLOCK_MISSILE = {
   ...UNLOCKABLE,
+  ...UPGRADE,
   name: "Missile",
   description: "Blow. Up. Everything.",
   powerup: MISSILE,
@@ -60,6 +80,7 @@ const UNLOCK_MISSILE = {
 };
 const UNLOCK_BUDDY = {
   ...UNLOCKABLE,
+  ...UPGRADE,
   name: "Buddy!",
   description: "He'll do exactly what you do",
   powerup: SHIELD,
@@ -196,23 +217,6 @@ const UNLOCK_ENDLESS_MODE = {
   points: 15000,
 };
 
-const UPGRADE = {
-  x: 0,
-  y: 0,
-  h: 25,
-  w: 27,
-  input: "",
-  image: "collectible",
-  spacing: 9,
-  color: PURPLE,
-  border_color: WHITE,
-  border_width: 1,
-  active: false,
-  highlight_x: 0,
-  highlight_y: 0,
-  name: "",
-};
-
 const HP_UPGRADE = {
   ...UPGRADE,
   image: "hp_up",
@@ -235,6 +239,7 @@ const POINT_UPGRADE = {
 };
 
 const CHOICE_UNLOCK = {
+  ...UPGRADE,
   name: "CHOOSE AN UPGRADE",
   description: "",
   sprite: "collectible",
@@ -267,6 +272,7 @@ const UNLOCKABLES = [
   UNLOCK_BUDDY,
   { ...CHOICE_UNLOCK },
 ];
+
 // let count = 0;
 // while (count < 5) {
 //   var unlock = choose(POTENTIAL_UNLOCKABLES);
