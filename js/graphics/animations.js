@@ -544,3 +544,36 @@ const playAnimation = (animation, speed, x, y, w_scale = 1, h_scale = 1) => {
     }
   }
 };
+
+const UI_ANIM_STACK = [];
+const UI_ANIM = {
+  started: false,
+  finished: false,
+  duration: 0,
+  progress: 0,
+  properties: [],
+  target,
+};
+
+const animProp = (name, value) => {
+  return { name, value };
+};
+
+const playUIAnimation = (animation, speed = 1) => {
+  const anim = animation;
+
+  if (!anim || !anim.target || anim.finished) {
+    return;
+  }
+
+  anim.progress = exactEasing(anim.progress, anim.duration, speed, 0.1);
+  const percentage = anim.progress / anim.duration;
+
+  anim.properties.forEach((prop) => {
+    anim.target[prop.name] = prop.value * percentage;
+  });
+
+  if (percentage >= 1) {
+    anim.finished = true;
+  }
+};
