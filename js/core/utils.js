@@ -25,6 +25,11 @@ function easingWithRate(x, target, rate, tolerance = 0) {
   return (x += (target - x) * rate);
 }
 
+function exactEasing(x, target, rate, tolerance = 0) {
+  if (tolerance > 0 && x >= target * tolerance) return target;
+  return (x += (target - x) * rate);
+}
+
 function choose(choices) {
   return choices[Math.floor(Math.random() * choices.length)];
 }

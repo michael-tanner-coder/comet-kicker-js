@@ -255,7 +255,7 @@ function updateScoreSection(section) {
   let tolerance = 0.9;
 
   let maxValue = points_to_enter_final_boss;
-  scoreBar.value = easingWithRate(
+  scoreBar.value = exactEasing(
     scoreBar.value,
     Math.round(score),
     anim_rate,
