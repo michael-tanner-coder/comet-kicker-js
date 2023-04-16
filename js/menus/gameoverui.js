@@ -262,7 +262,7 @@ function updateScoreSection(section) {
   scoreBar.x = section.x;
   scoreBar.y = section.y + section.h / 2 - scoreBar.h / 2;
   let anim_rate = 0.04;
-  let tolerance = 0.9;
+  let tolerance = 0.95;
 
   let maxValue = points_to_enter_final_boss;
   scoreBar.value = exactEasing(
