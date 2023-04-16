@@ -166,11 +166,13 @@ function spawnCollectible() {
   // check if the newly spawned collectible is a valid choice
   while (!valid_choice) {
     new_collect = JSON.parse(JSON.stringify(choose(COLLECTIBLES)));
+    const weapons = COLLECTIBLES.filter((collect) => collect.weapon);
 
     // don't spawn the same collectible twice
     if (
       new_collect.pickup !== most_recent_pickup ||
-      COLLECTIBLES.length === 1
+      COLLECTIBLES.length === 1 ||
+      weapons.length === 1
     ) {
       valid_choice = true;
     }

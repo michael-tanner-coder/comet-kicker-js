@@ -360,10 +360,10 @@ const ROTATING_SHIELD = {
   has_trail: true,
 };
 
-const WIDE_SHOT = { ...COLLECT, pickup: PICKUPS.WIDE_SHOT };
-const RAPID_FIRE = { ...COLLECT, pickup: PICKUPS.RAPID_FIRE };
-const MISSILE = { ...COLLECT, pickup: PICKUPS.MISSILE };
-const SHIELD = { ...COLLECT, pickup: PICKUPS.SHIELD };
+const WIDE_SHOT = { ...COLLECT, pickup: PICKUPS.WIDE_SHOT, weapon: true, };
+const RAPID_FIRE = { ...COLLECT, pickup: PICKUPS.RAPID_FIRE,weapon: true };
+const MISSILE = { ...COLLECT, pickup: PICKUPS.MISSILE,weapon: true };
+const SHIELD = { ...COLLECT, pickup: PICKUPS.SHIELD, weapon: true };
 const HP = { ...COLLECT, pickup: PICKUPS.HP, sprite: "hp_up" };
 // const COLLECTIBLES = [MISSILE, WIDE_SHOT, RAPID_FIRE, SHIELD, HP, COLLECT];
 const COLLECTIBLES = [COLLECT];
