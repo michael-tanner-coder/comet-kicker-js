@@ -69,8 +69,6 @@ const PROMPTS = [
   // Score Falling
   SCORE_PROMPT,
   FIGHT_PROMPT,
-
-  // Screenwrapping
 ];
 var tutorial_index = 0;
 
