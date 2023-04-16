@@ -149,9 +149,11 @@ function animatePrompt() {
   // controls - cursor
   if (onPress(CONTROLS.moveLeft)) {
     UNLOCK_PROMPT.cursor--;
+    playSoundEffect("heal_hp");
   }
   if (onPress(CONTROLS.moveRight)) {
     UNLOCK_PROMPT.cursor++;
+    playSoundEffect("heal_hp");
   }
   if (UNLOCK_PROMPT.cursor < 0) {
     UNLOCK_PROMPT.cursor = UNLOCK_PROMPT.choices.length - 1;
@@ -163,6 +165,7 @@ function animatePrompt() {
   // controls - select
   if (onPress(CONTROLS.accept)) {
     activateUpgradeEffect(UNLOCK_PROMPT.choices[UNLOCK_PROMPT.cursor]);
+    playSoundEffect("missile");
   }
 }
 
@@ -473,7 +476,7 @@ function drawUpgradeChoice(upgrade) {
     );
   }
   // yellow border
-  context.fillStyle = upgrade.border_color;
+  context.fillStyle = upgrade.active ? YELLOW : upgrade.border_color;
   context.fillRect(
     upgrade.x - upgrade.border_width,
     upgrade.y - upgrade.border_width,
