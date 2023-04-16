@@ -593,7 +593,7 @@ function drawUnlockPrompt(unlock) {
 
   // DESCRIPTION
   if (unlock.description) {
-    let description_y = unlock.type === "choice" ? 64 : 26;
+    let description_y = unlock.type === "choice" ? 64 : 32;
     context.font = `8px PressStart2P`;
     context.fillStyle = WHITE;
     context.fillText(
