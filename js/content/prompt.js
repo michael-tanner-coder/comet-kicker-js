@@ -42,6 +42,16 @@ const SHOOT_DOWN_PROMPT = {
   text: "KICK DOWN: ",
   controls: ["shoot", "moveDown"],
 };
+const SCORE_PROMPT = {
+  ...PROMPT,
+  text: "YOUR SCORE WILL KEEP FALLING: ",
+  controls: ["shoot"],
+};
+const FIGHT_PROMPT = {
+  ...PROMPT,
+  text: "FIGHT TO MAKE IT GO UP! ",
+  controls: ["shoot"],
+};
 
 const PROMPTS = [
   // Movement
@@ -55,6 +65,12 @@ const PROMPTS = [
 
   // Jumping
   JUMP_PROMPT,
+
+  // Score Falling
+  SCORE_PROMPT,
+  FIGHT_PROMPT,
+
+  // Screenwrapping
 ];
 var tutorial_index = 0;
 
