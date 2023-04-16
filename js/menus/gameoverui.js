@@ -219,11 +219,21 @@ function drawScoreSection(section) {
     }
     let x = Math.floor(GAME_W * (unlock.points / points_to_enter_final_boss));
     let y =
+      unlock.y +
       scoreBar.y +
       Math.floor(
         Math.sin(game_speed * time_scale * (game_timer + i) * 0.1) * 3
       ) -
       4;
+
+    if (unlock.activated) {
+      unlock.y = easingWithRate(unlock.y, unlock.target_y, 0.01, 0.9);
+    }
+
+    if (unlock.y < 0.9 * unlock.target_y) {
+      unlock.finished_animating = true;
+    }
+
     if (unlock.sprite) {
       context.drawImage(IMAGES[unlock.sprite], x, y);
     } else {
@@ -273,7 +283,7 @@ function updateScoreSection(section) {
     tolerance
   );
   scoreBar.text.text = "SCORE: " + Math.round(scoreBar.text.value);
-  
+
   if (scoreBar.text.value == Math.round(score)) {
     SCORE_SECTION.finished = true;
   }
@@ -285,7 +295,8 @@ function updateScoreSection(section) {
     }
     let x = Math.floor(GAME_W * (unlock.points / points_to_enter_final_boss));
     if (scoreBar.w > x) {
-      if (!RECENT_UNLOCKS.includes(unlock)) {
+      unlock.activated = true;
+      if (!RECENT_UNLOCKS.includes(unlock) && unlock.finished_animating) {
         RECENT_UNLOCKS.push(unlock);
         turnOffAudioLowpassFilter();
         playSoundEffect("missile");

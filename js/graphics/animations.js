@@ -552,7 +552,7 @@ const UI_ANIM = {
   duration: 0,
   progress: 0,
   properties: [],
-  target,
+  target: null,
 };
 
 const animProp = (name, value) => {

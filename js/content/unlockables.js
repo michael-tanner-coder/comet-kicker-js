@@ -15,6 +15,9 @@ const UPGRADE = {
   highlight_x: 0,
   highlight_y: 0,
   name: "",
+  activated: false,
+  finished_animating: false,
+  target_y: -100
 };
 
 const RECENT_UNLOCKS = [];
