@@ -285,9 +285,10 @@ function updateScoreSection(section) {
     anim_rate,
     tolerance
   );
+  
   scoreBar.text.text = "SCORE: " + Math.round(scoreBar.text.value);
 
-  if (scoreBar.text.value == Math.round(score)) {
+  if (Math.round(scoreBar.text.value) == Math.round(score)) {
     SCORE_SECTION.finished = true;
   }
 
