@@ -573,7 +573,6 @@ function updateMenuNavigation() {
 
 function updateGameOverScreen() {
   if (RECENT_UNLOCKS.length > 0) {
-
     animatePrompt();
     if (onPress(CONTROLS.accept)) {
       RECENT_UNLOCKS.forEach((unlock) => {
@@ -596,7 +595,7 @@ function updateGameOverScreen() {
     SCORE_SECTION.finished = false;
     attempts += 1;
   }
-  
+
   if (onPress(CONTROLS.decline)) {
     game_state = STATES.MENU;
     score = 0;
@@ -851,9 +850,9 @@ function drawGameOverScreen() {
   drawAverageScoreSection(AVERAGE_SCORE_SECTION);
   drawOptionsSection(OPTIONS_SECTION);
 
-  RECENT_UNLOCKS.forEach((unlock) => {
-    drawUnlockPrompt(unlock);
-  });
+  if (RECENT_UNLOCKS.length > 0) {
+    drawUnlockPrompt(RECENT_UNLOCKS[RECENT_UNLOCKS.length - 1]);
+  }
 }
 
 function drawPauseScreen() {
