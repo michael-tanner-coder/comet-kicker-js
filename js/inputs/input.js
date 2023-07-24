@@ -308,6 +308,7 @@ function inputListener() {
 
 window.addEventListener("keydown", function (e) {
   if (Object.keys(INPUTS).includes(e.key)) {
+    e.preventDefault();
     INPUTS[e.key] = true;
   }
 });
